@@ -1,0 +1,247 @@
+The system is: Windows - 10.0.22621 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx86/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++-Optimierungscompiler Version 19.32.31332 für x64
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+CMakeCCompilerId.c
+Microsoft (R) Incremental Linker Version 14.32.31332.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCCompilerId.exe 
+CMakeCCompilerId.obj 
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+
+The C compiler identification is MSVC, found in "C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/3.23.1/CompilerIdC/CMakeCCompilerId.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx86/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++-Optimierungscompiler Version 19.32.31332 für x64
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+CMakeCXXCompilerId.cpp
+Microsoft (R) Incremental Linker Version 14.32.31332.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCXXCompilerId.exe 
+CMakeCXXCompilerId.obj 
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+
+The CXX compiler identification is MSVC, found in "C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/3.23.1/CompilerIdCXX/CMakeCXXCompilerId.exe"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_a93f2 && [1/2] Building C object CMakeFiles\cmTC_a93f2.dir\CMakeCCompilerABI.c.obj
+[2/2] Linking C executable cmTC_a93f2.exe
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_4bb29 && [1/2] Building CXX object CMakeFiles\cmTC_4bb29.dir\CMakeCXXCompilerABI.cpp.obj
+[2/2] Linking CXX executable cmTC_4bb29.exe
+
+
+
+Performing C SOURCE FILE Test CHECK_CPU_ARCHITECTURE_X64 succeeded with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_a76fe && [1/2] Building C object CMakeFiles\cmTC_a76fe.dir\src.c.obj
+[2/2] Linking C executable cmTC_a76fe.exe
+
+
+Source file was:
+
+int main(int argc, char *argv[]) {
+#if defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64) || defined(_M_X64) || defined(_M_AMD64)
+  return 0;
+#else
+  choke
+#endif
+}
+
+Determining if the include file immintrin.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_a3ebc && [1/2] Building C object CMakeFiles\cmTC_a3ebc.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_a3ebc.exe
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_831a4 && [1/2] Building C object CMakeFiles\cmTC_831a4.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_831a4.exe
+
+
+
+Performing C SOURCE FILE Test HAVE_WIN32_CC succeeded with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_36051 && [1/2] Building C object CMakeFiles\cmTC_36051.dir\src.c.obj
+[2/2] Linking C executable cmTC_36051.exe
+
+
+Source file was:
+
+    #include <windows.h>
+    int main(int argc, char **argv) { return 0; }
+Determining if the include file d3d9.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_f0aa5 && [1/2] Building C object CMakeFiles\cmTC_f0aa5.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_f0aa5.exe
+
+
+
+Determining if the include file d3d11_1.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_fbf70 && [1/2] Building C object CMakeFiles\cmTC_fbf70.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_fbf70.exe
+
+
+
+Performing C SOURCE FILE Test HAVE_D3D12_H succeeded with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_61bd5 && [1/2] Building C object CMakeFiles\cmTC_61bd5.dir\src.c.obj
+[2/2] Linking C executable cmTC_61bd5.exe
+
+
+Source file was:
+
+      #include <winsdkver.h>
+      #include <sdkddkver.h>
+      #include <d3d12.h>
+      ID3D12Device1 *device;
+      #if WDK_NTDDI_VERSION > 0x0A000008
+      int main(int argc, char **argv) { return 0; }
+      #endif
+Determining if the include file ddraw.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_a1c0a && [1/2] Building C object CMakeFiles\cmTC_a1c0a.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_a1c0a.exe
+
+
+
+Determining if the include file dsound.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_20936 && [1/2] Building C object CMakeFiles\cmTC_20936.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_20936.exe
+
+
+
+Determining if the include file dinput.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_c4401 && [1/2] Building C object CMakeFiles\cmTC_c4401.dir\CheckIncludeFile.c.obj
+C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+[2/2] Linking C executable cmTC_c4401.exe
+
+
+
+Determining if the include file dxgi.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_4c830 && [1/2] Building C object CMakeFiles\cmTC_4c830.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_4c830.exe
+
+
+
+Performing C SOURCE FILE Test HAVE_XINPUT_H succeeded with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_a857a && [1/2] Building C object CMakeFiles\cmTC_a857a.dir\src.c.obj
+[2/2] Linking C executable cmTC_a857a.exe
+
+
+Source file was:
+
+      #include <windows.h>
+      #include <xinput.h>
+      int main(int argc, char **argv) { return 0; }
+Performing C SOURCE FILE Test HAVE_WINDOWS_GAMING_INPUT_H succeeded with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_ce540 && [1/2] Building C object CMakeFiles\cmTC_ce540.dir\src.c.obj
+[2/2] Linking C executable cmTC_ce540.exe
+
+
+Source file was:
+
+      #define COBJMACROS
+      #include <windows.gaming.input.h>
+      __x_ABI_CWindows_CGaming_CInput_CIGamepadStatics2 *s2;
+      int main(int argc, char **argv) { return 0; }
+Determining if the include file tpcshrd.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_47250 && [1/2] Building C object CMakeFiles\cmTC_47250.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_47250.exe
+
+
+
+Determining if the include file roapi.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_e4fa5 && [1/2] Building C object CMakeFiles\cmTC_e4fa5.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_e4fa5.exe
+
+
+
+Determining if the include file mmdeviceapi.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_59ca2 && [1/2] Building C object CMakeFiles\cmTC_59ca2.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_59ca2.exe
+
+
+
+Determining if the include file audioclient.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_efe2f && [1/2] Building C object CMakeFiles\cmTC_efe2f.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_efe2f.exe
+
+
+
+Determining if the include file sensorsapi.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_bf2da && [1/2] Building C object CMakeFiles\cmTC_bf2da.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_bf2da.exe
+
+
+
+Determining if the include file shellscalingapi.h exists passed with the following output:
+Change Dir: C:/Users/Julian/Projects/project-farscape/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/WINLIB~1.0-R/mingw64/bin/ninja.exe cmTC_577af && [1/2] Building C object CMakeFiles\cmTC_577af.dir\CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_577af.exe
+
+
+
