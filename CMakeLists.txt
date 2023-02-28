@@ -6,3 +6,4 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "" FORCE)
 
 add_subdirectory(src)
 add_subdirectory(deps/SDL)
+add_subdirectory(deps/SDL_image)
