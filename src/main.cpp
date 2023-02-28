@@ -1,12 +1,14 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 int main(int argc, char **argv)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     IMG_Init(IMG_INIT_PNG);
     TTF_Init();
+    Mix_Init(MIX_INIT_MP3);
 
     SDL_Window *window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
