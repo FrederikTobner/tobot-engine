@@ -2,11 +2,16 @@
 configure_file(project_config.h.in project_config.h)
 
 set(PROJECT_FARSCAPE_SOURCES
+utilities/logger.cpp
 main.cpp
 )
 
 set(PROJECT_FARSCAPE_HEADERS
-logger.hpp
+utilities/logger.hpp
+)
+
+add_compile_definitions(
+    LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/"
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_FARSCAPE_SOURCES} ${PROJECT_FARSCAPE_HEADERS})

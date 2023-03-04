@@ -3,7 +3,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-#include "logger.hpp"
+#include "./utilities/logger.hpp"
 
 #include "project_config.h"
 
@@ -16,7 +16,8 @@ int main(int argc, char **argv)
 
     SDL_Window *window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    LOG_INFO("%s version %s.%s\n", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR);
+    Farscape_Logger::Logger::EnableFileOutput();
+    LOG_INFO("%s version %s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR);
     bool running = true;
     while (running)
     {
