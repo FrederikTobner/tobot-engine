@@ -65,14 +65,14 @@ void Logger::ensure_logs_directory_exists()
             closedir(resultsDirectory);
         else
         {
-            fprintf(stderr, "Can not create results directory!\n");
+            fprintf(stderr, "Can not create logs directory!\n");
             exit(70);
         }
     }
     else
     {
-        fprintf(stderr, "Can not access results directory!\n");
-        exit(EXIT_CODE_SYSTEM_ERROR);
+        fprintf(stderr, "Can not access logs directory!\n");
+        exit(70);
     }
 #endif
 }
