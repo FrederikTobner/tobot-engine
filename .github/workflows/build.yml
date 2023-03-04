@@ -1,4 +1,4 @@
-name: Build project
+name: Build Farscape
 
 on:
   push:
@@ -19,13 +19,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-    - uses: actions/checkout@v3
-    # include submodules
+      uses: actions/checkout@v3
+      # include submodules
       with:
         submodules: recursive
-
+    
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Building project
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target project-farscape
+    - name: Build Project
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
