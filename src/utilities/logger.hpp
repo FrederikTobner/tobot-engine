@@ -50,11 +50,6 @@ namespace Farscape_Logger
             get_Instance().enable_file_out();
         }
 
-        static void EnableFileOutput(const char *fileName)
-        {
-            get_Instance().enable_file_out(fileName);
-        }
-
         static void SetTimeStampFormat(const char *new_format)
         {
             get_Instance().timeStampFormat = new_format;

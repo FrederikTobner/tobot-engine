@@ -15,27 +15,23 @@ namespace Farscape_Logger
 
     void Logger::enable_file_out()
     {
+        ensure_logs_directory_exists();
         std::time_t current_time = std::time(0);
         std::tm *timestamp = std::localtime(&current_time);
-        char fileNameBuffer[80];
-        strftime(fileNameBuffer, 80, "%d_%m_%Y_%H-%M-%S_log.txt", timestamp);
-        enable_file_out(fileNameBuffer);
-    }
-
-    void Logger::enable_file_out(char const *fileName)
-    {
-        ensure_logs_directory_exists();
         char buffer[120];
         *buffer = '\0';
+        char fileNameBuffer[80];
+        strftime(fileNameBuffer, 80, "%d_%m_%Y_%H-%M-%S", timestamp);
         strcat(buffer, LOGS_FOLDER_PATH);
-        strcat(buffer, fileName);
+        strcat(buffer, fileNameBuffer);
+        filepath = strcat(buffer, "_log.txt");
         if (file)
             fclose(file);
         file = fopen(filepath, "w");
         if (!file)
             printf("failed to open file at %s", filepath);
     }
-
+    
     void Logger::ensure_logs_directory_exists()
     {
 #ifdef _WIN32
