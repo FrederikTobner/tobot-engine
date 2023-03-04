@@ -1,8 +1,6 @@
 name: Build Farscape
 
 on:
-  push:
-    branches: [ "build-workflow" ]
   pull_request:
     branches: [ "master" ]
 
