@@ -34,7 +34,7 @@ void Logger::enable_file_out()
 
 void Logger::ensure_logs_directory_exists()
 {
-#ifdef _WIN32
+#ifdef OS_WINDOWS
     DWORD dwAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
     if (dwAttribute == INVALID_FILE_ATTRIBUTES)
     {
