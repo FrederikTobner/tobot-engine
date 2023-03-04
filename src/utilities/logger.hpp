@@ -11,21 +11,21 @@
 #include <windows.h>
 #endif
 
-namespace Farscape_Logger
+namespace Farscape::Utilities
 {
-#define LOG_TRACE(message, ...) (Farscape_Logger::Logger::Trace(message, __VA_ARGS__))
-#define LOG_DEBUG(message, ...) (Farscape_Logger::Logger::Debug(message, __VA_ARGS__))
-#define LOG_INFO(message, ...) (Farscape_Logger::Logger::Info(message, __VA_ARGS__))
-#define LOG_WARN(message, ...) (Farscape_Logger::Logger::Warn(message, __VA_ARGS__))
-#define LOG_ERROR(message, ...) (Farscape_Logger::Logger::Error(message, __VA_ARGS__))
-#define LOG_CRITICAL(message, ...) (Farscape_Logger::Logger::Critical(message, __VA_ARGS__))
+#define LOG_TRACE(message, ...) (Farscape::Utilities::Logger::Trace(message, __VA_ARGS__))
+#define LOG_DEBUG(message, ...) (Farscape::Utilities::Logger::Debug(message, __VA_ARGS__))
+#define LOG_INFO(message, ...) (Farscape::Utilities::Logger::Info(message, __VA_ARGS__))
+#define LOG_WARN(message, ...) (Farscape::Utilities::Logger::Warn(message, __VA_ARGS__))
+#define LOG_ERROR(message, ...) (Farscape::Utilities::Logger::Error(message, __VA_ARGS__))
+#define LOG_CRITICAL(message, ...) (Farscape::Utilities::Logger::Critical(message, __VA_ARGS__))
 
-#define LOG_TRACE_AT(message, ...) (Farscape_Logger::Logger::Trace(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_DEBUG_AT(message, ...) (Farscape_Logger::Logger::Debug(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_INFO_AT(message, ...) (Farscape_Logger::Logger::Info(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_WARN_AT(message, ...) (Farscape_Logger::Logger::Warn(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_ERROR_AT(message, ...) (Farscape_Logger::Logger::Error(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_CRITICAL_AT(message, ...) (Farscape_Logger::Logger::Critical(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_TRACE_AT(message, ...) (Farscape::Utilities::Logger::Trace(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_DEBUG_AT(message, ...) (Farscape::Utilities::Logger::Debug(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_INFO_AT(message, ...) (Farscape::Utilities::Logger::Info(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_WARN_AT(message, ...) (Farscape::Utilities::Logger::Warn(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_ERROR_AT(message, ...) (Farscape::Utilities::Logger::Error(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_CRITICAL_AT(message, ...) (Farscape::Utilities::Logger::Critical(__LINE__, __FILE__, message, __VA_ARGS__))
 
     enum LogPriority
     {

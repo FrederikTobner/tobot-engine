@@ -1,13 +1,18 @@
-# configure project config to show version
 configure_file(project_config.h.in project_config.h)
 
 set(PROJECT_FARSCAPE_SOURCES
 utilities/logger.cpp
+core/render_object.cpp
+core/farscape_application.cpp
+core/view.cpp
 main.cpp
 )
 
 set(PROJECT_FARSCAPE_HEADERS
 utilities/logger.hpp
+core/render_object.h
+core/farscape_application.h
+core/view.h
 )
 
 add_compile_definitions(
@@ -16,7 +21,9 @@ add_compile_definitions(
 
 add_executable(${PROJECT_NAME} ${PROJECT_FARSCAPE_SOURCES} ${PROJECT_FARSCAPE_HEADERS})
 
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS OFF)
+
+target_include_directories(${PROJECT_NAME} PUBLIC ./)
 
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static)
 
