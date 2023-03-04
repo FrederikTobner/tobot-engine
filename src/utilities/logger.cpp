@@ -52,14 +52,14 @@ void Logger::ensure_logs_directory_exists()
         exit(70);
     }
 #endif
-#ifdef __linux__
+#ifdef OS_LINUX
     DIR *resultsDirectory = opendir(LOGS_FOLDER_PATH);
     if (resultsDirectory)
         closedir(resultsDirectory);
     else if (ENOENT == errno)
     {
         // If the directory does not exists we need to create it
-        mkdir(RESULTS_BASE_PATH, 0700);
+        mkdir(LOGS_FOLDER_PATH, 0700);
         resultsDirectory = opendir(LOGS_FOLDER_PATH);
         if (resultsDirectory)
             closedir(resultsDirectory);
