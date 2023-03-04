@@ -2,5 +2,10 @@
     "conventionalCommits.scopes": [
         "deps",
         "vscode"
-    ]
+    ],
+    "files.associations": {
+        "iostream": "cpp",
+        "xstring": "cpp",
+        "cmath": "cpp"
+    }
 }
