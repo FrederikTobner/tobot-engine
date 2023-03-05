@@ -1,0 +1,25 @@
+#include <gtest/gtest.h>
+
+#include "math/vector2d.h"
+
+TEST(Vector2DTest, Addition)
+{
+  Tobot::Math::Vector2D<int> vector1(5, 5);
+  Tobot::Math::Vector2D<int> vector2(5, 5);
+
+  Tobot::Math::Vector2D<int> result = vector1 + vector2;
+
+  EXPECT_EQ(result.x, 5 + 5);
+  EXPECT_EQ(result.y, 5 + 5);
+}
+
+TEST(Vector2DTest, AdditionAssignment)
+{
+  Tobot::Math::Vector2D<int> vector1(5, 5);
+  Tobot::Math::Vector2D<int> vector2(5, 5);
+
+  vector1 += vector2;
+
+  EXPECT_EQ(vector1.x, 5 + 5);
+  EXPECT_EQ(vector1.y, 5 + 5);
+}

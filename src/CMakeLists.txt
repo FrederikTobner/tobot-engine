@@ -8,12 +8,14 @@ utilities/logger.cpp
 )
 
 set(TOBOT_ENGINE_HEADERS
-entry_point.hpp
+entry_point.h
 core/render_object.h
 core/tobot_application.h
 core/view.h
-utilities/logger.hpp
-utilities/tobot_asserts.hpp
+utilities/logger.h
+utilities/tobot_asserts.h
+math/vector2d.h
+widget/text.h
 )
 
 add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})

@@ -1,6 +1,6 @@
 #include "tobot_application.h"
 
-#include "utilities/logger.hpp"
+#include "utilities/logger.h"
 #include "project_config.h"
 
 using namespace Tobot::Core;
