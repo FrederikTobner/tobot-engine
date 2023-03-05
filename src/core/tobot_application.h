@@ -25,10 +25,13 @@ namespace Tobot::Core
         bool m_Running;
 
     public:
-        static TobotApplication *getInstance();
-
+        TobotApplication();
+        virtual ~TobotApplication();
         void initialize();
         void run();
+        int displayWidth = 800;
+        int displayHeight = 600;
+        char const * applicationName = "app"; 
 
     private:
         void handleEvents();

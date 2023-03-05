@@ -233,19 +233,16 @@ namespace Tobot::Utilities
         template <typename... Args>
         void log(char const *message_priority_str, LogPriority message_priority, char const *message, Args... args)
         {
-            if (priority <= message_priority)
+            if (this->priority <= message_priority)
             {
                 std::scoped_lock lock(log_mutex);
-#ifdef OS_WINDOWS
-                HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-#endif
                 std::time_t current_time = std::time(0);
                 std::tm *timestamp = std::localtime(&current_time);
                 char buffer[80];
                 strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
                 printf("%s - [", buffer);
-                printf("] - [");
 #ifdef OS_WINDOWS
+                HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
                 SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[message_priority]);
 #endif
                 printf(message_priority_str);
@@ -270,13 +267,13 @@ namespace Tobot::Utilities
                     SetConsoleTextAttribute(console_color, 7);
                 }
 #endif
-                if (file)
+                if (this->file)
                 {
-                    fprintf(file, "%s - [%s]\t\t", buffer, message_priority_str);
+                    fprintf(this->file, "%s - [%s]\t\t", buffer, message_priority_str);
                     if (strlen(message_priority_str) <= 6)
-                        fprintf(file, "\t");
-                    fprintf(file, message, args...);
-                    fprintf(file, "\n");
+                        fprintf(this->file, "\t");
+                    fprintf(this->file, message, args...);
+                    fprintf(this->file, "\n");
                 }
             }
         }
@@ -284,19 +281,16 @@ namespace Tobot::Utilities
         template <typename... Args>
         void log(int line_number, char const *source_file, char const *message_priority_str, LogPriority message_priority, char const *message, Args... args)
         {
-            if (priority <= message_priority)
+            if (this->priority <= message_priority)
             {
                 std::scoped_lock lock(log_mutex);
-#ifdef OS_WINDOWS
-                HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-#endif
                 std::time_t current_time = std::time(0);
                 std::tm *timestamp = std::localtime(&current_time);
                 char buffer[80];
-                strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
+                strftime(buffer, 80, this->get_Instance().timeStampFormat, timestamp);
                 printf("%s - [", buffer);
-                printf("] - [");
 #ifdef OS_WINDOWS
+                HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
                 SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[message_priority]);
 #endif
                 printf(message_priority_str);
@@ -322,12 +316,12 @@ namespace Tobot::Utilities
 #endif
                 printf(" (on line %d in %s)", line_number, source_file);
                 printf("\n");
-                if (file)
+                if (this->file)
                 {
-                    fprintf(file, "%s - [%s]\t\t", buffer, message_priority_str);
-                    fprintf(file, message, args...);
-                    fprintf(file, " (on line %d in %s)", line_number, source_file);
-                    fprintf(file, "\n");
+                    fprintf(this->file, "%s - [%s]\t\t", buffer, message_priority_str);
+                    fprintf(this->file, message, args...);
+                    fprintf(this->file, " (on line %d in %s)", line_number, source_file);
+                    fprintf(this->file, "\n");
                 }
             }
         }
