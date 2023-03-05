@@ -1,28 +1,22 @@
 configure_file(project_config.h.in project_config.h)
 
 set(TOBOT_ENGINE_SOURCES
-utilities/logger.cpp
 core/render_object.cpp
 core/tobot_application.cpp
 core/view.cpp
-main.cpp
+utilities/logger.cpp
 )
 
 set(TOBOT_ENGINE_HEADERS
-utilities/logger.hpp
+entry_point.hpp
 core/render_object.h
 core/tobot_application.h
 core/view.h
+utilities/logger.hpp
+utilities/tobot_asserts.hpp
 )
 
-add_compile_definitions(
-    LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/"
-)
-
-include(../cmake/tobot_detect_platform.cmake)
-Tobot_Detect_Platform()
-
-add_executable(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
+add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
 
 set(BUILD_SHARED_LIBS OFF)
 
