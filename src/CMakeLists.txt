@@ -8,12 +8,12 @@ utilities/logger.cpp
 )
 
 set(TOBOT_ENGINE_HEADERS
-entry_point.h
+entry_point.hpp
 core/render_object.h
 core/tobot_application.h
 core/view.h
-utilities/logger.h
-utilities/tobot_asserts.h
+utilities/logger.hpp
+utilities/tobot_asserts.hpp
 math/vector2d.h
 widget/text.h
 )

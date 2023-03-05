@@ -1,8 +1,8 @@
 
-#include "entry_point.h"
+#include "entry_point.hpp"
 #include "core/tobot_application.h"
-#include "utilities/logger.h"
-#include "utilities/tobot_asserts.h"
+#include "utilities/logger.hpp"
+#include "utilities/tobot_asserts.hpp"
 
 class Example : public Tobot::Core::TobotApplication
 {
