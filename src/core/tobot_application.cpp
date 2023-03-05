@@ -75,7 +75,7 @@ void TobotApplication::update()
 {
 }
 
-// virtual destructor
+// virtual constructor
 TobotApplication::TobotApplication()
 {
     this->initialize();

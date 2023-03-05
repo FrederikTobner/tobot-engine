@@ -24,14 +24,16 @@ namespace Tobot::Core
 
         bool m_Running;
 
+    protected:
+        int displayWidth = 800;
+        int displayHeight = 600;
+        char const *applicationName = "app";
+
     public:
         TobotApplication();
         virtual ~TobotApplication();
         void initialize();
         void run();
-        int displayWidth = 800;
-        int displayHeight = 600;
-        char const * applicationName = "app"; 
 
     private:
         void handleEvents();
@@ -39,5 +41,5 @@ namespace Tobot::Core
         void render();
         void quit();
     };
-    TobotApplication * CreateApplication();
+    TobotApplication *CreateApplication();
 } // namespace Fars
