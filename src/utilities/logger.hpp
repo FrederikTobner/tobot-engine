@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <iostream>
 
-#ifdef _WIN32
+#ifdef OS_WINDOWS
 #include <windows.h>
 #endif
 
@@ -236,7 +236,7 @@ namespace Farscape::Utilities
             if (priority <= message_priority)
             {
                 std::scoped_lock lock(log_mutex);
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 #endif
                 std::time_t current_time = std::time(0);
@@ -245,18 +245,18 @@ namespace Farscape::Utilities
                 strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
                 printf("%s - [", buffer);
                 printf("] - [");
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[message_priority]);
 #endif
                 printf(message_priority_str);
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 SetConsoleTextAttribute(console_color, 7);
 #endif
                 if (strlen(message_priority_str) <= 6)
                     printf("]\t");
                 else
                     printf("]\t\t");
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
                 {
                     SetConsoleTextAttribute(console_color, 4);
@@ -264,7 +264,7 @@ namespace Farscape::Utilities
 #endif
                 printf(message, args...);
                 printf("\n");
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
                 {
                     SetConsoleTextAttribute(console_color, 7);
@@ -287,7 +287,7 @@ namespace Farscape::Utilities
             if (priority <= message_priority)
             {
                 std::scoped_lock lock(log_mutex);
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
 #endif
                 std::time_t current_time = std::time(0);
@@ -296,31 +296,25 @@ namespace Farscape::Utilities
                 strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
                 printf("%s - [", buffer);
                 printf("] - [");
-#ifdef _WIN32
-                if (message_priority == CRITICAL_PRIORITY)
-                {
-                    SetConsoleTextAttribute(console_color, 4);
-                }
+#ifdef OS_WINDOWS
+                SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[message_priority]);
 #endif
                 printf(message_priority_str);
-#ifdef _WIN32
-                if (message_priority == CRITICAL_PRIORITY)
-                {
-                    SetConsoleTextAttribute(console_color, 7);
-                }
+#ifdef OS_WINDOWS
+                SetConsoleTextAttribute(console_color, 7);
 #endif
                 if (strlen(message_priority_str) <= 6)
                     printf("]\t");
                 else
                     printf("]\t\t");
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
                 {
                     SetConsoleTextAttribute(console_color, 4);
                 }
 #endif
                 printf(message, args...);
-#ifdef _WIN32
+#ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
                 {
                     SetConsoleTextAttribute(console_color, 7);

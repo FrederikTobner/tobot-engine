@@ -34,7 +34,7 @@ void Logger::enable_file_out()
 
 void Logger::ensure_logs_directory_exists()
 {
-#ifdef _WIN32
+#ifdef OS_WINDOWS
     DWORD dwAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
     if (dwAttribute == INVALID_FILE_ATTRIBUTES)
     {
@@ -52,27 +52,27 @@ void Logger::ensure_logs_directory_exists()
         exit(70);
     }
 #endif
-#ifdef __linux__
+#ifdef OS_LINUX
     DIR *resultsDirectory = opendir(LOGS_FOLDER_PATH);
     if (resultsDirectory)
         closedir(resultsDirectory);
     else if (ENOENT == errno)
     {
         // If the directory does not exists we need to create it
-        mkdir(RESULTS_BASE_PATH, 0700);
+        mkdir(LOGS_FOLDER_PATH, 0700);
         resultsDirectory = opendir(LOGS_FOLDER_PATH);
         if (resultsDirectory)
             closedir(resultsDirectory);
         else
         {
-            fprintf(stderr, "Can not create results directory!\n");
+            fprintf(stderr, "Can not create logs directory!\n");
             exit(70);
         }
     }
     else
     {
-        fprintf(stderr, "Can not access results directory!\n");
-        exit(EXIT_CODE_SYSTEM_ERROR);
+        fprintf(stderr, "Can not access logs directory!\n");
+        exit(70);
     }
 #endif
 }

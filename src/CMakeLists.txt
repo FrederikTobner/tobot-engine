@@ -19,6 +19,9 @@ add_compile_definitions(
     LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/"
 )
 
+include(../cmake/farscape_detect_platform.cmake)
+Farscape_Detect_Platform()
+
 add_executable(${PROJECT_NAME} ${PROJECT_FARSCAPE_SOURCES} ${PROJECT_FARSCAPE_HEADERS})
 
 set(BUILD_SHARED_LIBS OFF)
