@@ -30,7 +30,7 @@ void TobotApplication::initialize()
         SDL_Quit();   
         exit(70);
     }
-    this->p_Window = SDL_CreateWindow("Tobot", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+    this->p_Window = SDL_CreateWindow(applicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, displayWidth, displayHeight, SDL_WINDOW_SHOWN);
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 }
@@ -43,7 +43,7 @@ void TobotApplication::run()
         this->update();
         this->render();
     }
-    this->quit();
+    delete this;
 }
 
 void TobotApplication::handleEvents()
@@ -64,6 +64,7 @@ void TobotApplication::handleEvents()
             }
             break;
 
+        // TODO: let client application handle some of the events
         default:
             break;
         }
@@ -72,6 +73,18 @@ void TobotApplication::handleEvents()
 
 void TobotApplication::update()
 {
+}
+
+// virtual destructor
+TobotApplication::TobotApplication()
+{
+    this->initialize();
+}
+
+// virtual destructor
+TobotApplication::~TobotApplication()
+{
+    this->quit();
 }
 
 void TobotApplication::render()
@@ -89,14 +102,4 @@ void TobotApplication::quit()
     TTF_Quit();
     Mix_Quit();
     SDL_Quit();
-}
-
-TobotApplication *TobotApplication::getInstance()
-{
-    if (sp_Instance == 0)
-    {
-        sp_Instance = new TobotApplication();
-    }
-
-    return sp_Instance;
 }
