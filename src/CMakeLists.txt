@@ -1,17 +1,17 @@
 configure_file(project_config.h.in project_config.h)
 
-set(PROJECT_FARSCAPE_SOURCES
+set(TOBOT_ENGINE_SOURCES
 utilities/logger.cpp
 core/render_object.cpp
-core/farscape_application.cpp
+core/tobot_application.cpp
 core/view.cpp
 main.cpp
 )
 
-set(PROJECT_FARSCAPE_HEADERS
+set(TOBOT_ENGINE_HEADERS
 utilities/logger.hpp
 core/render_object.h
-core/farscape_application.h
+core/tobot_application.h
 core/view.h
 )
 
@@ -19,10 +19,10 @@ add_compile_definitions(
     LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/"
 )
 
-include(../cmake/farscape_detect_platform.cmake)
-Farscape_Detect_Platform()
+include(../cmake/tobot_detect_platform.cmake)
+Tobot_Detect_Platform()
 
-add_executable(${PROJECT_NAME} ${PROJECT_FARSCAPE_SOURCES} ${PROJECT_FARSCAPE_HEADERS})
+add_executable(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
 
 set(BUILD_SHARED_LIBS OFF)
 
@@ -36,7 +36,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR}/src)
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Sets properties for the package created using cpack
     set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} A game made with SDL in space")
+    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} A game engine")
     set(CPACK_BUILD_SOURCE_DIRS "${PROJECT_BINARY_DIR}/src")
     
     include(CPack)

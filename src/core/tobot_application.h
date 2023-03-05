@@ -10,22 +10,22 @@
 #include <iostream>
 #include <unordered_map>
 
-namespace Farscape::Core
+namespace Tobot::Core
 {
-    class FarscapeApplication
+    class TobotApplication
     {
     private:
-        inline static FarscapeApplication *sp_Instance = 0;
+        inline static TobotApplication *sp_Instance = 0;
 
         SDL_Window *p_Window;
         SDL_Renderer *p_Renderer;
 
-        std::unordered_map<const char *, std::unique_ptr<Farscape::Core::View>> p_Views;
+        std::unordered_map<const char *, std::unique_ptr<Tobot::Core::View>> p_Views;
 
         bool m_Running;
 
     public:
-        static FarscapeApplication *getInstance();
+        static TobotApplication *getInstance();
 
         void initialize();
         void run();

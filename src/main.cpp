@@ -3,11 +3,11 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-#include "core/farscape_application.h"
+#include "core/tobot_application.h"
 
 int main(int argc, char **argv)
 {
-    Farscape::Core::FarscapeApplication *application = Farscape::Core::FarscapeApplication::getInstance();
+    Tobot::Core::TobotApplication *application = Tobot::Core::TobotApplication::getInstance();
     application->initialize();
     application->run();
     return 0;

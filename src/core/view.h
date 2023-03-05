@@ -6,7 +6,7 @@
 
 #include "render_object.h"
 
-namespace Farscape::Core
+namespace Tobot::Core
 {
     class View
     {
@@ -23,4 +23,4 @@ namespace Farscape::Core
     public:
         virtual void initialize() = 0;
     };
-} // namespace Farscape::Core
+} // namespace Tobot::Core
