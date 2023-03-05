@@ -1,6 +1,6 @@
 #pragma once
 
-#include "logger.hpp"
+#include "logger.h"
 
 // Asserts are only defined for debug builds
 #ifdef _DEBUG
