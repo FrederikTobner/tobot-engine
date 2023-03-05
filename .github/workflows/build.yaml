@@ -1,4 +1,4 @@
-name: Build CHIP-8
+name: Build Tobot Engine
 
 on:
   pull_request:
