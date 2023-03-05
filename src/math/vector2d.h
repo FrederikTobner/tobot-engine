@@ -12,7 +12,7 @@ namespace Tobot::Math
 
         Vector2D(T x, T y) : x(x), y(y) {}
 
-        Vector2D<T> &operator+=(const Vector2D<T> &rhs) 
+        Vector2D<T> &operator+=(const Vector2D<T> &rhs)
         {
             this->x += rhs.x;
             this->y += rhs.y;
@@ -21,6 +21,19 @@ namespace Tobot::Math
         friend Vector2D<T> operator+(Vector2D<T> lhs, const Vector2D<T> &rhs)
         {
             lhs += rhs;
+            return lhs;
+        }
+
+        Vector2D<T> &operator*=(const Vector2D<T> &rhs)
+        {
+            this->x *= rhs.x;
+            this->y *= rhs.y;
+            return *this;
+        }
+
+        friend Vector2D<T> operator*(Vector2D<T> lhs, const Vector2D<T> &rhs)
+        {
+            lhs *= rhs;
             return lhs;
         }
     };
