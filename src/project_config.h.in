@@ -3,6 +3,7 @@
 
 #define PROJECT_VERSION_MAJOR ("@project-farscape_VERSION_MAJOR@")
 #define PROJECT_VERSION_MINOR ("@project-farscape_VERSION_MINOR@")
+#define PROJECT_VERSION_PATCH ("@project-farscape_VERSION_PATCH@")
 #define PROJECT_NAME ("@PROJECT_NAME@")
 
 #endif
