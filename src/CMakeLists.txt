@@ -5,7 +5,6 @@ utilities/logger.cpp
 core/render_object.cpp
 core/tobot_application.cpp
 core/view.cpp
-main.cpp
 )
 
 set(TOBOT_ENGINE_HEADERS
@@ -13,6 +12,7 @@ utilities/logger.hpp
 core/render_object.h
 core/tobot_application.h
 core/view.h
+entry_point.hpp
 )
 
 add_compile_definitions(
@@ -22,7 +22,7 @@ add_compile_definitions(
 include(../cmake/tobot_detect_platform.cmake)
 Tobot_Detect_Platform()
 
-add_executable(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
+add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
 
 set(BUILD_SHARED_LIBS OFF)
 

@@ -36,4 +36,5 @@ namespace Tobot::Core
         void render();
         void quit();
     };
+    TobotApplication * CreateApplication();
 } // namespace Fars

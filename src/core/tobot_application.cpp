@@ -7,7 +7,6 @@ using namespace Tobot::Core;
 
 void TobotApplication::initialize()
 {
-    Tobot::Utilities::Logger::EnableFileOutput();
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     if (SDL_Init(SDL_INIT_EVERYTHING)) {
         LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());    

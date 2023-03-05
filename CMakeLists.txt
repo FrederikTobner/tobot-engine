@@ -7,3 +7,5 @@ add_subdirectory(deps/SDL)
 add_subdirectory(deps/SDL_image)
 add_subdirectory(deps/SDL_ttf)
 add_subdirectory(deps/SDL_mixer)
+
+add_subdirectory(example)
