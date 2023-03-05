@@ -8,6 +8,7 @@
         "xstring": "cpp",
         "cmath": "cpp",
         "memory": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "chrono": "cpp"
     }
 }

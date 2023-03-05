@@ -14,6 +14,8 @@ core/tobot_application.h
 core/view.h
 utilities/logger.hpp
 utilities/tobot_asserts.hpp
+math/vector2d.h
+widget/text.h
 )
 
 add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
