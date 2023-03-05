@@ -1,14 +1,14 @@
-#include "farscape_application.h"
+#include "tobot_application.h"
 
 #include "utilities/logger.hpp"
 #include "project_config.h"
 
-using namespace Farscape::Core;
+using namespace Tobot::Core;
 
-void FarscapeApplication::initialize()
+void TobotApplication::initialize()
 {
-    Farscape::Utilities::Logger::EnableFileOutput();
-    LOG_INFO("%s version %s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR);
+    Tobot::Utilities::Logger::EnableFileOutput();
+    LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     if (SDL_Init(SDL_INIT_EVERYTHING)) {
         LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());    
         exit(70);
@@ -31,12 +31,12 @@ void FarscapeApplication::initialize()
         SDL_Quit();   
         exit(70);
     }
-    this->p_Window = SDL_CreateWindow("Farscape", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+    this->p_Window = SDL_CreateWindow("Tobot", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 }
 
-void FarscapeApplication::run()
+void TobotApplication::run()
 {
     while (this->m_Running)
     {
@@ -47,7 +47,7 @@ void FarscapeApplication::run()
     this->quit();
 }
 
-void FarscapeApplication::handleEvents()
+void TobotApplication::handleEvents()
 {
     SDL_Event ev;
     while (SDL_PollEvent(&ev))
@@ -71,18 +71,18 @@ void FarscapeApplication::handleEvents()
     }
 }
 
-void FarscapeApplication::update()
+void TobotApplication::update()
 {
 }
 
-void FarscapeApplication::render()
+void TobotApplication::render()
 {
     SDL_SetRenderDrawColor(this->p_Renderer, 0, 0, 0, 0);
     SDL_RenderClear(this->p_Renderer);
     SDL_RenderPresent(this->p_Renderer);
 }
 
-void FarscapeApplication::quit()
+void TobotApplication::quit()
 {
     SDL_DestroyRenderer(this->p_Renderer);
     SDL_DestroyWindow(this->p_Window);
@@ -92,11 +92,11 @@ void FarscapeApplication::quit()
     SDL_Quit();
 }
 
-FarscapeApplication *FarscapeApplication::getInstance()
+TobotApplication *TobotApplication::getInstance()
 {
     if (sp_Instance == 0)
     {
-        sp_Instance = new FarscapeApplication();
+        sp_Instance = new TobotApplication();
     }
 
     return sp_Instance;

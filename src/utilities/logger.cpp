@@ -2,7 +2,7 @@
 
 #include <ctime>
 
-using namespace Farscape::Utilities;
+using namespace Tobot::Utilities;
 
 Logger::Logger()
 {

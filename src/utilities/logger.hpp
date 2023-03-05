@@ -11,21 +11,21 @@
 #include <windows.h>
 #endif
 
-namespace Farscape::Utilities
+namespace Tobot::Utilities
 {
-#define LOG_TRACE(message, ...) (Farscape::Utilities::Logger::Trace(message, __VA_ARGS__))
-#define LOG_DEBUG(message, ...) (Farscape::Utilities::Logger::Debug(message, __VA_ARGS__))
-#define LOG_INFO(message, ...) (Farscape::Utilities::Logger::Info(message, __VA_ARGS__))
-#define LOG_WARN(message, ...) (Farscape::Utilities::Logger::Warn(message, __VA_ARGS__))
-#define LOG_ERROR(message, ...) (Farscape::Utilities::Logger::Error(message, __VA_ARGS__))
-#define LOG_CRITICAL(message, ...) (Farscape::Utilities::Logger::Critical(message, __VA_ARGS__))
+#define LOG_TRACE(message, ...) (Tobot::Utilities::Logger::Trace(message, __VA_ARGS__))
+#define LOG_DEBUG(message, ...) (Tobot::Utilities::Logger::Debug(message, __VA_ARGS__))
+#define LOG_INFO(message, ...) (Tobot::Utilities::Logger::Info(message, __VA_ARGS__))
+#define LOG_WARN(message, ...) (Tobot::Utilities::Logger::Warn(message, __VA_ARGS__))
+#define LOG_ERROR(message, ...) (Tobot::Utilities::Logger::Error(message, __VA_ARGS__))
+#define LOG_CRITICAL(message, ...) (Tobot::Utilities::Logger::Critical(message, __VA_ARGS__))
 
-#define LOG_TRACE_AT(message, ...) (Farscape::Utilities::Logger::Trace(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_DEBUG_AT(message, ...) (Farscape::Utilities::Logger::Debug(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_INFO_AT(message, ...) (Farscape::Utilities::Logger::Info(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_WARN_AT(message, ...) (Farscape::Utilities::Logger::Warn(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_ERROR_AT(message, ...) (Farscape::Utilities::Logger::Error(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_CRITICAL_AT(message, ...) (Farscape::Utilities::Logger::Critical(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_TRACE_AT(message, ...) (Tobot::Utilities::Logger::Trace(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_DEBUG_AT(message, ...) (Tobot::Utilities::Logger::Debug(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_INFO_AT(message, ...) (Tobot::Utilities::Logger::Info(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_WARN_AT(message, ...) (Tobot::Utilities::Logger::Warn(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_ERROR_AT(message, ...) (Tobot::Utilities::Logger::Error(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_CRITICAL_AT(message, ...) (Tobot::Utilities::Logger::Critical(__LINE__, __FILE__, message, __VA_ARGS__))
 
     enum LogPriority
     {

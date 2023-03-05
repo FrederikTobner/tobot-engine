@@ -1,6 +1,6 @@
 #include "view.h"
 
-using namespace Farscape::Core;
+using namespace Tobot::Core;
 
 template<typename T>
 void View::add(T *renderObject) {

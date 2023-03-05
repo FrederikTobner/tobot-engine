@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Farscape::Core
+namespace Tobot::Core
 {
     class RenderObject
     {
@@ -15,5 +15,5 @@ namespace Farscape::Core
 
         const char* getId();
     };
-} // namespace Farscape::Core
+} // namespace Tobot::Core
 

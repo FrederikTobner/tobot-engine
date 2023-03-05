@@ -2,9 +2,9 @@
 
 #include "core/render_object.h"
 
-namespace Farscape::Widget
+namespace Tobot::Widget
 {
-    class Text : public Farscape::Core::RenderObject
+    class Text : public Tobot::Core::RenderObject
     {
     private:
         const char *m_Text;
@@ -12,5 +12,5 @@ namespace Farscape::Widget
     public:
         Text(const char *text, const char *id, int x, int y) : RenderObject(id, x, y), m_Text(text) {}
     };
-} // namespace Farscape::Widget
+} // namespace Tobot::Widget
 

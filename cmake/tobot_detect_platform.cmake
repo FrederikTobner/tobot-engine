@@ -1,5 +1,5 @@
 # Macro for adding os-specific compiler definitions
-macro(Farscape_Detect_Platform)
+macro(Tobot_Detect_Platform)
     
     if(UNIX)
     add_compile_definitions(OS_UNIX_LIKE)    
@@ -53,4 +53,4 @@ macro(Farscape_Detect_Platform)
     else()
         message(FATAL_ERROR "The underlying operating system was not recognized")
     endif()
-endmacro(Farscape_Detect_Platform)
+endmacro(Tobot_Detect_Platform)

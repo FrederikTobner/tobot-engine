@@ -1,3 +1,3 @@
 # Project Farscape
 
-![Farscape inspitarational picture](./assets/inspirational_picture.png)
+![Tobot inspitarational picture](./assets/inspirational_picture.png)
