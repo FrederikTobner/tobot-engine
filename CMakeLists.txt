@@ -1,8 +1,14 @@
 cmake_minimum_required(VERSION 3.18.0)
 project(tobot-engine VERSION 1.0.0 LANGUAGES CXX)
 
+# Adding compile definitions (used OS, compiler, build type and the logs folder path)
 include(./cmake/tobot_detect_platform.cmake)
+include(./cmake/tobot_detect_compiler.cmake)
 Tobot_Detect_Platform()
+Tobot_Detect_Compiler()
+if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
+  add_compile_definitions(BUILD_TYPE_DEBUG)
+endif()
 add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 
 set(CMAKE_CXX_STANDARD 17)
