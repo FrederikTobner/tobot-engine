@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        operatingsystems: [windows-latest, ubuntu-latest, macos-latest] 
+        operatingsystems: [windows-latest] 
         buildtypes: [Release] 
 
     steps:
