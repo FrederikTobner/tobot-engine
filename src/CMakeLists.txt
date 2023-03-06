@@ -20,7 +20,7 @@ widget/text.h
 
 add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
 
-set(BUILD_SHARED_LIBS OFF)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ./)
 
