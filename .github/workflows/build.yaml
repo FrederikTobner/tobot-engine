@@ -1,4 +1,4 @@
-name: Build Engine
+name: Build
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        operatingsystems: [windows-latest] 
+        operatingsystems: [windows-latest, ubuntu-latest, macos-latest] 
         buildtypes: [Release] 
 
     steps:
