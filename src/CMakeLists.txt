@@ -18,6 +18,14 @@ math/vector2d.h
 widget/text.h
 )
 
+# Adding compile definitions (used OS, compiler, build type and the logs folder path)
+include(../cmake/tobot_detect.cmake)
+Tobot_Detect_Platform()
+Tobot_Detect_Compiler()
+if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
+  add_compile_definitions(BUILD_TYPE_DEBUG)
+endif()
+
 add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
