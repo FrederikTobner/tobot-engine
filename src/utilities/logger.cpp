@@ -42,18 +42,18 @@ void Logger::ensure_logs_directory_exists()
         dwAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
         if (dwAttribute == INVALID_FILE_ATTRIBUTES)
         {
-            fprintf(stderr, "Can not create logs directory!\n");
+            std::cerr << "Can not create logs directory!\n";
             exit(70);
         }
     }
     else if (!(dwAttribute & FILE_ATTRIBUTE_DIRECTORY))
     {
-        fprintf(stderr, "Logs is not a directory");
+        std::cerr << "Logs is not a directory\n";
         exit(70);
     }
 #endif
 #ifdef OS_LINUX
-    DIR *resultsDirectory = opendir(LOGS_FOLDER_PATH);
+    DIR * resultsDirectory = opendir(LOGS_FOLDER_PATH);
     if (resultsDirectory)
         closedir(resultsDirectory);
     else if (ENOENT == errno)
@@ -65,13 +65,13 @@ void Logger::ensure_logs_directory_exists()
             closedir(resultsDirectory);
         else
         {
-            fprintf(stderr, "Can not create logs directory!\n");
+            std::cerr << "Can not create logs directory!\n";
             exit(70);
         }
     }
     else
     {
-        fprintf(stderr, "Can not access logs directory!\n");
+        fstd::cerr << "Can not access logs directory!\n";
         exit(70);
     }
 #endif
@@ -82,6 +82,6 @@ void Logger::free_file()
     if (file)
     {
         fclose(file);
-        file = 0;
+        file = NULL;
     }
 }

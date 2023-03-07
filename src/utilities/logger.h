@@ -34,7 +34,7 @@ namespace Tobot::Utilities
         INFO_PRIORITY,
         WARN_PRIORITY,
         ERROR_PRIORITY,
-        CRITICAL_PRIORITY,
+        CRITICAL_PRIORITY
     };
 
     class Logger
@@ -66,7 +66,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Trace(char const *message, Args... args)
         {
-            get_Instance().log("Trace", TRACE_PRIORITY, message, args...);
+            get_Instance().log(TRACE_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -78,7 +78,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Debug(char const *message, Args... args)
         {
-            get_Instance().log("Debug", DEBUG_PRIORITY, message, args...);
+            get_Instance().log(DEBUG_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -90,7 +90,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Info(char const *message, Args... args)
         {
-            get_Instance().log("Info", INFO_PRIORITY, message, args...);
+            get_Instance().log(INFO_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -102,7 +102,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Warn(char const *message, Args... args)
         {
-            get_Instance().log("Warn", WARN_PRIORITY, message, args...);
+            get_Instance().log(WARN_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -114,7 +114,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Error(char const *message, Args... args)
         {
-            get_Instance().log("Error", ERROR_PRIORITY, message, args...);
+            get_Instance().log(ERROR_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -126,7 +126,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Critical(char const *message, Args... args)
         {
-            get_Instance().log("Critical", CRITICAL_PRIORITY, message, args...);
+            get_Instance().log(CRITICAL_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -138,7 +138,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Trace(int line, char const *source_file, char const *message, Args... args)
         {
-            get_Instance().log(line, source_file, "Trace", TRACE_PRIORITY, message, args...);
+            get_Instance().log(line, source_file, TRACE_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -150,7 +150,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Debug(int line, char const *source_file, char const *message, Args... args)
         {
-            get_Instance().log(line, source_file, "Debug", DEBUG_PRIORITY, message, args...);
+            get_Instance().log(line, source_file, DEBUG_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -162,7 +162,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Info(int line, char const *source_file, char const *message, Args... args)
         {
-            get_Instance().log(line, source_file, "Info", INFO_PRIORITY, message, args...);
+            get_Instance().log(line, source_file, INFO_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -174,7 +174,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Warn(int line, char const *source_file, char const *message, Args... args)
         {
-            get_Instance().log(line, source_file, "Warn", WARN_PRIORITY, message, args...);
+            get_Instance().log(line, source_file, WARN_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -186,7 +186,7 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Error(int line, char const *source_file, char const *message, Args... args)
         {
-            get_Instance().log(line, source_file, "Error", ERROR_PRIORITY, message, args...);
+            get_Instance().log(line, source_file, ERROR_PRIORITY, message, args...);
         }
 
         template <typename... Args>
@@ -198,24 +198,24 @@ namespace Tobot::Utilities
         template <typename... Args>
         static void Critical(int line, char const *source_file, char const *message, Args... args)
         {
-            get_Instance().log(line, source_file, "Critical", CRITICAL_PRIORITY, message, args...);
+            get_Instance().log(line, source_file, CRITICAL_PRIORITY, message, args...);
         }
 
         template <typename... Args>
-        static void Critical(int line, char const *source_file, std::string message, Args... args)
+        static void Critical(int line, char const *source_file, std::string message, Args... args, bool)
         {
             Critical(line, source_file, message.c_str(), args...);
         }
 
     private:
-        LogPriority priority;
-        bool file_output;
+        LogPriority priority = LogPriority::INFO_PRIORITY;
         uint8_t logLevelColors[6] = {7, 2, 3, 6, 4, 4};
         char const *filepath;
         char const *timeStampFormat = "%d.%m.%Y - %H:%M:%S";
         FILE *file;
         std::mutex log_mutex; // for thread safety
-
+        char const * logLevelStrings[6] = {"Trace", "Debug", "Info", "Warn", "Error", "Critical"};
+    
         Logger();
 
         Logger(const Logger &) = delete;
@@ -231,7 +231,7 @@ namespace Tobot::Utilities
         }
 
         template <typename... Args>
-        void log(char const *message_priority_str, LogPriority message_priority, char const *message, Args... args)
+        void log(LogPriority message_priority, char const *message, Args... args)
         {
             if (this->priority <= message_priority)
             {
@@ -245,32 +245,28 @@ namespace Tobot::Utilities
                 HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
                 SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[message_priority]);
 #endif
-                printf(message_priority_str);
+                std::cout << logLevelStrings[message_priority];
 #ifdef OS_WINDOWS
                 SetConsoleTextAttribute(console_color, 7);
 #endif
-                if (strlen(message_priority_str) <= 6)
-                    printf("]\t");
+                if (message_priority == LogPriority::CRITICAL_PRIORITY)
+                    std::cout << "]\t";
                 else
-                    printf("]\t\t");
+                    std::cout << "]\t\t";
 #ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
-                {
                     SetConsoleTextAttribute(console_color, 4);
-                }
 #endif
                 printf(message, args...);
-                printf("\n");
+                std::cout << "\n";
 #ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
-                {
                     SetConsoleTextAttribute(console_color, 7);
-                }
 #endif
                 if (this->file)
                 {
-                    fprintf(this->file, "%s - [%s]\t\t", buffer, message_priority_str);
-                    if (strlen(message_priority_str) <= 6)
+                    fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[message_priority]);
+                    if (message_priority == LogPriority::CRITICAL_PRIORITY)
                         fprintf(this->file, "\t");
                     fprintf(this->file, message, args...);
                     fprintf(this->file, "\n");
@@ -279,7 +275,7 @@ namespace Tobot::Utilities
         }
 
         template <typename... Args>
-        void log(int line_number, char const *source_file, char const *message_priority_str, LogPriority message_priority, char const *message, Args... args)
+        void log(int line_number, char const *source_file, LogPriority message_priority, char const *message, Args... args)
         {
             if (this->priority <= message_priority)
             {
@@ -293,32 +289,30 @@ namespace Tobot::Utilities
                 HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
                 SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[message_priority]);
 #endif
-                printf(message_priority_str);
+                std::cout << logLevelStrings[message_priority];
 #ifdef OS_WINDOWS
                 SetConsoleTextAttribute(console_color, 7);
 #endif
-                if (strlen(message_priority_str) <= 6)
-                    printf("]\t");
+                if (message_priority == LogPriority::CRITICAL_PRIORITY)
+                    std::cout << "]\t";
                 else
-                    printf("]\t\t");
+                    std::cout << "]\t\t";
 #ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
-                {
                     SetConsoleTextAttribute(console_color, 4);
-                }
 #endif
                 printf(message, args...);
 #ifdef OS_WINDOWS
                 if (message_priority == CRITICAL_PRIORITY)
-                {
                     SetConsoleTextAttribute(console_color, 7);
-                }
 #endif
                 printf(" (on line %d in %s)", line_number, source_file);
-                printf("\n");
+                std::cout << "\n";
                 if (this->file)
                 {
-                    fprintf(this->file, "%s - [%s]\t\t", buffer, message_priority_str);
+                    fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[message_priority]);
+                    if (message_priority == LogPriority::CRITICAL_PRIORITY)
+                        fprintf(this->file, "\t");
                     fprintf(this->file, message, args...);
                     fprintf(this->file, " (on line %d in %s)", line_number, source_file);
                     fprintf(this->file, "\n");
