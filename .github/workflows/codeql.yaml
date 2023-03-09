@@ -2,12 +2,12 @@ name: "CodeQL"
 
 on:
   schedule:
-    - cron: '0 12 15 * ?' # At 12 at the 15th day of every month
+    - cron: '0 12 10 * ?' # At 12 at the 10th day of every month
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: windows-latest
+    runs-on: ${{matrix.operatingsystems}}
     permissions:
       actions: read
       contents: read
@@ -17,10 +17,13 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'cpp' ]
+        operatingsystems: [windows-latest] 
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2

@@ -3,6 +3,18 @@ name: Build
 on:
   pull_request:
     branches: [ "master" ]
+    paths-ignore:
+     - '**/*.md'
+     - '**/*.bat'
+     - '**/*.sh'
+     - '**/*.html'  # Documentation
+     - '**/*.js'
+     - '**/*.png'
+     - '**/*.css'
+     - '**/*.dox'
+     - '**/*.svg'
+     - '**/*.bmp'
+     - '**/*.ico'
 
 jobs:
   build:
@@ -24,4 +36,4 @@ jobs:
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Building Engine
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target tobot-engine
