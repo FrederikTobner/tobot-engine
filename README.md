@@ -10,6 +10,8 @@ A 2D rendering engine built on top of SDL2.
 
 ## Architecture
 
+![](./assets/tobot_architecture.png)
+
 ## Key concepts
 
 ## License
