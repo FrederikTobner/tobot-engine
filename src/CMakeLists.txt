@@ -1,21 +1,21 @@
 configure_file(project_config.h.in project_config.h)
 
 set(TOBOT_ENGINE_SOURCES
-core/render_object.cpp
-core/tobot_application.cpp
-core/view.cpp
-utilities/logger.cpp
+"core/render_object.cpp"
+"core/tobot_application.cpp"
+"core/view.cpp"
+"utilities/logger.cpp"
 )
 
 set(TOBOT_ENGINE_HEADERS
-entry_point.h
-core/render_object.h
-core/tobot_application.h
-core/view.h
-utilities/logger.h
-utilities/tobot_asserts.h
-math/vector2d.h
-widget/text.h
+"entry_point.h"
+"core/render_object.h"
+"core/tobot_application.h"
+"core/view.h"
+"utilities/logger.h"
+"utilities/tobot_asserts.h"
+"math/vector2d.h"
+"widget/text.h"
 )
 
 # Adding compile definitions (used OS, compiler, build type and the logs folder path)
