@@ -5,10 +5,10 @@
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 
-#include "view.h"
-
 #include <iostream>
 #include <unordered_map>
+
+#include "scene.h"
 
 namespace Tobot::Core
 {
@@ -57,17 +57,19 @@ namespace Tobot::Core
         SDL_Window *p_Window;
         SDL_Renderer *p_Renderer;
 
-        std::unordered_map<const char *, std::unique_ptr<Tobot::Core::View>> p_Views;
+        Scene *p_CurrentScene;
 
         bool m_Running;
 
     protected:
-        int displayWidth = 800;
-        int displayHeight = 600;
-        char const *applicationName = "app";
+        int m_DisplayWidth = 800;
+        int m_DisplayHeight = 600;
+        char const *m_ApplicationName = "app";
+
+        void setInitialScene(Scene *scene);
 
     public:
-        TobotApplication();
+        TobotApplication(const char *name);
         virtual ~TobotApplication();
         void initialize();
         void run();

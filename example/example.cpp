@@ -1,13 +1,43 @@
 #include "tobot.h"
 
+class Player : public Tobot::Core::GameEntity
+{
+public:
+    Player() : GameEntity("player", 50, 50)
+    {
+        this->setTexture(Tobot::Core::AssetManager::loadTexture("../../assets/inspirational_picture.png"));
+    }
+
+    void update() override
+    {
+        this->m_Position += Tobot::Math::Vector2D<int>(1, 1);
+    }
+};
+
+class IntroductionScene : public Tobot::Core::Scene
+{
+public:
+    IntroductionScene() : Scene("MainMenu")
+    {
+        // Initialize variables
+    }
+
+    void onCreate() override
+    {
+        // Layers, Widgets, RenderObjects
+        LOG_INFO("MainMenu::onCreate");
+        this->add(new Player());
+    }
+};
+
 class Example : public Tobot::Core::TobotApplication
 {
 public:
-    Example()
+    Example() : TobotApplication("Example")
     {
-        this->displayWidth = 1200;
-        this->displayHeight = 800;
-        this->applicationName = "Example";
+        this->m_DisplayWidth = 1200;
+        this->m_DisplayHeight = 800;
+        this->setInitialScene(new IntroductionScene());
     }
 
     ~Example()
@@ -16,7 +46,7 @@ public:
     }
 };
 
-Tobot::Core::TobotApplication * Tobot::Core::CreateApplication()
+Tobot::Core::TobotApplication *Tobot::Core::CreateApplication()
 {
     Tobot::Utilities::Logger::EnableFileOutput();
     LOG_INFO("Hello from Example %i", 123);
