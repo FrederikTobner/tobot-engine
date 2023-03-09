@@ -2,35 +2,20 @@
 
 #include "utilities/logger.h"
 #include "project_config.h"
+#include "edl/edl_initializer.h"
 
 using namespace Tobot::Core;
 
 void TobotApplication::initialize()
 {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
-    if (SDL_Init(SDL_INIT_EVERYTHING)) {
-        LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());    
+    // Initialize SDL subsystems
+    if (Tobot::EDL::EDLInitializerInitialize(Tobot::EDL::SDL_CORE_INIT_EVERYTHING | 
+                                                Tobot::EDL::SDL_IMAGE_INIT_PNG | 
+                                                Tobot::EDL::SDL_TTF_INIT | 
+                                                Tobot::EDL::SDL_MIXER_INIT_MP3))
         exit(70);
-    }
-    if (!IMG_Init(IMG_INIT_PNG)) {
-        LOG_CRITICAL("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-        SDL_Quit();
-        exit(70);
-    }
-    if (TTF_Init()) {
-        LOG_CRITICAL("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
-        IMG_Quit();
-        SDL_Quit();      
-        exit(70);
-    }
-    if (!Mix_Init(MIX_INIT_MP3)) {
-        LOG_CRITICAL("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
-        TTF_Quit();
-        IMG_Quit();
-        SDL_Quit();   
-        exit(70);
-    }
-    this->p_Window = SDL_CreateWindow(applicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, displayWidth, displayHeight, SDL_WINDOW_SHOWN);
+    this->p_Window = SDL_CreateWindow(applicationName, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, displayWidth, displayHeight, SDL_WINDOW_SHOWN);
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 }
