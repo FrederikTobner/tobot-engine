@@ -32,6 +32,10 @@
         "xlocmon": "cpp",
         "xlocnum": "cpp",
         "xloctime": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "format": "cpp",
+        "type_traits": "cpp",
+        "vector": "cpp",
+        "xtree": "cpp"
     }
 }

@@ -5,34 +5,47 @@
 
 using namespace Tobot::Core;
 
+void TobotApplication::setInitialScene(Scene *scene)
+{
+    this->p_CurrentScene = scene;
+}
+
 void TobotApplication::initialize()
 {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
-    if (SDL_Init(SDL_INIT_EVERYTHING)) {
-        LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());    
+    if (SDL_Init(SDL_INIT_EVERYTHING))
+    {
+        LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         exit(70);
     }
-    if (!IMG_Init(IMG_INIT_PNG)) {
+    if (!IMG_Init(IMG_INIT_PNG))
+    {
         LOG_CRITICAL("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
         SDL_Quit();
         exit(70);
     }
-    if (TTF_Init()) {
+    if (TTF_Init())
+    {
         LOG_CRITICAL("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
         IMG_Quit();
-        SDL_Quit();      
+        SDL_Quit();
         exit(70);
     }
-    if (!Mix_Init(MIX_INIT_MP3)) {
+    if (!Mix_Init(MIX_INIT_MP3))
+    {
         LOG_CRITICAL("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
         TTF_Quit();
         IMG_Quit();
-        SDL_Quit();   
+        SDL_Quit();
         exit(70);
     }
-    this->p_Window = SDL_CreateWindow(applicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, displayWidth, displayHeight, SDL_WINDOW_SHOWN);
+    this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->m_DisplayWidth, this->m_DisplayHeight, SDL_WINDOW_SHOWN);
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
+
+    // TODO: Maybe call call this when onApplicationCreate will be a thing
+    this->p_CurrentScene->onCreate();
+    this->p_CurrentScene->prepareTextures(this->p_Renderer);
 }
 
 void TobotApplication::run()
@@ -73,12 +86,12 @@ void TobotApplication::handleEvents()
 
 void TobotApplication::update()
 {
+    this->p_CurrentScene->update();
 }
 
 // virtual constructor
-TobotApplication::TobotApplication()
+TobotApplication::TobotApplication(const char *name) : m_ApplicationName(name)
 {
-
 }
 
 // virtual destructor
@@ -89,8 +102,12 @@ TobotApplication::~TobotApplication()
 
 void TobotApplication::render()
 {
+    /// TODO: Scenes should decide the background color
     SDL_SetRenderDrawColor(this->p_Renderer, 0, 0, 0, 0);
     SDL_RenderClear(this->p_Renderer);
+
+    this->p_CurrentScene->render(this->p_Renderer);
+
     SDL_RenderPresent(this->p_Renderer);
 }
 

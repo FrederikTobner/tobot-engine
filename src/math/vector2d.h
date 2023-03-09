@@ -1,8 +1,10 @@
 #pragma once
 
+#include "utilities/concepts.h"
+
 namespace Tobot::Math
 {
-    template <typename T>
+    template <typename T> requires Arithmetic<T>
     class Vector2D
     {
 
