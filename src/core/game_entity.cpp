@@ -39,3 +39,7 @@ void GameEntity::render(SDL_Renderer *renderer)
     this->prepareRects();
     SDL_RenderCopy(renderer, this->p_Texture, &this->m_SrcRect, &this->m_DstRect);
 }
+
+GameEntity::~GameEntity() {
+
+}

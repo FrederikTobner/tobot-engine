@@ -24,6 +24,8 @@ namespace Tobot::Core
         GameEntity(const char *id, int x, int y, SDL_Texture *texture);
         GameEntity(const char *id, int x, int y);
 
+        virtual ~GameEntity() = 0;
+
         void initializeTexture(SDL_Renderer *renderer);
 
         virtual void update() override = 0;
