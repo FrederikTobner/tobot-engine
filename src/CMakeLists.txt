@@ -2,7 +2,6 @@ configure_file(project_config.h.in project_config.h)
 
 set(TOBOT_ENGINE_SOURCES
 "core/render_object.cpp"
-"edl/edl_initializer.cpp"
 "core/tobot_application.cpp"
 "core/view.cpp"
 "utilities/logger.cpp"
@@ -11,7 +10,6 @@ set(TOBOT_ENGINE_SOURCES
 set(TOBOT_ENGINE_HEADERS
 "entry_point.h"
 "core/render_object.h"
-"edl/edl_initializer.h"
 "core/tobot_application.h"
 "core/view.h"
 "utilities/logger.h"
