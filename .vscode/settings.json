@@ -3,6 +3,7 @@
         "deps",
         "vscode"
     ],
+    "editor.formatOnSave": true,
     "files.associations": {
         "iostream": "cpp",
         "xstring": "cpp",

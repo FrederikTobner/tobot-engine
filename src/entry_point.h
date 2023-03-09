@@ -4,8 +4,7 @@
 
 extern Tobot::Core::TobotApplication * Tobot::Core::CreateApplication();
 
-int main(int argc, char ** argv)
-{    
+int main(int argc, char ** argv) {
     Tobot::Core::TobotApplication * application = Tobot::Core::CreateApplication();
     application->initialize();
     application->run();
