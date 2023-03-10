@@ -14,12 +14,14 @@ entry_point.h
 core/render_object.h
 core/tobot_application.h
 core/scene.h
+core/scene_manager.h
 core/game_entity.h
 core/asset_manager.h
 utilities/logger.h
 utilities/tobot_asserts.h
 utilities/concepts.h
 math/vector2d.h
+math/dimension.h
 widget/text.h
 )
 

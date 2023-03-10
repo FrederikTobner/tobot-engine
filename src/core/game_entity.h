@@ -5,28 +5,29 @@
 #include "render_object.h"
 
 namespace Tobot::Core {
-class GameEntity : public Tobot::Core::RenderObject {
+    class GameEntity : public Tobot::Core::RenderObject {
 
-  protected:
-    void setTexture(SDL_Surface * texture);
+        protected:
+            void setTexture(SDL_Surface * texture);
 
-    SDL_Surface * p_TextureSurface;
+            SDL_Surface * p_TextureSurface;
+            SDL_Texture * p_Texture;
 
-  private:
-    SDL_Texture * p_Texture;
-    SDL_Rect m_SrcRect, m_DstRect;
+        private:
+            SDL_Rect m_SrcRect, m_DstRect;
 
-    void prepareRects();
+            void prepareRects();
 
-  public:
-    GameEntity(const char * id, int x, int y, SDL_Texture * texture);
-    GameEntity(const char * id, int x, int y);
+        public:
+            GameEntity(const char * id, int x, int y, SDL_Texture * texture);
+            GameEntity(const char * id, int x, int y);
 
-    virtual ~GameEntity() = 0;
+            virtual ~GameEntity() = 0;
 
-    void initializeTexture(SDL_Renderer * renderer);
+            void initializeTexture(SDL_Renderer * renderer);
 
-    virtual void update() override = 0;
-    void render(SDL_Renderer * renderer) override;
-};
+            virtual void update() override = 0;
+            void render(SDL_Renderer * renderer) override;
+            void dispose() override;
+    };
 } // namespace Tobot::Core

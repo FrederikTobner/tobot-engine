@@ -34,5 +34,9 @@ void GameEntity::render(SDL_Renderer * renderer) {
     SDL_RenderCopy(renderer, this->p_Texture, &this->m_SrcRect, &this->m_DstRect);
 }
 
+void GameEntity::dispose() {
+    SDL_DestroyTexture(this->p_Texture);
+}
+
 GameEntity::~GameEntity() {
 }

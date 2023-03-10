@@ -26,3 +26,17 @@ void Scene::render(SDL_Renderer * renderer) {
         object.second->render(renderer);
     }
 }
+
+void Scene::destroy(const char * id) {
+    Tobot::Core::GameEntity * gameEntity = this->m_GameEntities[id];
+    gameEntity->dispose();
+}
+
+void Scene::destroyAll() {
+    for (auto entity : this->m_GameEntities) {
+        entity.second->dispose();
+    }
+}
+
+Scene::~Scene() {
+}
