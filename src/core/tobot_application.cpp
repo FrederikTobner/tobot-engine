@@ -1,25 +1,22 @@
 #include "tobot_application.h"
 
+#include "project_config.h"
+#include "utilities/logger.h"
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_ttf.h>
 #include <SDL_mixer.h>
-#include "utilities/logger.h"
-#include "project_config.h"
+#include <SDL_ttf.h>
 
 using namespace Tobot::Core;
 
-void TobotApplication::setInitialScene(Scene *scene)
-{
+void TobotApplication::setInitialScene(Scene * scene) {
     this->p_CurrentScene = scene;
 }
 
-void TobotApplication::initialize()
-{
+void TobotApplication::initialize() {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     // Initialize SDL subsystems
-    if (InitializeSDLSubsystems(SDL_CORE_INIT_EVERYTHING | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3))
-    {
+    if (InitializeSDLSubsystems(SDL_CORE_INIT_EVERYTHING | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
         exit(70);
     }
     this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -32,10 +29,8 @@ void TobotApplication::initialize()
     this->p_CurrentScene->prepareTextures(this->p_Renderer);
 }
 
-void TobotApplication::run()
-{
-    while (this->m_Running)
-    {
+void TobotApplication::run() {
+    while (this->m_Running) {
         this->handleEvents();
         this->update();
         this->render();
@@ -43,20 +38,16 @@ void TobotApplication::run()
     delete this;
 }
 
-void TobotApplication::handleEvents()
-{
+void TobotApplication::handleEvents() {
     SDL_Event ev;
-    while (SDL_PollEvent(&ev))
-    {
-        switch (ev.type)
-        {
+    while (SDL_PollEvent(&ev)) {
+        switch (ev.type) {
         case SDL_QUIT:
             this->m_Running = false;
             break;
 
         case SDL_KEYUP:
-            if (SDL_SCANCODE_ESCAPE == ev.key.keysym.scancode)
-            {
+            if (SDL_SCANCODE_ESCAPE == ev.key.keysym.scancode) {
                 this->m_Running = false;
             }
             break;
@@ -68,24 +59,20 @@ void TobotApplication::handleEvents()
     }
 }
 
-void TobotApplication::update()
-{
+void TobotApplication::update() {
     this->p_CurrentScene->update();
 }
 
 // virtual constructor
-TobotApplication::TobotApplication(const char *name) : m_ApplicationName(name)
-{
+TobotApplication::TobotApplication(const char * name) : m_ApplicationName(name) {
 }
 
 // virtual destructor
-TobotApplication::~TobotApplication()
-{
+TobotApplication::~TobotApplication() {
     this->quit();
 }
 
-void TobotApplication::render()
-{
+void TobotApplication::render() {
     /// TODO: Scenes should decide the background color
     SDL_SetRenderDrawColor(this->p_Renderer, 0, 0, 0, 0);
     SDL_RenderClear(this->p_Renderer);
@@ -95,8 +82,7 @@ void TobotApplication::render()
     SDL_RenderPresent(this->p_Renderer);
 }
 
-void TobotApplication::quit()
-{
+void TobotApplication::quit() {
     SDL_DestroyRenderer(this->p_Renderer);
     SDL_DestroyWindow(this->p_Window);
     IMG_Quit();
@@ -105,55 +91,64 @@ void TobotApplication::quit()
     SDL_Quit();
 }
 
-int Tobot::Core::InitializeSDLSubsystems(uint32_t flags)
-{
+int Tobot::Core::InitializeSDLSubsystems(uint32_t flags) {
     uint32_t sdl_core_init_flags;
-    if (flags & SDL_CORE_INIT_TIMER)
+    if (flags & SDL_CORE_INIT_TIMER) {
         sdl_core_init_flags &= SDL_INIT_TIMER;
-    if (flags & SDL_CORE_INIT_AUDIO)
+    }
+    if (flags & SDL_CORE_INIT_AUDIO) {
         sdl_core_init_flags &= SDL_INIT_AUDIO;
-    if (flags & SDL_CORE_INIT_VIDEO)
+    }
+    if (flags & SDL_CORE_INIT_VIDEO) {
         sdl_core_init_flags &= SDL_INIT_VIDEO;
-    if (flags & SDL_CORE_INIT_JOYSTICK)
+    }
+    if (flags & SDL_CORE_INIT_JOYSTICK) {
         sdl_core_init_flags &= SDL_INIT_JOYSTICK;
-    if (flags & SDL_CORE_INIT_HAPTIC)
+    }
+    if (flags & SDL_CORE_INIT_HAPTIC) {
         sdl_core_init_flags &= SDL_INIT_HAPTIC;
-    if (flags & SDL_CORE_INIT_GAMECONTROLLER)
+    }
+    if (flags & SDL_CORE_INIT_GAMECONTROLLER) {
         sdl_core_init_flags &= SDL_INIT_GAMECONTROLLER;
-    if (flags & SDL_CORE_INIT_EVENTS)
+    }
+    if (flags & SDL_CORE_INIT_EVENTS) {
         sdl_core_init_flags &= SDL_INIT_EVENTS;
-    if (flags & SDL_CORE_INIT_SENSOR)
+    }
+    if (flags & SDL_CORE_INIT_SENSOR) {
         sdl_core_init_flags &= SDL_INIT_SENSOR;
-    if (SDL_Init(sdl_core_init_flags) < 0)
-    {
+    }
+    if (SDL_Init(sdl_core_init_flags) < 0) {
         LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         return -1;
     }
 
     uint32_t sdl_image_init_flags = 0;
-    if (flags & SDL_IMAGE_INIT_JPG)
+    if (flags & SDL_IMAGE_INIT_JPG) {
         sdl_image_init_flags |= IMG_INIT_JPG;
-    if (flags & SDL_IMAGE_INIT_PNG)
+    }
+    if (flags & SDL_IMAGE_INIT_PNG) {
         sdl_image_init_flags |= IMG_INIT_PNG;
-    if (flags & SDL_IMAGE_INIT_TIF)
+    }
+    if (flags & SDL_IMAGE_INIT_TIF) {
         sdl_image_init_flags |= IMG_INIT_PNG;
-    if (flags & SDL_IMAGE_INIT_WEBP)
+    }
+    if (flags & SDL_IMAGE_INIT_WEBP) {
         sdl_image_init_flags |= IMG_INIT_WEBP;
-    if (flags & SDL_IMAGE_INIT_JXL)
+    }
+    if (flags & SDL_IMAGE_INIT_JXL) {
         sdl_image_init_flags |= IMG_INIT_JXL;
-    if (flags & SDL_IMAGE_INIT_AVIF)
+    }
+    if (flags & SDL_IMAGE_INIT_AVIF) {
         sdl_image_init_flags |= IMG_INIT_AVIF;
-    if (IMG_Init(sdl_image_init_flags) < 0)
-    {
+    }
+    if (IMG_Init(sdl_image_init_flags) < 0) {
         LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         SDL_Quit();
         return -1;
     }
 
-    if (flags & SDL_TTF_INIT)
-    {
-        if (TTF_Init())
-        {
+    if (flags & SDL_TTF_INIT) {
+        if (TTF_Init()) {
             LOG_CRITICAL("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
             IMG_Quit();
             SDL_Quit();
@@ -162,25 +157,32 @@ int Tobot::Core::InitializeSDLSubsystems(uint32_t flags)
     }
 
     uint32_t sdl_mixxer_init_flags = 0;
-    if (flags & SDL_MIXER_INIT_FLAC)
+    if (flags & SDL_MIXER_INIT_FLAC) {
         sdl_mixxer_init_flags |= MIX_INIT_FLAC;
-    if (flags & SDL_MIXER_INIT_MID)
+    }
+    if (flags & SDL_MIXER_INIT_MID) {
         sdl_mixxer_init_flags |= MIX_INIT_MID;
-    if (flags & SDL_MIXER_INIT_MOD)
+    }
+    if (flags & SDL_MIXER_INIT_MOD) {
         sdl_mixxer_init_flags |= MIX_INIT_MOD;
-    if (flags & SDL_MIXER_INIT_MP3)
+    }
+    if (flags & SDL_MIXER_INIT_MP3) {
         sdl_mixxer_init_flags |= MIX_INIT_MP3;
-    if (flags & SDL_MIXER_INIT_OGG)
+    }
+    if (flags & SDL_MIXER_INIT_OGG) {
         sdl_mixxer_init_flags |= MIX_INIT_OGG;
-    if (flags & SDL_MIXER_INIT_OPUS)
+    }
+    if (flags & SDL_MIXER_INIT_OPUS) {
         sdl_mixxer_init_flags |= MIX_INIT_OPUS;
-    if (flags & SDL_MIXER_INIT_WAVPACK)
+    }
+    if (flags & SDL_MIXER_INIT_WAVPACK) {
         sdl_mixxer_init_flags |= MIX_INIT_WAVPACK;
-    if (!Mix_Init(sdl_mixxer_init_flags))
-    {
+    }
+    if (!Mix_Init(sdl_mixxer_init_flags)) {
         LOG_CRITICAL("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
-        if (flags & SDL_TTF_INIT)
+        if (flags & SDL_TTF_INIT) {
             TTF_Quit();
+        }
         IMG_Quit();
         SDL_Quit();
         return -1;
