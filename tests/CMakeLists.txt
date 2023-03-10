@@ -9,8 +9,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
-
 # Set all test files
 set(TEST_SOURCES math/vector2d_test.cpp main.cpp)
 

@@ -8,7 +8,7 @@
             "name": "Debug - MSVC",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/src/project-farscape.exe",
+            "program": "${workspaceFolder}/build/example/tobot-engine_Example.exe",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "console": "externalTerminal"

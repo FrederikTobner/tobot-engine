@@ -10,6 +10,7 @@ add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 add_subdirectory(src)
 
 # googletest tests
+enable_testing()
 add_subdirectory(tests)
 
 # SDL2 deps

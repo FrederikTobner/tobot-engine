@@ -1,6 +1,7 @@
 #include "tobot_application.h"
 
 #include "project_config.h"
+#include "scene_manager.h"
 #include "utilities/logger.h"
 #include <SDL.h>
 #include <SDL_image.h>
@@ -9,10 +10,6 @@
 
 using namespace Tobot::Core;
 
-void TobotApplication::setInitialScene(Scene * scene) {
-    this->p_CurrentScene = scene;
-}
-
 void TobotApplication::initialize() {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     // Initialize SDL subsystems
@@ -20,7 +17,7 @@ void TobotApplication::initialize() {
         exit(70);
     }
     this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                      this->m_DisplayWidth, this->m_DisplayHeight, SDL_WINDOW_SHOWN);
+                                      this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN);
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 
@@ -39,6 +36,17 @@ void TobotApplication::run() {
 }
 
 void TobotApplication::handleEvents() {
+
+    /// If a scene was loaded by the user prepare it for rendering
+    if (!Tobot::Core::SceneManager::sp_SceneStack.empty()) {
+
+        this->p_CurrentScene = Tobot::Core::SceneManager::sp_SceneStack.top();
+        this->p_CurrentScene->onCreate();
+        this->p_CurrentScene->prepareTextures(this->p_Renderer);
+
+        Tobot::Core::SceneManager::sp_SceneStack.pop();
+    }
+
     SDL_Event ev;
     while (SDL_PollEvent(&ev)) {
         switch (ev.type) {
@@ -63,6 +71,10 @@ void TobotApplication::update() {
     this->p_CurrentScene->update();
 }
 
+void Tobot::Core::TobotApplication::setInitialScene(Tobot::Core::Scene * scene) {
+    this->p_CurrentScene = scene;
+}
+
 // virtual constructor
 TobotApplication::TobotApplication(const char * name) : m_ApplicationName(name) {
 }
@@ -73,7 +85,7 @@ TobotApplication::~TobotApplication() {
 }
 
 void TobotApplication::render() {
-    /// TODO: Scenes should decide the background color
+    /// TODO: Scene specific background color with enums, reusable in logger maybe?
     SDL_SetRenderDrawColor(this->p_Renderer, 0, 0, 0, 0);
     SDL_RenderClear(this->p_Renderer);
 
@@ -83,6 +95,9 @@ void TobotApplication::render() {
 }
 
 void TobotApplication::quit() {
+
+    this->p_CurrentScene->onDestroy();
+
     SDL_DestroyRenderer(this->p_Renderer);
     SDL_DestroyWindow(this->p_Window);
     IMG_Quit();
