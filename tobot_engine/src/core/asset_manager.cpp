@@ -1,5 +1,5 @@
 #include "asset_manager.h"
-#include "utilities/logger.h"
+#include "logger.h"
 
 #include "SDL_image.h"
 

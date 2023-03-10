@@ -5,4 +5,4 @@
 #include "../core/scene_manager.h"
 #include "../entry_point.h"
 #include "../math/vector2d.h"
-#include "../utilities/logger.h"
+#include "logger.h"

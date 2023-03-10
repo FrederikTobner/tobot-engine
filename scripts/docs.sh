@@ -1,8 +1,8 @@
 # Generates documentation using doxyxgen (https://www.doxygen.nl/)
-if [ -d "../src" ]
+if [ -d "../tobot_engine/src" ]
 then
     echo "Generating Documentation ..."
-    cd ../src
+    cd ../tobot_engine/src
     doxygen
     echo "Moving generated content out of the html folder ..."
     if [ -d "../docs" ]

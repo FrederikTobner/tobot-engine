@@ -1,10 +1,10 @@
 :: Generates documentation using doxyxgen (https://www.doxygen.nl/)
 @ECHO OFF
-IF NOT EXIST ..\src (
+IF NOT EXIST ..\tobot_engine\src (
     ECHO Can not find source directory
     EXIT
 )
-cd ..\src
+cd ..\tobot_engine\src
 ECHO Generating Documentation ...
 doxygen
 ECHO Moving generated content out of the html folder ...
