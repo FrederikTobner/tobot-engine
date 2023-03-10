@@ -20,7 +20,7 @@ namespace Tobot::Core {
             /// @param ...args Constructor arguments of the scene implementation
             template <typename T, typename... TArgs>
                 requires BaseOf<T, Tobot::Core::Scene>
-            static void load(TArgs &&... args) {
+            static void navigateTo(TArgs &&... args) {
                 T * scene(new T(std::forward<TArgs>(args)...));
                 sp_SceneStack.push(scene);
             }

@@ -49,7 +49,7 @@ class Example : public Tobot::Core::TobotApplication {
             this->m_DisplaySize = Tobot::Math::Dimension<int>(1200, 800);
             this->setInitialScene(new IntroductionScene());
 
-            Tobot::Core::SceneManager::load<BlankScene>();
+            Tobot::Core::SceneManager::navigateTo<BlankScene>();
         }
 
         ~Example() {

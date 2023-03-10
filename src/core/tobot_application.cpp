@@ -40,6 +40,10 @@ void TobotApplication::handleEvents() {
     /// If a scene was loaded by the user prepare it for rendering
     if (!Tobot::Core::SceneManager::sp_SceneStack.empty()) {
 
+        // Destroy the previous scene for now: Configurable caching should be the future
+        this->p_CurrentScene->onDestroy();
+
+        // Pop the latest scene create it
         this->p_CurrentScene = Tobot::Core::SceneManager::sp_SceneStack.top();
         this->p_CurrentScene->onCreate();
         this->p_CurrentScene->prepareTextures(this->p_Renderer);
