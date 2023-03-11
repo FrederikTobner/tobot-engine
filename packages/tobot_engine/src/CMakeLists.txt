@@ -18,8 +18,6 @@ set(TOBOT_ENGINE_HEADERS
 "core/scene.h"
 "core/scene_manager.h"
 "core/tobot_application.h"
-"math/dimension.h"
-"math/vector2d.h"
 "utilities/concepts.h"
 "widget/text.h"
 )
@@ -38,18 +36,20 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ./)
 
-target_link_libraries(${PROJECT_NAME} SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling)
+target_link_libraries(${PROJECT_NAME} SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math)
 
 # for including the project_config.h file
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_engine/src ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src/include)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_engine/src ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src/include ${PROJECT_SOURCE_DIR}/packages/tobot_math/src/include)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Sets properties for the package created using cpack
     set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
     set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} The tobot game engine")
+
+    # Can we specify the packages here?
     set(CPACK_BUILD_SOURCE_DIRS "${PROJECT_BINARY_DIR}/tobot_engine/src")
     # Setting the project version
-    set(CPACK_PACKAGE_VERSION "${Cellox_VERSION_MAJOR}.${Cellox_VERSION_MINOR}.${Cellox_VERSION_PATCH}")
+    set(CPACK_PACKAGE_VERSION "${tobot-engine_VERSION_MAJOR}.${tobot-engine_VERSION_MINOR}.${tobot-engine_VERSION_PATCH}")
     # Add our license as resouce
     set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
     

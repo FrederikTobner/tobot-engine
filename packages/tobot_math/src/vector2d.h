@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utilities/concepts.h"
+#include "concepts.h"
 
 namespace Tobot::Math {
     template <typename T>
@@ -11,8 +11,7 @@ namespace Tobot::Math {
             T x;
             T y;
 
-            Vector2D(T x, T y) : x(x), y(y) {
-            }
+            Vector2D(T x, T y);
 
             Vector2D<T> & operator+=(const Vector2D<T> & rhs) {
                 this->x += rhs.x;
