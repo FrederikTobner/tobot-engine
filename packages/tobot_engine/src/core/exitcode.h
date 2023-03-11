@@ -4,9 +4,21 @@ namespace Tobot::Core {
     class ExitCode {
         public:
             static const ExitCode OK;
-            static const ExitCode CommandLineUsageError;
-            static const ExitCode SubSystemError;
-            static const ExitCode IOError;
+            static const ExitCode USAGE;
+            static const ExitCode DATAERR;
+            static const ExitCode NOINPUT;
+            static const ExitCode NOUSER;
+            static const ExitCode NOHOST;
+            static const ExitCode UNAVAILABLE;
+            static const ExitCode SOFTWARE;
+            static const ExitCode OSERR;
+            static const ExitCode OSFILE;
+            static const ExitCode CANTCREAT;
+            static const ExitCode IOERR;
+            static const ExitCode TEMPFAIL;
+            static const ExitCode PROTOCOL;
+            static const ExitCode NOPERM;
+            static const ExitCode CONFIG;
 
         private:
             int code;
