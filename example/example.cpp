@@ -4,7 +4,7 @@
 class Player : public Tobot::Core::GameEntity {
     public:
         Player() : GameEntity("player", 50, 50) {
-            this->setTexture(Tobot::Core::AssetManager::loadTexture("../../assets/inspirational_picture.png"));
+            this->setTexture(Tobot::Core::AssetManager::loadTexture("assets/inspirational_picture.png"));
         }
 
         void update() override {
@@ -49,8 +49,6 @@ class Example : public Tobot::Core::TobotApplication {
         Example() : TobotApplication("Example") {
             this->m_DisplaySize = Tobot::Math::Dimension<int>(1200, 800);
             this->setInitialScene(new IntroductionScene());
-
-            Tobot::Core::SceneManager::navigateTo<BlankScene>();
         }
 
         ~Example() {
