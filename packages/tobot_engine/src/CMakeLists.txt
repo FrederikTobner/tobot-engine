@@ -2,6 +2,7 @@ configure_file(project_config.h.in project_config.h)
 
 set(TOBOT_ENGINE_SOURCES
 "core/asset_manager.cpp"
+"core/exit_codes.cpp"
 "core/game_entity.cpp"
 "core/render_object.cpp"
 "core/scene.cpp"
@@ -11,6 +12,7 @@ set(TOBOT_ENGINE_SOURCES
 set(TOBOT_ENGINE_HEADERS
 "entry_point.h"
 "core/asset_manager.h"
+"core/exit_codes.h"
 "core/game_entity.h"
 "core/render_object.h"
 "core/scene.h"
