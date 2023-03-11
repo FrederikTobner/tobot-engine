@@ -8,8 +8,14 @@ The tobot tooling library contains
 
 ## Logging
 
+A threadsafe logger
+
 ## Debugging
+
+Assertions are provided for debugging
 
 ## Test framework
 
-[Test framework architecture](../../assets/Test_Framework_Architecture.png)
+The testing framework utilizes macro's to let the programmer write their tst case's.
+
+![Test framework architecture](../../assets/Test_Framework_Architecture.png)
