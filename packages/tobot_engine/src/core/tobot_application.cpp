@@ -1,7 +1,7 @@
 #include "tobot_application.h"
 
 #include "tobot_tooling.h"
-#include "exit_codes.h"
+#include "exitcode.h"
 #include "project_config.h"
 #include "scene_manager.h"
 #include <SDL.h>
