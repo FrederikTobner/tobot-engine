@@ -23,7 +23,7 @@ set(TOBOT_ENGINE_HEADERS
 )
 
 # Adding compile definitions (used OS, compiler, build type and the logs folder path)
-include(../../cmake/tobot_detect.cmake)
+include(../../../cmake/tobot_detect.cmake)
 Tobot_Detect_Platform()
 Tobot_Detect_Compiler()
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
@@ -39,7 +39,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ./)
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling)
 
 # for including the project_config.h file
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR}/tobot_engine/src ${PROJECT_SOURCE_DIR}/tobot_tooling/src)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_engine/src ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src/include)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Sets properties for the package created using cpack
