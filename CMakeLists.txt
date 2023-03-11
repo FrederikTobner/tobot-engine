@@ -2,16 +2,16 @@ cmake_minimum_required(VERSION 3.18.0)
 project(tobot-engine VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-get_filename_component(SOURCEPATH ${PROJECT_SOURCE_DIR}/src ABSOLUTE)
+get_filename_component(SOURCEPATH ${PROJECT_SOURCE_DIR}/packages/tobot_engine/src ABSOLUTE)
 
 add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 
-add_subdirectory(src)
-
-# googletest tests
+# enabling tests
 enable_testing()
-add_subdirectory(tests)
+# building packages
+add_subdirectory(packages)
 
 # SDL2 deps
 add_subdirectory(deps/SDL)

@@ -1,8 +1,8 @@
 #include "tobot_application.h"
 
+#include "tobot_tooling.h"
 #include "project_config.h"
 #include "scene_manager.h"
-#include "utilities/logger.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
@@ -51,15 +51,15 @@ void TobotApplication::handleEvents() {
         Tobot::Core::SceneManager::sp_SceneStack.pop();
     }
 
-    SDL_Event ev;
-    while (SDL_PollEvent(&ev)) {
-        switch (ev.type) {
+    SDL_Event sdlEvent;
+    while (SDL_PollEvent(&sdlEvent)) {
+        switch (sdlEvent.type) {
         case SDL_QUIT:
             this->m_Running = false;
             break;
 
         case SDL_KEYUP:
-            if (SDL_SCANCODE_ESCAPE == ev.key.keysym.scancode) {
+            if (SDL_SCANCODE_ESCAPE == sdlEvent.key.keysym.scancode) {
                 this->m_Running = false;
             }
             break;
@@ -110,31 +110,32 @@ void TobotApplication::quit() {
     SDL_Quit();
 }
 
+// 🤮
 int Tobot::Core::InitializeSDLSubsystems(uint32_t flags) {
     uint32_t sdl_core_init_flags;
     if (flags & SDL_CORE_INIT_TIMER) {
-        sdl_core_init_flags &= SDL_INIT_TIMER;
+        sdl_core_init_flags |= SDL_INIT_TIMER;
     }
     if (flags & SDL_CORE_INIT_AUDIO) {
-        sdl_core_init_flags &= SDL_INIT_AUDIO;
+        sdl_core_init_flags |= SDL_INIT_AUDIO;
     }
     if (flags & SDL_CORE_INIT_VIDEO) {
-        sdl_core_init_flags &= SDL_INIT_VIDEO;
+        sdl_core_init_flags |= SDL_INIT_VIDEO;
     }
     if (flags & SDL_CORE_INIT_JOYSTICK) {
-        sdl_core_init_flags &= SDL_INIT_JOYSTICK;
+        sdl_core_init_flags |= SDL_INIT_JOYSTICK;
     }
     if (flags & SDL_CORE_INIT_HAPTIC) {
-        sdl_core_init_flags &= SDL_INIT_HAPTIC;
+        sdl_core_init_flags |= SDL_INIT_HAPTIC;
     }
     if (flags & SDL_CORE_INIT_GAMECONTROLLER) {
-        sdl_core_init_flags &= SDL_INIT_GAMECONTROLLER;
+        sdl_core_init_flags |= SDL_INIT_GAMECONTROLLER;
     }
     if (flags & SDL_CORE_INIT_EVENTS) {
-        sdl_core_init_flags &= SDL_INIT_EVENTS;
+        sdl_core_init_flags |= SDL_INIT_EVENTS;
     }
     if (flags & SDL_CORE_INIT_SENSOR) {
-        sdl_core_init_flags &= SDL_INIT_SENSOR;
+        sdl_core_init_flags |= SDL_INIT_SENSOR;
     }
     if (SDL_Init(sdl_core_init_flags) < 0) {
         LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());

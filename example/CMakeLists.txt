@@ -1,9 +1,9 @@
 set(SOURCES
-example.cpp
+"example.cpp"
 )
 
 add_executable("${PROJECT_NAME}_Example" ${SOURCES})
 
 target_link_libraries("${PROJECT_NAME}_Example" PUBLIC ${PROJECT_NAME})
 
-target_include_directories("${PROJECT_NAME}_Example" PUBLIC "${PROJECT_SOURCE_DIR}/src/include")
+target_include_directories("${PROJECT_NAME}_Example" PUBLIC "${SOURCEPATH}/include" "${SOURCE_DIR}/packages/tobot_tooling/src/include/")
