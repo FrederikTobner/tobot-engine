@@ -1,12 +1,6 @@
 #include "tobot_engine.h"
 #include "tobot_tooling.h"
 
-TOBOT_TEST(example, first)
-{
-    EXPECT_TRUE(false)
-    ASSERT_TRUE(true)
-}
-
 class Player : public Tobot::Core::GameEntity {
     public:
         Player() : GameEntity("player", 50, 50) {
