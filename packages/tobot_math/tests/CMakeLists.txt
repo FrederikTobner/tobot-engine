@@ -9,7 +9,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(TOBOT_MATH_TESTS tobot-tooling_TESTS)
+set(TOBOT_MATH_TESTS tobot-math_TESTS)
 
 # Set all test files
 set(TEST_SOURCES vector2d_test.cpp main.cpp)
