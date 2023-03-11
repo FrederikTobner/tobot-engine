@@ -8,7 +8,7 @@ class Player : public Tobot::Core::GameEntity {
         }
 
         void update() override {
-            this->m_Position += Tobot::Math::Vector2D<int>(1, 1);
+            this->incrementPosition();
         }
 };
 

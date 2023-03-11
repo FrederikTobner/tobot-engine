@@ -23,7 +23,9 @@ void Scene::update() {
 
 void Scene::render(SDL_Renderer * renderer) {
     for (auto object : this->m_GameEntities) {
-        object.second->render(renderer);
+        if (object.second->isVisible()) {
+            object.second->render(renderer);
+        }
     }
 }
 
