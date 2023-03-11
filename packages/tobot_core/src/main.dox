@@ -1,7 +1,7 @@
 /** 
 * \mainpage Main Page
 * \section intro_sec Introduction
-* Welcome to the technical documentation of the tobot-engine. <br>
+* Welcome to the technical documentation of the tobot-core. <br>
 * \section building_sec Building
 * To build the engine a C++-Compiler, that supports the C++20 standard, and CMake (Version >= 3.16) are required. <br>
 * Additionaly the engine has the following dependecies <br>

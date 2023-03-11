@@ -1,17 +1,17 @@
 # Generates documentation using doxyxgen (https://www.doxygen.nl/)
-if [ -d "../packages/tobot_engine/src" ]
+if [ -d "../packages/tobot_tooling/src" ]
 then
-    echo "Generating Documentation ..."
-    cd ../packages/tobot_engine/src
+    echo "Generating Documentation of the tooling ..."
+    cd ../packages/tobot_tooling/src
     doxygen
     echo "Moving generated content out of the html folder ..."
-    if [ -d "../docs" ]
+    if [ -d "../docs/tobot-tooling" ]
     then
-        if [ -d "../docs/html" ]
+        if [ -d "../docs/tobot-tooling/html" ]
         then
-            cp -avr ../docs/html/* ../docs
+            cp -avr ../docs/tobot-tooling/html/* ../docs/tobot-tooling
             echo "Removing html folder ..."
-            rm -rf ../docs/html
+            rm -rf ../docs/tobot-tooling/html
             echo "Sucessfully generated documentation!"
         else
             echo "No html folder inside the docs foulder found"
@@ -24,7 +24,7 @@ then
         exit 70
     fi
 else
-    echo "Could not find source folder"
+    echo "Could not find source folder of the tobot-tooling library"
     cd ../scripts
     exit 70
 fi

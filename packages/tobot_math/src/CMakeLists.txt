@@ -10,4 +10,4 @@ set(TOBOT_MATH_HEADER_FILES
 "include/tobot_math.h"
 )
 
-add_library(tobot-math ${TOBOT_MATH_SOURCE_FILES} ${TOBOT_MATH_HEADER_FILES})
+add_library(tobot-math STATIC ${TOBOT_MATH_SOURCE_FILES} ${TOBOT_MATH_HEADER_FILES})

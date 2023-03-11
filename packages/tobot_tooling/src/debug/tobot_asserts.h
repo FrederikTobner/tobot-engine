@@ -1,6 +1,6 @@
 #pragma once
 
-#include "logging/logger.h"
+#include "../logging/logger.h"
 namespace Tobot::Tooling::Debug {
 // Asserts are only defined for debug builds
 #ifdef BUILD_TYPE_DEBUG
