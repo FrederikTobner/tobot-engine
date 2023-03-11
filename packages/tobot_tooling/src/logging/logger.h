@@ -11,20 +11,20 @@
 #include <windows.h>
 #endif
 
-namespace Tobot::Utilities {
-#define LOG_TRACE(message, ...)       (Tobot::Utilities::Logger::Trace(message, __VA_ARGS__))
-#define LOG_DEBUG(message, ...)       (Tobot::Utilities::Logger::Debug(message, __VA_ARGS__))
-#define LOG_INFO(message, ...)        (Tobot::Utilities::Logger::Info(message, __VA_ARGS__))
-#define LOG_WARN(message, ...)        (Tobot::Utilities::Logger::Warn(message, __VA_ARGS__))
-#define LOG_ERROR(message, ...)       (Tobot::Utilities::Logger::Error(message, __VA_ARGS__))
-#define LOG_CRITICAL(message, ...)    (Tobot::Utilities::Logger::Critical(message, __VA_ARGS__))
+namespace Tobot::Tooling::Logging {
+#define LOG_TRACE(message, ...)       (Tobot::Tooling::Logging::Logger::Trace(message, __VA_ARGS__))
+#define LOG_DEBUG(message, ...)       (Tobot::Tooling::Logging::Logger::Debug(message, __VA_ARGS__))
+#define LOG_INFO(message, ...)        (Tobot::Tooling::Logging::Logger::Info(message, __VA_ARGS__))
+#define LOG_WARN(message, ...)        (Tobot::Tooling::Logging::Logger::Warn(message, __VA_ARGS__))
+#define LOG_ERROR(message, ...)       (Tobot::Tooling::Logging::Logger::Error(message, __VA_ARGS__))
+#define LOG_CRITICAL(message, ...)    (Tobot::Tooling::Logging::Logger::Critical(message, __VA_ARGS__))
 
-#define LOG_TRACE_AT(message, ...)    (Tobot::Utilities::Logger::Trace(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_DEBUG_AT(message, ...)    (Tobot::Utilities::Logger::Debug(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_INFO_AT(message, ...)     (Tobot::Utilities::Logger::Info(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_WARN_AT(message, ...)     (Tobot::Utilities::Logger::Warn(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_ERROR_AT(message, ...)    (Tobot::Utilities::Logger::Error(__LINE__, __FILE__, message, __VA_ARGS__))
-#define LOG_CRITICAL_AT(message, ...) (Tobot::Utilities::Logger::Critical(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_TRACE_AT(message, ...)    (Tobot::Tooling::Logging::Logger::Trace(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_DEBUG_AT(message, ...)    (Tobot::Tooling::Logging::Logger::Debug(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_INFO_AT(message, ...)     (Tobot::Tooling::Logging::Logger::Info(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_WARN_AT(message, ...)     (Tobot::Tooling::Logging::Logger::Warn(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_ERROR_AT(message, ...)    (Tobot::Tooling::Logging::Logger::Error(__LINE__, __FILE__, message, __VA_ARGS__))
+#define LOG_CRITICAL_AT(message, ...) (Tobot::Tooling::Logging::Logger::Critical(__LINE__, __FILE__, message, __VA_ARGS__))
 
     enum LogPriority {
         TRACE_PRIORITY,

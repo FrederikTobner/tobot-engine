@@ -1,6 +1,12 @@
 #include "tobot_engine.h"
 #include "tobot_tooling.h"
 
+TOBOT_TEST(example, first)
+{
+    EXPECT_TRUE(false)
+    ASSERT_TRUE(true)
+}
+
 class Player : public Tobot::Core::GameEntity {
     public:
         Player() : GameEntity("player", 50, 50) {
@@ -57,7 +63,9 @@ class Example : public Tobot::Core::TobotApplication {
 };
 
 Tobot::Core::TobotApplication * Tobot::Core::CreateApplication() {
-    Tobot::Utilities::Logger::EnableFileOutput();
+    int i = 0;
+    tobot_testexample_first(&i);
+    Tobot::Tooling::Logging::Logger::EnableFileOutput();
     LOG_INFO("Hello from Example %i", 123);
     return new Example();
 }
