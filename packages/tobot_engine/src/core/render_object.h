@@ -6,10 +6,15 @@
 
 namespace Tobot::Core {
     class RenderObject {
-        protected:
+        private:
             const char * m_Id;
             Tobot::Math::Vector2D<int> m_Position;
+            bool m_Visible;
+        protected:
+            void setVisible(bool visible);
 
+            /// @brief Just for Testing purposes
+            void incrementPosition();
         public:
             RenderObject(const char * id, int x, int y);
             virtual ~RenderObject() = 0;
@@ -20,5 +25,6 @@ namespace Tobot::Core {
 
             const char * getId();
             Tobot::Math::Vector2D<int> getPosition();
+            bool isVisible();
     };
 } // namespace Tobot::Core

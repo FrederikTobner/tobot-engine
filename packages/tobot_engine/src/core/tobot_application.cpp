@@ -13,6 +13,7 @@ using namespace Tobot::Core;
 using namespace Tobot::Tooling::Logging;
 
 void TobotApplication::initialize() {
+    LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     LOG_INFO("\n  _______    _           _     ______             _            \n\
  |__   __|  | |         | |   |  ____|           (_)           \n\
     | | ___ | |__   ___ | |_  | |__   _ __   __ _ _ _ __   ___ \n\
@@ -20,7 +21,7 @@ void TobotApplication::initialize() {
     | | (_) | |_) | (_) | |_  | |____| | | | (_| | | | | |  __/\n\
     |_|\\___/|_.__/ \\___/ \\__| |______|_| |_|\\__, |_|_| |_|\\___|\n\
                                              __/ |             \n\
-                                            |___/              %s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
+                                            |___/              ");
     // Initialize SDL subsystems
     if (InitializeSDLSubsystems(SDL_CORE_INIT_EVERYTHING | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
         exit(Tobot::Core::ExitCode::SOFTWARE.getCode());
