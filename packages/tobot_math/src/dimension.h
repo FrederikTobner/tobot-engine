@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utilities/concepts.h"
+#include "concepts.h"
 
 namespace Tobot::Math {
     template <typename T>
@@ -10,7 +10,6 @@ namespace Tobot::Math {
             T width;
             T height;
 
-            Dimension(T width, T height) : width(width), height(height) {
-            }
+            Dimension(T width, T height);
     };
 } // namespace Tobot::Math

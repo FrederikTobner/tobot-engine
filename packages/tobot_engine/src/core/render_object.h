@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/vector2d.h"
+#include "tobot_math.h"
 
 #include "SDL.h"
 

@@ -10,7 +10,7 @@
 
 #include "scene.h"
 
-#include "math/dimension.h"
+#include "tobot_math.h"
 
 namespace Tobot::Core {
     typedef enum {
