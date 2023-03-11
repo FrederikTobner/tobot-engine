@@ -2,7 +2,7 @@
 
 #include <ctime>
 
-using namespace Tobot::Utilities;
+using namespace Tobot::Tooling::Logging;
 
 Logger::Logger()
 {

@@ -1,4 +1,5 @@
 #pragma once
 
-#include "../logger.h"
-#include "../tobot_asserts.h"
+#include "../logging/logger.h"
+#include "../debug/tobot_asserts.h"
+#include "../test/tobot_test.h"

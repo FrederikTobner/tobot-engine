@@ -1,7 +1,7 @@
 #pragma once
 
-#include "logger.h"
-
+#include "logging/logger.h"
+namespace Tobot::Tooling::Debug {
 // Asserts are only defined for debug builds
 #ifdef BUILD_TYPE_DEBUG
 #define TOBOT_ASSERT(x)                               \
@@ -14,3 +14,4 @@
 #else
 #define TOBOT_ASSERT(x)
 #endif
+} // namespace Tobot::Tooling::Debug

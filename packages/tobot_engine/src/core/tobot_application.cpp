@@ -10,6 +10,7 @@
 #include <SDL_ttf.h>
 
 using namespace Tobot::Core;
+using namespace Tobot::Tooling::Logging;
 
 void TobotApplication::initialize() {
     LOG_INFO("\n  _______    _           _     ______             _            \n\
