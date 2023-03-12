@@ -8,18 +8,21 @@ ConsoleTestReportGenerator::ConsoleTestReportGenerator() {
 }
 
 ConsoleTestReportGenerator::~ConsoleTestReportGenerator() {
+    printf("\n%g%% tests passed, %zu tests failed of %zu\n",
+           100.0 * this->passedTestCounter / this->executedTestCounter,
+           this->executedTestCounter - this->passedTestCounter, this->executedTestCounter);
 }
 
 void ConsoleTestReportGenerator::handle_test_report(TestReport report, size_t totalNumberOfTests) {
     std::scoped_lock lock(log_mutex);
     this->executedTestCounter++;
     if (report.state->passed) {
-        printf("%zu/%zu Test #%zu: %s.%s Passed!\n", this->executedTestCounter, totalNumberOfTests, totalNumberOfTests,
-               report.corresponding_test->testName, report.corresponding_test->groupName);
+        printf("%zu/%zu Test #%zu: %s.%s\t Passed ...\n", this->executedTestCounter, totalNumberOfTests,
+               totalNumberOfTests, report.corresponding_test->testName, report.corresponding_test->groupName);
         this->passedTestCounter++;
     } else {
-        fprintf(stderr, "%zu/%zu Test#%zu: %s.%s Failed!\n", this->executedTestCounter, totalNumberOfTests,
-                totalNumberOfTests, report.corresponding_test->testName, report.corresponding_test->groupName);
+        printf("%zu/%zu Test#%zu: %s.%s\t Failed ...\n", this->executedTestCounter, totalNumberOfTests,
+               totalNumberOfTests, report.corresponding_test->testName, report.corresponding_test->groupName);
     }
 }
 
