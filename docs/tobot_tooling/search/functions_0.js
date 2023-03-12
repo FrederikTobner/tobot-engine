@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['critical_0',['Critical',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0db8ee11884925c00b15b496254f59a9',1,'Tobot::Tooling::Logging::Logger::Critical(char const *format, Args... args)'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aa6f68908b93dbed6c5486566630dbbd8',1,'Tobot::Tooling::Logging::Logger::Critical(std::string format, Args... args)'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a52882f0bccc9efb57b1e52ea4d25fb65',1,'Tobot::Tooling::Logging::Logger::Critical(int line, char const *source_file, char const *format, Args... args)'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#abb95b855d1c784e31dc40d3c47c514f6',1,'Tobot::Tooling::Logging::Logger::Critical(int line, char const *source_file, std::string format, Args... args, bool)']]]
+];

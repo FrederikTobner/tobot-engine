@@ -10,11 +10,13 @@ namespace Tobot::Core {
             const char * m_Id;
             Tobot::Math::Vector2D<int> m_Position;
             bool m_Visible;
+
         protected:
             void setVisible(bool visible);
 
             /// @brief Just for Testing purposes
             void incrementPosition();
+
         public:
             RenderObject(const char * id, int x, int y);
             virtual ~RenderObject() = 0;

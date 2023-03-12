@@ -1,3 +1,8 @@
+/**
+ * @file tobot_asserts.h
+ * @brief Contains test macro's regarding assertions
+ */
+
 #pragma once
 
 #include "../logging/logger.h"
