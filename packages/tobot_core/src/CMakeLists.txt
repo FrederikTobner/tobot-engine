@@ -1,25 +1,24 @@
 configure_file(project_config.h.in project_config.h)
 
 set(TOBOT_CORE_SOURCES
-"core/asset_manager.cpp"
-"core/exitcode.cpp"
-"core/game_entity.cpp"
-"core/render_object.cpp"
-"core/scene.cpp"
-"core/tobot_application.cpp"
+"asset_manager.cpp"
+"exitcode.cpp"
+"game_entity.cpp"
+"render_object.cpp"
+"scene.cpp"
+"tobot_application.cpp"
 )
 
 set(TOBOT_CORE_HEADERS
-"core/asset_manager.h"
-"core/entry_point.h"
-"core/exitcode.h"
-"core/game_entity.h"
-"core/render_object.h"
-"core/scene.h"
-"core/scene_manager.h"
-"core/tobot_application.h"
-"utilities/concepts.h"
-"widget/text.h"
+"asset_manager.h"
+"entry_point.h"
+"exitcode.h"
+"game_entity.h"
+"render_object.h"
+"scene.h"
+"scene_manager.h"
+"tobot_application.h"
+"concepts.h"
 )
 
 # Adding compile definitions (used OS, compiler, build type and the logs folder path)
