@@ -9,6 +9,6 @@ set(TOBOT_TOOLING_HEADER_FILES
 "include/tobot_tooling.h"
 )
 
-add_library(tobot-tooling ${TOBOT_TOOLING_SOURCE_FILES} ${TOBOT_TOOLING_HEADER_FILES})
+add_library(tobot-tooling STATIC ${TOBOT_TOOLING_SOURCE_FILES} ${TOBOT_TOOLING_HEADER_FILES})
 
-target_include_directories(tobot-tooling PUBLIC "${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src/")
+target_include_directories(tobot-tooling PUBLIC "${SOURCE_PATH_TOOLING}/src/")

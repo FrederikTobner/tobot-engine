@@ -4,7 +4,7 @@
 
 #include "scene.h"
 
-#include "utilities/concepts.h"
+#include "concepts.h"
 
 namespace Tobot::Core {
     /// @brief Responsible for supplying the application with scenes which are pushed onto a stack

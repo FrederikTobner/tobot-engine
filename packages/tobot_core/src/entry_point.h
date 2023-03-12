@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/tobot_application.h"
+#include "tobot_application.h"
 
 extern Tobot::Core::TobotApplication * Tobot::Core::CreateApplication();
 

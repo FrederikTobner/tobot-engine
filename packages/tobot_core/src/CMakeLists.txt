@@ -1,25 +1,24 @@
 configure_file(project_config.h.in project_config.h)
 
-set(TOBOT_ENGINE_SOURCES
-"core/asset_manager.cpp"
-"core/exitcode.cpp"
-"core/game_entity.cpp"
-"core/render_object.cpp"
-"core/scene.cpp"
-"core/tobot_application.cpp"
+set(TOBOT_CORE_SOURCES
+"asset_manager.cpp"
+"exitcode.cpp"
+"game_entity.cpp"
+"render_object.cpp"
+"scene.cpp"
+"tobot_application.cpp"
 )
 
-set(TOBOT_ENGINE_HEADERS
+set(TOBOT_CORE_HEADERS
+"asset_manager.h"
 "entry_point.h"
-"core/asset_manager.h"
-"core/exitcode.h"
-"core/game_entity.h"
-"core/render_object.h"
-"core/scene.h"
-"core/scene_manager.h"
-"core/tobot_application.h"
-"utilities/concepts.h"
-"widget/text.h"
+"exitcode.h"
+"game_entity.h"
+"render_object.h"
+"scene.h"
+"scene_manager.h"
+"tobot_application.h"
+"concepts.h"
 )
 
 # Adding compile definitions (used OS, compiler, build type and the logs folder path)
@@ -30,16 +29,20 @@ if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
   add_compile_definitions(BUILD_TYPE_DEBUG)
 endif()
 
-add_library(${PROJECT_NAME} ${TOBOT_ENGINE_SOURCES} ${TOBOT_ENGINE_HEADERS})
+if(BUILD_CORE_SHARED)
+  add_library(tobot-core SHARED ${TOBOT_CORE_SOURCES} ${TOBOT_CORE_HEADERS})
+else()
+  add_library(tobot-core STATIC ${TOBOT_CORE_SOURCES} ${TOBOT_CORE_HEADERS})
+endif()
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ./)
+target_include_directories(tobot-core PUBLIC ./)
 
-target_link_libraries(${PROJECT_NAME} SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math)
+target_link_libraries(tobot-core SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math)
 
 # for including the project_config.h file
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_engine/src ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src/include ${PROJECT_SOURCE_DIR}/packages/tobot_math/src/include)
+target_include_directories(tobot-core PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_core/src ${SOURCE_PATH_TOOLING}/include ${SOURCE_PATH_MATH}/include)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Sets properties for the package created using cpack
