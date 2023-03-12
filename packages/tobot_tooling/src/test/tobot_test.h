@@ -1,3 +1,8 @@
+/**
+ * @file tobot_test.h
+ * @brief Contains test macro's
+ */
+
 #pragma once
 
 namespace Tobot::Tooling::Test {
@@ -27,14 +32,14 @@ namespace Tobot::Tooling::Test {
         std::cout << "Check failed at line " << __LINE__ << " in " << __FILE__ << std::endl; \
         *result = -1;                                                                        \
     }
-#define ASSERT_STREQUAL(a, b)                                                                       \
-    if (strcmp(a, b)) {                                                                                \
+#define ASSERT_STREQUAL(a, b)                                                                    \
+    if (strcmp(a, b)) {                                                                          \
         std::cout << "Assertion failed at line " << __LINE__ << " in " << __FILE__ << std::endl; \
         *result = -1;                                                                            \
         return;                                                                                  \
     }
-#define EXPECT_STREQUAL(a, b)                                                                   \
-    if (strcmp(a, b)) {                                                                            \
+#define EXPECT_STREQUAL(a, b)                                                                \
+    if (strcmp(a, b)) {                                                                      \
         std::cout << "Check failed at line " << __LINE__ << " in " << __FILE__ << std::endl; \
         *result = -1;                                                                        \
     }

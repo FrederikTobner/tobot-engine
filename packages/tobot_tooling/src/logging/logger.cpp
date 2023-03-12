@@ -1,3 +1,8 @@
+/**
+ * @file logger.cpp
+ * @brief Definitions regarding the logger
+ */
+
 #include "logger.h"
 
 #include <ctime>
