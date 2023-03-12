@@ -1,16 +1,3 @@
-include(CheckIncludeFile)
-
-# Checking dependecies
-if(UNIX)
-elseif(WIN32)
-    # Check dependecies under windows
-    CHECK_INCLUDE_FILE("windows.h" WINDOWS_AVAILABLE)
-    if(NOT ${WINDOWS_AVAILABLE})
-        message(FATAL_ERROR "windows.h is required to build the compiler under windows. \
-\   \   Please make sure it is available to the compiler and try again after that")
-    endif() # windows.h not available
-endif()
-
 set(TOBOT_TOOLING_SOURCE_FILES
 "logging/logger.cpp"
 )
