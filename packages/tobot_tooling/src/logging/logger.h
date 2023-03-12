@@ -377,7 +377,7 @@ namespace Tobot::Tooling::Logging {
                     printf("%s - [", buffer);
 #ifdef OS_WINDOWS
                     HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-                    SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[format_priority]);
+                    SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[log_priority]);
 #endif
                     std::cout << logLevelStrings[log_priority];
 #ifdef OS_WINDOWS
@@ -389,14 +389,14 @@ namespace Tobot::Tooling::Logging {
                         std::cout << "]\t\t";
                     }
 #ifdef OS_WINDOWS
-                    if (format_priority == CRITICAL_PRIORITY) {
+                    if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 4);
                     }
 #endif
                     printf(format, args...);
                     std::cout << "\n";
 #ifdef OS_WINDOWS
-                    if (format_priority == CRITICAL_PRIORITY) {
+                    if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 7);
                     }
 #endif
@@ -431,7 +431,7 @@ namespace Tobot::Tooling::Logging {
                     printf("%s - [", buffer);
 #ifdef OS_WINDOWS
                     HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-                    SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[format_priority]);
+                    SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[log_priority]);
 #endif
                     std::cout << logLevelStrings[log_priority];
 #ifdef OS_WINDOWS
@@ -443,13 +443,13 @@ namespace Tobot::Tooling::Logging {
                         std::cout << "]\t\t";
                     }
 #ifdef OS_WINDOWS
-                    if (format_priority == CRITICAL_PRIORITY) {
+                    if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 4);
                     }
 #endif
                     printf(format, args...);
 #ifdef OS_WINDOWS
-                    if (format_priority == CRITICAL_PRIORITY) {
+                    if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 7);
                     }
 #endif
