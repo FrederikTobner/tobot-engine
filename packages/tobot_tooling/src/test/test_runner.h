@@ -1,21 +1,24 @@
 #pragma once
 
-#include "test_report_generator.h"
+#include "test_fixture.h"
+#include "test_report_processor.h"
 
+#include <iostream>
 #include <queue>
 
 namespace Tobot::Tooling::Test {
+    class TestRunner {
 
-    class testRunner {
         private:
-            std::queue<Test> testQueue;
-            TestReportGenerator * generator;
+            std::queue<TestFixture> fixtureQueue;
+            TestReportProcessor & processor;
 
         public:
-            testRunner(TestReportGenerator * generator);
-            ~testRunner();
-            void addTest(Test test);
-            void runTests();
+            TestRunner(TestReportProcessor & processor);
+            ~TestRunner();
+            void addFixture(TestFixture fixture);
+            void runAll();
+            TestRunner & operator=(const TestRunner & rhs){};
     };
 
 } // namespace Tobot::Tooling::Test

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "test.h"
+#include "test_case.h"
 #include "test_state.h"
 
 namespace Tobot::Tooling::Test {
     class TestReport {
         public:
-            Test * corresponding_test;
+            TestCase & correspondingTest;
             TestState * state;
-            TestReport(Test * corresponding_test);
+            TestReport(TestCase & correspondingTest);
             ~TestReport();
     };
 

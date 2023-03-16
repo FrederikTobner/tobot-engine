@@ -2,10 +2,9 @@
 
 using namespace Tobot::Tooling::Test;
 
-TestReport::TestReport(Test * corresponding_test) {
-    this->state = new (TestState);
-    this->corresponding_test = corresponding_test;
-    this->corresponding_test->test_function(state);
+TestReport::TestReport(TestCase & correspondingTest) : correspondingTest(correspondingTest) {
+    this->state = new TestState();
+    this->correspondingTest.testFunction(state);
 }
 
 TestReport::~TestReport() {
