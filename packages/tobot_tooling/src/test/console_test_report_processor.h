@@ -16,9 +16,9 @@ namespace Tobot::Tooling::Test {
             ConsoleTestReportProcessor();
             ~ConsoleTestReportProcessor();
             virtual void handleTestReport(TestReport report, size_t totalNumberOfTests,
-                                          char const * fixtureName) override;
+                                          std::string const & fixtureName) override;
             virtual void preHandleTestReport(TestCase test, size_t totalNumberOfTests,
-                                             char const * fixtureName) override;
+                                             std::string const & fixtureName) override;
     };
 
 } // namespace Tobot::Tooling::Test

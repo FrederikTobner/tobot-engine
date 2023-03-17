@@ -11,10 +11,10 @@ namespace Tobot::Tooling::Test {
     class TestFixture {
         private:
             std::queue<TestCase> testQueue;
-            char const * fixtureName;
+            std::string const & fixtureName;
 
         public:
-            TestFixture(char const * fixtureName);
+            TestFixture(std::string const & fixtureName);
             ~TestFixture();
             void addTestCase(TestCase test);
             void addTestCases(const std::vector<TestCase> & cases);

@@ -4,7 +4,7 @@
 :: We should maybe check first if the clang-format npm package is installed at all.
 
 @ECHO OFF
-IF NOT EXIST ..\packages\tobot_core\src (
+IF NOT EXIST ..\packages (
     ECHO Can not find source directory
     EXIT
 )
