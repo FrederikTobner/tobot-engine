@@ -4,7 +4,8 @@
 
 using namespace Tobot::Tooling::Test;
 
-TestFixture::TestFixture(std::string const & fixtureName) : fixtureName(fixtureName) {
+TestFixture::TestFixture(char const * fixtureName) {
+    this->fixtureName = fixtureName;
 }
 
 TestFixture::~TestFixture() {

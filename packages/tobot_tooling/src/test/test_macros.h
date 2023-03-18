@@ -44,14 +44,14 @@ namespace Tobot::Tooling::Test {
     }
 
 #define ASSERT_NOT_EQUAL(a, b)                                                                   \
-    if ((a) != (b)) {                                                                            \
+    if ((a) == (b)) {                                                                            \
         std::cout << "Assertion failed at line " << __LINE__ << " in " << __FILE__ << std::endl; \
         state->passed = false;                                                                   \
         return;                                                                                  \
     }
 
 #define EXPECT_NOT_EQUAL(a, b)                                                               \
-    if ((a) != (b)) {                                                                        \
+    if ((a) == (b)) {                                                                        \
         std::cout << "Check failed at line " << __LINE__ << " in " << __FILE__ << std::endl; \
         state->passed = false;                                                               \
     }

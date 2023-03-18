@@ -6,9 +6,9 @@
 namespace Tobot::Tooling::Test {
     class TestCase {
         public:
-            std::string const & testName;
+            char const * testName;
             void (*testFunction)(TestState * state);
-            TestCase(void (*test_function)(TestState * state), std::string const & testName);
+            TestCase(void (*test_function)(TestState * state), char const * testName);
             ~TestCase();
     };
 
