@@ -1,3 +1,8 @@
+/**
+ * @file test_fixture.h
+ * @brief File containing definitions regarding a TestFixture.
+ */
+
 #include "test_fixture.h"
 
 #include <stdarg.h>

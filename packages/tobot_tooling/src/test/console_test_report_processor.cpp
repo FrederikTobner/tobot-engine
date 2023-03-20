@@ -1,3 +1,8 @@
+/**
+ * @file console_test_report_processor.cpp
+ * @brief File containing definitions regarding a ConsoleTestReportProcessor.
+ */
+
 #include "console_test_report_processor.h"
 
 #include <stdio.h>

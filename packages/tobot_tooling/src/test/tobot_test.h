@@ -1,6 +1,6 @@
 /**
  * @file tobot_test.h
- * @brief Contains test macro's
+ * @brief Main header file of thhe test module
  */
 
 #pragma once

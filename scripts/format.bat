@@ -6,12 +6,12 @@
 @ECHO OFF
 IF NOT EXIST ..\packages (
     ECHO Can not find source directory
-    EXIT
+    EXIT 74
 )
 
 IF NOT EXIST ..\.clang-format (
     ECHO Can not find source directory
-    EXIT
+    EXIT 74
 )
 
 cd ..\packages\
@@ -21,3 +21,4 @@ ECHO Formatting all the source file's in our package directory
 for /r %%t in (*.cpp *.h) do clang-format -i --style=file "%%t"
 
 cd ..\scripts\
+EXIT 0

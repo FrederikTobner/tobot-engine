@@ -1,3 +1,8 @@
+/**
+ * @file test_case.cpp
+ * @brief File containing definitions regarding a TestCase.
+ */
+
 #include "test_case.h"
 
 using namespace Tobot::Tooling::Test;

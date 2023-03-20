@@ -1,3 +1,8 @@
+/**
+ * @file test_macros.h
+ * @brief File containing macros for creating and writing TestCase's.
+ */
+
 #pragma once
 
 namespace Tobot::Tooling::Test {

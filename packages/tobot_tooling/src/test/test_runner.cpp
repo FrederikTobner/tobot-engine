@@ -1,3 +1,8 @@
+/**
+ * @file test_runner.cpp
+ * @brief File containing definitions regarding a TestRunner.
+ */
+
 #include "test_runner.h"
 
 #include "test_report.h"
