@@ -2,6 +2,7 @@
 @ECHO OFF
 IF NOT EXIST ..\logs (
     ECHO Can not find logs directory
-    EXIT
+    EXIT 74
 )
 DEL "..\logs\*.*?"
+EXIT 0
