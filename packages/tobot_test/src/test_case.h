@@ -6,6 +6,7 @@
 #pragma once
 
 #include "test_state.h"
+#include <functional>
 #include <string>
 
 namespace Tobot::Tooling::Test {
@@ -14,7 +15,7 @@ namespace Tobot::Tooling::Test {
             /// @brief The name of the testcase
             char const * testName;
             /// @brief Function pointer to the underlying test function
-            void (*testFunction)(TestState * state);
+            void (*test_function)(TestState * state);
 
             /// @brief Constructor of the TestCase class
             /// @param test_function Function pointer to the underlying test function

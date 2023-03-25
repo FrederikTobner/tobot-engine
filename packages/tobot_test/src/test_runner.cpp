@@ -7,7 +7,10 @@
 
 #include "test_report.h"
 
-#include "stdio.h"
+#include <future>
+#include <iostream>
+#include <stdio.h>
+#include <thread>
 
 using namespace Tobot::Tooling::Test;
 

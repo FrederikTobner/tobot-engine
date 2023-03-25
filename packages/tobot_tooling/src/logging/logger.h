@@ -374,7 +374,7 @@ namespace Tobot::Tooling::Logging {
                     std::tm * timestamp = std::localtime(&current_time);
                     char buffer[80];
                     strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
-                    printf("%s - [", buffer);
+                    std::cout << buffer << " - [";
 #ifdef OS_WINDOWS
                     HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
                     SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[log_priority]);
@@ -394,7 +394,7 @@ namespace Tobot::Tooling::Logging {
                     }
 #endif
                     printf(format, args...);
-                    std::cout << "\n";
+                    std::cout << std::endl;
 #ifdef OS_WINDOWS
                     if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 7);
@@ -428,7 +428,7 @@ namespace Tobot::Tooling::Logging {
                     std::tm * timestamp = std::localtime(&current_time);
                     char buffer[80];
                     strftime(buffer, 80, this->get_Instance().timeStampFormat, timestamp);
-                    printf("%s - [", buffer);
+                    std::cout << buffer << " - [";
 #ifdef OS_WINDOWS
                     HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
                     SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[log_priority]);
@@ -453,8 +453,7 @@ namespace Tobot::Tooling::Logging {
                         SetConsoleTextAttribute(console_color, 7);
                     }
 #endif
-                    printf(" (on line %d in %s)", line_number, source_file);
-                    std::cout << "\n";
+                    std::cout << " (on line " << line_number << " in " << source_file << std::endl;
                     if (this->file) {
                         fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[log_priority]);
                         if (log_priority == LogPriority::CRITICAL_PRIORITY) {

@@ -30,7 +30,7 @@ namespace Tobot::Tooling::Test {
             ~TestFixture();
 
             /// @brief Adds a new Testcase to the testfixture
-            /// @param test
+            /// @param test The test that is added to the fixture
             void addTestCase(TestCase test);
 
             /// @brief Adds multiple testcases to the testfixture

@@ -2,7 +2,7 @@ name: CodeQL
 
 on:
   schedule:
-    - cron: '0 12 10 * ?' # At 12 at the 10th day of every month
+    - cron: '0 9 * * Sat [ $(expr $(date +%W) % 2) -eq 1 ]' # At 9am UTC at every second saturday
 
 jobs:
   analyze:
@@ -36,8 +36,8 @@ jobs:
        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
     - name: Build Engine 
       run: |
-       echo "Building Engine"
-       cmake --build ${{github.workspace}}/build --target tobot-engine
+       echo "Building Project Tobot"
+       cmake --build ${{github.workspace}}/build
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2

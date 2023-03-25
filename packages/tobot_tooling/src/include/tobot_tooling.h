@@ -7,4 +7,3 @@
 
 #include "../debug/tobot_asserts.h"
 #include "../logging/logger.h"
-#include "../test/tobot_test.h"

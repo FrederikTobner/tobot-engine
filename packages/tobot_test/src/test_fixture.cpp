@@ -21,8 +21,8 @@ void TestFixture::addTestCase(TestCase testCase) {
 }
 
 void TestFixture::addTestCases(const std::vector<TestCase> & cases) {
-    for (size_t i = 0; i < cases.size(); ++i) {
-        this->testQueue.push(cases[i]);
+    for (auto _case : cases) {
+        this->testQueue.push(_case);
     }
 }
 
