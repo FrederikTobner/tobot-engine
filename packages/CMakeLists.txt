@@ -1,3 +1,10 @@
+# Adding compile definitions (used OS, compiler, build type and the logs folder path)
+include(../cmake/tobot_detect.cmake)
+Tobot_Detect_Platform()
+Tobot_Detect_Compiler()
+
+add_subdirectory(tobot_io)
+
 add_subdirectory(tobot_tooling)
 
 add_subdirectory(tobot_math)

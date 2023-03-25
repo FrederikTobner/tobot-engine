@@ -477,8 +477,5 @@ namespace Tobot::Tooling::Logging {
 
             /// @brief Releseases the file that is currently used by the logger
             void free_file();
-
-            /// @brief Ensures the logs directory exists and exits otherwise
-            void ensure_logs_directory_exists();
     };
 } // namespace Tobot::Tooling::Logging

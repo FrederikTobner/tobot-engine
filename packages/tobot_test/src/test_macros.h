@@ -7,7 +7,7 @@
 
 namespace Tobot::Tooling::Test {
 #define TBTT_TEST(testsuiteName, testName, ...) \
-    void test_##testsuiteName##_##testName##(Tobot::Tooling::Test::TestState * state)
+    inline void test_##testsuiteName##_##testName##(Tobot::Tooling::Test::TestState * state)
 
 #define TBTT_ASSERT_TRUE(condition)                                                              \
     if (!(condition)) {                                                                          \

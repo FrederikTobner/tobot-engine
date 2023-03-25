@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "test_report.h"
+#include "../test_report.h"
 #include <string>
 
 namespace Tobot::Tooling::Test {

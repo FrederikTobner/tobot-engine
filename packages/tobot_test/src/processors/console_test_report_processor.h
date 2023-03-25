@@ -7,7 +7,7 @@
 
 #include "test_report_processor.h"
 
-#include <mutex>
+#include "../pre_compiled_header.h"
 
 namespace Tobot::Tooling::Test {
     class ConsoleTestReportProcessor : public Tobot::Tooling::Test::TestReportProcessor {

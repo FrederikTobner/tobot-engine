@@ -5,11 +5,10 @@
 
 #pragma once
 
+#include "processors/test_report_processor.h"
 #include "test_case.h"
-#include "test_report_processor.h"
 
-#include <queue>
-#include <vector>
+#include "pre_compiled_header.h"
 
 namespace Tobot::Tooling::Test {
 

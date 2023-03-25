@@ -11,6 +11,7 @@ option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
 option(BUILD_SDL "Building SDL" ON)
 
 get_filename_component(SOURCE_PATH_CORE ${PROJECT_SOURCE_DIR}/packages/tobot_core/src ABSOLUTE)
+get_filename_component(SOURCE_PATH_IO ${PROJECT_SOURCE_DIR}/packages/tobot_io/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_MATH ${PROJECT_SOURCE_DIR}/packages/tobot_math/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_TEST ${PROJECT_SOURCE_DIR}/packages/tobot_test/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_TOOLING ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src ABSOLUTE)

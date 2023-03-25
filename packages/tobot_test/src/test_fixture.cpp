@@ -5,7 +5,7 @@
 
 #include "test_fixture.h"
 
-#include <stdarg.h>
+#include "pre_compiled_header.h"
 
 using namespace Tobot::Tooling::Test;
 
@@ -21,8 +21,8 @@ void TestFixture::addTestCase(TestCase testCase) {
 }
 
 void TestFixture::addTestCases(const std::vector<TestCase> & cases) {
-    for (auto _case : cases) {
-        this->testQueue.push(_case);
+    for (TestCase testCase : cases) {
+        this->testQueue.push(testCase);
     }
 }
 

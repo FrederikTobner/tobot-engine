@@ -2,7 +2,7 @@ name: CodeQL
 
 on:
   schedule:
-    - cron: '0 9 * * Sat [ $(expr $(date +%W) % 2) -eq 1 ]' # At 9am UTC at every second saturday
+    - cron: '0 9 * * Sat' # At 9am UTC at every saturday
 
 jobs:
   analyze:

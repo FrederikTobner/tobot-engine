@@ -5,14 +5,13 @@
 
 #pragma once
 
-#include "test_fixture.h"
-#include "test_report_processor.h"
+#include "../processors/test_report_processor.h"
+#include "test_runner.h"
 
-#include <iostream>
-#include <queue>
+#include "../pre_compiled_header.h"
 
 namespace Tobot::Tooling::Test {
-    class TestRunner {
+    class SimpleTestRunner : public Tobot::Tooling::Test::TestRunner {
 
         private:
             /// @brief Queue that stores the TestFixture's the runner will execute
@@ -23,16 +22,16 @@ namespace Tobot::Tooling::Test {
         public:
             /// @brief Constructor of the Testrunner class
             /// @param processor The testreportprocessor that handles the testreports
-            TestRunner(TestReportProcessor & processor);
+            SimpleTestRunner(TestReportProcessor & processor);
             /// Destructor of the TestRunner class
-            ~TestRunner();
+            ~SimpleTestRunner();
             /// @brief Adds a new TestFixture to the the runner
             /// @param fixture The fixture that is added
-            void addFixture(TestFixture fixture);
+            virtual void addFixture(TestFixture fixture);
             /// @brief Executes all the TestCase's that are stored in the TestFixture's that this TestRunner will
             /// execute
-            void runAll();
-            TestRunner & operator=(const TestRunner & rhs){};
+            virtual void runAll();
+            SimpleTestRunner & operator=(const SimpleTestRunner & rhs){};
     };
 
 } // namespace Tobot::Tooling::Test

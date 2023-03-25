@@ -16,7 +16,7 @@ TBTT_TEST(example, second) {
 
 int main(int argc, char const ** argv) {
     ConsoleTestReportProcessor processor;
-    TestRunner runner(processor);
+    SimpleTestRunner runner(processor);
     TestFixture exampleFixture("example");
     TestCase firstTest(test_example_first, "first");
     TestCase secondTest(test_example_second, "second");

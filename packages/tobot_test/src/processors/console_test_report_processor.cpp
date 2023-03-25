@@ -5,8 +5,6 @@
 
 #include "console_test_report_processor.h"
 
-#include <stdio.h>
-
 using namespace Tobot::Tooling::Test;
 
 ConsoleTestReportProcessor::ConsoleTestReportProcessor() {

@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include "../console_test_report_processor.h"
+#include "../processors/console_test_report_processor.h"
+#include "../runners/simple_test_runner.h"
 #include "../test_macros.h"
 #include "../test_report.h"
-#include "../test_runner.h"
 #include "../test_state.h"

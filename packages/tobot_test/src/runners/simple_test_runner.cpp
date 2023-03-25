@@ -3,28 +3,26 @@
  * @brief File containing definitions regarding a TestRunner.
  */
 
-#include "test_runner.h"
+#include "simple_test_runner.h"
 
-#include "test_report.h"
+#include "../test_report.h"
 
-#include <future>
 #include <iostream>
 #include <stdio.h>
-#include <thread>
 
 using namespace Tobot::Tooling::Test;
 
-TestRunner::TestRunner(TestReportProcessor & processor) : processor(processor) {
+SimpleTestRunner::SimpleTestRunner(TestReportProcessor & processor) : processor(processor) {
 }
 
-TestRunner::~TestRunner() {
+SimpleTestRunner::~SimpleTestRunner() {
 }
 
-void TestRunner::addFixture(TestFixture fixture) {
+void SimpleTestRunner::addFixture(TestFixture fixture) {
     this->fixtureQueue.push(fixture);
 }
 
-void TestRunner::runAll() {
+void SimpleTestRunner::runAll() {
     size_t testCount = this->fixtureQueue.size();
     while (!this->fixtureQueue.empty()) {
         this->fixtureQueue.front().runTestCases(this->processor);
