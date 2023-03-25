@@ -32,21 +32,21 @@ void Logger::enable_file_out() {
     }
     file = fopen(filepath, "w");
     if (!file) {
-        printf("failed to open file at %s", filepath);
+        std::cerr << "failed to open file at " << filepath;
     }
 }
 
 void Logger::ensure_logs_directory_exists() {
 #ifdef OS_WINDOWS
-    DWORD dwAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
-    if (dwAttribute == INVALID_FILE_ATTRIBUTES) {
+    DWORD dataWordAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
+    if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {
         CreateDirectory(LOGS_FOLDER_PATH, NULL);
-        dwAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
-        if (dwAttribute == INVALID_FILE_ATTRIBUTES) {
+        dataWordAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
+        if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {
             std::cerr << "Can not create logs directory!\n";
             exit(70);
         }
-    } else if (!(dwAttribute & FILE_ATTRIBUTE_DIRECTORY)) {
+    } else if (!(dataWordAttribute & FILE_ATTRIBUTE_DIRECTORY)) {
         std::cerr << "Logs is not a directory\n";
         exit(70);
     }
@@ -66,7 +66,7 @@ void Logger::ensure_logs_directory_exists() {
             exit(70);
         }
     } else {
-        fstd::cerr << "Can not access logs directory!\n";
+        std::cerr << "Can not access logs directory!\n";
         exit(70);
     }
 #endif

@@ -1,17 +1,17 @@
-#include "tobot_tooling.h"
+#include "tobot_test.h"
 
 using namespace Tobot::Tooling::Test;
 
-TOBOT_TEST(example, first) {
-    EXPECT_TRUE(1 < 5);
-    ASSERT_TRUE(true);
-    ASSERT_STR_EQUAL("first", "first");
+TBTT_TEST(example, first) {
+    TBTT_EXPECT_TRUE(1 < 5);
+    TBTT_ASSERT_TRUE(true);
+    TBTT_ASSERT_STR_EQUAL("first", "first");
 }
 
-TOBOT_TEST(example, second) {
-    EXPECT_TRUE(3 > 1);
-    ASSERT_TRUE(1 == 1);
-    ASSERT_STR_EQUAL("second", "second");
+TBTT_TEST(example, second) {
+    TBTT_EXPECT_TRUE(3 > 1);
+    TBTT_ASSERT_TRUE(1 == 1);
+    TBTT_ASSERT_STR_EQUAL("second", "second");
 }
 
 int main(int argc, char const ** argv) {
