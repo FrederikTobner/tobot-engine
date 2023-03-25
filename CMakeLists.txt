@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD 99)
 set(C_STANDARD_REQUIRED TRUE)
 
 option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
-option(BUILD_SDL "Buidling SDL" ON)
+option(BUILD_SDL "Building SDL" ON)
 
 get_filename_component(SOURCE_PATH_CORE ${PROJECT_SOURCE_DIR}/packages/tobot_core/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_MATH ${PROJECT_SOURCE_DIR}/packages/tobot_math/src ABSOLUTE)
