@@ -10,6 +10,27 @@ set(C_STANDARD_REQUIRED TRUE)
 option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
 option(BUILD_SDL "Building SDL" ON)
 
+include(CheckIncludeFile)
+if(UNIX)
+    # Check dependecies under unix-like systems   
+    CHECK_INCLUDE_FILE("unistd.h" UNISTD_AVAILABLE)    
+    if(NOT ${UNISTD_AVAILABLE})
+        message(FATAL_ERROR "unistd.h is required to build the project under unix-like systems. Please make sure it is available to the compiler and try again after that")
+    endif() # unistd.h
+elseif(WIN32)
+    # Check dependecies under windows
+    CHECK_INCLUDE_FILE("windows.h" WINDOWS_AVAILABLE)
+    CHECK_INCLUDE_FILE("psapi.h" PSAPI_AVAILABLE)
+    if(NOT ${WINDOWS_AVAILABLE})
+        message(FATAL_ERROR "windows.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that"
+        )
+    endif() # windows.h
+    if(NOT ${PSAPI_AVAILABLE})
+    message(FATAL_ERROR "psapi.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
+    endif() # psapi.h
+endif()
+
+
 get_filename_component(SOURCE_PATH_CORE ${PROJECT_SOURCE_DIR}/packages/tobot_core/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_IO ${PROJECT_SOURCE_DIR}/packages/tobot_io/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_MATH ${PROJECT_SOURCE_DIR}/packages/tobot_math/src ABSOLUTE)

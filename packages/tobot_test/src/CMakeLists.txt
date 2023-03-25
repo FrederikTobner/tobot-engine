@@ -1,5 +1,4 @@
 set(TOBOT_TEST_SOURCE_FILES
-
 "test_case.cpp"
 "test_fixture.cpp"
 "test_report.cpp"
@@ -30,7 +29,7 @@ target_include_directories(tobot-test PUBLIC "${SOURCE_PATH_TEST}/src/")
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)
     # VisualStudio only accepts header files that also have a source file    
-    target_precompile_headers(tobot-test  PUBLIC pre_compiled_header.h pre_compiled_header.cpp) 
+    target_precompile_headers(tobot-test PUBLIC pre_compiled_header.h pre_compiled_header.cpp) 
 else()
-    target_precompile_headers(tobot-test  PUBLIC pre_compiled_header.h)
+    target_precompile_headers(tobot-test PUBLIC pre_compiled_header.h)
 endif()

@@ -16,6 +16,8 @@ A 2D rendering engine built on top of SDL2.
 
 ## Key concepts
 
+1. Creating a game should be approachable for beginners and intuitive
+
 ## License
 
 This project is licensed under the [GNU General Public License](LICENSE)
