@@ -14,7 +14,6 @@ var class_tobot_1_1_tooling_1_1_logging_1_1_logger =
     [ "enable_file_out", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#af199c27acb5aa746d12d22109dac3291", null ],
     [ "enable_file_out", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a9616451c5b8d872da48beb6cb1bd4f68", null ],
     [ "EnableFileOutput", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a8ea3047e3c7a73f6be12119768a6feed", null ],
-    [ "ensure_logs_directory_exists", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ad086100093e10ff9722f0c99990e5b0c", null ],
     [ "Error", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aafb3010504c571c5412124ee84fa6ee3", null ],
     [ "Error", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ab299560d6fb8cd1a72a73c92ac3870c9", null ],
     [ "Error", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ad8f1c02600f5da3ddd697f44f5a074ed", null ],

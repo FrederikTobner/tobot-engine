@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['assert_5fequal_0',['ASSERT_EQUAL',['../tobot__test_8h.html#a4eb2dea94d13f305ce42ea82cec4114b',1,'tobot_test.h']]],
-  ['assert_5fstrequal_1',['ASSERT_STREQUAL',['../tobot__test_8h.html#a24b92e9b192e024c2d097ac012872ec1',1,'tobot_test.h']]],
-  ['assert_5ftrue_2',['ASSERT_TRUE',['../tobot__test_8h.html#ae9244bfbda562e8b798789b001993fa5',1,'tobot_test.h']]]
+  ['critical_0',['Critical',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0db8ee11884925c00b15b496254f59a9',1,'Tobot::Tooling::Logging::Logger::Critical(char const *format, Args... args)'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aa6f68908b93dbed6c5486566630dbbd8',1,'Tobot::Tooling::Logging::Logger::Critical(std::string format, Args... args)'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a52882f0bccc9efb57b1e52ea4d25fb65',1,'Tobot::Tooling::Logging::Logger::Critical(int line, char const *source_file, char const *format, Args... args)'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#abb95b855d1c784e31dc40d3c47c514f6',1,'Tobot::Tooling::Logging::Logger::Critical(int line, char const *source_file, std::string format, Args... args, bool)']]],
+  ['critical_5fpriority_1',['CRITICAL_PRIORITY',['../namespace_tobot_1_1_tooling_1_1_logging.html#aa8b1c6568df4ee385e4d1d12f7153f02afe17a86d04877871690435f20cd74a9b',1,'Tobot::Tooling::Logging']]]
 ];

@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
-#include "../vector2d.h"
 #include "../dimension.h"
+#include "../vector2d.h"

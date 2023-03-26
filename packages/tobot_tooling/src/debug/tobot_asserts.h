@@ -9,12 +9,12 @@
 namespace Tobot::Tooling::Debug {
 // Asserts are only defined for debug builds
 #ifdef BUILD_TYPE_DEBUG
-#define TOBOT_ASSERT(x)                               \
-    {                                                 \
-        if (!(x)) {                                   \
-            LOG_ERROR_AT("Assertion Failed: %s", #x); \
-            __debugbreak();                           \
-        }                                             \
+#define TOBOT_ASSERT(condition)                               \
+    {                                                         \
+        if (!(condition)) {                                   \
+            LOG_ERROR_AT("Assertion Failed: %s", #condition); \
+            __debugbreak();                                   \
+        }                                                     \
     }
 #else
 #define TOBOT_ASSERT(x)

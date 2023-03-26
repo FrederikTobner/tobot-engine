@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['file_0',['file',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a702945180aa732857b380a007a7e2a21',1,'Tobot::Tooling::Logging::Logger']]],
-  ['filepath_1',['filepath',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a32f61a27b051b9e0d077ebfba92c89e2',1,'Tobot::Tooling::Logging::Logger']]],
-  ['free_5ffile_2',['free_file',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a06fd196c1755530bd33e12b4eb332325',1,'Tobot::Tooling::Logging::Logger']]]
+  ['get_5finstance_0',['get_Instance',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ae6a9e5405c83390fb27b7d883e399c0c',1,'Tobot::Tooling::Logging::Logger']]]
 ];
