@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18.0)
 # We need to build a target with name of the project i fear
-project(tobot-core VERSION 1.0.0 LANGUAGES CXX)
+project(tobot-core VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
