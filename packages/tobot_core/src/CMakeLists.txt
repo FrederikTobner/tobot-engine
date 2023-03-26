@@ -6,6 +6,7 @@ set(TOBOT_CORE_SOURCES
 "game_entity.cpp"
 "render_object.cpp"
 "scene.cpp"
+"layer.cpp"
 "tobot_application.cpp"
 )
 
@@ -13,6 +14,7 @@ set(TOBOT_CORE_HEADERS
 "asset_manager.h"
 "entry_point.h"
 "exitcode.h"
+"layer.h"
 "game_entity.h"
 "render_object.h"
 "scene.h"

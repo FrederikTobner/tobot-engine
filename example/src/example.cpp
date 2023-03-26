@@ -8,7 +8,16 @@ class Player : public Tobot::Core::GameEntity {
         }
 
         void update() override {
-            this->incrementPosition();
+        }
+};
+
+class Background :  public Tobot::Core::GameEntity {
+    public:
+        Background() : GameEntity("background", 0, 0) {
+            this->setTexture(Tobot::Core::AssetManager::loadTexture("assets/main_menu_background.png"));
+        }
+
+        void update() override {
         }
 };
 
@@ -35,7 +44,11 @@ class IntroductionScene : public Tobot::Core::Scene {
         void onCreate() override {
             // Layers, Widgets, RenderObjects
             LOG_INFO("MainMenu::onCreate");
-            this->add(new Player());
+            Tobot::Core::Layer * layer = new Tobot::Core::Layer("foreground", 1);
+            this->addLayer(layer);
+
+            this->add(new Background());
+            this->add("foreground", new Player());
         }
 
         void onDestroy() override {
