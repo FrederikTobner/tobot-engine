@@ -9,7 +9,7 @@ using namespace Tobot::Tooling::Test;
 
 TestReport::TestReport(TestCase & correspondingTest) : correspondingTest(correspondingTest) {
     this->state = new TestState();
-    this->correspondingTest.test_function(state);
+    this->correspondingTest.testFunction(state);
 }
 
 TestReport::~TestReport() {

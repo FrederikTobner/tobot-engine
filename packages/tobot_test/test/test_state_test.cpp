@@ -13,13 +13,13 @@ TBTT_TEST(testState, passes) {
 }
 
 TEST(testState, CanFail) {
-    TestCase testCase(test_testState_fails, "fails");
+    TestCase testCase(tobot_testState_fails_test, "fails");
     TestReport report(testCase);
     ASSERT_FALSE(report.state->passed);
 }
 
 TEST(testState, CanPass) {
-    TestCase testCase(test_testState_passes, "passes");
+    TestCase testCase(tobot_testState_passes_test, "passes");
     TestReport report(testCase);
     ASSERT_TRUE(report.state->passed);
 }

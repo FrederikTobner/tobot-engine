@@ -21,10 +21,6 @@ set(TOBOT_CORE_HEADERS
 "concepts.h"
 )
 
-# Adding compile definitions (used OS, compiler, build type and the logs folder path)
-include(../../../cmake/tobot_detect.cmake)
-Tobot_Detect_Platform()
-Tobot_Detect_Compiler()
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
   add_compile_definitions(BUILD_TYPE_DEBUG)
 endif()

@@ -14,18 +14,13 @@ set(TOBOT_MATH_TESTS tobot-math_TESTS)
 # Set all test files
 set(TEST_SOURCES vector2d_test.cpp main.cpp)
 
-# Set needed tobot-math header/sources
-set(TEST_DEPS_SOURCES "${SOURCE_PATH_MATH}/vector2d.cpp")
-
-set(TEST_DEPS_HEADERS "${SOURCE_PATH_MATH}/vector2d.h")
-
-add_executable(${TOBOT_MATH_TESTS} ${TEST_DEPS_SOURCES} ${TEST_DEPS_HEADERS} ${TEST_SOURCES})
+add_executable(${TOBOT_MATH_TESTS} ${TEST_SOURCES})
 
 # Includes source path of the math library
 target_include_directories(${TOBOT_MATH_TESTS} PUBLIC ${SOURCE_PATH_MATH})
 
 # Link google test
-target_link_libraries(${TOBOT_MATH_TESTS} GTest::gtest_main)
+target_link_libraries(${TOBOT_MATH_TESTS} GTest::gtest_main tobot-math)
 
 include(GoogleTest)
 gtest_discover_tests(${TOBOT_MATH_TESTS})

@@ -5,6 +5,7 @@
 
 #include "logger.h"
 
+#include "tobot_io.h"
 #include <ctime>
 
 using namespace Tobot::Tooling::Logging;
@@ -17,7 +18,9 @@ Logger::~Logger() {
 }
 
 void Logger::enable_file_out() {
-    ensure_logs_directory_exists();
+    if (Tobot::IO::Directory::ensure_directory_exists(LOGS_FOLDER_PATH)) {
+        exit(70);
+    }
     std::time_t current_time = std::time(0);
     std::tm * timestamp = std::localtime(&current_time);
     char buffer[120];
@@ -34,42 +37,6 @@ void Logger::enable_file_out() {
     if (!file) {
         std::cerr << "failed to open file at " << filepath;
     }
-}
-
-void Logger::ensure_logs_directory_exists() {
-#ifdef OS_WINDOWS
-    DWORD dataWordAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
-    if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {
-        CreateDirectory(LOGS_FOLDER_PATH, NULL);
-        dataWordAttribute = GetFileAttributes(LOGS_FOLDER_PATH);
-        if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {
-            std::cerr << "Can not create logs directory!\n";
-            exit(70);
-        }
-    } else if (!(dataWordAttribute & FILE_ATTRIBUTE_DIRECTORY)) {
-        std::cerr << "Logs is not a directory\n";
-        exit(70);
-    }
-#endif
-#ifdef OS_LINUX
-    DIR * resultsDirectory = opendir(LOGS_FOLDER_PATH);
-    if (resultsDirectory) {
-        closedir(resultsDirectory);
-    } else if (ENOENT == errno) {
-        // If the directory does not exists we need to create it
-        mkdir(LOGS_FOLDER_PATH, 0700);
-        resultsDirectory = opendir(LOGS_FOLDER_PATH);
-        if (resultsDirectory) {
-            closedir(resultsDirectory);
-        } else {
-            std::cerr << "Can not create logs directory!\n";
-            exit(70);
-        }
-    } else {
-        std::cerr << "Can not access logs directory!\n";
-        exit(70);
-    }
-#endif
 }
 
 void Logger::free_file() {

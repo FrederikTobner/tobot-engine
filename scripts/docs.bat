@@ -1,8 +1,8 @@
 :: Generates documentation using doxyxgen (https://www.doxygen.nl/) for a single project
-IF "%1" == ""(set \p projectName=Project to document :) else (set projectName=%1)
+set projectName=%1
 @ECHO OFF
 IF NOT EXIST ..\packages\%projectName%\src (
-    ECHO Can not find source directory
+    ECHO Can not find source directory %projectName%
     EXIT 74
 )
 cd ..\packages\%projectName%\src
@@ -21,4 +21,3 @@ xcopy ..\..\..\docs\%projectName%\html ..\..\..\docs\%projectName% /E
 ECHO Removing html folder ...
 rmdir /s ..\..\..\docs\%projectName%\html\
 cd ..\..\..\scripts
-EXIT 0
