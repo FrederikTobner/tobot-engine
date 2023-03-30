@@ -6,6 +6,8 @@
 #pragma once
 
 // C++ standard library dependecies
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <stack>
 #include <unordered_map>
