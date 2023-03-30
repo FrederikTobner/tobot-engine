@@ -1,12 +1,13 @@
 set(TOBOT_MATH_SOURCE_FILES
-"vector2d.cpp"
 "dimension.cpp"
+"vector2d.cpp"
 )
 
 set(TOBOT_MATH_HEADER_FILES
-"vector2d.h"
-"dimension.h"
 "concepts.h"
+"dimension.h"
+"vector2d.h"
+"matrix.h"
 "include/tobot_math.h"
 )
 

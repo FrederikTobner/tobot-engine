@@ -12,7 +12,11 @@ FetchContent_MakeAvailable(googletest)
 set(TOBOT_MATH_TESTS tobot-math_TESTS)
 
 # Set all test files
-set(TEST_SOURCES vector2d_test.cpp main.cpp)
+set(TEST_SOURCES
+"main.cpp"
+"matrix_test.cpp"
+"vector2d_test.cpp"
+)
 
 add_executable(${TOBOT_MATH_TESTS} ${TEST_SOURCES})
 

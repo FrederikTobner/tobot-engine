@@ -59,7 +59,7 @@ TEST(Vector2D, SubtractionAssignment) {
 }
 
 /**
- * @brief Testing vector simple multiplication
+ * @brief Testing simple vector multiplication
  *
  */
 TEST(Vector2D, Multiplication) {
@@ -87,7 +87,7 @@ TEST(Vector2D, MultiplicationAssignment) {
 }
 
 /**
- * @brief Testing vector simple multiplication
+ * @brief Testing simple vector division
  *
  */
 TEST(Vector2D, Division) {
@@ -119,8 +119,8 @@ TEST(Vector2D, DivisionAssignment) {
  *
  */
 TEST(Vector2D, Magnitude) {
-    Tobot::Math::Vector2D<int> vector(4, 3);
-    EXPECT_EQ(5, vector.Magnitude());
+    Tobot::Math::Vector2D<int> leVector(4, 3);
+    EXPECT_EQ(5, leVector.Magnitude());
 }
 
 /**
@@ -128,7 +128,7 @@ TEST(Vector2D, Magnitude) {
  *
  */
 TEST(Vector2D, Normalize) {
-    Tobot::Math::Vector2D<float> vector(4.0, 3.0);
-    vector.Normalize();
-    EXPECT_EQ(1, vector.Magnitude());
+    Tobot::Math::Vector2D<float> leVector(4.0, 3.0);
+    leVector.Normalize();
+    EXPECT_EQ(1, leVector.Magnitude());
 }

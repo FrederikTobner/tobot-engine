@@ -7,10 +7,10 @@ template <typename T>
 Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
 }
 
-// Gotta go fast 🚀
-template class Vector2D<int_fast8_t>;
-template class Vector2D<int_fast16_t>;
-template class Vector2D<int_fast32_t>;
-template class Vector2D<int_fast64_t>;
+template class Vector2D<short>;
+template class Vector2D<int>;
+template class Vector2D<long>;
+template class Vector2D<long long>;
 template class Vector2D<float>;
 template class Vector2D<double>;
+template class Vector2D<long double>;
