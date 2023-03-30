@@ -5,17 +5,6 @@
 
 #pragma once
 
-#include <mutex>
-#include <sstream>
-#include <string>
-
-#include <iostream>
-#include <stdio.h>
-
-#ifdef OS_WINDOWS
-#include <windows.h>
-#endif
-
 /// @brief The logging namespace
 namespace Tobot::Tooling::Logging {
 #define LOG_TRACE(format, ...)    (Tobot::Tooling::Logging::Logger::Trace(format, __VA_ARGS__))

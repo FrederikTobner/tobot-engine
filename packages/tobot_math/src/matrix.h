@@ -1,9 +1,7 @@
 #pragma once
 
 #include "concepts.h"
-#include <array>
-#include <exception>
-#include <vector>
+#include "pre_compiled_header.h"
 
 namespace Tobot::Math {
     template <typename T, std::size_t m, std::size_t n>

@@ -2,9 +2,7 @@
 
 #include "SDL.h"
 
-#include <iostream>
-#include <unordered_map>
-#include <vector>
+#include "pre_compiled_header.h"
 
 #include "game_entity.h"
 #include "render_object.h"

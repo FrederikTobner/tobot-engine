@@ -6,7 +6,6 @@
 #include "logger.h"
 
 #include "tobot_io.h"
-#include <ctime>
 
 using namespace Tobot::Tooling::Logging;
 
