@@ -19,8 +19,19 @@ namespace Tobot::Math {
                 return *this;
             }
 
+            Vector2D<T> & operator-=(const Vector2D<T> & rhs) {
+                this->x -= rhs.x;
+                this->y -= rhs.y;
+                return *this;
+            }
+
             friend Vector2D<T> operator+(Vector2D<T> lhs, const Vector2D<T> & rhs) {
                 lhs += rhs;
+                return lhs;
+            }
+
+            friend Vector2D<T> operator-(Vector2D<T> lhs, const Vector2D<T> & rhs) {
+                lhs -= rhs;
                 return lhs;
             }
 
@@ -30,9 +41,22 @@ namespace Tobot::Math {
                 return *this;
             }
 
-            Vector2D<T> & operator*=(const T & rhs) {
+            Vector2D<T> & operator*=(const T rhs) {
                 this->x *= rhs;
                 this->y *= rhs;
+                return *this;
+            }
+
+            Vector2D<T> & operator/=(const Vector2D<T> & rhs) {
+                this->x /= rhs.x;
+                this->y /= rhs.y;
+                return *this;
+            }
+
+            Vector2D<T> & operator/=(const T rhs) {
+
+                this->x /= rhs;
+                this->y /= rhs;
                 return *this;
             }
 
@@ -41,39 +65,20 @@ namespace Tobot::Math {
                 return lhs;
             }
 
-            friend Vector2D<T> operator*(Vector2D<T> lhs, const int & rhs) {
+            friend Vector2D<T> operator*(Vector2D<T> lhs, const T rhs) {
                 lhs.x *= rhs;
                 lhs.y *= rhs;
                 return lhs;
             }
 
-            friend Vector2D<T> operator*(Vector2D<T> lhs, const short & rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
+            friend Vector2D<T> operator/(Vector2D<T> lhs, const Vector2D<T> & rhs) {
+                lhs /= rhs;
                 return lhs;
             }
 
-            friend Vector2D<T> operator*(Vector2D<T> lhs, const long & rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
-                return lhs;
-            }
-
-            friend Vector2D<T> operator*(Vector2D<T> lhs, const long long & rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
-                return lhs;
-            }
-
-            friend Vector2D<T> operator*(Vector2D<T> lhs, const float & rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
-                return lhs;
-            }
-
-            friend Vector2D<T> operator*(Vector2D<T> lhs, const double & rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
+            friend Vector2D<T> operator/(Vector2D<T> lhs, const T rhs) {
+                lhs.x /= rhs;
+                lhs.y /= rhs;
                 return lhs;
             }
 
@@ -82,9 +87,7 @@ namespace Tobot::Math {
             }
 
             void Normalize() {
-                T mag = this->Magnitude();
-                this->x /= mag;
-                this->y /= mag;
+                *this /= this->Magnitude();
             }
     };
 } // namespace Tobot::Math
