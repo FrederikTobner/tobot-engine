@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stack>
+#include "pre_compiled_header.h"
 
 #include "scene.h"
 

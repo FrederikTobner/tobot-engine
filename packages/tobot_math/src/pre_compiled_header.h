@@ -4,13 +4,12 @@
  */
 
 #pragma once
-
-// C standard library dependecies
-#include <stdarg.h>
-#include <stdio.h>
+// C library dependecies
+#include <assert.h>
+#include <math.h>
 
 // C++ standard library dependecies
+#include <array>
+#include <exception>
 #include <iostream>
-#include <mutex>
-#include <queue>
 #include <vector>

@@ -2,11 +2,7 @@
 
 #include "SDL.h"
 
-#include <iostream>
-#include <unordered_map>
-#include <vector>
-#include <algorithm>
-#include <cmath>
+#include "pre_compiled_header.h"
 
 #include "game_entity.h"
 #include "layer.h"

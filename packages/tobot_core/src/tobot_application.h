@@ -5,8 +5,7 @@
 #include "SDL_mixer.h"
 #include "SDL_ttf.h"
 
-#include <iostream>
-#include <unordered_map>
+#include "pre_compiled_header.h"
 
 #include "scene.h"
 

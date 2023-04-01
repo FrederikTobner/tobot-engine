@@ -5,12 +5,10 @@
 
 #pragma once
 
-// C standard library dependecies
-#include <stdarg.h>
-#include <stdio.h>
-
 // C++ standard library dependecies
+#include <algorithm>
+#include <cmath>
 #include <iostream>
-#include <mutex>
-#include <queue>
+#include <stack>
+#include <unordered_map>
 #include <vector>

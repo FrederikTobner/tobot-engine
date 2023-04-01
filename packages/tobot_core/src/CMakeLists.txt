@@ -42,6 +42,14 @@ target_link_libraries(tobot-core SDL2::SDL2main SDL2::SDL2-static SDL2_image::SD
 # for including the project_config.h file
 target_include_directories(tobot-core PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_core/src ${SOURCE_PATH_TOOLING}/include ${SOURCE_PATH_MATH}/include)
 
+# Precompiles dependencies to speed up compilation of the target
+if(MSVC)
+    # VisualStudio only accepts header files that also have a source file    
+    target_precompile_headers(tobot-core PUBLIC pre_compiled_header.h pre_compiled_header.cpp) 
+else()
+    target_precompile_headers(tobot-core PUBLIC pre_compiled_header.h)
+endif()
+
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Sets properties for the package created using cpack
     set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
