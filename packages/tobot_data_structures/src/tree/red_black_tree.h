@@ -258,7 +258,7 @@ namespace Tobot::DataStructures {
     }
 
     template <typename T>
-    Tobot::DataStructures::RedBlackTree<T>::Node * RedBlackTree<T>::Search(T value) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::Search(T value) {
         Node * x = this->root;
         while (x != this->nil && x->value != value) {
             if (value < x->value) {
@@ -302,7 +302,7 @@ namespace Tobot::DataStructures {
     }
 
     template <typename T>
-    Tobot::DataStructures::RedBlackTree<T>::Node * RedBlackTree<T>::Minimum(Node * x) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::Minimum(Node * x) {
         while (x->left != this->nil) {
             x = x->left;
         }
@@ -310,7 +310,7 @@ namespace Tobot::DataStructures {
     }
 
     template <typename T>
-    Tobot::DataStructures::RedBlackTree<T>::Node * RedBlackTree<T>::Maximum(Node * x) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::Maximum(Node * x) {
         while (x->right != this->nil) {
             x = x->right;
         }
@@ -318,7 +318,7 @@ namespace Tobot::DataStructures {
     }
 
     template <typename T>
-    Tobot::DataStructures::RedBlackTree<T>::Node * RedBlackTree<T>::Successor(Node * x) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::Successor(Node * x) {
         if (x->right != this->nil) {
             return this->Minimum(x->right);
         }
@@ -331,7 +331,7 @@ namespace Tobot::DataStructures {
     }
 
     template <typename T>
-    Tobot::DataStructures::RedBlackTree<T>::Node * RedBlackTree<T>::Predecessor(Node * x) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::Predecessor(Node * x) {
         if (x->left != this->nil) {
             return this->Maximum(x->left);
         }
