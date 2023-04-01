@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "vector4d.h"
+#include "vector/vector4d.h"
 
 /**
  * @brief Testing simple vector addition

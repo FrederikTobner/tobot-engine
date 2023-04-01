@@ -4,7 +4,8 @@
  */
 
 #pragma once
-// C Math library
+// C library dependecies
+#include <assert.h>
 #include <math.h>
 
 // C++ standard library dependecies

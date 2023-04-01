@@ -2,6 +2,7 @@
 
 #include "../dimension.h"
 #include "../matrix.h"
-#include "../vector2d.h"
-#include "../vector3d.h"
-#include "../vector4d.h"
+#include "../vector/vector.h"
+#include "../vector/vector2d.h"
+#include "../vector/vector3d.h"
+#include "../vector/vector4d.h"

@@ -1,12 +1,14 @@
 #pragma once
 
-#include "concepts.h"
 #include "pre_compiled_header.h"
+
+#include "concepts.h"
+#include "vector.h"
 
 namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
-    class Vector4D {
+    class Vector4D : Vector<T> {
 
         public:
             T x;
@@ -48,9 +50,19 @@ namespace Tobot::Math {
 
             Vector4D<T> & operator/=(const T scalar);
 
+            T & operator()(std::size_t i);
+
+            T operator()(std::size_t i) const;
+
+            T & operator[](std::size_t i);
+
+            T operator[](std::size_t i) const;
+
             inline T Magnitude();
 
             inline void Normalize();
+
+            inline std::size_t GetSize();
     };
 
     template <typename T>
@@ -100,6 +112,110 @@ namespace Tobot::Math {
 
     template <typename T>
         requires Arithmetic<T>
+    T & Vector4D<T>::operator()(std::size_t i) {
+        assert(i < 4);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+        case 2:
+            return this->z;
+        case 3:
+            return this->w;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector4D<T>::operator()(std::size_t i) const {
+        assert(i < 4);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+        case 2:
+            return this->z;
+        case 3:
+            return this->w;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T & Vector4D<T>::operator[](std::size_t i) {
+        assert(i < 4);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+        case 2:
+            return this->z;
+        case 3:
+            return this->w;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector4D<T>::operator[](std::size_t i) const {
+        assert(i < 4);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+        case 2:
+            return this->z;
+        case 3:
+            return this->w;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
     inline T Vector4D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
     }
@@ -108,6 +224,12 @@ namespace Tobot::Math {
         requires Arithmetic<T>
     inline void Vector4D<T>::Normalize() {
         *this /= this->Magnitude();
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    inline std::size_t Vector4D<T>::GetSize() {
+        return 4;
     }
 
 } // namespace Tobot::Math

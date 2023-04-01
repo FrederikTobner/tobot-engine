@@ -1,12 +1,14 @@
 #pragma once
 
-#include "concepts.h"
 #include "pre_compiled_header.h"
+
+#include "concepts.h"
+#include "vector.h"
 
 namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
-    class Vector2D {
+    class Vector2D : Vector<T> {
 
         public:
             T x;
@@ -45,9 +47,19 @@ namespace Tobot::Math {
 
             Vector2D<T> & operator/=(const T scalar);
 
+            T & operator()(std::size_t i);
+
+            T operator()(std::size_t i) const;
+
+            T & operator[](std::size_t i);
+
+            T operator[](std::size_t i) const;
+
             inline T Magnitude();
 
             inline void Normalize();
+
+            inline std::size_t GetSize();
     };
 
     template <typename T>
@@ -89,6 +101,94 @@ namespace Tobot::Math {
 
     template <typename T>
         requires Arithmetic<T>
+    T & Vector2D<T>::operator()(std::size_t i) {
+        assert(i < 2);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector2D<T>::operator()(std::size_t i) const {
+        assert(i < 2);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T & Vector2D<T>::operator[](std::size_t i) {
+        assert(i < 2);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector2D<T>::operator[](std::size_t i) const {
+        assert(i < 2);
+        switch (i) {
+        case 0:
+            return this->x;
+        case 1:
+            return this->y;
+
+        default:
+            // Unreachable
+#if defined(COMPILER_MSVC)
+            __assume(0);
+#elif defined(COMPILER_GCC) || defined(COMPILER_CLANG)
+            __builtin_unreachable();
+#else // Compiler is Intel or unknown
+            exit(70);
+#endif;
+        }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
     inline T Vector2D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y);
     }
@@ -97,5 +197,11 @@ namespace Tobot::Math {
         requires Arithmetic<T>
     inline void Vector2D<T>::Normalize() {
         *this /= this->Magnitude();
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    inline std::size_t Vector2D<T>::GetSize() {
+        return 2;
     }
 } // namespace Tobot::Math

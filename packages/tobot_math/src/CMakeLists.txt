@@ -5,11 +5,11 @@ set(TOBOT_MATH_SOURCE_FILES
 set(TOBOT_MATH_HEADER_FILES
 "concepts.h"
 "dimension.h"
-"vector2d.h"
-"vector3d.h"
-"vector4d.h"
+"vector/vector.h"
+"vector/vector2d.h"
+"vector/vector3d.h"
+"vector/vector4d.h"
 "matrix.h"
-"matrix3d.h"
 "include/tobot_math.h"
 )
 
