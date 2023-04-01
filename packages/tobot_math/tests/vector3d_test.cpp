@@ -136,3 +136,29 @@ TEST(Vector3D, Normalize) {
     leVector.Normalize();
     EXPECT_EQ(1, leVector.Magnitude());
 }
+
+/**
+ * @brief Testing vector dot product
+ *
+ */
+TEST(Vector3D, DotProduct) {
+    Tobot::Math::Vector3D<int> vector1(5, 4, 1);
+    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+
+    EXPECT_EQ(26, vector1.Dot(vector2));
+}
+
+/**
+ * @brief Testing vector cross product
+ *
+ */
+TEST(Vector3D, CrossProduct) {
+    Tobot::Math::Vector3D<int> vector1(5, 4, 1);
+    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+
+    Tobot::Math::Vector3D<int> result = vector1.Cross(vector2);
+
+    EXPECT_EQ(-10, result.x);
+    EXPECT_EQ(14, result.y);
+    EXPECT_EQ(-6, result.z);
+}

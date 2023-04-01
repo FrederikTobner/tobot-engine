@@ -60,6 +60,12 @@ namespace Tobot::Math {
             inline void Normalize();
 
             inline std::size_t GetSize();
+
+            inline T Dot(const Vector2D<T> & vec);
+
+            Vector2D<T> Cross(const Vector2D<T> & vec);
+
+            Vector2D<T> FromAngle(T angle);
     };
 
     template <typename T>
@@ -185,6 +191,18 @@ namespace Tobot::Math {
             exit(70);
 #endif;
         }
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector2D<T>::Dot(const Vector2D<T> & vec) {
+        return this->x * vec.x + this->y * vec.y;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector2D<T> Vector2D<T>::Cross(const Vector2D<T> & vec) {
+        return Vector2D(0, this->x * vec.y - this->y * vec.x);
     }
 
     template <typename T>

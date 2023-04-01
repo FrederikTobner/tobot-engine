@@ -144,3 +144,14 @@ TEST(Vector4D, Normalize) {
     leVector.Normalize();
     EXPECT_EQ(1, leVector.Magnitude());
 }
+
+/**
+ * @brief Testing vector dot product
+ *
+ */
+TEST(Vector4D, DotProduct) {
+    Tobot::Math::Vector4D<int> vector1(4, 3, 2, 1);
+    Tobot::Math::Vector4D<int> vector2(1, 2, 3, 4);
+
+    EXPECT_EQ(20, vector1.Dot(vector2));
+}

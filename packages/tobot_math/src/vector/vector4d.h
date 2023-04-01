@@ -63,6 +63,8 @@ namespace Tobot::Math {
             inline void Normalize();
 
             inline std::size_t GetSize();
+
+            T Dot(const Vector4D<T> & vec);
     };
 
     template <typename T>
@@ -230,6 +232,12 @@ namespace Tobot::Math {
         requires Arithmetic<T>
     inline std::size_t Vector4D<T>::GetSize() {
         return 4;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector4D<T>::Dot(const Vector4D<T> & vec) {
+        return this->x * vec.x + this->y * vec.y + this->z * vec.z + this->w * vec.w;
     }
 
 } // namespace Tobot::Math

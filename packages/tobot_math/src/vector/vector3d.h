@@ -62,6 +62,12 @@ namespace Tobot::Math {
             inline void Normalize();
 
             inline std::size_t GetSize();
+
+            T Dot(const Vector3D<T> & vec);
+
+            Vector3D<T> Cross(const Vector3D<T> & vec);
+
+            Vector3D<T> FromAngle(T angle);
     };
 
     template <typename T>
@@ -217,6 +223,19 @@ namespace Tobot::Math {
         requires Arithmetic<T>
     inline std::size_t Vector3D<T>::GetSize() {
         return 3;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    T Vector3D<T>::Dot(const Vector3D<T> & vec) {
+        return this->x * vec.x + this->y * vec.y + this->z * vec.z;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T> Vector3D<T>::Cross(const Vector3D<T> & vec) {
+        return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
+                           this->x * vec.y - this->y * vec.x);
     }
 
 } // namespace Tobot::Math
