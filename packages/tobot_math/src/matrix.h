@@ -13,22 +13,22 @@ namespace Tobot::Math {
             std::array<std::array<T, n>, m> m_matrix;
 
         public:
-            explicit Matrix();
-            explicit Matrix(const std::vector<T> values);
+            Matrix();
+            Matrix(const std::vector<T> values);
 
-            T & operator()(std::size_t i, std::size_t j);
-            T & operator()(std::size_t i, std::size_t j) const;
+            inline T & operator()(std::size_t i, std::size_t j);
+            inline T & operator()(std::size_t i, std::size_t j) const;
+            inline std::array<T, n> & operator[](std::size_t i);
+            inline std::array<T, n> & operator[](std::size_t i) const;
 
-            std::size_t getRows() const;
-            std::size_t getColoumns() const;
+            inline std::size_t getRows() const;
+            inline std::size_t getColoumns() const;
     };
 
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     Matrix<T, m, n>::Matrix() : rowsCount(m), columnsCount(n) {
-        if (rowsCount == 0 || columnsCount == 0) {
-            throw std::invalid_argument("received zero as argument");
-        }
+        static_assert(m > 0 && n > 0);
     }
 
     template <typename T, std::size_t m, std::size_t n>
@@ -53,25 +53,41 @@ namespace Tobot::Math {
 
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) {
+    inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) {
+        assert(i < m && j < n);
         return this->m_matrix[i][j];
     }
 
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
+    inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
+        assert(i < m && j < n);
         return this->m_matrix[i][j];
     }
 
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    std::size_t Matrix<T, m, n>::getRows() const {
+    inline std::array<T, n> & Matrix<T, m, n>::operator[](std::size_t i) {
+        assert(i < m);
+        return this->m_matrix[i];
+    }
+
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    inline std::array<T, n> & Matrix<T, m, n>::operator[](std::size_t i) const {
+        assert(i < m);
+        return this->m_matrix[i];
+    }
+
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    inline std::size_t Matrix<T, m, n>::getRows() const {
         return this->rowsCount;
     }
 
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    std::size_t Matrix<T, m, n>::getColoumns() const {
+    inline std::size_t Matrix<T, m, n>::getColoumns() const {
         return this->columnsCount;
     }
 } // namespace Tobot::Math

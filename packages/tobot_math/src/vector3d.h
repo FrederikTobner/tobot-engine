@@ -13,67 +13,96 @@ namespace Tobot::Math {
             T y;
             T z;
 
-            Vector3D(T x, T y, T z) : x(x), y(y), z(z){};
+            Vector3D(T x, T y, T z);
 
-            friend Vector3D<T> operator+(Vector3D<T> lVec, const Vector3D<T> & rVec) {
+            friend inline Vector3D<T> operator+(Vector3D<T> lVec, const Vector3D<T> & rVec) {
                 return Vector3D(lVec.x + rVec.x, lVec.y + rVec.y, lVec.z + rVec.z);
             }
 
-            friend Vector3D<T> operator-(Vector3D<T> lVec, const Vector3D<T> & rVec) {
+            friend inline Vector3D<T> operator-(Vector3D<T> lVec, const Vector3D<T> & rVec) {
                 return Vector3D(lVec.x - rVec.x, lVec.y - rVec.y, lVec.z - rVec.z);
             }
 
-            friend Vector3D<T> operator*(const T scalar, Vector3D<T> vec) {
+            friend inline Vector3D<T> operator*(const T scalar, Vector3D<T> vec) {
                 return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
             }
 
-            friend Vector3D<T> operator*(Vector3D<T> vec, const T scalar) {
+            friend inline Vector3D<T> operator*(Vector3D<T> vec, const T scalar) {
                 return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
             }
 
-            friend Vector3D<T> operator/(const T scalar, Vector3D<T> vec) {
+            friend inline Vector3D<T> operator/(const T scalar, Vector3D<T> vec) {
                 return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
             }
 
-            friend Vector3D<T> operator/(Vector3D<T> vec, const T scalar) {
+            friend inline Vector3D<T> operator/(Vector3D<T> vec, const T scalar) {
                 return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
             }
 
-            Vector3D<T> & operator+=(const Vector3D<T> & vec) {
-                this->x += vec.x;
-                this->y += vec.y;
-                this->z += vec.z;
-                return *this;
-            }
+            Vector3D<T> & operator+=(const Vector3D<T> & vec);
 
-            Vector3D<T> & operator-=(const Vector3D<T> & vec) {
-                this->x -= vec.x;
-                this->y -= vec.y;
-                this->z -= vec.z;
-                return *this;
-            }
+            Vector3D<T> & operator-=(const Vector3D<T> & vec);
 
-            Vector3D<T> & operator*=(const T scalar) {
-                this->x *= scalar;
-                this->y *= scalar;
-                this->z *= scalar;
-                return *this;
-            }
+            Vector3D<T> & operator*=(const T scalar);
 
-            Vector3D<T> & operator/=(const T scalar) {
+            Vector3D<T> & operator/=(const T scalar);
 
-                this->x /= scalar;
-                this->y /= scalar;
-                this->z /= scalar;
-                return *this;
-            }
+            inline T Magnitude();
 
-            T Magnitude() {
-                return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
-            }
-
-            void Normalize() {
-                *this /= this->Magnitude();
-            }
+            inline void Normalize();
     };
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T> & Vector3D<T>::operator+=(const Vector3D<T> & vec) {
+        this->x += vec.x;
+        this->y += vec.y;
+        this->z += vec.z;
+        return *this;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T> & Vector3D<T>::operator-=(const Vector3D<T> & vec) {
+        this->x -= vec.x;
+        this->y -= vec.y;
+        this->z -= vec.z;
+        return *this;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T> & Vector3D<T>::operator*=(const T scalar) {
+        this->x *= scalar;
+        this->y *= scalar;
+        this->z *= scalar;
+        return *this;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T> & Vector3D<T>::operator/=(const T scalar) {
+        this->x /= scalar;
+        this->y /= scalar;
+        this->z /= scalar;
+        return *this;
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    inline T Vector3D<T>::Magnitude() {
+        return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
+    }
+
+    template <typename T>
+        requires Arithmetic<T>
+    inline void Vector3D<T>::Normalize() {
+        *this /= this->Magnitude();
+    }
+
 } // namespace Tobot::Math

@@ -9,6 +9,7 @@ set(TOBOT_MATH_HEADER_FILES
 "vector3d.h"
 "vector4d.h"
 "matrix.h"
+"matrix3d.h"
 "include/tobot_math.h"
 )
 

@@ -1,15 +1,13 @@
 #include <gtest/gtest.h>
 
-#include "matrix.h"
+#include "matrix3d.h"
 
 /**
  * @brief Testing simple matrix creation
  *
  */
-TEST(Matrix, Creation) {
-    Tobot::Math::Matrix<int, 3, 3> leMatrix({1, 2, 3, 4, 5, 6, 7, 8, 9});
-    EXPECT_EQ(3, leMatrix.getRows());
-    EXPECT_EQ(3, leMatrix.getColoumns());
+TEST(Matrix3D, Creation) {
+    Tobot::Math::Matrix3D<int> leMatrix({1, 2, 3, 4, 5, 6, 7, 8, 9});
     EXPECT_EQ(1, leMatrix(0, 0));
     EXPECT_EQ(2, leMatrix(0, 1));
     EXPECT_EQ(3, leMatrix(0, 2));
