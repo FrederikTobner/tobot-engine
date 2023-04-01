@@ -5,6 +5,8 @@ Tobot_Detect_Compiler()
 
 add_subdirectory(tobot_io)
 
+add_subdirectory(tobot_data_structures)
+
 add_subdirectory(tobot_tooling)
 
 add_subdirectory(tobot_math)
