@@ -2,9 +2,8 @@
 
 #include "vector/vector2d.h"
 
-/**
- * @brief Testing simple vector addition
- *
+/*
+ * Testing simple vector addition
  */
 TEST(Vector2D, Addition) {
     Tobot::Math::Vector2D<int> vector1(5, 3);
@@ -16,9 +15,8 @@ TEST(Vector2D, Addition) {
     EXPECT_EQ(5, result.y);
 }
 
-/**
- * @brief Testing vector addition assignment
- *
+/*
+ * Testing vector addition assignment
  */
 TEST(Vector2D, AdditionAssignment) {
     Tobot::Math::Vector2D<int> vector1(5, 3);
@@ -30,9 +28,8 @@ TEST(Vector2D, AdditionAssignment) {
     EXPECT_EQ(5, vector1.y);
 }
 
-/**
- * @brief Testing simple vector subtraction
- *
+/*
+ * Testing simple vector subtraction
  */
 TEST(Vector2D, Subtraction) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
@@ -44,9 +41,8 @@ TEST(Vector2D, Subtraction) {
     EXPECT_EQ(2, result.y);
 }
 
-/**
- * @brief Testing vector subtraction assignment
- *
+/*
+ * Testing vector subtraction assignment
  */
 TEST(Vector2D, SubtractionAssignment) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
@@ -58,9 +54,8 @@ TEST(Vector2D, SubtractionAssignment) {
     EXPECT_EQ(2, vector1.y);
 }
 
-/**
- * @brief Testing simple vector multiplication
- *
+/*
+ * Testing simple vector multiplication
  */
 TEST(Vector2D, Multiplication) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
@@ -71,9 +66,8 @@ TEST(Vector2D, Multiplication) {
     EXPECT_EQ(12, result.y);
 }
 
-/**
- * @brief Testing vector multiplication assignment
- *
+/*
+ * Testing vector multiplication assignment
  */
 TEST(Vector2D, MultiplicationAssignment) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
@@ -84,9 +78,8 @@ TEST(Vector2D, MultiplicationAssignment) {
     EXPECT_EQ(12, vector1.y);
 }
 
-/**
- * @brief Testing simple vector division
- *
+/*
+ * Testing simple vector division
  */
 TEST(Vector2D, Division) {
     Tobot::Math::Vector2D<int> vector1(9, 6);
@@ -97,9 +90,8 @@ TEST(Vector2D, Division) {
     EXPECT_EQ(2, result.y);
 }
 
-/**
- * @brief Testing vector division assignment
- *
+/*
+ * Testing vector division assignment
  */
 TEST(Vector2D, DivisionAssignment) {
     Tobot::Math::Vector2D<int> vector1(9, 6);
@@ -110,18 +102,16 @@ TEST(Vector2D, DivisionAssignment) {
     EXPECT_EQ(2, vector1.y);
 }
 
-/**
- * @brief Testing vector magnitude
- *
+/*
+ * Testing vector magnitude
  */
 TEST(Vector2D, Magnitude) {
     Tobot::Math::Vector2D<int> leVector(4, 3);
     EXPECT_EQ(5, leVector.Magnitude());
 }
 
-/**
- * @brief Testing vector normalization
- *
+/*
+ * Testing vector normalization
  */
 TEST(Vector2D, Normalize) {
     Tobot::Math::Vector2D<float> leVector(4.0, 3.0);
@@ -129,9 +119,8 @@ TEST(Vector2D, Normalize) {
     EXPECT_EQ(1, leVector.Magnitude());
 }
 
-/**
- * @brief Testing vector dot product
- *
+/*
+ * Testing vector dot product
  */
 TEST(Vector2D, DotProduct) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
@@ -141,8 +130,7 @@ TEST(Vector2D, DotProduct) {
 }
 
 /**
- * @brief Testing vector cross product
- *
+ * Testing vector cross product
  */
 TEST(Vector2D, CrossProduct) {
     Tobot::Math::Vector2D<int> vector1(5, 4);

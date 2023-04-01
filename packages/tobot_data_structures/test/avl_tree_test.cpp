@@ -4,15 +4,24 @@
 
 using namespace Tobot::DataStructures;
 
+/*
+ * Tests whether the AVLTree can be created
+ */
 TEST(AVLTree, CanBeCreated) {
     AVLTree<int> tree;
 }
 
+/*
+ * Tests whether the AVLTree can insert a single element
+ */
 TEST(avlTree, CanInsert) {
     AVLTree<int> tree;
     tree.Insert(1);
 }
 
+/*
+ * Tests whether the AVLTree can insert multiple elements
+ */
 TEST(AVLTree, CanInsertMultiple) {
     AVLTree<int> tree;
     tree.Insert(1);
@@ -20,6 +29,9 @@ TEST(AVLTree, CanInsertMultiple) {
     tree.Insert(3);
 }
 
+/*
+ * Tests whether the AVLTree can insert multiple elements and find them
+ */
 TEST(AVLTree, CanInsertMultipleAndFind) {
     AVLTree<int> tree;
     tree.Insert(1);
@@ -30,6 +42,9 @@ TEST(AVLTree, CanInsertMultipleAndFind) {
     ASSERT_EQ(tree.Search(3)->value, 3);
 }
 
+/*
+ * Tests whether the AVLTree can delete an element
+ */
 TEST(AVLTree, CanDelete) {
     AVLTree<int> tree;
     tree.Insert(1);

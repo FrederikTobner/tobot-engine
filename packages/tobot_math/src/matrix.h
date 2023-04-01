@@ -21,6 +21,10 @@ namespace Tobot::Math {
             inline std::array<T, n> & operator[](std::size_t i);
             inline std::array<T, n> & operator[](std::size_t i) const;
 
+            /// @brief Appends the matrix to the ostream
+            /// @param os The ostream to append the matrix to
+            /// @param mat The matrix to append to the ostream
+            /// @return std::ostream& The ostream with the matrix appended
             friend std::ostream operator<<(std::ostream & os, const Matrix<T, m, n> & mat) {
                 for (std::size_t i = 0; i < mat.getRows(); i++) {
                     for (std::size_t j = 0; j < mat.getColoumns(); j++) {
@@ -35,12 +39,21 @@ namespace Tobot::Math {
             inline std::size_t getColoumns() const;
     };
 
+    /// @brief Construct a new Matrix object
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     Matrix<T, m, n>::Matrix() : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
     }
 
+    /// @brief Construct a new Matrix object from a vector of values
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param values The vector of values to construct the matrix from
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
@@ -61,6 +74,13 @@ namespace Tobot::Math {
         }
     }
 
+    /// @brief Get a reference to the value at the specified row and coloumn
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param i The row index
+    /// @param j The coloumn index
+    /// @return T& The value at the specified row and coloumn
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) {
@@ -68,6 +88,13 @@ namespace Tobot::Math {
         return this->m_matrix[i][j];
     }
 
+    /// @brief Get a const reference to the value at the specified row and coloumn
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param i The row index
+    /// @param j The coloumn index
+    /// @return T& The value at the specified row and coloumn
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
@@ -75,6 +102,12 @@ namespace Tobot::Math {
         return this->m_matrix[i][j];
     }
 
+    /// @brief Get the underlying array of the specified row
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param i The row index
+    /// @return std::array<T, n>& The underlying array of the specified row
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline std::array<T, n> & Matrix<T, m, n>::operator[](std::size_t i) {
@@ -82,6 +115,12 @@ namespace Tobot::Math {
         return this->m_matrix[i];
     }
 
+    /// @brief Get the underlying array of the specified row
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param i The row index
+    /// @return std::array<T, n>& The underlying array of the specified row
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline std::array<T, n> & Matrix<T, m, n>::operator[](std::size_t i) const {
@@ -89,12 +128,22 @@ namespace Tobot::Math {
         return this->m_matrix[i];
     }
 
+    /// @brief Get the number of rows in the matrix
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @return std::size_t The number of rows in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline std::size_t Matrix<T, m, n>::getRows() const {
         return this->rowsCount;
     }
 
+    /// @brief Gets the number of coloumns in the matrix
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @return std::size_t The number of coloumns in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline std::size_t Matrix<T, m, n>::getColoumns() const {

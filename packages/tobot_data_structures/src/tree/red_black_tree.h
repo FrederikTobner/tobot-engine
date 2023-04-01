@@ -5,6 +5,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     class RedBlackTree {
         public:
+            /// @brief The node structure for the RedBlackTree class
             struct Node {
                     T value;
                     Node * left;
@@ -35,6 +36,8 @@ namespace Tobot::DataStructures {
             void Print(Node * x);
     };
 
+    /// @brief Constructor for the RedBlackTree class
+    /// @tparam T The type of the value stored in the tree
     template <typename T>
     RedBlackTree<T>::RedBlackTree() {
         this->nil = new Node;
@@ -45,11 +48,16 @@ namespace Tobot::DataStructures {
         this->root = this->nil;
     }
 
+    /// @brief Destructor for the RedBlackTree class
+    /// @tparam T The type of the value stored in the tree
     template <typename T>
     RedBlackTree<T>::~RedBlackTree() {
         delete this->nil;
     }
 
+    /// @brief Left rotate the tree at node x
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to rotate the tree at
     template <typename T>
     void RedBlackTree<T>::LeftRotate(Node * x) {
         Node * y = x->right;
@@ -69,6 +77,9 @@ namespace Tobot::DataStructures {
         x->parent = y;
     }
 
+    /// @brief  Right rotate the tree at node x
+    /// @tparam T  The type of the value stored in the tree
+    /// @param x  The node to rotate the tree at
     template <typename T>
     void RedBlackTree<T>::RightRotate(Node * x) {
         Node * y = x->left;
@@ -88,6 +99,9 @@ namespace Tobot::DataStructures {
         x->parent = y;
     }
 
+    /// @brief Insert a new node into the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @param z The node to insert into the tree
     template <typename T>
     void RedBlackTree<T>::InsertFixup(Node * z) {
         while (z->parent->isRed) {
@@ -128,6 +142,9 @@ namespace Tobot::DataStructures {
         this->root->isRed = false;
     }
 
+    /// @brief Delete a node from the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @param value The value of the node to delete
     template <typename T>
     void RedBlackTree<T>::Insert(T value) {
         Node * z = new Node;
@@ -157,6 +174,9 @@ namespace Tobot::DataStructures {
         this->InsertFixup(z);
     }
 
+    /// @brief Delete a node from the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @param value The value of the node to delete
     template <typename T>
     void RedBlackTree<T>::Delete(T value) {
         Node * z = this->root;
@@ -201,6 +221,9 @@ namespace Tobot::DataStructures {
         delete z;
     }
 
+    /// @brief Fix the tree after a node has been deleted
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to start fixing the tree at
     template <typename T>
     void RedBlackTree<T>::DeleteFixup(Node * x) {
         while (x != this->root && !x->isRed) {
@@ -257,6 +280,10 @@ namespace Tobot::DataStructures {
         x->isRed = false;
     }
 
+    /// @brief Transplant one node for another
+    /// @tparam T   The type of the value stored in the tree
+    /// @param value The value of the node to delete
+    /// @return The node with the given value
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::Search(T value) {
         Node * x = this->root;
@@ -273,6 +300,10 @@ namespace Tobot::DataStructures {
         return x;
     }
 
+    /// @brief Check if the tree contains a node with the given value
+    /// @tparam T The type of the value stored in the tree
+    /// @param value The value to check for
+    /// @return True if the tree contains a node with the given value, false otherwise
     template <typename T>
     bool RedBlackTree<T>::Contains(T value) {
         Node * x = this->root;
@@ -301,6 +332,10 @@ namespace Tobot::DataStructures {
         v->parent = u->parent;
     }
 
+    /// @brief Get the minimum value in the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to start searching from
+    /// @return The node with the minimum value
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::Minimum(Node * x) {
         while (x->left != this->nil) {
@@ -309,6 +344,10 @@ namespace Tobot::DataStructures {
         return x;
     }
 
+    /// @brief Get the maximum value in the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to start searching from
+    /// @return The node with the maximum value
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::Maximum(Node * x) {
         while (x->right != this->nil) {
@@ -317,6 +356,10 @@ namespace Tobot::DataStructures {
         return x;
     }
 
+    /// @brief Get the successor of a node
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to get the successor of
+    /// @return The successor of the given node
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::Successor(Node * x) {
         if (x->right != this->nil) {
@@ -330,6 +373,10 @@ namespace Tobot::DataStructures {
         return y;
     }
 
+    /// @brief Get the predecessor of a node
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to get the predecessor of
+    /// @return The predecessor of the given node
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::Predecessor(Node * x) {
         if (x->left != this->nil) {
@@ -343,12 +390,17 @@ namespace Tobot::DataStructures {
         return y;
     }
 
+    /// @brief Print the tree to the console
+    /// @tparam T The type of the value stored in the tree
     template <typename T>
     void RedBlackTree<T>::Print() {
         this->Print(this->root);
         std::cout << std::endl;
     }
 
+    /// @brief Print the tree to the console
+    /// @tparam T The type of the value stored in the tree
+    /// @param x The node to start printing from
     template <typename T>
     void RedBlackTree<T>::Print(Node * x) {
         if (x != this->nil) {
