@@ -13,83 +13,59 @@ namespace Tobot::Math {
             T y;
             T z;
 
-            Vector3D(T x, T y, T z);
+            Vector3D(T x, T y, T z) : x(x), y(y), z(z){};
 
-            Vector3D<T> & operator+=(const Vector3D<T> & rhs) {
-                this->x += rhs.x;
-                this->y += rhs.y;
-                this->z += rhs.z;
+            friend Vector3D<T> operator+(Vector3D<T> lVec, const Vector3D<T> & rVec) {
+                return Vector3D(lVec.x + rVec.x, lVec.y + rVec.y, lVec.z + rVec.z);
+            }
+
+            friend Vector3D<T> operator-(Vector3D<T> lVec, const Vector3D<T> & rVec) {
+                return Vector3D(lVec.x - rVec.x, lVec.y - rVec.y, lVec.z - rVec.z);
+            }
+
+            friend Vector3D<T> operator*(const T scalar, Vector3D<T> vec) {
+                return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+            }
+
+            friend Vector3D<T> operator*(Vector3D<T> vec, const T scalar) {
+                return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+            }
+
+            friend Vector3D<T> operator/(const T scalar, Vector3D<T> vec) {
+                return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
+            }
+
+            friend Vector3D<T> operator/(Vector3D<T> vec, const T scalar) {
+                return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
+            }
+
+            Vector3D<T> & operator+=(const Vector3D<T> & vec) {
+                this->x += vec.x;
+                this->y += vec.y;
+                this->z += vec.z;
                 return *this;
             }
 
-            Vector3D<T> & operator-=(const Vector3D<T> & rhs) {
-                this->x -= rhs.x;
-                this->y -= rhs.y;
-                this->z -= rhs.z;
+            Vector3D<T> & operator-=(const Vector3D<T> & vec) {
+                this->x -= vec.x;
+                this->y -= vec.y;
+                this->z -= vec.z;
                 return *this;
             }
 
-            friend Vector3D<T> operator+(Vector3D<T> lhs, const Vector3D<T> & rhs) {
-                lhs += rhs;
-                return lhs;
-            }
-
-            friend Vector3D<T> operator-(Vector3D<T> lhs, const Vector3D<T> & rhs) {
-                lhs -= rhs;
-                return lhs;
-            }
-
-            Vector3D<T> & operator*=(const Vector3D<T> & rhs) {
-                this->x *= rhs.x;
-                this->y *= rhs.y;
-                this->z *= rhs.z;
+            Vector3D<T> & operator*=(const T scalar) {
+                this->x *= scalar;
+                this->y *= scalar;
+                this->z *= scalar;
                 return *this;
             }
 
-            Vector3D<T> & operator*=(const T rhs) {
-                this->x *= rhs;
-                this->y *= rhs;
-                this->z *= rhs;
+            Vector3D<T> & operator/=(const T scalar) {
+
+                this->x /= scalar;
+                this->y /= scalar;
+                this->z /= scalar;
                 return *this;
-            }
-
-            Vector3D<T> & operator/=(const Vector3D<T> & rhs) {
-                this->x /= rhs.x;
-                this->y /= rhs.y;
-                this->z /= rhs.z;
-                return *this;
-            }
-
-            Vector3D<T> & operator/=(const T rhs) {
-
-                this->x /= rhs;
-                this->y /= rhs;
-                this->z /= rhs;
-                return *this;
-            }
-
-            friend Vector3D<T> operator*(Vector3D<T> lhs, const Vector3D<T> & rhs) {
-                lhs *= rhs;
-                return lhs;
-            }
-
-            friend Vector3D<T> operator*(Vector3D<T> lhs, const T rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
-                lhs.z *= rhs;
-                return lhs;
-            }
-
-            friend Vector3D<T> operator/(Vector3D<T> lhs, const Vector3D<T> & rhs) {
-                lhs /= rhs;
-                return lhs;
-            }
-
-            friend Vector3D<T> operator/(Vector3D<T> lhs, const T rhs) {
-                lhs.x /= rhs;
-                lhs.y /= rhs;
-                lhs.z /= rhs;
-                return lhs;
             }
 
             T Magnitude() {

@@ -14,91 +14,63 @@ namespace Tobot::Math {
             T z;
             T w;
 
-            Vector4D(T x, T y, T z, T w);
+            Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w){};
 
-            Vector4D<T> & operator+=(const Vector4D<T> & rhs) {
-                this->x += rhs.x;
-                this->y += rhs.y;
-                this->z += rhs.z;
-                this->w += rhs.w;
+            friend Vector4D<T> operator+(Vector4D<T> lVec, const Vector4D<T> & rVec) {
+                return Vector4D(lVec.x + rVec.x, lVec.y + rVec.y, lVec.z + rVec.z, lVec.w + rVec.w);
+            }
+
+            friend Vector4D<T> operator-(Vector4D<T> lVec, const Vector4D<T> & rVec) {
+                return Vector4D(lVec.x - rVec.x, lVec.y - rVec.y, lVec.z - rVec.z, lVec.w - rVec.w);
+            }
+
+            friend Vector4D<T> operator*(const T scalar, Vector4D<T> vec) {
+                return Vector4D(vec.x * scalar, vec.y * scalar, vec.z * scalar, vec.w * scalar);
+            }
+
+            friend Vector4D<T> operator*(Vector4D<T> vec, const T scalar) {
+                return Vector4D(vec.x * scalar, vec.y * scalar, vec.z * scalar, vec.w * scalar);
+            }
+
+            friend Vector4D<T> operator/(const T scalar, Vector4D<T> vec) {
+                return Vector4D(vec.x / scalar, vec.y / scalar, vec.z /= scalar, vec.w / scalar);
+            }
+
+            friend Vector4D<T> operator/(Vector4D<T> vec, const T scalar) {
+                return Vector4D(vec.x / scalar, vec.y / scalar, vec.z / scalar, vec.w / scalar);
+            }
+
+            Vector4D<T> & operator+=(const Vector4D<T> & vec) {
+                this->x += vec.x;
+                this->y += vec.y;
+                this->z += vec.z;
+                this->w += vec.w;
                 return *this;
             }
 
-            Vector4D<T> & operator-=(const Vector4D<T> & rhs) {
-                this->x -= rhs.x;
-                this->y -= rhs.y;
-                this->z -= rhs.z;
-                this->w -= rhs.w;
+            Vector4D<T> & operator-=(const Vector4D<T> & vec) {
+                this->x -= vec.x;
+                this->y -= vec.y;
+                this->z -= vec.z;
+                this->w -= vec.w;
                 return *this;
             }
 
-            friend Vector4D<T> operator+(Vector4D<T> lhs, const Vector4D<T> & rhs) {
-                lhs += rhs;
-                return lhs;
-            }
-
-            friend Vector4D<T> operator-(Vector4D<T> lhs, const Vector4D<T> & rhs) {
-                lhs -= rhs;
-                return lhs;
-            }
-
-            Vector4D<T> & operator*=(const Vector4D<T> & rhs) {
-                this->x *= rhs.x;
-                this->y *= rhs.y;
-                this->z *= rhs.z;
-                this->w *= rhs.w;
+            Vector4D<T> & operator*=(const T scalar) {
+                this->x *= scalar;
+                this->y *= scalar;
+                this->z *= scalar;
+                this->w *= scalar;
                 return *this;
             }
 
-            Vector4D<T> & operator*=(const T rhs) {
-                this->x *= rhs;
-                this->y *= rhs;
-                this->z *= rhs;
-                this->w *= rhs;
+            Vector4D<T> & operator/=(const T scalar) {
+
+                this->x /= scalar;
+                this->y /= scalar;
+                this->z /= scalar;
+                this->w /= scalar;
                 return *this;
-            }
-
-            Vector4D<T> & operator/=(const Vector4D<T> & rhs) {
-                this->x /= rhs.x;
-                this->y /= rhs.y;
-                this->z /= rhs.z;
-                this->w /= rhs.w;
-                return *this;
-            }
-
-            Vector4D<T> & operator/=(const T rhs) {
-
-                this->x /= rhs;
-                this->y /= rhs;
-                this->z /= rhs;
-                this->w /= rhs;
-                return *this;
-            }
-
-            friend Vector4D<T> operator*(Vector4D<T> lhs, const Vector4D<T> & rhs) {
-                lhs *= rhs;
-                return lhs;
-            }
-
-            friend Vector4D<T> operator*(Vector4D<T> lhs, const T rhs) {
-                lhs.x *= rhs;
-                lhs.y *= rhs;
-                lhs.z *= rhs;
-                lhs.w *= rhs;
-                return lhs;
-            }
-
-            friend Vector4D<T> operator/(Vector4D<T> lhs, const Vector4D<T> & rhs) {
-                lhs /= rhs;
-                return lhs;
-            }
-
-            friend Vector4D<T> operator/(Vector4D<T> lhs, const T rhs) {
-                lhs.x /= rhs;
-                lhs.y /= rhs;
-                lhs.z /= rhs;
-                lhs.w /= rhs;
-                return lhs;
             }
 
             T Magnitude() {

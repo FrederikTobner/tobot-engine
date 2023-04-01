@@ -1,8 +1,5 @@
 set(TOBOT_MATH_SOURCE_FILES
 "dimension.cpp"
-"vector2d.cpp"
-"vector3d.cpp"
-"vector4d.cpp"
 )
 
 set(TOBOT_MATH_HEADER_FILES

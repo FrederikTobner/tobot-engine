@@ -16,6 +16,9 @@ namespace Tobot::Math {
             explicit Matrix();
             explicit Matrix(const std::vector<T> values);
 
+            T & operator()(std::size_t i, std::size_t j);
+            T & operator()(std::size_t i, std::size_t j) const;
+
             std::size_t getRows() const;
             std::size_t getColoumns() const;
     };
@@ -39,13 +42,25 @@ namespace Tobot::Math {
         }
 
         if (rowsCount * columnsCount != values.size()) {
-            throw std::runtime_error("Total number of matrix values does not match with rows and coloumns provided");
+            throw std::runtime_error("Total number of matrix values does not match the rows and coloumns provided");
         }
-        for (size_t i = 0; i < columnsCount; i++) {
-            for (size_t j = 0; j < rowsCount; j++) {
+        for (std::size_t i = 0; i < columnsCount; i++) {
+            for (std::size_t j = 0; j < rowsCount; j++) {
                 this->m_matrix[i][j] = values[i * rowsCount + j];
             }
         }
+    }
+
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) {
+        return this->m_matrix[i][j];
+    }
+
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
+        return this->m_matrix[i][j];
     }
 
     template <typename T, std::size_t m, std::size_t n>
