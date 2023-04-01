@@ -57,6 +57,11 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            friend std::ostream operator<<(std::ostream & os, const Vector3D<T> & vec) {
+                os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
+                return os;
+            }
+
             inline T Magnitude();
 
             inline void Normalize();
@@ -237,5 +242,4 @@ namespace Tobot::Math {
         return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
                            this->x * vec.y - this->y * vec.x);
     }
-
 } // namespace Tobot::Math

@@ -58,6 +58,11 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            friend std::ostream operator<<(std::ostream & os, const Vector4D<T> & vec) {
+                os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ", " << vec.w << ")";
+                return os;
+            }
+
             inline T Magnitude();
 
             inline void Normalize();

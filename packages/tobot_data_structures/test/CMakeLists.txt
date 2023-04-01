@@ -11,8 +11,14 @@ FetchContent_MakeAvailable(googletest)
 
 set(TOBOT_DATA_STRUCTURES_TESTS tobot-data-structures_TESTS)
 
+set(TOBOT_DATA_STRUCTURES_TEST_SOURCES 
+"avl_tree_test.cpp"
+"main.cpp"
+"red_black_tree_test.cpp"
+"tuple_test.cpp")
+
 # Set all test files
-set(TEST_SOURCES avl_tree_test.cpp red_black_tree_test.cpp main.cpp)
+set(TEST_SOURCES ${TOBOT_DATA_STRUCTURES_TEST_SOURCES})
 
 add_executable(${TOBOT_DATA_STRUCTURES_TESTS} ${TEST_SOURCES})
 

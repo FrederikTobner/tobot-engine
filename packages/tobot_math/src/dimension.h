@@ -10,6 +10,11 @@ namespace Tobot::Math {
             T width;
             T height;
 
-            Dimension(T width, T height);
+            Dimension(T width, T height) : width(width), height(height) {
+            }
+            friend std::ostream operator<<(std::ostream & os, const Dimension<T> & dim) {
+                os << "(" << dim.width << ", " << dim.height << ")";
+                return os;
+            }
     };
 } // namespace Tobot::Math

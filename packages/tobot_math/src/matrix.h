@@ -21,6 +21,16 @@ namespace Tobot::Math {
             inline std::array<T, n> & operator[](std::size_t i);
             inline std::array<T, n> & operator[](std::size_t i) const;
 
+            friend std::ostream operator<<(std::ostream & os, const Matrix<T, m, n> & mat) {
+                for (std::size_t i = 0; i < mat.getRows(); i++) {
+                    for (std::size_t j = 0; j < mat.getColoumns(); j++) {
+                        os << mat(i, j) << " ";
+                    }
+                    os << std::endl;
+                }
+                return os;
+            }
+
             inline std::size_t getRows() const;
             inline std::size_t getColoumns() const;
     };

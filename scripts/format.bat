@@ -18,7 +18,7 @@ cd ..\packages\
 
 ECHO Formatting all the source file's in our package directory
 
-for /r %%t in (*.cpp *.h) do clang-format -i --style=file "%%t"
+for /r %%t in (*.c *.cpp *.cc *.h *.hpp *.hh) do clang-format -i --style=file "%%t"
 
 cd ..\scripts\
 EXIT 0

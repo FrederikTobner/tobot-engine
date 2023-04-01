@@ -55,6 +55,11 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            friend std::ostream operator<<(std::ostream & os, const Vector2D<T> & vec) {
+                os << "(" << vec.x << ", " << vec.y << ")";
+                return os;
+            }
+
             inline T Magnitude();
 
             inline void Normalize();
