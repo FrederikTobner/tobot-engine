@@ -10,6 +10,18 @@ TEST(Vector3D, CanBeCreatedWithList) {
 }
 
 /*
+ * Testing copy constructor
+ */
+TEST(Vector3D, Copy) {
+    Tobot::Math::Vector3D<int> firstVector(5, 3, 6);
+    Tobot::Math::Vector3D<int> secondVector(firstVector);
+
+    EXPECT_EQ(5, secondVector.x);
+    EXPECT_EQ(3, secondVector.y);
+    EXPECT_EQ(6, secondVector.z);
+}
+
+/*
  * Testing simple vector addition
  */
 TEST(Vector3D, Addition) {

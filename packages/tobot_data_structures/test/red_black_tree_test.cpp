@@ -126,3 +126,21 @@ TEST(RedBlackTree, TraversePostOrder) {
     ASSERT_EQ(result.front(), 4);
     result.pop();
 }
+
+/*
+ * Tests whether the RedBlackTree can be cleared
+ */
+TEST(RedBlackTree, CanClear) {
+    RedBlackTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    tree.Clear();
+    ASSERT_EQ(tree.GetSize(), 0);
+}
+
+/*
+ * Tests whether the RedBlackTree can be copied
+ */
+TEST(RedBlackTree, CanCopy) {
+    RedBlackTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    RedBlackTree<int> tree2 = tree;
+    ASSERT_EQ(tree.GetSize(), tree2.GetSize());
+}

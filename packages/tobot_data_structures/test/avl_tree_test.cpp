@@ -54,6 +54,9 @@ TEST(AVLTree, CanDelete) {
     ASSERT_FALSE(tree.Contains(1));
 }
 
+/*
+ * Tests whether the AVLTree can be traversed in order
+ */
 TEST(AVLTree, TraverseInOrder) {
     AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::queue<int> result;
@@ -64,6 +67,9 @@ TEST(AVLTree, TraverseInOrder) {
     }
 }
 
+/*
+ * Tests whether the AVLTree can be traversed in pre order
+ */
 TEST(AVLTree, TraversePreOrder) {
     AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::queue<int> result;
@@ -90,6 +96,9 @@ TEST(AVLTree, TraversePreOrder) {
     result.pop();
 }
 
+/*
+ * Tests whether the AVLTree can be traversed in post order
+ */
 TEST(AVLTree, TraversePostOrder) {
     AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::queue<int> result;
@@ -114,4 +123,10 @@ TEST(AVLTree, TraversePostOrder) {
     result.pop();
     ASSERT_EQ(result.front(), 4);
     result.pop();
+}
+
+TEST(AVLTree, Clear) {
+    AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    tree.Clear();
+    ASSERT_EQ(tree.GetSize(), 0);
 }

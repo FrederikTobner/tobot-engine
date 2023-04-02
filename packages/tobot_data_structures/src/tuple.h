@@ -11,6 +11,7 @@ namespace Tobot::DataStructures {
             U second;
 
             Tuple(T first, U second);
+            Tuple(const Tuple<T, U> & tuple);
             bool operator==(const Tuple<T, U> & tuple) const;
             bool operator!=(const Tuple<T, U> & tuple) const;
             /// @brief Appends the tuple to the ostream
@@ -33,6 +34,16 @@ namespace Tobot::DataStructures {
     Tuple<T, U>::Tuple(T first, U second) {
         this->first = first;
         this->second = second;
+    }
+
+    /// @brief Construct a new Tuple object
+    /// @tparam T The type of the first element of the tuple
+    /// @tparam U The type of the second element of the tuple
+    /// @param tuple The tuple to copy
+    template <typename T, typename U>
+    Tuple<T, U>::Tuple(const Tuple<T, U> & tuple) {
+        this->first = tuple.first;
+        this->second = tuple.second;
     }
 
     /// @brief Compare two tuples

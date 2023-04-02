@@ -20,6 +20,9 @@ TEST(Matrix, Creation) {
     EXPECT_EQ(9, leMatrix(2, 2));
 }
 
+/*
+ * Testing simple matrix creation from list
+ */
 TEST(Matrix, CreationFromList) {
     Tobot::Math::Matrix<int, 3, 3> leMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     EXPECT_EQ(3, leMatrix.getRows());
@@ -35,6 +38,9 @@ TEST(Matrix, CreationFromList) {
     EXPECT_EQ(9, leMatrix(2, 2));
 }
 
+/*
+ * Testing eaulity operator
+ */
 TEST(Matrix, Equality) {
     Tobot::Math::Matrix<int, 3, 3> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     Tobot::Math::Matrix<int, 3, 3> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -43,6 +49,9 @@ TEST(Matrix, Equality) {
     ASSERT_FALSE(firstMatrix == thirdMatrix);
 }
 
+/*
+ * Testing inequality operator
+ */
 TEST(Matrix, Inequality) {
     Tobot::Math::Matrix<int, 3, 3> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     Tobot::Math::Matrix<int, 3, 3> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};

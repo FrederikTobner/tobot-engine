@@ -16,6 +16,7 @@ namespace Tobot::Math {
             T z;
 
             Vector3D(T x, T y, T z);
+            Vector3D(Vector3D & vec);
             Vector3D(std::initializer_list<T> list);
 
             /// @brief Calculates the sum of two vectors
@@ -116,6 +117,14 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
+    }
+
+    /// @brief Constructs a new Vector3D object
+    /// @tparam T The type of the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
     /// @brief Constructs a new Vector3D object

@@ -10,6 +10,17 @@ TEST(Vector2D, CanBeCreatedWithList) {
 }
 
 /*
+ * Testing copy constructor
+ */
+TEST(Vector2D, Copy) {
+    Tobot::Math::Vector2D<int> firstVector(5, 3);
+    Tobot::Math::Vector2D<int> secondVector(firstVector);
+
+    EXPECT_EQ(5, secondVector.x);
+    EXPECT_EQ(3, secondVector.y);
+}
+
+/*
  * Testing simple vector addition
  */
 TEST(Vector2D, Addition) {
@@ -109,6 +120,9 @@ TEST(Vector2D, DivisionAssignment) {
     EXPECT_EQ(2, vector1.y);
 }
 
+/*
+ * Testing vector equality
+ */
 TEST(Vector2D, Equality) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
     Tobot::Math::Vector2D<int> vector2(5, 4);
@@ -117,6 +131,9 @@ TEST(Vector2D, Equality) {
     EXPECT_FALSE(vector1 == vector3);
 }
 
+/*
+ * Testing vector inequality
+ */
 TEST(Vector2D, Inequality) {
     Tobot::Math::Vector2D<int> vector1(5, 4);
     Tobot::Math::Vector2D<int> vector2(5, 4);

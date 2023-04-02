@@ -10,6 +10,7 @@ namespace Tobot::DataStructures {
             T data[size];
 
             Array();
+            Array(Array & array);
             Array(T data[size]);
             Array(std::initializer_list<T> list);
 
@@ -45,6 +46,17 @@ namespace Tobot::DataStructures {
     Array<T, size>::Array() {
         for (std::size_t i = 0; i < size; i++) {
             this->data[i] = T();
+        }
+    }
+
+    /// @brief Construct a new Array object
+    /// @tparam T The type of the elements of the array
+    /// @tparam size The size of the array
+    /// @param array The array to copy
+    template <typename T, std::size_t size>
+    Array<T, size>::Array(Array & array) {
+        for (std::size_t i = 0; i < size; i++) {
+            this->data[i] = array.data[i];
         }
     }
 
@@ -135,11 +147,11 @@ namespace Tobot::DataStructures {
     /// @brief Calls the given function for each element of the array
     /// @tparam T The type of the elements of the array
     /// @tparam size The size of the array
-    /// @param function The function to call for each element of the array
+    /// @param callback The function to call for each element of the array
     template <typename T, std::size_t size>
-    void Array<T, size>::ForEach(std::function<void(T &)> function) {
+    void Array<T, size>::ForEach(std::function<void(T &)> callback) {
         for (std::size_t i = 0; i < size; i++) {
-            function(this->data[i]);
+            callback(this->data[i]);
         }
     }
 

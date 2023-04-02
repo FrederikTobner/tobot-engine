@@ -2,10 +2,12 @@
 
 #include "../pre_compiled_header.h"
 
+#include "tree.h"
+
 namespace Tobot::DataStructures {
 
     template <typename T>
-    class AVLTree {
+    class AVLTree : Tree<T> {
         public:
             struct Node {
                     T value;
@@ -14,6 +16,7 @@ namespace Tobot::DataStructures {
                     int height;
             };
             AVLTree();
+            AVLTree(AVLTree & tree);
             ~AVLTree();
             AVLTree(std::initializer_list<T> list);
 
@@ -24,6 +27,12 @@ namespace Tobot::DataStructures {
             void TraverseInOrder(std::function<void(T)> callback);
             void TraversePreOrder(std::function<void(T)> callback);
             void TraversePostOrder(std::function<void(T)> callback);
+            void Print();
+            void Clear();
+            std::size_t GetSize();
+            friend std::ostream & operator<<(std::ostream & os, AVLTree<T> & tree) {
+                TraverseInOrder([&](T value) { os << value << ", "; });
+            }
 
         private:
             Node * root;
@@ -45,6 +54,7 @@ namespace Tobot::DataStructures {
             void TraverseInOrder(Node * node, std::function<void(T)> callback);
             void TraversePreOrder(Node * node, std::function<void(T)> callback);
             void TraversePostOrder(Node * node, std::function<void(T)> callback);
+            void Print(Node * node, int level);
     };
 
     /// @brief AVLTree constructor
@@ -52,6 +62,15 @@ namespace Tobot::DataStructures {
     template <typename T>
     AVLTree<T>::AVLTree() {
         root = nullptr;
+    }
+
+    /// @brief AVLTree copy constructor
+    /// @tparam T The type of the value stored in the tree
+    /// @param tree The tree to copy
+    template <typename T>
+    AVLTree<T>::AVLTree(AVLTree & tree) {
+        root = nullptr;
+        TraverseInOrder([&](T value) { Insert(value); });
     }
 
     /// @brief AVLTree constructor
@@ -368,6 +387,48 @@ namespace Tobot::DataStructures {
     template <typename T>
     void AVLTree<T>::TraversePostOrder(std::function<void(T)> callback) {
         TraversePostOrder(root, callback);
+    }
+
+    /// Prints the tree in a human readable format
+    /// @tparam T The type of the value stored in the tree
+    /// @param node The node to start the traversal from
+    /// @param indent The current indentation level
+    template <typename T>
+    void AVLTree<T>::Print(Node * node, int indent) {
+        if (node == nullptr) {
+            return;
+        }
+        Print(node->right, indent + 1);
+        for (int i = 0; i < indent; i++) {
+            std::cout << "    ";
+        }
+        std::cout << node->value << std::endl;
+        Print(node->left, indent + 1);
+    }
+
+    /// Prints the tree in a human readable format
+    /// @tparam T The type of the value stored in the tree
+    template <typename T>
+    void AVLTree<T>::Print() {
+        Print(root, 0);
+    }
+
+    /// Clears the tree
+    /// @tparam T The type of the value stored in the tree
+    template <typename T>
+    void AVLTree<T>::Clear() {
+        TraversePostOrder([this](T value) { DeleteNode(Search(value)); });
+        root = nullptr;
+    }
+
+    /// @brief Get the number of nodes in the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @return The number of nodes in the tree
+    template <typename T>
+    std::size_t AVLTree<T>::GetSize() {
+        std::size_t size = 0;
+        TraverseInOrder([&size](T value) { size++; });
+        return size;
     }
 
 } // namespace Tobot::DataStructures

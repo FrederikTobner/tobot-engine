@@ -9,8 +9,7 @@ namespace Tobot::Math {
     class Vector {
 
         public:
-            Vector() {
-            }
+            Vector();
             virtual T & operator()(std::size_t i) = 0;
 
             virtual T operator()(std::size_t i) const = 0;
@@ -25,4 +24,9 @@ namespace Tobot::Math {
 
             virtual std::size_t GetSize() = 0;
     };
+
+    template <typename T>
+        requires Arithmetic<T>
+    Vector<T>::Vector() {
+    }
 } // namespace Tobot::Math

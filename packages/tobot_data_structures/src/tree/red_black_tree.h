@@ -1,9 +1,13 @@
 #pragma once
 
+#include "../pre_compiled_header.h"
+
+#include "tree.h"
+
 namespace Tobot::DataStructures {
 
     template <typename T>
-    class RedBlackTree {
+    class RedBlackTree : Tree<T> {
         public:
             /// @brief The node structure for the RedBlackTree class
             struct Node {
@@ -14,6 +18,7 @@ namespace Tobot::DataStructures {
                     bool isRed;
             };
             RedBlackTree();
+            RedBlackTree(RedBlackTree<T> & tree);
             RedBlackTree(std::initializer_list<T> list);
             ~RedBlackTree();
             void Insert(T value);
@@ -24,6 +29,11 @@ namespace Tobot::DataStructures {
             void TraverseInOrder(std::function<void(T)> callback);
             void TraversePreOrder(std::function<void(T)> callback);
             void TraversePostOrder(std::function<void(T)> callback);
+            void Clear();
+            std::size_t GetSize();
+            friend std::ostream & operator<<(std::ostream & os, const RedBlackTree<T> & tree) {
+                TraverseInOrder(tree.root, [&os](T value) { os << value << ", "; });
+            }
 
         private:
             Node * root;
@@ -41,6 +51,7 @@ namespace Tobot::DataStructures {
             void TraverseInOrder(Node * node, std::function<void(T)> callback);
             void TraversePreOrder(Node * node, std::function<void(T)> callback);
             void TraversePostOrder(Node * node, std::function<void(T)> callback);
+            void Clear(Node * node);
     };
 
     /// @brief Constructor for the RedBlackTree class
@@ -53,6 +64,20 @@ namespace Tobot::DataStructures {
         this->nil->parent = nullptr;
         this->nil->isRed = false;
         this->root = this->nil;
+    }
+
+    /// @brief Copy constructor for the RedBlackTree class
+    /// @tparam T The type of the value stored in the tree
+    /// @param tree The tree to copy
+    template <typename T>
+    RedBlackTree<T>::RedBlackTree(RedBlackTree<T> & tree) {
+        this->nil = new Node;
+        this->nil->left = nullptr;
+        this->nil->right = nullptr;
+        this->nil->parent = nullptr;
+        this->nil->isRed = false;
+        this->root = this->nil;
+        tree.TraverseInOrder([&](T value) { this->Insert(value); });
     }
 
     /// Creates a RebBlackTree from a list of values
@@ -498,6 +523,36 @@ namespace Tobot::DataStructures {
     template <typename T>
     void RedBlackTree<T>::TraversePostOrder(std::function<void(T)> callback) {
         this->TraversePostOrder(this->root, callback);
+    }
+
+    /// Clears the tree
+    ///  @tparam T The type of the value stored in the tree
+    template <typename T>
+    void RedBlackTree<T>::Clear() {
+        this->Clear(this->root);
+        this->root = this->nil;
+    }
+
+    /// Clears the tree
+    ///  @tparam T The type of the value stored in the tree
+    ///  @param node The node to start clearing from
+    template <typename T>
+    void RedBlackTree<T>::Clear(Node * node) {
+        if (node != this->nil) {
+            this->Clear(node->left);
+            this->Clear(node->right);
+            delete node;
+        }
+    }
+
+    /// Gets the amount of nodes in the tree
+    /// @tparam T The type of the value stored in the tree
+    /// @return The amount of nodes in the tree
+    template <typename T>
+    std::size_t RedBlackTree<T>::GetSize() {
+        std::size_t size = 0;
+        TraverseInOrder([&size](T value) { size++; });
+        return size;
     }
 
 } // namespace Tobot::DataStructures

@@ -17,6 +17,7 @@ namespace Tobot::Math {
             T w;
 
             Vector4D(T x, T y, T z, T w);
+            Vector4D(Vector4D & vec);
             Vector4D(std::initializer_list<T> list);
 
             /// @brief Adds two vectors together
@@ -114,6 +115,14 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector4D<T>::Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires Arithmetic<T>
+    Vector4D<T>::Vector4D(Vector4D<T> & vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
     }
 
     /// @brief Creates a new Vector4D object

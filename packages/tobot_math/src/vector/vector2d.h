@@ -15,6 +15,7 @@ namespace Tobot::Math {
             T y;
 
             Vector2D(T x, T y);
+            Vector2D(Vector2D & vec);
             Vector2D(std::initializer_list<T> list);
 
             /// @brief Addition operator for two vectors
@@ -102,8 +103,7 @@ namespace Tobot::Math {
             inline T Dot(const Vector2D<T> & vec);
 
             Vector2D<T> Cross(const Vector2D<T> & vec);
-
-            Vector2D<T> FromAngle(T angle);
+            ;
     };
 
     /// @brief Constructor for the Vector2D class
@@ -113,6 +113,14 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires Arithmetic<T>
+    Vector2D<T>::Vector2D(Vector2D & vec) : x(vec.x), y(vec.y) {
     }
 
     /// @brief Constructor for the Vector2D class
