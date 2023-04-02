@@ -15,6 +15,7 @@ namespace Tobot::Math {
             T y;
 
             Vector2D(T x, T y);
+            Vector2D(std::initializer_list<T> list);
 
             /// @brief Addition operator for two vectors
             /// @param lVec The left vector
@@ -79,6 +80,10 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            bool operator==(const Vector2D<T> & vec) const;
+
+            bool operator!=(const Vector2D<T> & vec) const;
+
             /// @brief Appends the vector to the output stream
             /// @param os The output stream to append to
             /// @param vec The vector to append
@@ -108,6 +113,19 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param list The list of values to initialize the vector with
+    template <typename T>
+        requires Arithmetic<T>
+    Vector2D<T>::Vector2D(std::initializer_list<T> list) {
+        if (list.size() != 2) {
+            throw std::invalid_argument("Vector2D initializer list must have 2 elements");
+        }
+        this->x = *list.begin();
+        this->y = *(list.begin() + 1);
     }
 
     /// @brief Adds two vectors together and stores the result in the first vector
@@ -260,6 +278,26 @@ namespace Tobot::Math {
             exit(70);
 #endif;
         }
+    }
+
+    /// @brief Compares two vectors for equality
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to compare to
+    /// @return bool True if the vectors are equal, false otherwise
+    template <typename T>
+        requires Arithmetic<T> bool
+    Vector2D<T>::operator==(const Vector2D<T> & vec) const {
+        return this->x == vec.x && this->y == vec.y;
+    }
+
+    /// @brief Compares two vectors for inequality
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to compare to
+    /// @return bool True if the vectors are not equal, false otherwise
+    template <typename T>
+        requires Arithmetic<T> bool
+    Vector2D<T>::operator!=(const Vector2D<T> & vec) const {
+        return this->x != vec.x || this->y != vec.y;
     }
 
     /// @brief Gets the dot product of two vectors

@@ -3,6 +3,13 @@
 #include "vector/vector4d.h"
 
 /*
+ * Testing vector creation
+ */
+TEST(Vector4D, CanBeCreatedWithList) {
+    Tobot::Math::Vector4D<int> vector = {1, 2, 3, 4};
+}
+
+/*
  * Testing simple vector addition
  */
 TEST(Vector4D, Addition) {

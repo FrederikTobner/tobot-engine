@@ -16,6 +16,7 @@ namespace Tobot::Math {
             T z;
 
             Vector3D(T x, T y, T z);
+            Vector3D(std::initializer_list<T> list);
 
             /// @brief Calculates the sum of two vectors
             /// @param lVec The left vector
@@ -81,6 +82,10 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            bool operator==(const Vector3D<T> & vec) const;
+
+            bool operator!=(const Vector3D<T> & vec) const;
+
             /// @brief Appends the vector to the output stream
             /// @param os The output stream
             /// @param vec The vector
@@ -111,6 +116,20 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
+    }
+
+    /// @brief Constructs a new Vector3D object
+    /// @tparam T The type of the vector
+    /// @param list The list of components of the vector
+    template <typename T>
+        requires Arithmetic<T>
+    Vector3D<T>::Vector3D(std::initializer_list<T> list) {
+        if (list.size() != 3) {
+            throw std::invalid_argument("The list must have exactly 3 elements");
+        }
+        this->x = *list.begin();
+        this->y = *(list.begin() + 1);
+        this->z = *(list.begin() + 2);
     }
 
     /// @brief Calculates the sum of two vectors and assigns the result to the left vector
@@ -275,6 +294,26 @@ namespace Tobot::Math {
             exit(70);
 #endif;
         }
+    }
+
+    /// Compares two vectors
+    /// @tparam T The type of the vector
+    /// @param vec The vector to compare
+    /// @return bool True if the vectors are equal, false otherwise
+    template <typename T>
+        requires Arithmetic<T> bool
+    Vector3D<T>::operator==(const Vector3D<T> & vec) const {
+        return this->x == vec.x && this->y == vec.y && this->z == vec.z;
+    }
+
+    /// Compares two vectors
+    /// @tparam T The type of the vector
+    /// @param vec The vector to compare
+    /// @return bool True if the vectors are not equal, false otherwise
+    template <typename T>
+        requires Arithmetic<T> bool
+    Vector3D<T>::operator!=(const Vector3D<T> & vec) const {
+        return this->x != vec.x || this->y != vec.y || this->z != vec.z;
     }
 
     /// @brief Calculates the magnitude of the vector

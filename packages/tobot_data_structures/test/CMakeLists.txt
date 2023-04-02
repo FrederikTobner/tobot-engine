@@ -12,6 +12,7 @@ FetchContent_MakeAvailable(googletest)
 set(TOBOT_DATA_STRUCTURES_TESTS tobot-data-structures_TESTS)
 
 set(TOBOT_DATA_STRUCTURES_TEST_SOURCES 
+"array_test.cpp"
 "avl_tree_test.cpp"
 "main.cpp"
 "red_black_tree_test.cpp"

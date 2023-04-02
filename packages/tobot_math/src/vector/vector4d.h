@@ -17,6 +17,7 @@ namespace Tobot::Math {
             T w;
 
             Vector4D(T x, T y, T z, T w);
+            Vector4D(std::initializer_list<T> list);
 
             /// @brief Adds two vectors together
             /// @param lVec The left vector
@@ -82,6 +83,10 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            bool operator==(const Vector4D<T> & vec) const;
+
+            bool operator!=(const Vector4D<T> & vec) const;
+
             /// @brief Appends the vector to the output stream
             /// @param os The output stream
             /// @param vec The vector to append to the output stream
@@ -109,6 +114,36 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector4D<T>::Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param list The list of components for the vector
+    template <typename T>
+        requires Arithmetic<T>
+    Vector4D<T>::Vector4D(std::initializer_list<T> list) {
+        if (list.size() != 4) {
+            throw std::invalid_argument("The list must have exactly 4 elements");
+        }
+
+        std::size_t i = 0;
+        for (auto it = list.begin(); it != list.end(); ++it) {
+            switch (i) {
+            case 0:
+                this->x = *it;
+                break;
+            case 1:
+                this->y = *it;
+                break;
+            case 2:
+                this->z = *it;
+                break;
+            case 3:
+                this->w = *it;
+                break;
+            }
+            ++i;
+        }
     }
 
     /// @brief Adds two vectors together
@@ -285,6 +320,26 @@ namespace Tobot::Math {
             exit(70);
 #endif;
         }
+    }
+
+    /// Compare two vectors for equality
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to compare against
+    /// @return bool True if the vectors are equal, false otherwise
+    template <typename T>
+        requires Arithmetic<T> bool
+    Vector4D<T>::operator==(const Vector4D<T> & vec) const {
+        return this->x == vec.x && this->y == vec.y && this->z == vec.z && this->w == vec.w;
+    }
+
+    /// Compare two vectors for inequality
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to compare against
+    /// @return bool True if the vectors are not equal, false otherwise
+    template <typename T>
+        requires Arithmetic<T> bool
+    Vector4D<T>::operator!=(const Vector4D<T> & vec) const {
+        return this->x != vec.x || this->y != vec.y || this->z != vec.z || this->w != vec.w;
     }
 
     /// @brief Gets the magnitude of the vector
