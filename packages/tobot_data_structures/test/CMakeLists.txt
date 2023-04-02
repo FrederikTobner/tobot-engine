@@ -14,9 +14,12 @@ set(TOBOT_DATA_STRUCTURES_TESTS tobot-data-structures_TESTS)
 set(TOBOT_DATA_STRUCTURES_TEST_SOURCES 
 "array_test.cpp"
 "avl_tree_test.cpp"
+"graph_test.cpp"
 "linear_probing_hash_table_test.cpp"
 "main.cpp"
+"queue_test.cpp"
 "red_black_tree_test.cpp"
+"stack_test.cpp"
 "tuple_test.cpp")
 
 # Set all test files

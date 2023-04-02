@@ -23,7 +23,7 @@ TEST(AVLTree, CanBeCopied) {
 /*
  * Tests whether the AVLTree can insert a single element
  */
-TEST(avlTree, CanInsert) {
+TEST(AVLTree, CanInsert) {
     AVLTree<int> tree;
     tree.Insert(1);
 }

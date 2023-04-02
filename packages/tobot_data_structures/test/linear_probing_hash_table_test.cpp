@@ -4,9 +4,10 @@
 
 using namespace Tobot::DataStructures;
 
+static fowler_noll_vo_hash_1a_32<int> fnv1a_32;
+
 std::size_t hashFunWrapper(int i, std::size_t size) {
-    static fowler_noll_vo_hash32<int> hash;
-    return hash.Hash(i, size);
+    return fnv1a_32(i, size);
 }
 
 std::size_t sizeFunWrapper(int i) {

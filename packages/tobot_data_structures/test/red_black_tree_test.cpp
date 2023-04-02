@@ -9,14 +9,14 @@ using namespace Tobot::DataStructures;
 /*
  * Tests whether the RedBlackTree can be created
  */
-TEST(redBlackTree, CanBeCreated) {
+TEST(RedBlackTree, CanBeCreated) {
     RedBlackTree<int> tree;
 }
 
 /*
  * Tests whether the RedBlackTree can insert a single element
  */
-TEST(redBlackTree, CanInsert) {
+TEST(RedBlackTree, CanInsert) {
     RedBlackTree<int> tree;
     tree.Insert(1);
 }
@@ -24,7 +24,7 @@ TEST(redBlackTree, CanInsert) {
 /*
  * Tests whether the RedBlackTree can insert multiple elements
  */
-TEST(redBlackTree, CanInsertMultiple) {
+TEST(RedBlackTree, CanInsertMultiple) {
     RedBlackTree<int> tree;
     tree.Insert(1);
     tree.Insert(2);
@@ -34,7 +34,7 @@ TEST(redBlackTree, CanInsertMultiple) {
 /*
  * Tests whether the RedBlackTree can insert multiple elements and find them
  */
-TEST(redBlackTree, CanInsertMultipleAndFind) {
+TEST(RedBlackTree, CanInsertMultipleAndFind) {
     RedBlackTree<int> tree;
     tree.Insert(1);
     tree.Insert(2);
@@ -47,7 +47,7 @@ TEST(redBlackTree, CanInsertMultipleAndFind) {
 /*
  * Tests whether the RedBlackTree can delete an element
  */
-TEST(redBlackTree, CanDelete) {
+TEST(RedBlackTree, CanDelete) {
     RedBlackTree<int> tree;
     tree.Insert(1);
     tree.Delete(1);

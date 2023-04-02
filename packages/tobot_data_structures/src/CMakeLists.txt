@@ -1,7 +1,10 @@
 set(DATA_STRUCTURES_HEADER_FILES
 "array.h"
-"tuple.h"
 "fnv1a.h"
+"graph.h"
+"queue.h"
+"stack.h"
+"tuple.h"
 "table/hash_table.h"
 "table/linear_probing_hash_table.h"
 "include/tobot_data_structures.h"
