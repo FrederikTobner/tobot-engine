@@ -13,6 +13,13 @@ TEST(AVLTree, CanBeCreated) {
     AVLTree<int> tree;
 }
 
+// Tests whehter the AVLTree can be copied
+TEST(AVLTree, CanBeCopied) {
+    AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    AVLTree<int> copy = tree;
+    ASSERT_EQ(10, copy.GetSize());
+}
+
 /*
  * Tests whether the AVLTree can insert a single element
  */
@@ -125,6 +132,9 @@ TEST(AVLTree, TraversePostOrder) {
     result.pop();
 }
 
+/*
+ * Tests whether the AVLTree can be cleared
+ */
 TEST(AVLTree, Clear) {
     AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     tree.Clear();

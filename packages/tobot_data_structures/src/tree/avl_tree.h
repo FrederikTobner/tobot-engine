@@ -70,7 +70,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     AVLTree<T>::AVLTree(AVLTree & tree) {
         root = nullptr;
-        TraverseInOrder([&](T value) { Insert(value); });
+        tree.TraverseInOrder([&](T value) { this->Insert(value); });
     }
 
     /// @brief AVLTree constructor

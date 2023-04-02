@@ -1,6 +1,9 @@
 set(DATA_STRUCTURES_HEADER_FILES
 "array.h"
 "tuple.h"
+"fnv1a.h"
+"table/hash_table.h"
+"table/linear_probing_hash_table.h"
 "include/tobot_data_structures.h"
 "tree/avl_tree.h"
 "tree/red_black_tree.h"

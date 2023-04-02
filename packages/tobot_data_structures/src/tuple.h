@@ -10,6 +10,7 @@ namespace Tobot::DataStructures {
             T first;
             U second;
 
+            Tuple();
             Tuple(T first, U second);
             Tuple(const Tuple<T, U> & tuple);
             bool operator==(const Tuple<T, U> & tuple) const;
@@ -22,8 +23,19 @@ namespace Tobot::DataStructures {
                 os << "(" << tuple.first << ", " << tuple.second << ")";
                 return os;
             }
+            T & GetFirst();
+            U & GetSecond();
 
     }; // class Tuple
+
+    /// @brief Construct a new Tuple object
+    /// @tparam T The type of the first element of the tuple
+    /// @tparam U The type of the second element of the tuple
+    template <typename T, typename U>
+    Tuple<T, U>::Tuple() {
+        this->first = T();
+        this->second = U();
+    }
 
     /// @brief Construct a new Tuple object
     /// @tparam T The type of the first element of the tuple
@@ -63,6 +75,24 @@ namespace Tobot::DataStructures {
     template <typename T, typename U>
     bool Tuple<T, U>::operator!=(const Tuple<T, U> & tuple) const {
         return !(*this == tuple);
+    }
+
+    /// @brief Get the first element of the tuple
+    /// @tparam T The type of the first element of the tuple
+    /// @tparam U The type of the second element of the tuple
+    /// @return T& The first element of the tuple
+    template <typename T, typename U>
+    T & Tuple<T, U>::GetFirst() {
+        return this->first;
+    }
+
+    /// @brief Get the second element of the tuple
+    /// @tparam T The type of the first element of the tuple
+    /// @tparam U The type of the second element of the tuple
+    /// @return U& The second element of the tuple
+    template <typename T, typename U>
+    U & Tuple<T, U>::GetSecond() {
+        return this->second;
     }
 
 } // namespace Tobot::DataStructures
