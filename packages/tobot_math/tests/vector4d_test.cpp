@@ -125,6 +125,22 @@ TEST(Vector4D, DivisionAssignment) {
     EXPECT_EQ(4, vector1.w);
 }
 
+TEST(Vector4D, Equality) {
+    Tobot::Math::Vector4D<int> vector1(9, 6, 3, 12);
+    Tobot::Math::Vector4D<int> vector2(9, 6, 3, 12);
+    Tobot::Math::Vector4D<int> vector3(9, 6, 3, 13);
+    EXPECT_TRUE(vector1 == vector2);
+    EXPECT_FALSE(vector1 == vector3);
+}
+
+TEST(Vector4D, Inequality) {
+    Tobot::Math::Vector4D<int> vector1(9, 6, 3, 12);
+    Tobot::Math::Vector4D<int> vector2(9, 6, 3, 12);
+    Tobot::Math::Vector4D<int> vector3(9, 6, 3, 13);
+    EXPECT_TRUE(vector1 != vector3);
+    EXPECT_FALSE(vector1 != vector2);
+}
+
 /*
  * Testing vector magnitude
  */

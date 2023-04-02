@@ -109,6 +109,22 @@ TEST(Vector2D, DivisionAssignment) {
     EXPECT_EQ(2, vector1.y);
 }
 
+TEST(Vector2D, Equality) {
+    Tobot::Math::Vector2D<int> vector1(5, 4);
+    Tobot::Math::Vector2D<int> vector2(5, 4);
+    Tobot::Math::Vector2D<int> vector3(4, 2);
+    EXPECT_TRUE(vector1 == vector2);
+    EXPECT_FALSE(vector1 == vector3);
+}
+
+TEST(Vector2D, Inequality) {
+    Tobot::Math::Vector2D<int> vector1(5, 4);
+    Tobot::Math::Vector2D<int> vector2(5, 4);
+    Tobot::Math::Vector2D<int> vector3(4, 2);
+    EXPECT_FALSE(vector1 != vector2);
+    EXPECT_TRUE(vector1 != vector3);
+}
+
 /*
  * Testing vector magnitude
  */

@@ -2,6 +2,8 @@
 
 #include "tobot_data_structures.h"
 
+#include <queue>
+
 using namespace Tobot::DataStructures;
 
 /*
@@ -50,4 +52,66 @@ TEST(AVLTree, CanDelete) {
     tree.Insert(1);
     tree.Delete(1);
     ASSERT_FALSE(tree.Contains(1));
+}
+
+TEST(AVLTree, TraverseInOrder) {
+    AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::queue<int> result;
+    tree.TraverseInOrder([&result](int value) { result.push(value); });
+    for (size_t i = 0; i < 10; i++) {
+        ASSERT_EQ(result.front(), i + 1);
+        result.pop();
+    }
+}
+
+TEST(AVLTree, TraversePreOrder) {
+    AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::queue<int> result;
+    tree.TraversePreOrder([&result](int value) { result.push(value); });
+    ASSERT_EQ(result.front(), 4);
+    result.pop();
+    ASSERT_EQ(result.front(), 2);
+    result.pop();
+    ASSERT_EQ(result.front(), 1);
+    result.pop();
+    ASSERT_EQ(result.front(), 3);
+    result.pop();
+    ASSERT_EQ(result.front(), 8);
+    result.pop();
+    ASSERT_EQ(result.front(), 6);
+    result.pop();
+    ASSERT_EQ(result.front(), 5);
+    result.pop();
+    ASSERT_EQ(result.front(), 7);
+    result.pop();
+    ASSERT_EQ(result.front(), 9);
+    result.pop();
+    ASSERT_EQ(result.front(), 10);
+    result.pop();
+}
+
+TEST(AVLTree, TraversePostOrder) {
+    AVLTree<int> tree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::queue<int> result;
+    tree.TraversePostOrder([&result](int value) { result.push(value); });
+    ASSERT_EQ(result.front(), 1);
+    result.pop();
+    ASSERT_EQ(result.front(), 3);
+    result.pop();
+    ASSERT_EQ(result.front(), 2);
+    result.pop();
+    ASSERT_EQ(result.front(), 5);
+    result.pop();
+    ASSERT_EQ(result.front(), 7);
+    result.pop();
+    ASSERT_EQ(result.front(), 6);
+    result.pop();
+    ASSERT_EQ(result.front(), 10);
+    result.pop();
+    ASSERT_EQ(result.front(), 9);
+    result.pop();
+    ASSERT_EQ(result.front(), 8);
+    result.pop();
+    ASSERT_EQ(result.front(), 4);
+    result.pop();
 }

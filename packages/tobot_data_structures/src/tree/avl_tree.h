@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../pre_compiled_header.h"
+
 namespace Tobot::DataStructures {
 
     template <typename T>
@@ -13,11 +15,15 @@ namespace Tobot::DataStructures {
             };
             AVLTree();
             ~AVLTree();
+            AVLTree(std::initializer_list<T> list);
 
             void Insert(T value);
             void Delete(T value);
             bool Contains(T value);
             Node * Search(T value);
+            void TraverseInOrder(std::function<void(T)> callback);
+            void TraversePreOrder(std::function<void(T)> callback);
+            void TraversePostOrder(std::function<void(T)> callback);
 
         private:
             Node * root;
@@ -36,6 +42,9 @@ namespace Tobot::DataStructures {
 
             Node * CreateNode(T value);
             void DeleteNode(Node * node);
+            void TraverseInOrder(Node * node, std::function<void(T)> callback);
+            void TraversePreOrder(Node * node, std::function<void(T)> callback);
+            void TraversePostOrder(Node * node, std::function<void(T)> callback);
     };
 
     /// @brief AVLTree constructor
@@ -43,6 +52,17 @@ namespace Tobot::DataStructures {
     template <typename T>
     AVLTree<T>::AVLTree() {
         root = nullptr;
+    }
+
+    /// @brief AVLTree constructor
+    /// @tparam T The type of the value stored in the tree
+    /// @param list The list of values to insert in the tree
+    template <typename T>
+    AVLTree<T>::AVLTree(std::initializer_list<T> list) {
+        root = nullptr;
+        for (T value : list) {
+            Insert(value);
+        }
     }
 
     /// @brief AVLTree destructor
@@ -282,6 +302,72 @@ namespace Tobot::DataStructures {
     template <typename T>
     void AVLTree<T>::DeleteNode(Node * node) {
         delete node;
+    }
+
+    /// Traverse the tree in order
+    /// @tparam T The type of the value stored in the tree
+    /// @param node The node to start the traversal from
+    /// @param callback The callback to call for each node
+    template <typename T>
+    void AVLTree<T>::TraverseInOrder(Node * node, std::function<void(T)> callback) {
+        if (node == nullptr) {
+            return;
+        }
+        TraverseInOrder(node->left, callback);
+        callback(node->value);
+        TraverseInOrder(node->right, callback);
+    }
+
+    /// Traverse the tree in order
+    ///  @tparam T The type of the value stored in the tree
+    ///  @param callback The callback to call for each node
+    template <typename T>
+    void AVLTree<T>::TraverseInOrder(std::function<void(T)> callback) {
+        TraverseInOrder(root, callback);
+    }
+
+    /// Traverse the tree in pre order
+    /// @tparam T The type of the value stored in the tree
+    /// @param node The node to start the traversal from
+    /// @param callback The callback to call for each node
+    template <typename T>
+    void AVLTree<T>::TraversePreOrder(Node * node, std::function<void(T)> callback) {
+        if (node == nullptr) {
+            return;
+        }
+        callback(node->value);
+        TraversePreOrder(node->left, callback);
+        TraversePreOrder(node->right, callback);
+    }
+
+    /// Traverse the tree in pre order
+    /// @tparam T The type of the value stored in the tree
+    /// @param callback The callback to call for each node
+    template <typename T>
+    void AVLTree<T>::TraversePreOrder(std::function<void(T)> callback) {
+        TraversePreOrder(root, callback);
+    }
+
+    /// Traverse the tree in post order
+    /// @tparam T The type of the value stored in the tree
+    /// @param node The node to start the traversal from
+    /// @param callback The callback to call for each node
+    template <typename T>
+    void AVLTree<T>::TraversePostOrder(Node * node, std::function<void(T)> callback) {
+        if (node == nullptr) {
+            return;
+        }
+        TraversePostOrder(node->left, callback);
+        TraversePostOrder(node->right, callback);
+        callback(node->value);
+    }
+
+    /// Traverse the tree in post order
+    /// @tparam T The type of the value stored in the tree
+    /// @param callback The callback to call for each node
+    template <typename T>
+    void AVLTree<T>::TraversePostOrder(std::function<void(T)> callback) {
+        TraversePostOrder(root, callback);
     }
 
 } // namespace Tobot::DataStructures

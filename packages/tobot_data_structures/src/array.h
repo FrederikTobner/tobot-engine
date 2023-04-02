@@ -18,6 +18,7 @@ namespace Tobot::DataStructures {
             Array<T, size> & operator=(const Array<T, size> & array);
             bool operator==(const Array<T, size> & array) const;
             bool operator!=(const Array<T, size> & array) const;
+            void ForEach(std::function<void(T &)> function);
             std::size_t getSize() const;
             /// @brief Appends the array to the ostream
             /// @param os The ostream to append the array to
@@ -129,6 +130,17 @@ namespace Tobot::DataStructures {
     template <typename T, std::size_t size>
     bool Array<T, size>::operator!=(const Array<T, size> & array) const {
         return !(*this == array);
+    }
+
+    /// @brief Calls the given function for each element of the array
+    /// @tparam T The type of the elements of the array
+    /// @tparam size The size of the array
+    /// @param function The function to call for each element of the array
+    template <typename T, std::size_t size>
+    void Array<T, size>::ForEach(std::function<void(T &)> function) {
+        for (std::size_t i = 0; i < size; i++) {
+            function(this->data[i]);
+        }
     }
 
     /// @brief Get the size of the array

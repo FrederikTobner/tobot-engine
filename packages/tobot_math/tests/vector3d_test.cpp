@@ -118,6 +118,28 @@ TEST(Vector3D, DivisionAssignment) {
 }
 
 /*
+ * Testing vector equality
+ */
+TEST(Vector3D, Equality) {
+    Tobot::Math::Vector3D<int> vector1(9, 6, 3);
+    Tobot::Math::Vector3D<int> vector2(9, 6, 3);
+    Tobot::Math::Vector3D<int> vector3(9, 6, 4);
+    EXPECT_TRUE(vector1 == vector2);
+    EXPECT_FALSE(vector1 == vector3);
+}
+
+/*
+ * Testing vector inequality
+ */
+TEST(Vector3D, Inequality) {
+    Tobot::Math::Vector3D<int> vector1(9, 6, 3);
+    Tobot::Math::Vector3D<int> vector2(9, 6, 3);
+    Tobot::Math::Vector3D<int> vector3(9, 6, 4);
+    EXPECT_FALSE(vector1 != vector2);
+    EXPECT_TRUE(vector1 != vector3);
+}
+
+/*
  * Testing vector magnitude
  */
 TEST(Vector3D, Magnitude) {

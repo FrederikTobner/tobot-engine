@@ -30,3 +30,10 @@ TEST(Array, IndexOperator) {
     ASSERT_EQ(array[1], 2);
     ASSERT_EQ(array[2], 3);
 }
+
+TEST(Array, ForEach) {
+    Array<int, 3> array = {1, 2, 3};
+    int sum = 0;
+    array.ForEach([&sum](int value) { sum += value; });
+    ASSERT_EQ(sum, 6);
+}
