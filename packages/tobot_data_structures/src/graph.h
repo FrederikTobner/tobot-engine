@@ -40,6 +40,7 @@ namespace Tobot::DataStructures {
             std::vector<Tuple<T, T>> GetEdges() const;
             std::vector<std::vector<T>> GetConnectedComponents() const;
             std::vector<std::vector<T>> GetCycles() const;
+            std::vector<T> GetComponent(T vertex);
             std::vector<T> GetNeighbors(T vertex) const;
             std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices) const;
             std::vector<T> GetNeighbors(T vertex, std::vector<Tuple<T, T>> edges) const;
@@ -248,15 +249,23 @@ namespace Tobot::DataStructures {
         for (std::vector<T> & connected_component : connected_components) {
             if (std::find(connected_component.begin(), connected_component.end(), vertex1) !=
                 connected_component.end()) {
-                connected_component.push_back(vertex2);
+                if (std::find(connected_component.begin(), connected_component.end(), vertex2) ==
+                    connected_component.end()) {
+                    connected_component.push_back(vertex2);
+                }
                 vertex1_found = true;
             }
             if (std::find(connected_component.begin(), connected_component.end(), vertex2) !=
                 connected_component.end()) {
-                connected_component.push_back(vertex1);
+                if (std::find(connected_component.begin(), connected_component.end(), vertex1) ==
+                    connected_component.end()) {
+                    connected_component.push_back(vertex1);
+                }
                 vertex2_found = true;
             }
         }
+        // If the edge connects two vertices that are not in any connected component, then create a new connected
+        // component
         if (!vertex1_found && !vertex2_found) {
             std::vector<T> connected_component;
             connected_component.push_back(vertex1);
@@ -455,6 +464,20 @@ namespace Tobot::DataStructures {
     template <typename T>
     std::vector<std::vector<T>> Graph<T>::GetCycles() const {
         return cycles;
+    }
+
+    /// @brief Gets the connected component of a vertex.
+    /// @tparam T The type of the vertices in the graph.
+    /// @param vertex The vertex to get the connected component of.
+    /// @return The connected component of the vertex.
+    template <typename T>
+    std::vector<T> Graph<T>::GetComponent(T vertex) {
+        for (std::vector<T> component : connected_components) {
+            if (std::find(component.begin(), component.end(), vertex) != component.end()) {
+                return component;
+            }
+        }
+        return std::vector<T>();
     }
 
     /// @brief Gets the neighbors of a vertex.

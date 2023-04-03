@@ -50,6 +50,45 @@ TEST(Graph, CanBeCopied) {
 }
 
 /*
+ * Tests whether the neighbors of a vertex can be retrieved
+ */
+TEST(Graph, CanGetNeighbors) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 1);
+    graph.AddEdge(4, 1);
+    std::vector<int> neighbors = graph.GetNeighbors(1);
+    ASSERT_EQ(3, neighbors.size());
+    ASSERT_TRUE(std::find(neighbors.begin(), neighbors.end(), 2) != neighbors.end());
+    ASSERT_TRUE(std::find(neighbors.begin(), neighbors.end(), 3) != neighbors.end());
+    ASSERT_TRUE(std::find(neighbors.begin(), neighbors.end(), 4) != neighbors.end());
+}
+
+/*
+ * Tests whether a vertex can be found
+ */
+TEST(Graph, CanFindVertex) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 1);
+    graph.AddEdge(4, 1);
+    ASSERT_TRUE(graph.ContainsVertex(1));
+    ASSERT_TRUE(graph.ContainsVertex(2));
+    ASSERT_TRUE(graph.ContainsVertex(3));
+    ASSERT_TRUE(graph.ContainsVertex(4));
+}
+
+/*
  * Tests whether the Graph can be moved
  */
 TEST(Graph, CanBeMoved) {
@@ -152,19 +191,24 @@ TEST(Graph, CanFindEdge) {
 }
 
 /*
- * Tests whether a vertex can be found
+ * Tests whether a component can be found
  */
-TEST(Graph, CanFindVertex) {
+TEST(Graph, CanFindComponent) {
     Graph<int> graph;
     graph.AddVertex(1);
     graph.AddVertex(2);
     graph.AddVertex(3);
     graph.AddVertex(4);
-    ASSERT_TRUE(graph.ContainsVertex(1));
-    ASSERT_TRUE(graph.ContainsVertex(2));
-    ASSERT_TRUE(graph.ContainsVertex(3));
-    ASSERT_TRUE(graph.ContainsVertex(4));
-    ASSERT_FALSE(graph.ContainsVertex(5));
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 1);
+    graph.AddEdge(4, 1);
+    std::vector<int> component = graph.GetComponent(1);
+    ASSERT_EQ(4, component.size());
+    ASSERT_TRUE(std::find(component.begin(), component.end(), 1) != component.end());
+    ASSERT_TRUE(std::find(component.begin(), component.end(), 2) != component.end());
+    ASSERT_TRUE(std::find(component.begin(), component.end(), 3) != component.end());
+    ASSERT_TRUE(std::find(component.begin(), component.end(), 4) != component.end());
 }
 
 /*
@@ -306,4 +350,108 @@ TEST(Graph, CanRemoveEdge) {
     graph.AddEdge(4, 1);
     graph.RemoveEdge(1, 2);
     ASSERT_FALSE(graph.ContainsEdge(1, 2));
+}
+
+/*
+ * Can remove multiple vertices
+ */
+TEST(Graph, CanRemoveMultipleVertices) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.RemoveVertices({1, 2, 3});
+    ASSERT_FALSE(graph.ContainsVertex(1));
+    ASSERT_FALSE(graph.ContainsVertex(2));
+    ASSERT_FALSE(graph.ContainsVertex(3));
+    ASSERT_TRUE(graph.ContainsVertex(4));
+}
+
+/*
+ * Can remove multiple edges
+ */
+TEST(Graph, CanRemoveMultipleEdges) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.RemoveEdges({{1, 2}, {2, 3}, {3, 4}});
+    ASSERT_FALSE(graph.ContainsEdge(1, 2));
+    ASSERT_FALSE(graph.ContainsEdge(2, 3));
+    ASSERT_FALSE(graph.ContainsEdge(3, 4));
+    ASSERT_TRUE(graph.ContainsEdge(4, 1));
+}
+
+/*
+ * Can remove all vertices
+ */
+TEST(Graph, CanRemoveAllVertices) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.RemoveAllVertices();
+    ASSERT_FALSE(graph.ContainsVertex(1));
+    ASSERT_FALSE(graph.ContainsVertex(2));
+    ASSERT_FALSE(graph.ContainsVertex(3));
+    ASSERT_FALSE(graph.ContainsVertex(4));
+}
+
+/*
+ * Can remove all edges
+ */
+TEST(Graph, CanRemoveAllEdges) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.RemoveAllEdges();
+    ASSERT_FALSE(graph.ContainsEdge(1, 2));
+    ASSERT_FALSE(graph.ContainsEdge(2, 3));
+    ASSERT_FALSE(graph.ContainsEdge(3, 4));
+    ASSERT_FALSE(graph.ContainsEdge(4, 1));
+}
+
+/*
+ * Can Remove All Edges And Vertices
+ */
+TEST(Graph, CanRemoveAllEdgesAndVertices) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.RemoveAllEdgesAndVertices();
+    ASSERT_FALSE(graph.ContainsVertex(1));
+    ASSERT_FALSE(graph.ContainsVertex(2));
+    ASSERT_FALSE(graph.ContainsVertex(3));
+    ASSERT_FALSE(graph.ContainsVertex(4));
+    ASSERT_FALSE(graph.ContainsEdge(1, 2));
+    ASSERT_FALSE(graph.ContainsEdge(2, 3));
+    ASSERT_FALSE(graph.ContainsEdge(3, 4));
+    ASSERT_FALSE(graph.ContainsEdge(4, 1));
 }
