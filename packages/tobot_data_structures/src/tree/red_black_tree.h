@@ -2,12 +2,12 @@
 
 #include "../pre_compiled_header.h"
 
-#include "tree.h"
+#include "binary_search_tree.h"
 
 namespace Tobot::DataStructures {
 
     template <typename T>
-    class RedBlackTree : Tree<T> {
+    class RedBlackTree : BinarySearchTree<T> {
         public:
             /// @brief The node structure for the RedBlackTree class
             struct Node {

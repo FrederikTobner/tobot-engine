@@ -2,12 +2,12 @@
 
 #include "../pre_compiled_header.h"
 
-#include "tree.h"
+#include "binary_search_tree.h"
 
 namespace Tobot::DataStructures {
 
     template <typename T>
-    class AVLTree : Tree<T> {
+    class AVLTree : BinarySearchTree<T> {
         public:
             struct Node {
                     T value;

@@ -3,9 +3,9 @@
 namespace Tobot::DataStructures {
 
     template <typename T>
-    class Tree {
+    class BinarySearchTree {
         public:
-            Tree();
+            BinarySearchTree();
             virtual void Insert(T value) = 0;
             virtual void Delete(T value) = 0;
             virtual bool Contains(T value) = 0;
@@ -15,9 +15,9 @@ namespace Tobot::DataStructures {
             virtual void TraversePostOrder(std::function<void(T)> callback) = 0;
             virtual void Clear() = 0;
             virtual std::size_t GetSize() = 0;
-    }; // class Tree
+    }; // class BinarySearchTree
 
     template <typename T>
-    Tree<T>::Tree() {
+    BinarySearchTree<T>::BinarySearchTree() {
     }
 } // namespace Tobot::DataStructures
