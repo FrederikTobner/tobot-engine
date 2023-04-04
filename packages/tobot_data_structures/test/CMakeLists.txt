@@ -20,7 +20,10 @@ set(TOBOT_DATA_STRUCTURES_TEST_SOURCES
 "queue_test.cpp"
 "red_black_tree_test.cpp"
 "stack_test.cpp"
-"tuple_test.cpp")
+"pair_test.cpp"
+"triple_test.cpp"
+"quadruple_test.cpp"
+)
 
 # Set all test files
 set(TEST_SOURCES ${TOBOT_DATA_STRUCTURES_TEST_SOURCES})
@@ -31,7 +34,7 @@ add_executable(${TOBOT_DATA_STRUCTURES_TESTS} ${TEST_SOURCES})
 target_include_directories(${TOBOT_DATA_STRUCTURES_TESTS} PUBLIC "${SOURCE_PATH_DATA_STRUCTURES}/include")
 
 # Link google test
-target_link_libraries(${TOBOT_DATA_STRUCTURES_TESTS} GTest::gtest_main tobot-data-structures)
+target_link_libraries(${TOBOT_DATA_STRUCTURES_TESTS} PUBLIC GTest::gtest_main tobot-data-structures)
 
 include(GoogleTest)
 gtest_discover_tests(${TOBOT_DATA_STRUCTURES_TESTS})

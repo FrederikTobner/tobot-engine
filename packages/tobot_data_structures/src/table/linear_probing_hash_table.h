@@ -2,7 +2,7 @@
 
 #include "../pre_compiled_header.h"
 
-#include "../tuple.h"
+#include "../tuple/pair.h"
 #include "hash_table.h"
 
 namespace Tobot::DataStructures {
@@ -12,7 +12,7 @@ namespace Tobot::DataStructures {
             LinearProbingHashTable();
             LinearProbingHashTable(std::size_t size);
             LinearProbingHashTable(const LinearProbingHashTable<T, U, hashFun, getSize> & hashTable);
-            LinearProbingHashTable(std::initializer_list<Tuple<T, U>> list);
+            LinearProbingHashTable(std::initializer_list<Pair<T, U>> list);
             LinearProbingHashTable<T, U, hashFun, getSize> &
             operator=(const LinearProbingHashTable<T, U, hashFun, getSize> & hashTable);
             ~LinearProbingHashTable();
@@ -30,7 +30,7 @@ namespace Tobot::DataStructures {
             std::size_t capacity;
             std::size_t (*hashFunction)(T key, std::size_t size);
             std::size_t (*sizeFunction)(T key);
-            Tuple<T, U> * table;
+            Pair<T, U> * table;
 
             std::size_t Hash(T key);
             std::size_t Find(T key);
@@ -50,7 +50,7 @@ namespace Tobot::DataStructures {
         this->capacity = 10;
         this->hashFunction = hashFun;
         this->sizeFunction = getSize;
-        this->table = new Tuple<T, U>[this->capacity];
+        this->table = new Pair<T, U>[this->capacity];
     }
 
     /// @brief Creates a new hash table with the given size.
@@ -64,7 +64,7 @@ namespace Tobot::DataStructures {
         this->capacity = size;
         this->hashFunction = hashFun;
         this->sizeFunction = getSize;
-        this->table = new Tuple<T, U>[this->capacity];
+        this->table = new Pair<T, U>[this->capacity];
     }
 
     /// @brief Deletes the hash table.
@@ -84,12 +84,12 @@ namespace Tobot::DataStructures {
     /// @tparam hashFun The used hash function.
     /// @param list The list to create the hash table from.
     template <typename T, typename U, std::size_t (*hashFun)(T val, std::size_t size), std::size_t (*getSize)(T val)>
-    LinearProbingHashTable<T, U, hashFun, getSize>::LinearProbingHashTable(std::initializer_list<Tuple<T, U>> list) {
+    LinearProbingHashTable<T, U, hashFun, getSize>::LinearProbingHashTable(std::initializer_list<Pair<T, U>> list) {
         this->size = 0;
         this->capacity = list.size();
         this->hashFunction = hashFun;
         this->sizeFunction = getSize;
-        this->table = new Tuple<T, U>[this->capacity];
+        this->table = new Pair<T, U>[this->capacity];
         for (auto & item : list) {
             this->Insert(item.first, item.second);
         }
@@ -138,7 +138,7 @@ namespace Tobot::DataStructures {
         if (this->table[index].GetFirst() == T()) {
             this->size++;
         }
-        this->table[index] = Tuple<T, U>(key, value);
+        this->table[index] = Pair<T, U>(key, value);
     }
 
     /// @brief Deletes the given key from the hash table.
@@ -152,11 +152,11 @@ namespace Tobot::DataStructures {
         if (index == this->capacity) {
             return;
         }
-        this->table[index] = Tuple<T, U>();
+        this->table[index] = Pair<T, U>();
         index = (index + 1) % this->capacity;
         while (this->table[index].GetFirst() != T()) {
-            Tuple<T, U> temp = this->table[index];
-            this->table[index] = Tuple<T, U>();
+            Pair<T, U> temp = this->table[index];
+            this->table[index] = Pair<T, U>();
             this->size--;
             this->Insert(temp.first, temp.second);
             index = (index + 1) % this->capacity;
@@ -210,7 +210,7 @@ namespace Tobot::DataStructures {
         this->DeleteTable();
         this->size = 0;
         this->capacity = 10;
-        this->table = new Tuple<T, U>[this->capacity];
+        this->table = new Pair<T, U>[this->capacity];
     }
 
     /// @brief Returns the size of the hash table.
@@ -289,7 +289,7 @@ namespace Tobot::DataStructures {
         this->size = hashTable.size;
         this->capacity = hashTable.capacity;
         this->hashFunction = hashTable.hashFunction;
-        this->table = new Tuple<T, U>[this->capacity];
+        this->table = new Pair<T, U>[this->capacity];
         for (std::size_t i = 0; i < this->capacity; i++) {
             this->table[i] = hashTable.table[i];
         }

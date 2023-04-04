@@ -22,7 +22,7 @@ TEST(Graph, CanBeCreatedWithInitializerList) {
  * Tests whether the Graph can be created with a vector of vertices and a vector of edges
  */
 TEST(Graph, CanBeCreatedWithVectorOfVerticesAndVectorOfEdges) {
-    Graph<int> graph = {std::vector<int>{1, 2, 3, 4}, std::vector<Tuple<int, int>>{{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
+    Graph<int> graph = {std::vector<int>{1, 2, 3, 4}, std::vector<Pair<int, int>>{{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
 }
 
 /*

@@ -6,6 +6,7 @@ set(TOBOT_MATH_HEADER_FILES
 "vector/vector3d.h"
 "vector/vector4d.h"
 "matrix.h"
+"plane.h"
 "include/tobot_math.h"
 )
 

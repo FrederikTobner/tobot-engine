@@ -2,7 +2,7 @@
 
 #include "pre_compiled_header.h"
 
-#include "concepts.h"
+#include "../concepts.h"
 #include "vector.h"
 
 namespace Tobot::Math {

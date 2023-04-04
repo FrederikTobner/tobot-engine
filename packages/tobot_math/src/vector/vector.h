@@ -1,6 +1,6 @@
 #pragma once
 
-#include "concepts.h"
+#include "../concepts.h"
 #include "pre_compiled_header.h"
 
 namespace Tobot::Math {
