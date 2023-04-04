@@ -2,8 +2,13 @@
 
 #include "../pre_compiled_header.h"
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Tuple {
 
+    /// @brief A quadruple that contains four elements of different types
+    /// @tparam T The type of the first element of the quadruple
+    /// @tparam U The type of the second element of the quadruple
+    /// @tparam V The type of the third element of the quadruple
+    /// @tparam W The type of the fourth element of the quadruple
     template <typename T, typename U, typename V, typename W>
     class Quadruple {
         public:
@@ -27,9 +32,13 @@ namespace Tobot::DataStructures {
             W & GetFourth();
 
         private:
+            /// @brief The first element of the quadruple
             T first;
+            /// @brief The second element of the quadruple
             U second;
+            /// @brief The third element of the quadruple
             V third;
+            /// @brief The fourth element of the quadruple
             W fourth;
 
     }; // class Quadruple
@@ -147,4 +156,4 @@ namespace Tobot::DataStructures {
         return this->fourth;
     }
 
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Tuple

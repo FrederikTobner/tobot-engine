@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Tree {
 
     template <typename T>
     class BinarySearchTree {
@@ -20,4 +20,4 @@ namespace Tobot::DataStructures {
     template <typename T>
     BinarySearchTree<T>::BinarySearchTree() {
     }
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Tree

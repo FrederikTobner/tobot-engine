@@ -4,7 +4,7 @@
 
 #include "binary_search_tree.h"
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Tree {
 
     template <typename T>
     class AVLTree : BinarySearchTree<T> {
@@ -431,4 +431,4 @@ namespace Tobot::DataStructures {
         return size;
     }
 
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Tree

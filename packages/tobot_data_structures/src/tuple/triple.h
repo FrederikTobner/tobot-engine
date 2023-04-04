@@ -2,8 +2,12 @@
 
 #include "../pre_compiled_header.h"
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Tuple {
 
+    /// @brief A triple containing three elements of different types
+    /// @tparam T The type of the first element of the triple
+    /// @tparam U The type of the second element of the triple
+    /// @tparam V The type of the third element of the triple
     template <typename T, typename U, typename V>
     class Triple {
         public:
@@ -25,8 +29,11 @@ namespace Tobot::DataStructures {
             V & GetThird();
 
         private:
+            /// @brief The first element of the triple
             T first;
+            /// @brief The second element of the triple
             U second;
+            /// @brief The third element of the triple
             V third;
 
     }; // class Triple
@@ -122,4 +129,4 @@ namespace Tobot::DataStructures {
         return this->third;
     }
 
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Tuple

@@ -12,6 +12,20 @@ TEST(Graph, CanBeCreated) {
 }
 
 /*
+ * Tests whether the Graph can be created with a vector of vertices
+ */
+TEST(Graph, CanBeCreatedWithVectorOfVertices) {
+    Graph<int> graph = {std::vector<int>{1, 2, 3, 4}};
+}
+
+/*
+ * Tests whether the Graph can be created with a initializer list of vertices
+ */
+TEST(Graph, CanBeCreatedWithInitializerListOfVertices) {
+    Graph<int> graph = {1, 2, 3, 4};
+}
+
+/*
  * Tests whether the Graph can be created with initializer list
  */
 TEST(Graph, CanBeCreatedWithInitializerList) {
@@ -22,7 +36,8 @@ TEST(Graph, CanBeCreatedWithInitializerList) {
  * Tests whether the Graph can be created with a vector of vertices and a vector of edges
  */
 TEST(Graph, CanBeCreatedWithVectorOfVerticesAndVectorOfEdges) {
-    Graph<int> graph = {std::vector<int>{1, 2, 3, 4}, std::vector<Pair<int, int>>{{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
+    Graph<int> graph = {std::vector<int>{1, 2, 3, 4},
+                        std::vector<Tobot::DataStructures::Tuple::Pair<int, int>>{{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
 }
 
 /*
@@ -203,7 +218,7 @@ TEST(Graph, CanFindComponent) {
     graph.AddEdge(2, 3);
     graph.AddEdge(3, 1);
     graph.AddEdge(4, 1);
-    std::vector<int> component = graph.GetComponent(1);
+    std::vector<int> component = graph.GetConnectedComponent(1);
     ASSERT_EQ(4, component.size());
     ASSERT_TRUE(std::find(component.begin(), component.end(), 1) != component.end());
     ASSERT_TRUE(std::find(component.begin(), component.end(), 2) != component.end());
@@ -454,4 +469,64 @@ TEST(Graph, CanRemoveAllEdgesAndVertices) {
     ASSERT_FALSE(graph.ContainsEdge(2, 3));
     ASSERT_FALSE(graph.ContainsEdge(3, 4));
     ASSERT_FALSE(graph.ContainsEdge(4, 1));
+}
+
+/*
+ * Can remove all cycles
+ */
+TEST(Graph, CanRemoveAllCycles) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.AddEdge(1, 3);
+    ASSERT_TRUE(graph.IsCyclic());
+    graph.RemoveAllCycles();
+    ASSERT_FALSE(graph.IsCyclic());
+}
+
+/*
+ * Cam remove all connected components
+ */
+TEST(Graph, CanRemoveAllConnectedComponents) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.AddEdge(1, 3);
+    ASSERT_EQ(graph.GetComponents().size(), 1);
+    graph.RemoveAllConnectedComponents();
+    ASSERT_EQ(graph.GetComponents().size(), 0);
+}
+
+/*
+ * Can remove everything
+ */
+TEST(Graph, CanRemoveEverything) {
+    Graph<int> graph;
+    graph.AddVertex(1);
+    graph.AddVertex(2);
+    graph.AddVertex(3);
+    graph.AddVertex(4);
+    graph.AddEdge(1, 2);
+    graph.AddEdge(2, 3);
+    graph.AddEdge(3, 4);
+    graph.AddEdge(4, 1);
+    graph.AddEdge(1, 3);
+    ASSERT_EQ(graph.GetComponents().size(), 1);
+    ASSERT_TRUE(graph.IsCyclic());
+    graph.RemoveAll();
+    ASSERT_EQ(graph.GetVertexCount(), 0);
+    ASSERT_EQ(graph.GetConnectedComponentCount(), 0);
+    ASSERT_FALSE(graph.IsCyclic());
 }

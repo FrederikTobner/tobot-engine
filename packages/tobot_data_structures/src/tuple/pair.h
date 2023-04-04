@@ -2,7 +2,7 @@
 
 #include "../pre_compiled_header.h"
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Tuple {
 
     template <typename T, typename U>
     class Pair {
@@ -95,4 +95,4 @@ namespace Tobot::DataStructures {
         return this->second;
     }
 
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Tuple

@@ -6,7 +6,7 @@
 #include "vector.h"
 
 namespace Tobot::Math {
-    template <typename T>
+    template <typename T = float>
         requires Arithmetic<T>
     class Vector3D : Vector<T> {
 

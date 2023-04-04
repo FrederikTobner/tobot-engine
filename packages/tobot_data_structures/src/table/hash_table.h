@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Table {
 
     template <typename T, typename U>
     class HashTable {
@@ -18,4 +18,4 @@ namespace Tobot::DataStructures {
     template <typename T, typename U>
     HashTable<T, U>::HashTable() {
     }
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Table

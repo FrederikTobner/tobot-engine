@@ -4,7 +4,7 @@
 #include "pre_compiled_header.h"
 
 namespace Tobot::Math {
-    template <typename T, std::size_t m, std::size_t n>
+    template <typename T = float, std::size_t m = 3, std::size_t n = 3>
         requires Arithmetic<T>
     class Matrix {
         private:
@@ -14,6 +14,7 @@ namespace Tobot::Math {
 
         public:
             Matrix();
+            Matrix(const Matrix<T, m, n> & mat);
             Matrix(const std::vector<T> values);
             Matrix(const std::initializer_list<T> list);
 
@@ -38,8 +39,8 @@ namespace Tobot::Math {
                 return os;
             }
 
-            inline std::size_t getRows() const;
-            inline std::size_t getColoumns() const;
+            inline std::size_t & getRows();
+            inline std::size_t & getColoumns();
     };
 
     /// @brief Construct a new Matrix object
@@ -52,6 +53,18 @@ namespace Tobot::Math {
         static_assert(m > 0 && n > 0);
     }
 
+    /// @brief Construct a new Matrix object
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param mat The matrix to copy
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    Matrix<T, m, n>::Matrix(const Matrix<T, m, n> & mat) : rowsCount(m), columnsCount(n) {
+        static_assert(m > 0 && n > 0);
+        m_matrix = mat.m_matrix;
+    }
+
     /// @brief Construct a new Matrix object from a vector of values
     /// @tparam T The underlying type of the matrix
     /// @tparam m The number of rows in the matrix
@@ -62,7 +75,6 @@ namespace Tobot::Math {
     Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
 
         static_assert(m > 0 && n > 0);
-
         if (values.empty()) {
             throw std::invalid_argument("The provided vector is empty");
         }
@@ -87,7 +99,6 @@ namespace Tobot::Math {
     Matrix<T, m, n>::Matrix(std::initializer_list<T> list) : rowsCount(m), columnsCount(n) {
 
         static_assert(m > 0 && n > 0);
-
         if (list.size() == 0) {
             throw std::invalid_argument("The provided list is empty");
         }
@@ -197,7 +208,7 @@ namespace Tobot::Math {
     /// @return std::size_t The number of rows in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    inline std::size_t Matrix<T, m, n>::getRows() const {
+    inline std::size_t & Matrix<T, m, n>::getRows() {
         return this->rowsCount;
     }
 
@@ -208,7 +219,7 @@ namespace Tobot::Math {
     /// @return std::size_t The number of coloumns in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    inline std::size_t Matrix<T, m, n>::getColoumns() const {
+    inline std::size_t & Matrix<T, m, n>::getColoumns() {
         return this->columnsCount;
     }
 } // namespace Tobot::Math

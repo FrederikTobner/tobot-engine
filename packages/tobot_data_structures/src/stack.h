@@ -32,8 +32,11 @@ namespace Tobot::DataStructures {
             void Clear();
 
         private:
+            // The elements of the stack
             T * elements;
+            // The size of the stack
             std::size_t size;
+            // The capacity of the stack
             std::size_t capacity;
 
     }; // class Stack

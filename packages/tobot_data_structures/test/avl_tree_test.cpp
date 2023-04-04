@@ -4,7 +4,7 @@
 
 #include <queue>
 
-using namespace Tobot::DataStructures;
+using namespace Tobot::DataStructures::Tree;
 
 /*
  * Tests whether the AVLTree can be created

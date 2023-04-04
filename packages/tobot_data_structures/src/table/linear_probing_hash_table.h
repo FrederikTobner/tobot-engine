@@ -5,14 +5,14 @@
 #include "../tuple/pair.h"
 #include "hash_table.h"
 
-namespace Tobot::DataStructures {
+namespace Tobot::DataStructures::Table {
     template <typename T, typename U, std::size_t (*hashFun)(T val, std::size_t size), std::size_t (*getSize)(T val)>
     class LinearProbingHashTable : HashTable<T, U> {
         public:
             LinearProbingHashTable();
             LinearProbingHashTable(std::size_t size);
             LinearProbingHashTable(const LinearProbingHashTable<T, U, hashFun, getSize> & hashTable);
-            LinearProbingHashTable(std::initializer_list<Pair<T, U>> list);
+            LinearProbingHashTable(std::initializer_list<Tobot::DataStructures::Tuple::Pair<T, U>> list);
             LinearProbingHashTable<T, U, hashFun, getSize> &
             operator=(const LinearProbingHashTable<T, U, hashFun, getSize> & hashTable);
             ~LinearProbingHashTable();
@@ -30,7 +30,7 @@ namespace Tobot::DataStructures {
             std::size_t capacity;
             std::size_t (*hashFunction)(T key, std::size_t size);
             std::size_t (*sizeFunction)(T key);
-            Pair<T, U> * table;
+            Tobot::DataStructures::Tuple::Pair<T, U> * table;
 
             std::size_t Hash(T key);
             std::size_t Find(T key);
@@ -50,7 +50,7 @@ namespace Tobot::DataStructures {
         this->capacity = 10;
         this->hashFunction = hashFun;
         this->sizeFunction = getSize;
-        this->table = new Pair<T, U>[this->capacity];
+        this->table = new Tobot::DataStructures::Tuple::Pair<T, U>[this->capacity];
     }
 
     /// @brief Creates a new hash table with the given size.
@@ -61,10 +61,10 @@ namespace Tobot::DataStructures {
     template <typename T, typename U, std::size_t (*hashFun)(T val, std::size_t size), std::size_t (*getSize)(T val)>
     LinearProbingHashTable<T, U, hashFun, getSize>::LinearProbingHashTable(std::size_t size) {
         this->size = 0;
-        this->capacity = size;
+        this->capacity = size > 4 ? size : 4;
         this->hashFunction = hashFun;
         this->sizeFunction = getSize;
-        this->table = new Pair<T, U>[this->capacity];
+        this->table = new Tobot::DataStructures::Tuple::Pair<T, U>[this->capacity];
     }
 
     /// @brief Deletes the hash table.
@@ -84,12 +84,13 @@ namespace Tobot::DataStructures {
     /// @tparam hashFun The used hash function.
     /// @param list The list to create the hash table from.
     template <typename T, typename U, std::size_t (*hashFun)(T val, std::size_t size), std::size_t (*getSize)(T val)>
-    LinearProbingHashTable<T, U, hashFun, getSize>::LinearProbingHashTable(std::initializer_list<Pair<T, U>> list) {
+    LinearProbingHashTable<T, U, hashFun, getSize>::LinearProbingHashTable(
+        std::initializer_list<Tobot::DataStructures::Tuple::Pair<T, U>> list) {
         this->size = 0;
         this->capacity = list.size();
         this->hashFunction = hashFun;
         this->sizeFunction = getSize;
-        this->table = new Pair<T, U>[this->capacity];
+        this->table = new Tobot::DataStructures::Tuple::Pair<T, U>[this->capacity];
         for (auto & item : list) {
             this->Insert(item.first, item.second);
         }
@@ -128,7 +129,7 @@ namespace Tobot::DataStructures {
     /// @param value The value.
     template <typename T, typename U, std::size_t (*hashFun)(T val, std::size_t size), std::size_t (*getSize)(T val)>
     void LinearProbingHashTable<T, U, hashFun, getSize>::Insert(T key, U value) {
-        if (this->size == this->capacity) {
+        if (this->size * 0.75 == this->capacity) {
             this->Resize();
         }
         std::size_t index = this->Hash(key);
@@ -138,7 +139,7 @@ namespace Tobot::DataStructures {
         if (this->table[index].GetFirst() == T()) {
             this->size++;
         }
-        this->table[index] = Pair<T, U>(key, value);
+        this->table[index] = Tobot::DataStructures::Tuple::Pair<T, U>(key, value);
     }
 
     /// @brief Deletes the given key from the hash table.
@@ -152,11 +153,11 @@ namespace Tobot::DataStructures {
         if (index == this->capacity) {
             return;
         }
-        this->table[index] = Pair<T, U>();
+        this->table[index] = Tobot::DataStructures::Tuple::Pair<T, U>();
         index = (index + 1) % this->capacity;
         while (this->table[index].GetFirst() != T()) {
-            Pair<T, U> temp = this->table[index];
-            this->table[index] = Pair<T, U>();
+            Tobot::DataStructures::Tuple::Pair<T, U> temp = this->table[index];
+            this->table[index] = Tobot::DataStructures::Tuple::Pair<T, U>();
             this->size--;
             this->Insert(temp.first, temp.second);
             index = (index + 1) % this->capacity;
@@ -210,7 +211,7 @@ namespace Tobot::DataStructures {
         this->DeleteTable();
         this->size = 0;
         this->capacity = 10;
-        this->table = new Pair<T, U>[this->capacity];
+        this->table = new Tobot::DataStructures::Tuple::Pair<T, U>[this->capacity];
     }
 
     /// @brief Returns the size of the hash table.
@@ -289,7 +290,7 @@ namespace Tobot::DataStructures {
         this->size = hashTable.size;
         this->capacity = hashTable.capacity;
         this->hashFunction = hashTable.hashFunction;
-        this->table = new Pair<T, U>[this->capacity];
+        this->table = new Tobot::DataStructures::Tuple::Pair<T, U>[this->capacity];
         for (std::size_t i = 0; i < this->capacity; i++) {
             this->table[i] = hashTable.table[i];
         }
@@ -304,4 +305,4 @@ namespace Tobot::DataStructures {
         delete[] this->table;
     }
 
-} // namespace Tobot::DataStructures
+} // namespace Tobot::DataStructures::Table

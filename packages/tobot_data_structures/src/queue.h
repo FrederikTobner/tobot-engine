@@ -43,8 +43,11 @@ namespace Tobot::DataStructures {
             void Enqueue(const T & element);
 
         private:
+            // The elements of the queue
             T * data;
+            // The size of the queue
             std::size_t size;
+            // The capacity of the queue
             std::size_t capacity;
 
     }; // class Queue

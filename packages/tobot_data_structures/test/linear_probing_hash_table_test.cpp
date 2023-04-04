@@ -2,9 +2,9 @@
 
 #include "tobot_data_structures.h"
 
-using namespace Tobot::DataStructures;
+using namespace Tobot::DataStructures::Table;
 
-static fowler_noll_vo_hash_1a_32<int> fnv1a_32;
+static Tobot::DataStructures::fowler_noll_vo_hash_1a_32<int> fnv1a_32;
 
 std::size_t hashFunWrapper(int i, std::size_t size) {
     return fnv1a_32(i, size);

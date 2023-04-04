@@ -2,7 +2,7 @@
 
 #include "tobot_data_structures.h"
 
-using namespace Tobot::DataStructures;
+using namespace Tobot::DataStructures::Tuple;
 
 /*
  * Tests whether the Pair can be created
