@@ -5,46 +5,46 @@
 using namespace Tobot::DataStructures;
 
 /*
- * Tests whether the Graph can be created
+ * Tests whether the UndirectedGraph can be created
  */
-TEST(Graph, CanBeCreated) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanBeCreated) {
+    UndirectedGraph<int> leGraph;
 }
 
 /*
- * Tests whether the Graph can be created with a vector of vertices
+ * Tests whether the UndirectedGraph can be created with a vector of vertices
  */
-TEST(Graph, CanBeCreatedWithVectorOfVertices) {
-    Graph<int> leGraph = {std::vector<int>{1, 2, 3, 4}};
+TEST(UndirectedGraph, CanBeCreatedWithVectorOfVertices) {
+    UndirectedGraph<int> leGraph = {std::vector<int>{1, 2, 3, 4}};
 }
 
 /*
- * Tests whether the Graph can be created with a initializer list of vertices
+ * Tests whether the UndirectedGraph can be created with a initializer list of vertices
  */
-TEST(Graph, CanBeCreatedWithInitializerListOfVertices) {
-    Graph<int> leGraph = {1, 2, 3, 4};
+TEST(UndirectedGraph, CanBeCreatedWithInitializerListOfVertices) {
+    UndirectedGraph<int> leGraph = {1, 2, 3, 4};
 }
 
 /*
- * Tests whether the Graph can be created with initializer list
+ * Tests whether the UndirectedGraph can be created with initializer list
  */
-TEST(Graph, CanBeCreatedWithInitializerList) {
-    Graph<int> leGraph = {{1, 2, 3, 4}, {{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
+TEST(UndirectedGraph, CanBeCreatedWithInitializerList) {
+    UndirectedGraph<int> leGraph = {{1, 2, 3, 4}, {{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
 }
 
 /*
- * Tests whether the Graph can be created with a vector of vertices and a vector of edges
+ * Tests whether the UndirectedGraph can be created with a vector of vertices and a vector of edges
  */
-TEST(Graph, CanBeCreatedWithVectorOfVerticesAndVectorOfEdges) {
-    Graph<int> leGraph = {std::vector<int>{1, 2, 3, 4},
-                          std::vector<std::pair<int, int>>{{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
+TEST(UndirectedGraph, CanBeCreatedWithVectorOfVerticesAndVectorOfEdges) {
+    UndirectedGraph<int> leGraph = {std::vector<int>{1, 2, 3, 4},
+                                    std::vector<std::pair<int, int>>{{1, 2}, {2, 3}, {3, 1}, {4, 1}}};
 }
 
 /*
- * Tests whether the Graph can be copied
+ * Tests whether the UndirectedGraph can be copied
  */
-TEST(Graph, CanBeCopied) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanBeCopied) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -53,7 +53,7 @@ TEST(Graph, CanBeCopied) {
     leGraph.AddEdge(2, 3);
     leGraph.AddEdge(3, 1);
     leGraph.AddEdge(4, 1);
-    Graph<int> leGraph2 = leGraph;
+    UndirectedGraph<int> leGraph2 = leGraph;
     ASSERT_TRUE(leGraph2.ContainsVertex(1));
     ASSERT_TRUE(leGraph2.ContainsVertex(2));
     ASSERT_TRUE(leGraph2.ContainsVertex(3));
@@ -67,8 +67,8 @@ TEST(Graph, CanBeCopied) {
 /*
  * Tests whether the neighbors of a vertex can be retrieved
  */
-TEST(Graph, CanGetNeighbors) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanGetNeighbors) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -87,8 +87,8 @@ TEST(Graph, CanGetNeighbors) {
 /*
  * Tests whether a vertex can be found
  */
-TEST(Graph, CanFindVertex) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanFindVertex) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -104,10 +104,10 @@ TEST(Graph, CanFindVertex) {
 }
 
 /*
- * Tests whether the Graph can be moved
+ * Tests whether the UndirectedGraph can be moved
  */
-TEST(Graph, CanBeMoved) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanBeMoved) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -116,7 +116,7 @@ TEST(Graph, CanBeMoved) {
     leGraph.AddEdge(2, 3);
     leGraph.AddEdge(3, 1);
     leGraph.AddEdge(4, 1);
-    Graph<int> leGraph2 = std::move(leGraph);
+    UndirectedGraph<int> leGraph2 = std::move(leGraph);
     ASSERT_TRUE(leGraph2.ContainsVertex(1));
     ASSERT_TRUE(leGraph2.ContainsVertex(2));
     ASSERT_TRUE(leGraph2.ContainsVertex(3));
@@ -128,38 +128,38 @@ TEST(Graph, CanBeMoved) {
 }
 
 /*
- * Tests whether the Graph can add a vertex
+ * Tests whether the UndirectedGraph can add a vertex
  */
-TEST(Graph, CanAddVertex) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanAddVertex) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
 }
 
 /*
- * Tests whether the Graph can add multiple vertices
+ * Tests whether the UndirectedGraph can add multiple vertices
  */
-TEST(Graph, CanAddMultipleVertices) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanAddMultipleVertices) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
 }
 
 /*
- * Tests whether the Graph can add an edge
+ * Tests whether the UndirectedGraph can add an edge
  */
-TEST(Graph, CanAddEdge) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanAddEdge) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddEdge(1, 2);
 }
 
 /*
- * Tests whether the Graph can add multiple edges
+ * Tests whether the UndirectedGraph can add multiple edges
  */
-TEST(Graph, CanAddMultipleEdges) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanAddMultipleEdges) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -169,10 +169,10 @@ TEST(Graph, CanAddMultipleEdges) {
 }
 
 /*
- * Tests whether the Graph can add multiple edges and remove them
+ * Tests whether the UndirectedGraph can add multiple edges and remove them
  */
-TEST(Graph, CanAddMultipleEdgesAndRemove) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanAddMultipleEdgesAndRemove) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -187,8 +187,8 @@ TEST(Graph, CanAddMultipleEdgesAndRemove) {
 /*
  * Tests whether a edge can be found
  */
-TEST(Graph, CanFindEdge) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanFindEdge) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -208,8 +208,8 @@ TEST(Graph, CanFindEdge) {
 /*
  * Tests whether a component can be found
  */
-TEST(Graph, CanFindComponent) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanFindComponent) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -227,10 +227,10 @@ TEST(Graph, CanFindComponent) {
 }
 
 /*
- * Tests whether the Graph can be cleared
+ * Tests whether the UndirectedGraph can be cleared
  */
-TEST(Graph, CanClear) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanClear) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -251,10 +251,10 @@ TEST(Graph, CanClear) {
 }
 
 /*
- * Tests asyclic Graph
+ * Tests asyclic UndirectedGraph
  */
-TEST(Graph, CanDetectAcyclic) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanDetectAcyclic) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -265,10 +265,10 @@ TEST(Graph, CanDetectAcyclic) {
 }
 
 /*
- * Tests whether the Graph can detect a cycle
+ * Tests whether the UndirectedGraph can detect a cycle
  */
-TEST(Graph, CanDetectCycle) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanDetectCycle) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -283,8 +283,8 @@ TEST(Graph, CanDetectCycle) {
 /*
  * Test equality operator
  */
-TEST(Graph, EqualityOperator) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, EqualityOperator) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -293,7 +293,7 @@ TEST(Graph, EqualityOperator) {
     leGraph.AddEdge(2, 3);
     leGraph.AddEdge(3, 4);
     leGraph.AddEdge(4, 1);
-    Graph<int> leGraph2;
+    UndirectedGraph<int> leGraph2;
     leGraph2.AddVertex(1);
     leGraph2.AddVertex(2);
     leGraph2.AddVertex(3);
@@ -303,7 +303,7 @@ TEST(Graph, EqualityOperator) {
     leGraph2.AddEdge(3, 4);
     leGraph2.AddEdge(4, 1);
     ASSERT_TRUE(leGraph == leGraph2);
-    Graph<int> leGraph3;
+    UndirectedGraph<int> leGraph3;
     leGraph3.AddVertex(1);
     leGraph3.AddVertex(2);
     leGraph3.AddVertex(3);
@@ -319,8 +319,8 @@ TEST(Graph, EqualityOperator) {
 /*
  * Test inequality operator
  */
-TEST(Graph, InequalityOperator) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, InequalityOperator) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -329,7 +329,7 @@ TEST(Graph, InequalityOperator) {
     leGraph.AddEdge(2, 3);
     leGraph.AddEdge(3, 4);
     leGraph.AddEdge(4, 1);
-    Graph<int> leGraph2;
+    UndirectedGraph<int> leGraph2;
     leGraph2.AddVertex(1);
     leGraph2.AddVertex(2);
     leGraph2.AddVertex(3);
@@ -340,7 +340,7 @@ TEST(Graph, InequalityOperator) {
     leGraph2.AddEdge(4, 1);
     leGraph2.AddEdge(1, 3);
     ASSERT_TRUE(leGraph != leGraph2);
-    Graph<int> leGraph3;
+    UndirectedGraph<int> leGraph3;
     leGraph3.AddVertex(1);
     leGraph3.AddVertex(2);
     leGraph3.AddVertex(3);
@@ -355,8 +355,8 @@ TEST(Graph, InequalityOperator) {
 /*
  * Can remove vertex
  */
-TEST(Graph, CanRemoveVertex) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveVertex) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -374,8 +374,8 @@ TEST(Graph, CanRemoveVertex) {
 /*
  * Can remove edge
  */
-TEST(Graph, CanRemoveEdge) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveEdge) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -391,8 +391,8 @@ TEST(Graph, CanRemoveEdge) {
 /*
  * Can remove multiple vertices
  */
-TEST(Graph, CanRemoveMultipleVertices) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveMultipleVertices) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -411,8 +411,8 @@ TEST(Graph, CanRemoveMultipleVertices) {
 /*
  * Can remove multiple edges
  */
-TEST(Graph, CanRemoveMultipleEdges) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveMultipleEdges) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -431,8 +431,8 @@ TEST(Graph, CanRemoveMultipleEdges) {
 /*
  * Can remove all vertices
  */
-TEST(Graph, CanRemoveAllVertices) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveAllVertices) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -451,8 +451,8 @@ TEST(Graph, CanRemoveAllVertices) {
 /*
  * Can remove all edges
  */
-TEST(Graph, CanRemoveAllEdges) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveAllEdges) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -471,8 +471,8 @@ TEST(Graph, CanRemoveAllEdges) {
 /*
  * Can Remove All Edges And Vertices
  */
-TEST(Graph, CanRemoveAllEdgesAndVertices) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveAllEdgesAndVertices) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -495,8 +495,8 @@ TEST(Graph, CanRemoveAllEdgesAndVertices) {
 /*
  * Can remove all cycles
  */
-TEST(Graph, CanRemoveAllCycles) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveAllCycles) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -514,8 +514,8 @@ TEST(Graph, CanRemoveAllCycles) {
 /*
  * Cam remove all connected components
  */
-TEST(Graph, CanRemoveAllConnectedComponents) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveAllConnectedComponents) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);
@@ -533,8 +533,8 @@ TEST(Graph, CanRemoveAllConnectedComponents) {
 /*
  * Can remove everything
  */
-TEST(Graph, CanRemoveEverything) {
-    Graph<int> leGraph;
+TEST(UndirectedGraph, CanRemoveEverything) {
+    UndirectedGraph<int> leGraph;
     leGraph.AddVertex(1);
     leGraph.AddVertex(2);
     leGraph.AddVertex(3);

@@ -6,6 +6,11 @@
 
 namespace Tobot::DataStructures::Tree {
 
+    /// @brief A RedBlackTree is a self-balancing binary search tree.
+    /// @tparam T The type of the value stored in the tree
+    /// @details It is a binary search tree with one extra bit of storage per node: its color, which can be either red
+    /// or black. These colors are used to ensure the tree remains approximately balanced during insertions and
+    /// deletions.
     template <typename T>
     class RedBlackTree : BinarySearchTree<T> {
         public:

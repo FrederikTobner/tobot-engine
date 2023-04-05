@@ -1,5 +1,5 @@
 set(DATA_STRUCTURES_HEADER_FILES
-"graph.h"
+"graph/undirected_graph.h"
 "include/tobot_data_structures.h"
 "tree/avl_tree.h"
 "tree/red_black_tree.h"
