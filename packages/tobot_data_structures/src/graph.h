@@ -2,8 +2,6 @@
 
 #include "pre_compiled_header.h"
 
-#include "tuple/pair.h"
-
 namespace Tobot::DataStructures {
     /// @brief Models a graph
     /// @tparam T The type of the vertices
@@ -15,13 +13,12 @@ namespace Tobot::DataStructures {
             Graph(const Graph<T> & graph);
             Graph(Graph<T> && graph);
             Graph(std::vector<T> vertices);
-            Graph(std::vector<T> vertices, std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges);
+            Graph(std::vector<T> vertices, std::vector<std::pair<T, T>> edges);
             Graph(std::initializer_list<T> vertices);
-            Graph(std::initializer_list<T> vertices,
-                  std::initializer_list<Tobot::DataStructures::Tuple::Pair<T, T>> edges);
-            Graph<T> & operator=(const Graph<T> & graph);
+            Graph(std::initializer_list<T> vertices, std::initializer_list<std::pair<T, T>> edges);
             ~Graph();
 
+            Graph<T> & operator=(const Graph<T> & graph);
             Graph<T> & operator=(Graph<T> && graph);
             bool operator==(const Graph<T> & graph) const;
             bool operator!=(const Graph<T> & graph) const;
@@ -35,7 +32,7 @@ namespace Tobot::DataStructures {
 
             void AddCycle(T vertex1, T vertex2);
             void AddEdge(T vertex1, T vertex2);
-            void AddEdges(std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges);
+            void AddEdges(std::vector<std::pair<T, T>> edges);
             void AddVertex(T vertex);
             void AddVertices(std::vector<T> vertices);
             bool ContainsVertex(T vertex) const;
@@ -46,30 +43,28 @@ namespace Tobot::DataStructures {
             std::size_t GetConnectedComponentCount() const;
             std::vector<std::vector<T>> GetCycles() const;
             std::size_t GetCycleCount() const;
-            std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> GetEdges() const;
+            std::vector<std::pair<T, T>> GetEdges() const;
             std::size_t GetEdgeCount() const;
             std::vector<T> GetVertices() const;
             std::size_t GetVertexCount() const;
             std::vector<T> GetConnectedComponent(T vertex);
             std::vector<T> GetNeighbors(T vertex) const;
             std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices) const;
-            std::vector<T> GetNeighbors(T vertex, std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) const;
+            std::vector<T> GetNeighbors(T vertex, std::vector<std::pair<T, T>> edges) const;
             std::vector<T> GetNeighbors(T vertex, std::vector<std::vector<T>> connected_components) const;
-            std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices,
-                                        std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) const;
-            std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices,
-                                        std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges,
+            std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices, std::vector<std::pair<T, T>> edges) const;
+            std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices, std::vector<std::pair<T, T>> edges,
                                         std::vector<std::vector<T>> connected_components) const;
             std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices, std::vector<T> visited_vertices) const;
             std::vector<T> GetNeighbors(T vertex, std::vector<T> vertices, std::vector<T> visited_vertices,
-                                        std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) const;
+                                        std::vector<std::pair<T, T>> edges) const;
             bool IsAcyclic() const;
             bool IsConnected() const;
             bool IsCyclic() const;
             bool IsEmpty() const;
             void RemoveConnectedComponent(T vertex);
             void RemoveEdge(T vertex1, T vertex2);
-            void RemoveEdges(std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges);
+            void RemoveEdges(std::vector<std::pair<T, T>> edges);
             void RemoveVertex(T vertex);
             void RemoveVertices(std::vector<T> vertices);
             void RemoveAllVertices();
@@ -83,7 +78,7 @@ namespace Tobot::DataStructures {
             /// @brief The vertices in the graph.
             std::vector<T> vertices;
             /// @brief The edges in the graph.
-            std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges;
+            std::vector<std::pair<T, T>> edges;
             /// @brief The connected components in the graph.
             std::vector<std::vector<T>> connected_components;
             /// @brief The cycles in the graph.
@@ -104,7 +99,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     Graph<T>::Graph() {
         vertices = std::vector<T>();
-        edges = std::vector<Tobot::DataStructures::Tuple::Pair<T, T>>();
+        edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
         cycles = std::vector<std::vector<T>>();
     }
@@ -115,7 +110,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     Graph<T>::Graph(const Graph<T> & graph) {
         vertices = std::vector<T>();
-        edges = std::vector<Tobot::DataStructures::Tuple::Pair<T, T>>();
+        edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
         cycles = std::vector<std::vector<T>>();
         vertices.insert(vertices.end(), graph.vertices.begin(), graph.vertices.end());
@@ -142,7 +137,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     Graph<T>::Graph(std::vector<T> vertices) {
         this->vertices = vertices;
-        this->edges = std::vector<Tobot::DataStructures::Tuple::Pair<T, T>>();
+        this->edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
         cycles = std::vector<std::vector<T>>();
     }
@@ -152,7 +147,7 @@ namespace Tobot::DataStructures {
     /// @param vertices The vertices in the graph.
     /// @param edges The edges in the graph.
     template <typename T>
-    Graph<T>::Graph(std::vector<T> vertices, std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) {
+    Graph<T>::Graph(std::vector<T> vertices, std::vector<std::pair<T, T>> edges) {
         this->vertices = vertices;
         this->edges = edges;
         connected_components = std::vector<std::vector<T>>();
@@ -165,7 +160,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     Graph<T>::Graph(std::initializer_list<T> vertices) {
         this->vertices = std::vector<T>(vertices);
-        this->edges = std::vector<Tobot::DataStructures::Tuple::Pair<T, T>>();
+        this->edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
         cycles = std::vector<std::vector<T>>();
     }
@@ -175,12 +170,21 @@ namespace Tobot::DataStructures {
     /// @param vertices The vertices in the graph.
     /// @param edges The edges in the graph.
     template <typename T>
-    Graph<T>::Graph(std::initializer_list<T> vertices,
-                    std::initializer_list<Tobot::DataStructures::Tuple::Pair<T, T>> edges) {
+    Graph<T>::Graph(std::initializer_list<T> vertices, std::initializer_list<std::pair<T, T>> edges) {
         this->vertices = std::vector<T>(vertices);
-        this->edges = std::vector<Tobot::DataStructures::Tuple::Pair<T, T>>(edges);
+        this->edges = std::vector<std::pair<T, T>>(edges);
         connected_components = std::vector<std::vector<T>>();
         cycles = std::vector<std::vector<T>>();
+    }
+
+    /// @brief Destructor for the Graph class.
+    /// @tparam T The type of the vertices in the graph.
+    template <typename T>
+    Graph<T>::~Graph() {
+        vertices.clear();
+        edges.clear();
+        connected_components.clear();
+        cycles.clear();
     }
 
     /// @brief Copy assignment operator for the Graph class.
@@ -209,24 +213,22 @@ namespace Tobot::DataStructures {
         return *this;
     }
 
+    /// @brief Equality operator for the Graph class.
+    /// @tparam T The type of the vertices in the graph.
+    /// @param graph The graph to compare to.
+    /// @return True if the graphs are equal, false otherwise.
     template <typename T>
     bool Graph<T>::operator==(const Graph<T> & graph) const {
         return vertices == graph.vertices && edges == graph.edges;
     }
 
+    /// @brief Inequality operator for the Graph class.
+    /// @tparam T The type of the vertices in the graph.
+    /// @param graph The graph to compare to.
+    /// @return True if the graphs are not equal, false otherwise.
     template <typename T>
     bool Graph<T>::operator!=(const Graph<T> & graph) const {
         return !(*this == graph);
-    }
-
-    /// @brief Destructor for the Graph class.
-    /// @tparam T The type of the vertices in the graph.
-    template <typename T>
-    Graph<T>::~Graph() {
-        vertices.clear();
-        edges.clear();
-        connected_components.clear();
-        cycles.clear();
     }
 
     /// @brief Adds a vertex to the graph.
@@ -262,7 +264,7 @@ namespace Tobot::DataStructures {
             AddVertex(vertex2);
         }
         if (!ContainsEdge(vertex1, vertex2)) {
-            edges.push_back(Tobot::DataStructures::Tuple::Pair<T, T>(vertex1, vertex2));
+            edges.push_back(std::pair<T, T>(vertex1, vertex2));
 
             AddEdgeToConnectedComponents(vertex1, vertex2);
         }
@@ -333,8 +335,8 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param edges The edges to add.
     template <typename T>
-    void Graph<T>::AddEdges(std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) {
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
+    void Graph<T>::AddEdges(std::vector<std::pair<T, T>> edges) {
+        for (std::pair<T, T> edge : edges) {
             AddEdge(edge.GetFirst(), edge.GetSecond());
         }
     }
@@ -346,10 +348,9 @@ namespace Tobot::DataStructures {
     void Graph<T>::RemoveVertex(T vertex) {
         if (ContainsVertex(vertex)) {
             vertices.erase(std::remove(vertices.begin(), vertices.end(), vertex), vertices.end());
-            edges.erase(std::remove_if(edges.begin(), edges.end(),
-                                       [vertex](Tobot::DataStructures::Tuple::Pair<T, T> edge) {
-                                           return edge.GetFirst() == vertex || edge.GetSecond() == vertex;
-                                       }),
+            edges.erase(std::remove_if(
+                            edges.begin(), edges.end(),
+                            [vertex](std::pair<T, T> edge) { return edge.first == vertex || edge.second == vertex; }),
                         edges.end());
         }
     }
@@ -388,9 +389,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     void Graph<T>::RemoveEdge(T vertex1, T vertex2) {
         if (ContainsEdge(vertex1, vertex2)) {
-            edges.erase(
-                std::remove(edges.begin(), edges.end(), Tobot::DataStructures::Tuple::Pair<T, T>(vertex1, vertex2)),
-                edges.end());
+            edges.erase(std::remove(edges.begin(), edges.end(), std::pair<T, T>(vertex1, vertex2)), edges.end());
         }
     }
 
@@ -398,9 +397,9 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param edges The edges to remove.
     template <typename T>
-    void Graph<T>::RemoveEdges(std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) {
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
-            RemoveEdge(edge.GetFirst(), edge.GetSecond());
+    void Graph<T>::RemoveEdges(std::vector<std::pair<T, T>> edges) {
+        for (std::pair<T, T> edge : edges) {
+            RemoveEdge(edge.first, edge.second);
         }
     }
 
@@ -465,8 +464,7 @@ namespace Tobot::DataStructures {
     /// @return True if the edge exists, false otherwise.
     template <typename T>
     bool Graph<T>::ContainsEdge(T vertex1, T vertex2) const {
-        return std::find(edges.begin(), edges.end(), Tobot::DataStructures::Tuple::Pair<T, T>(vertex1, vertex2)) !=
-               edges.end();
+        return std::find(edges.begin(), edges.end(), std::pair<T, T>(vertex1, vertex2)) != edges.end();
     }
 
     /// @brief Checks if a cycle exists in the graph.
@@ -532,7 +530,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The edges of the graph.
     template <typename T>
-    std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> Graph<T>::GetEdges() const {
+    std::vector<std::pair<T, T>> Graph<T>::GetEdges() const {
         return edges;
     }
 
@@ -640,11 +638,11 @@ namespace Tobot::DataStructures {
     template <typename T>
     std::vector<T> Graph<T>::GetNeighbors(T vertex) const {
         std::vector<T> neighbors;
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
-            if (edge.GetFirst() == vertex) {
-                neighbors.push_back(edge.GetSecond());
-            } else if (edge.GetSecond() == vertex) {
-                neighbors.push_back(edge.GetFirst());
+        for (std::pair<T, T> edge : edges) {
+            if (edge.first == vertex) {
+                neighbors.push_back(edge.second);
+            } else if (edge.second == vertex) {
+                neighbors.push_back(edge.first);
             }
         }
         return neighbors;
@@ -656,9 +654,9 @@ namespace Tobot::DataStructures {
     /// @param edges The edges to consider.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) const {
+    std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<std::pair<T, T>> edges) const {
         std::vector<T> neighbors;
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
+        for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex) {
                 neighbors.push_back(edge.GetSecond());
             } else if (edge.GetSecond() == vertex) {
@@ -676,7 +674,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<T> vertices) const {
         std::vector<T> neighbors;
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
+        for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
                 std::find(vertices.begin(), vertices.end(), edge.GetSecond()) != vertices.end()) {
                 neighbors.push_back(edge.GetSecond());
@@ -695,10 +693,9 @@ namespace Tobot::DataStructures {
     /// @param edges The edges to consider.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<T> vertices,
-                                          std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) const {
+    std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<T> vertices, std::vector<std::pair<T, T>> edges) const {
         std::vector<T> neighbors;
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
+        for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
                 std::find(vertices.begin(), vertices.end(), edge.GetSecond()) != vertices.end()) {
                 neighbors.push_back(edge.GetSecond());
@@ -719,7 +716,7 @@ namespace Tobot::DataStructures {
     template <typename T>
     std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<T> vertices, std::vector<T> visited_vertices) const {
         std::vector<T> neighbors;
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
+        for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
                 std::find(vertices.begin(), vertices.end(), edge.GetSecond()) != vertices.end() &&
                 std::find(visited_vertices.begin(), visited_vertices.end(), edge.GetSecond()) ==
@@ -744,9 +741,9 @@ namespace Tobot::DataStructures {
     /// @return The neighbors of the vertex.
     template <typename T>
     std::vector<T> Graph<T>::GetNeighbors(T vertex, std::vector<T> vertices, std::vector<T> visited_vertices,
-                                          std::vector<Tobot::DataStructures::Tuple::Pair<T, T>> edges) const {
+                                          std::vector<std::pair<T, T>> edges) const {
         std::vector<T> neighbors;
-        for (Tobot::DataStructures::Tuple::Pair<T, T> edge : edges) {
+        for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
                 std::find(vertices.begin(), vertices.end(), edge.GetSecond()) != vertices.end() &&
                 std::find(visited_vertices.begin(), visited_vertices.end(), edge.GetSecond()) ==
