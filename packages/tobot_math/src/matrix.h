@@ -38,9 +38,9 @@ namespace Tobot::Math {
             Matrix<T, m, n> & operator=(Matrix<T, m, n> && mat);
             Matrix<T, m, n> & operator*(const T & scalar) const;
             Matrix<T, m, n> & operator+=(const Matrix<T, m, n> & mat);
-            Matrix<T, m, n> & operator-=(const Matrix<T, m, n> & mat) const;
-            Matrix<T, m, n> & operator*=(const T & scalar) const;
-            Matrix<T, m, n> & operator*=(const Matrix<T, m, n> & mat) const;
+            Matrix<T, m, n> & operator-=(const Matrix<T, m, n> & mat);
+            Matrix<T, m, n> & operator*=(const T & scalar);
+            Matrix<T, m, n> & operator*=(const Matrix<T, m, n> & mat);
 
             /// @brief Appends the matrix to the ostream
             /// @param os The ostream to append the matrix to
@@ -66,7 +66,8 @@ namespace Tobot::Math {
             Matrix<T, m, n> adjoint() const;
             Matrix<T, m, n> identity() const;
             /// Implementation of the matrix row
-            struct Row {
+            class Row {
+                public:
                     Matrix & parent;
                     std::size_t row;
                     Row(Matrix & parent, std::size_t row) : parent(parent), row(row) {
@@ -79,7 +80,7 @@ namespace Tobot::Math {
         private:
             std::size_t rowsCount;
             std::size_t columnsCount;
-            std::array<std::array<T, n>, m> m_matrix;
+            mutable std::array<std::array<T, n>, m> m_matrix;
     };
 
     /// @brief Construct a new Matrix object
@@ -280,7 +281,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator-=(const Matrix<T, m, n> & mat) const {
+    Matrix<T, m, n> & Matrix<T, m, n>::operator-=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] -= mat[i][j];
@@ -297,7 +298,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const T & scalar) const {
+    Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const T & scalar) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] *= scalar;
@@ -314,7 +315,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const Matrix<T, m, n> & mat) const {
+    Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] *= mat[i][j];

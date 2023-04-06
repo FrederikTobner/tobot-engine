@@ -2,11 +2,13 @@
 
 #include "matrix.h"
 
+using namespace Tobot::Math;
+
 /*
  * Testing simple matrix creation
  */
 TEST(Matrix, Creation) {
-    Tobot::Math::Matrix<> leMatrix({1, 2, 3, 4, 5, 6, 7, 8, 9});
+    Matrix<> leMatrix({1, 2, 3, 4, 5, 6, 7, 8, 9});
     EXPECT_EQ(3, leMatrix.getRows());
     EXPECT_EQ(3, leMatrix.getColoumns());
     EXPECT_EQ(1, leMatrix(0, 0));
@@ -24,7 +26,7 @@ TEST(Matrix, Creation) {
  * Testing simple matrix creation from list
  */
 TEST(Matrix, CreationFromList) {
-    Tobot::Math::Matrix<> leMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> leMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     EXPECT_EQ(3, leMatrix.getRows());
     EXPECT_EQ(3, leMatrix.getColoumns());
     EXPECT_EQ(1, leMatrix(0, 0));
@@ -39,12 +41,12 @@ TEST(Matrix, CreationFromList) {
 }
 
 /*
- * Testing eaulity operator
+ * Testing eqaulity operator
  */
 TEST(Matrix, Equality) {
-    Tobot::Math::Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Tobot::Math::Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Tobot::Math::Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     ASSERT_TRUE(firstMatrix == secondMatrix);
     ASSERT_FALSE(firstMatrix == thirdMatrix);
 }
@@ -53,9 +55,9 @@ TEST(Matrix, Equality) {
  * Testing inequality operator
  */
 TEST(Matrix, Inequality) {
-    Tobot::Math::Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Tobot::Math::Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Tobot::Math::Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     ASSERT_FALSE(firstMatrix != secondMatrix);
     ASSERT_TRUE(firstMatrix != thirdMatrix);
 }
@@ -64,9 +66,9 @@ TEST(Matrix, Inequality) {
  * Testing determinant calculation
  */
 TEST(Matrix, Determinant) {
-    Tobot::Math::Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Tobot::Math::Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Tobot::Math::Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     ASSERT_EQ(0, firstMatrix.determinant());
     ASSERT_EQ(0, secondMatrix.determinant());
     ASSERT_EQ(0, thirdMatrix.determinant());

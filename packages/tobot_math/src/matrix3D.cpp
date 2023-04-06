@@ -18,6 +18,19 @@ Matrix3D::Matrix3D(float matrix[3][3]) {
     }
 }
 
+Matrix3D::Matrix3D(std::initializer_list<float> list) {
+    int i = 0;
+    int j = 0;
+    for (auto it = list.begin(); it != list.end(); it++) {
+        this->m_data[i][j] = *it;
+        j++;
+        if (j == 3) {
+            j = 0;
+            i++;
+        }
+    }
+}
+
 Matrix3D::Matrix3D(const Matrix3D & matrix) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -157,7 +170,7 @@ Matrix3D & Matrix3D::operator/=(const float & scalar) {
 
 Matrix3D Matrix3D::operator!() const {
     Matrix3D result;
-    float det = this->det();
+    float det = this->determinant();
     if (det == 0) {
         throw std::invalid_argument("Matrix is not invertible");
     }
@@ -182,7 +195,7 @@ float & Matrix3D::operator()(const int & row, const int & column) {
     return this->m_data[row][column];
 }
 
-float Matrix3D::det() const {
+float Matrix3D::determinant() const {
     return this->m_data[0][0] * this->m_data[1][1] * this->m_data[2][2] +
            this->m_data[0][1] * this->m_data[1][2] * this->m_data[2][0] +
            this->m_data[0][2] * this->m_data[1][0] * this->m_data[2][1] -
@@ -191,44 +204,12 @@ float Matrix3D::det() const {
            this->m_data[0][0] * this->m_data[1][2] * this->m_data[2][1];
 }
 
-Matrix3D Matrix3D::identity() {
-    Matrix3D result;
-    for (int i = 0; i < 3; i++) {
-        result.m_data[i][i] = 1;
-    }
-    return result;
-}
-
 Matrix3D Matrix3D::rotation(const float & angle) {
     Matrix3D result;
     result.m_data[0][0] = cos(angle);
     result.m_data[0][1] = -sin(angle);
     result.m_data[1][0] = sin(angle);
     result.m_data[1][1] = cos(angle);
-    result.m_data[2][2] = 1;
-    return result;
-}
-
-Matrix3D Matrix3D::scale(const float & x, const float & y) {
-    Matrix3D result;
-    result.m_data[0][0] = x;
-    result.m_data[1][1] = y;
-    result.m_data[2][2] = 1;
-    return result;
-}
-
-Matrix3D Matrix3D::translation(const float & x, const float & y) {
-    Matrix3D result;
-    result.m_data[0][2] = x;
-    result.m_data[1][2] = y;
-    result.m_data[2][2] = 1;
-    return result;
-}
-
-Matrix3D Matrix3D::shear(const float & x, const float & y) {
-    Matrix3D result;
-    result.m_data[0][1] = x;
-    result.m_data[1][0] = y;
     result.m_data[2][2] = 1;
     return result;
 }

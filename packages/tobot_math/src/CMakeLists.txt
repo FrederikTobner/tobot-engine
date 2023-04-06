@@ -1,4 +1,5 @@
 set(TOBOT_MATH_HEADER_FILES
+"circle.h"
 "concepts.h"
 "dimension.h"
 "vector/vector.h"
@@ -13,6 +14,7 @@ set(TOBOT_MATH_HEADER_FILES
 )
 
 set(TOBOT_MATH_SOURCE_FILES
+"circle.cpp"
 "matrix3d.cpp"
 "point2D.cpp"
 )

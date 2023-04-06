@@ -36,46 +36,6 @@ namespace Tobot::Math {
             /// @return Reference to this
             Point2D & operator=(Point2D &&) noexcept;
 
-            /// @brief Addition operator
-            /// @param point Point to add
-            /// @return Result of addition
-            Point2D operator+(const Point2D &) const;
-
-            /// @brief Subtraction operator
-            /// @param point Point to subtract
-            /// @return Result of subtraction
-            Point2D operator-(const Point2D &) const;
-
-            /// @brief Multiplication operator
-            /// @param point Point to multiply
-            /// @return Result of multiplication
-            Point2D operator*(const float &) const;
-
-            /// @brief Division operator
-            /// @param point Point to divide
-            /// @return Result of division
-            Point2D operator/(const float &) const;
-
-            /// @brief Addition assignment operator
-            /// @param point Point to add
-            /// @return Reference to this
-            Point2D & operator+=(const Point2D &);
-
-            /// @brief Subtraction assignment operator
-            /// @param point Point to subtract
-            /// @return Reference to this
-            Point2D & operator-=(const Point2D &);
-
-            /// @brief Multiplication assignment operator
-            /// @param point Point to multiply
-            /// @return Reference to this
-            Point2D & operator*=(const float &);
-
-            /// @brief Division assignment operator
-            /// @param point Point to divide
-            /// @return Reference to this
-            Point2D & operator/=(const float &);
-
             /// @brief Equality operator
             /// @param point Point to compare
             /// @return True if equal, false otherwise
@@ -108,17 +68,6 @@ namespace Tobot::Math {
             /// @return True if greater than or equal, false otherwise
             float distanceSquared(const float &, const float &) const;
 
-            /// @brief Dot product
-            /// @param point Point to dot product with
-            /// @return Dot product
-            float dot(const Point2D &) const;
-
-            /// @brief Dot product
-            /// @param x X coordinate
-            /// @param y Y coordinate
-            /// @return Dot product
-            float dot(const float &, const float &) const;
-
             /// @brief Cross product
             /// @return Cross product
             float x() const;
@@ -134,22 +83,6 @@ namespace Tobot::Math {
             /// @brief Set Y coordinate
             /// @param y Y coordinate
             void setY(const float &);
-
-            /// @brief Get X coordinate
-            /// @return X coordinate
-            float length() const;
-
-            /// @brief Get Y coordinate
-            /// @return Y coordinate
-            float lengthSquared() const;
-
-            /// @brief Normalize
-            /// @return Reference to this
-            Point2D normalize();
-
-            /// @brief Normalize
-            /// @return Normalized point
-            Point2D normalize() const;
 
         private:
             /// @brief X coordinate

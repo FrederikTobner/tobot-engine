@@ -13,11 +13,14 @@ namespace Tobot::Math {
 
             /// @brief Default constructor
             Matrix3D();
-            ;
 
             /// @brief Constructor
             /// @param data Data to initialize the matrix with
             Matrix3D(float[3][3]);
+
+            /// @brief Constructor
+            /// @param data Data to initialize the matrix with
+            Matrix3D(std::initializer_list<float> data);
 
             /// @brief Copy constructor
             /// @param matrix Matrix to copy
@@ -102,9 +105,9 @@ namespace Tobot::Math {
                 return Row(*this, row);
             }
 
-            /// @brief Equality operator
-            /// @return True if the matrices are equal, false otherwise
-            float det() const;
+            /// @brief Calculates the determinant of the matrix
+            /// @return Determinant of the matrix
+            float determinant() const;
 
             /// Identity matrix
             Matrix3D identity();
@@ -113,24 +116,6 @@ namespace Tobot::Math {
             /// @param angle Angle to rotate by
             /// @return Rotated matrix
             Matrix3D rotation(const float & angle);
-
-            /// Scales the matrix by the given factors
-            /// @param x X factor
-            /// @param y Y factor
-            /// @return Scaled matrix
-            Matrix3D scale(const float & x, const float & y);
-
-            /// Translates the matrix by the given factors
-            /// @param x X factor
-            /// @param y Y factor
-            /// @return Translated matrix
-            Matrix3D translation(const float & x, const float & y);
-
-            /// Shears the matrix by the given factors
-            /// @param x X factor
-            /// @param y Y factor
-            /// @return Sheared matrix
-            Matrix3D shear(const float & x, const float & y);
 
             /// Reflects the matrix by the given angle
             /// @param angle Angle to reflect by
@@ -164,7 +149,10 @@ namespace Tobot::Math {
             /// @return Sheared matrix
             Matrix3D shear(const float & x, const float & y, const Point2D & point);
 
-            struct Row {
+            /// @brief Models a row of a matrix
+            /// @details This struct is used to access the elements of a row of a matrix
+            class Matrix3D::Row {
+                public:
                     Matrix3D & parent;
                     std::size_t row;
                     Row(Matrix3D & parent, std::size_t row) : parent(parent), row(row) {
