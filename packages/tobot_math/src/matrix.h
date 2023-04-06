@@ -14,22 +14,30 @@ namespace Tobot::Math {
     class Matrix {
 
         public:
-            Matrix();
-            Matrix(const Matrix<T, m, n> & mat);
-            Matrix(const std::vector<T> values);
+            // Represents a row of the matrix
+            struct Row;
+
+            explicit Matrix();
+            explicit Matrix(const Matrix<T, m, n> & mat);
+            explicit Matrix(const std::vector<T> values);
             Matrix(const std::initializer_list<T> list);
-            Matrix(Matrix<T, m, n> && mat);
+            explicit Matrix(Matrix<T, m, n> && mat);
+            ~Matrix();
 
             inline T & operator()(std::size_t i, std::size_t j);
             inline T & operator()(std::size_t i, std::size_t j) const;
-            inline std::array<T, n> & operator[](std::size_t i);
-            inline std::array<T, n> & operator[](std::size_t i) const;
+            Row operator[](std::size_t row) {
+                return Row(*this, row);
+            }
+            Row & operator[](std::size_t row) const {
+                return Row(*this, row);
+            }
             bool operator==(const Matrix<T, m, n> & mat) const;
             bool operator!=(const Matrix<T, m, n> & mat) const;
             Matrix<T, m, n> & operator=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator=(Matrix<T, m, n> && mat);
             Matrix<T, m, n> & operator*(const T & scalar) const;
-            Matrix<T, m, n> & operator+=(const Matrix<T, m, n> & mat) const;
+            Matrix<T, m, n> & operator+=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator-=(const Matrix<T, m, n> & mat) const;
             Matrix<T, m, n> & operator*=(const T & scalar) const;
             Matrix<T, m, n> & operator*=(const Matrix<T, m, n> & mat) const;
@@ -56,6 +64,17 @@ namespace Tobot::Math {
             Matrix<T, m, n> inverse() const;
             Matrix<T, m, n> transpose() const;
             Matrix<T, m, n> adjoint() const;
+            Matrix<T, m, n> identity() const;
+            /// Implementation of the matrix row
+            struct Row {
+                    Matrix & parent;
+                    std::size_t row;
+                    Row(Matrix & parent, std::size_t row) : parent(parent), row(row) {
+                    }
+                    T & operator[](std::size_t col) {
+                        return parent(row, col);
+                    }
+            };
 
         private:
             std::size_t rowsCount;
@@ -97,23 +116,29 @@ namespace Tobot::Math {
         m_matrix = std::move(mat.m_matrix);
     }
 
-    /// @brief Construct a new Matrix object from a vector of values
-    /// @tparam T The underlying type of the matrix
-    /// @tparam m The number of rows in the matrix
-    /// @tparam n The number of coloumns in the matrix
-    /// @param values The vector of values to construct the matrix from
+    /**
+     * @brief Construct a new Matrix object
+     *
+     * @tparam T the type of value used to build the matrix
+     * @tparam m the number of rows in the matrix
+     * @tparam n the number of columns in the matrix
+     * @param values the values for the matrix in row-major order
+     */
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
 
+        // check that the matrix invariants are satisfied
         static_assert(m > 0 && n > 0);
+        // check that the values vector is not empty
         if (values.empty()) {
             throw std::invalid_argument("The provided vector is empty");
         }
-
+        // check that the number of values is equal to rowsCount * columnsCount
         if (rowsCount * columnsCount != values.size()) {
             throw std::runtime_error("Total number of matrix values does not match the rows and coloumns provided");
         }
+        // populate the matrix with the provided values
         for (std::size_t i = 0; i < columnsCount; i++) {
             for (std::size_t j = 0; j < rowsCount; j++) {
                 this->m_matrix[i][j] = values[i * rowsCount + j];
@@ -146,6 +171,11 @@ namespace Tobot::Math {
         }
     }
 
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    Matrix<T, m, n>::~Matrix() {
+    }
+
     /// @brief Get a reference to the value at the specified row and coloumn
     /// @tparam T The underlying type of the matrix
     /// @tparam m The number of rows in the matrix
@@ -172,32 +202,6 @@ namespace Tobot::Math {
     inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
         assert(i < m && j < n);
         return this->m_matrix[i][j];
-    }
-
-    /// @brief Get a reference to the row at the specified index
-    /// @tparam T The underlying type of the matrix
-    /// @tparam m The number of rows in the matrix
-    /// @tparam n The number of coloumns in the matrix
-    /// @param i The row index
-    /// @return std::array<T, n>& The row at the specified index
-    template <typename T, std::size_t m, std::size_t n>
-        requires Arithmetic<T>
-    inline std::array<T, n> & Matrix<T, m, n>::operator[](std::size_t i) {
-        assert(i < m);
-        return this->m_matrix[i];
-    }
-
-    /// @brief Get a const reference to the row at the specified index
-    /// @tparam T The underlying type of the matrix
-    /// @tparam m The number of rows in the matrix
-    /// @tparam n The number of coloumns in the matrix
-    /// @param i The row index
-    /// @return std::array<T, n>& The row at the specified index
-    template <typename T, std::size_t m, std::size_t n>
-        requires Arithmetic<T>
-    inline std::array<T, n> & Matrix<T, m, n>::operator[](std::size_t i) const {
-        assert(i < m);
-        return this->m_matrix[i];
     }
 
     /// @brief Copy assignment operator
@@ -259,7 +263,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator+=(const Matrix<T, m, n> & mat) const {
+    Matrix<T, m, n> & Matrix<T, m, n>::operator+=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] += mat[i][j];
@@ -411,13 +415,17 @@ namespace Tobot::Math {
         return std::pow(-1, i + j) * this->minor(i, j);
     }
 
-    /// Calculates the minor of the matrix at the specified row and coloumn
-    /// @tparam T The underlying type of the matrix
-    /// @tparam m The number of rows in the matrix
-    /// @tparam n The number of coloumns in the matrix
-    /// @param i The row index
-    /// @param j The coloumn index
-    /// @return T The minor of the matrix at the specified row and coloumn
+    /**
+     * Calculates the minor of the matrix at the specified row and column
+     *
+     * @tparam T The underlying type of the matrix
+     * @tparam m The number of rows in the matrix
+     * @tparam n The number of columns in the matrix
+     * @param i The row index
+     * @param j The column index
+     *
+     * @return T The minor of the matrix at the specified row and column
+     */
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     inline T Matrix<T, m, n>::minor(std::size_t i, std::size_t j) const {
@@ -493,6 +501,23 @@ namespace Tobot::Math {
             }
         }
         return adjoint;
+    }
+
+    /// @brief Calculates the identity matrix of the same size as the matrix
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @return Matrix<T, m, n> The identity matrix of the same size as the matrix
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    Matrix<T, m, n> Matrix<T, m, n>::identity() const {
+        Matrix<T, m, n> identity();
+        for (std::size_t i = 0; i < rowsCount; i++) {
+            for (std::size_t j = 0; j < columnsCount; j++) {
+                identity[i][j] = (i == j) ? 1 : 0;
+            }
+        }
+        return identity;
     }
 
 } // namespace Tobot::Math

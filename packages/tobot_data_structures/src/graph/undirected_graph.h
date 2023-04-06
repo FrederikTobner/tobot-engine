@@ -109,15 +109,10 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to copy.
     template <typename T>
     UndirectedGraph<T>::UndirectedGraph(const UndirectedGraph<T> & graph) {
-        vertices = std::vector<T>();
-        edges = std::vector<std::pair<T, T>>();
-        connected_components = std::vector<std::vector<T>>();
-        cycles = std::vector<std::vector<T>>();
-        vertices.insert(vertices.end(), graph.vertices.begin(), graph.vertices.end());
-        edges.insert(edges.end(), graph.edges.begin(), graph.edges.end());
-        connected_components.insert(connected_components.end(), graph.connected_components.begin(),
-                                    graph.connected_components.end());
-        cycles.insert(cycles.end(), graph.cycles.begin(), graph.cycles.end());
+        vertices = std::vector<T>(graph.vertices);         // deep copy of the vertices
+        edges = std::vector<std::pair<T, T>>(graph.edges); // deep copy of the edges
+        connected_components = graph.connected_components; // shallow copy of the connected_components
+        cycles = graph.cycles;                             // shallow copy of the cycles
     }
 
     /// @brief Move constructor for the Graph class.
@@ -745,20 +740,28 @@ namespace Tobot::DataStructures {
     template <typename T>
     std::vector<T> UndirectedGraph<T>::GetNeighbors(T vertex, std::vector<T> vertices, std::vector<T> visited_vertices,
                                                     std::vector<std::pair<T, T>> edges) const {
+        // Create an empty vector to store the neighbors of the input vertex.
         std::vector<T> neighbors;
+        // loop through all edges to find the neighbors of the input vertex.
         for (std::pair<T, T> edge : edges) {
+            // If the first vertex of the edge is equal to the input vertex and the second vertex of the edge is within
+            // the input vertices and not included in the visited vertices, add it to the vector of neighbors.
             if (edge.GetFirst() == vertex &&
                 std::find(vertices.begin(), vertices.end(), edge.GetSecond()) != vertices.end() &&
                 std::find(visited_vertices.begin(), visited_vertices.end(), edge.GetSecond()) ==
                     visited_vertices.end()) {
                 neighbors.push_back(edge.GetSecond());
-            } else if (edge.GetSecond() == vertex &&
-                       std::find(vertices.begin(), vertices.end(), edge.GetFirst()) != vertices.end() &&
-                       std::find(visited_vertices.begin(), visited_vertices.end(), edge.GetFirst()) ==
-                           visited_vertices.end()) {
+            } // If the second vertex of the edge is equal to the input vertex and the first vertex of the edge is
+              // within
+              // the input vertices and not included in the visited vertices, add it to the vector of neighbors.
+            else if (edge.GetSecond() == vertex &&
+                     std::find(vertices.begin(), vertices.end(), edge.GetFirst()) != vertices.end() &&
+                     std::find(visited_vertices.begin(), visited_vertices.end(), edge.GetFirst()) ==
+                         visited_vertices.end()) {
                 neighbors.push_back(edge.GetFirst());
             }
         }
+        // Return the vector of neighbors.
         return neighbors;
     }
 
@@ -794,16 +797,24 @@ namespace Tobot::DataStructures {
         return cycles.size();
     }
 
-    /// @brief Gets the connected components of the graph.
-    /// @tparam T The type of the vertices in the graph.
-    /// @param vertex The vertex to start the search from.
-    /// @param visited_vertices The vertices that have been visited.
-    /// @param connected_component The connected component that has been found.
+    /**
+     * The 'FindConnectedComponent' function searches all neighbors of a given vertex recursively
+     * and finds all the vertices that the given vertex is connected to.
+     *
+     * @tparam T (typename) The data type of the vertices
+     * @param vertex (T) The initial vertex in the graph
+     * @param visited_vertices (std::vector<T> &) A vector of visited vertices (passed as reference)
+     * @param connected_component (std::vector<T> &) A vector of vertices that all belong to the same connected
+     * component (passed as reference)
+     */
     template <typename T>
     void UndirectedGraph<T>::FindConnectedComponent(T vertex, std::vector<T> & visited_vertices,
                                                     std::vector<T> & connected_component) const {
+        // Adds the initial vertex as visited and part of the connected component
         visited_vertices.push_back(vertex);
         connected_component.push_back(vertex);
+
+        // Finds and visits all unvisited neighbors of the vertex
         std::vector<T> neighbors = GetNeighbors(vertex, vertices, visited_vertices);
         for (T neighbor : neighbors) {
             if (std::find(visited_vertices.begin(), visited_vertices.end(), neighbor) == visited_vertices.end()) {

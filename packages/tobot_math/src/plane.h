@@ -5,6 +5,7 @@
 #include "concepts.h"
 #include "vector/vector3d.h"
 
+/// @brief A plane in 3D space.
 namespace Tobot::Math {
     template <typename T = float>
         requires Arithmetic<T>

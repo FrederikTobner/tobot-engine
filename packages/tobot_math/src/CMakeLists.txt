@@ -6,12 +6,18 @@ set(TOBOT_MATH_HEADER_FILES
 "vector/vector3d.h"
 "vector/vector4d.h"
 "matrix.h"
+"matrix3d.h"
 "plane.h"
+"point2D.h"
 "include/tobot_math.h"
 )
 
-add_library(tobot-math INTERFACE)
-target_sources(tobot-math INTERFACE ${TOBOT_MATH_HEADER_FILES})
+set(TOBOT_MATH_SOURCE_FILES
+"matrix3d.cpp"
+"point2D.cpp"
+)
+
+add_library(tobot-math ${TOBOT_MATH_HEADER_FILES} ${TOBOT_MATH_SOURCE_FILES})
 set_target_properties(tobot-math PROPERTIES LINKER_LANGUAGE CXX)
 
 # Includes Libmath under unix-like systems

@@ -134,10 +134,7 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     Vector4D<T>::Vector4D(std::initializer_list<T> list) {
-        if (list.size() != 4) {
-            throw std::invalid_argument("The list must have exactly 4 elements");
-        }
-
+        assert(list.size() == 4);
         std::size_t i = 0;
         for (auto it = list.begin(); it != list.end(); ++it) {
             switch (i) {
@@ -251,7 +248,7 @@ namespace Tobot::Math {
     template <typename T>
         requires Arithmetic<T>
     T Vector4D<T>::operator()(std::size_t i) const {
-        assert(i < 4);
+        assert(4 > i);
         switch (i) {
         case 0:
             return this->x;

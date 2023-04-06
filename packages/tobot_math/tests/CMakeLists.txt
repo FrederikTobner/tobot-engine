@@ -15,6 +15,7 @@ set(TOBOT_MATH_TESTS tobot-math_TESTS)
 set(TEST_SOURCES
 "main.cpp"
 "matrix_test.cpp"
+"matrix3D_test.cpp"
 "plane_test.cpp"
 "vector2d_test.cpp"
 "vector3d_test.cpp"
