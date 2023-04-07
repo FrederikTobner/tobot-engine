@@ -5,17 +5,17 @@
 
 #pragma once
 
-#include "../logging/logger.h"
+#include <iostream>
 namespace Tobot::Tooling::Debug {
 // Asserts are only defined for debug builds
-#ifdef BUILD_TYPE_DEBUG
-#define TOBOT_ASSERT(condition)                                                                                   \
-    {                                                                                                             \
-        if (!(condition)) {                                                                                       \
-            printf("Assertion Failed: %s\n\tin file %s, line %i\n\tfunction: %s", #condition, __FILE__, __LINE__, \
-                   __PRETTY_FUNCTION__);                                                                          \
-            __debugbreak();                                                                                       \
-        }                                                                                                         \
+#if BUILD_TYPE_DEBUG
+#define TOBOT_ASSERT(condition)                                                                                                        \
+    {                                                                                                                                  \
+        if (!(condition)) {                                                                                                            \
+            std::cout << "Assertion Failed: "<< #condition << "\n\tin file" << __FILE__ << ", line " << __LINE__ << "\n\tfunction: "<< \
+                   __PRETTY_FUNCTION__);                                                                                               \
+            __debugbreak();                                                                                                            \
+        }                                                                                                                              \
     }
 #else
 #define TOBOT_ASSERT(x)

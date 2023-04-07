@@ -7,6 +7,7 @@ set(TOBOT_MATH_HEADER_FILES
 "include/tobot_math.h"
 "shape/circle.h"
 "shape/polygon.h"
+"shape/rectangle.h"
 "shape/triangle.h"
 "vector/vector.h"
 "vector/vector2d.h"

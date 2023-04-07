@@ -6,6 +6,7 @@
 #include "../point2D.h"
 #include "../shape/circle.h"
 #include "../shape/polygon.h"
+#include "../shape/rectangle.h"
 #include "../shape/triangle.h"
 #include "../vector/vector.h"
 #include "../vector/vector2d.h"
