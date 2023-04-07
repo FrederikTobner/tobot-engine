@@ -1,0 +1,200 @@
+#pragma once
+
+#include "../pre_compiled_header.h"
+
+#include "../point2d.h"
+
+namespace Tobot::Math {
+    /// @brief Models a Cicle in 2D space
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    class Circle {
+        public:
+            /// @brief Default constructor
+            Circle() = default;
+
+            /// @brief Constructor
+            /// @param center Center of the circle
+            /// @param radius Radius of the circle
+            Circle(const Point2D<T> & center, const T & radius);
+
+            /// @brief Copy constructor
+            /// @param circle Circle to copy
+            Circle(const Circle<T> & circle);
+
+            /// @brief Move constructor
+            /// @param circle Circle to move
+            Circle(Circle<T> &&) noexcept;
+
+            /// @brief Destructor
+            ~Circle() = default;
+
+            /// @brief Copy assignment operator
+            /// @param circle Circle to copy
+            /// @return Reference to this
+            Circle<T> & operator=(const Circle<T> &);
+
+            /// @brief Move assignment operator
+            /// @param circle Circle to move
+            /// @return Reference to this
+            Circle<T> & operator=(Circle<T> &&) noexcept;
+
+            /// @brief Equality operator
+            /// @param circle Circle to compare
+            /// @return True if equal, false otherwise
+            bool operator==(const Circle<T> &) const;
+
+            /// @brief Inequality operator
+            /// @param circle Circle to compare
+            /// @return True if not equal, false otherwise
+            bool operator!=(const Circle<T> &) const;
+
+            /// @brief Less than operator
+            /// @param circle Circle to compare
+            /// @return True if less than, false otherwise
+            bool operator<(const Circle<T> &) const;
+
+            /// @brief Greater than operator
+            /// @param circle Circle to compare
+            /// @return True if greater than, false otherwise
+            bool operator>(const Circle<T> &) const;
+
+            /// @brief Less than or equal operator
+            /// @param circle Circle to compare
+            /// @return True if less than or equal, false otherwise
+            bool operator<=(const Circle<T> &) const;
+
+            /// @brief Greater than or equal operator
+            /// @param circle Circle to compare
+            /// @return True if greater than or equal, false otherwise
+            bool operator>=(const Circle<T> &) const;
+
+            /// @brief Get the center of the circle
+            /// @return Center of the circle
+            Point2D<T> center() const;
+
+            /// @brief Get the radius of the circle
+            /// @return Radius of the circle
+            float radius() const;
+
+            /// @brief Set the center of the circle
+            /// @param center Center of the circle
+            void setCenter(const Point2D<T> &);
+
+            /// @brief Set the radius of the circle
+            /// @param radius Radius of the circle
+            void setRadius(const T &);
+
+            /// @brief Get the area of the circle
+            /// @return Area of the circle
+            T getArea() const;
+
+        private:
+            Point2D<T> m_center;
+            T m_radius;
+    };
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Circle::Circle(const Point2D<T> & center, const T & radius) {
+        m_center = center;
+        m_radius = radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Circle::Circle(const Circle<T> & circle) {
+        m_center = circle.m_center;
+        m_radius = circle.m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Circle::Circle(Circle<T> && circle) noexcept {
+        m_center = circle.m_center;
+        m_radius = circle.m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Circle<T> & Circle::operator=(const Circle<T> & circle) {
+        m_center = circle.m_center;
+        m_radius = circle.m_radius;
+        return *this;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Circle<T> & Circle::operator=(Circle<T> && circle) noexcept {
+        m_center = circle.m_center;
+        m_radius = circle.m_radius;
+        return *this;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T> bool
+    Circle::operator==(const Circle<T> & circle) const {
+        return (m_center == circle.m_center) && (m_radius == circle.m_radius);
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T> bool
+    Circle::operator!=(const Circle<T> & circle) const {
+        return (m_center != circle.m_center) || (m_radius != circle.m_radius);
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T> bool
+    Circle::operator<(const Circle<T> & circle) const {
+        return m_radius < circle.m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T> bool
+    Circle::operator>(const Circle<T> & circle) const {
+        return m_radius > circle.m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T> bool
+    Circle::operator<=(const Circle<T> & circle) const {
+        return m_radius <= circle.m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T> bool
+    Circle::operator>=(const Circle<T> & circle) const {
+        return m_radius >= circle.m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Point2D<float> Circle::center() const {
+        return m_center;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    float Circle::radius() const {
+        return m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    void Circle::setCenter(const Point2D<T> & center) {
+        m_center = center;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    void Circle::setRadius(const T & radius) {
+        m_radius = radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Circle::getArea() const {
+        return MATH_PI * pow(m_radius, 2);
+    }
+
+} // namespace Tobot::Math

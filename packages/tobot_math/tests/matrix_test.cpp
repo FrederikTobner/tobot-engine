@@ -63,6 +63,25 @@ TEST(Matrix, Inequality) {
 }
 
 /*
+ * Testing addition operator
+ */
+TEST(Matrix, Addition) {
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    Matrix<> fourthMatrix = firstMatrix + secondMatrix;
+    ASSERT_EQ(2, fourthMatrix(0, 0));
+    ASSERT_EQ(4, fourthMatrix(0, 1));
+    ASSERT_EQ(6, fourthMatrix(0, 2));
+    ASSERT_EQ(8, fourthMatrix(1, 0));
+    ASSERT_EQ(10, fourthMatrix(1, 1));
+    ASSERT_EQ(12, fourthMatrix(1, 2));
+    ASSERT_EQ(14, fourthMatrix(2, 0));
+    ASSERT_EQ(16, fourthMatrix(2, 1));
+    ASSERT_EQ(18, fourthMatrix(2, 2));
+}
+
+/*
  * Testing determinant calculation
  */
 TEST(Matrix, Determinant) {

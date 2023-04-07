@@ -18,10 +18,10 @@ namespace Tobot::Math {
             class Row;
 
             explicit Matrix();
-            explicit Matrix(const Matrix<T, m, n> & mat);
+            Matrix(const Matrix<T, m, n> & mat);
             explicit Matrix(const std::vector<T> values);
             Matrix(const std::initializer_list<T> list);
-            explicit Matrix(Matrix<T, m, n> && mat);
+            Matrix(Matrix<T, m, n> && mat);
             Matrix(std::array<std::array<T, n>, m> values);
             ~Matrix();
 
@@ -37,26 +37,13 @@ namespace Tobot::Math {
             bool operator!=(const Matrix<T, m, n> & mat) const;
             Matrix<T, m, n> & operator=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator=(Matrix<T, m, n> && mat);
+            Matrix<T, m, n> operator+(const Matrix<T, m, n> & mat) const;
             Matrix<T, m, n> & operator*(const T & scalar) const;
             Matrix<T, m, n> & operator+=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator-=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator*=(const T & scalar);
             Matrix<T, m, n> & operator*=(const Matrix<T, m, n> & mat);
             inline Matrix<T, m, n> operator!();
-
-            /// @brief Appends the matrix to the ostream
-            /// @param os The ostream to append the matrix to
-            /// @param mat The matrix to append to the ostream
-            /// @return std::ostream& The ostream with the matrix appended
-            friend std::ostream operator<<(std::ostream & os, const Matrix<T, m, n> & mat) {
-                for (std::size_t i = 0; i < mat.getRows(); i++) {
-                    for (std::size_t j = 0; j < mat.getColoumns(); j++) {
-                        os << mat(i, j) << " ";
-                    }
-                    os << std::endl;
-                }
-                return os;
-            }
 
             inline std::size_t & getRows();
             inline std::size_t & getColoumns();
@@ -82,7 +69,7 @@ namespace Tobot::Math {
         private:
             std::size_t rowsCount;
             std::size_t columnsCount;
-            mutable std::array<std::array<T, n>, m> m_matrix;
+            std::array<std::array<T, n>, m> m_matrix;
     };
 
     /// @brief Construct a new Matrix object
@@ -245,6 +232,18 @@ namespace Tobot::Math {
             }
         }
         return *this;
+    }
+
+    template <typename T, std::size_t m, std::size_t n>
+        requires ArithmeticFloatingPoint<T>
+    Matrix<T, m, n> Matrix<T, m, n>::operator+(const Matrix<T, m, n> & mat) const {
+        std::array<std::array<T, n>, m> result;
+        for (std::size_t i = 0; i < rowsCount; i++) {
+            for (std::size_t j = 0; j < columnsCount; j++) {
+                result[i][j] = this->m_matrix[i][j] + mat.m_matrix[i][j];
+            }
+        }
+        return Matrix<T, m, n>(result);
     }
 
     /// Multiplies the Matrix by a scalar
