@@ -41,6 +41,46 @@ TEST(Matrix, CreationFromList) {
 }
 
 /*
+ * Testing copy constructor
+ */
+TEST(Matrix, Copy) {
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix(firstMatrix);
+    firstMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    EXPECT_EQ(3, secondMatrix.getRows());
+    EXPECT_EQ(3, secondMatrix.getColoumns());
+    EXPECT_EQ(1, secondMatrix(0, 0));
+    EXPECT_EQ(2, secondMatrix(0, 1));
+    EXPECT_EQ(3, secondMatrix(0, 2));
+    EXPECT_EQ(4, secondMatrix(1, 0));
+    EXPECT_EQ(5, secondMatrix(1, 1));
+    EXPECT_EQ(6, secondMatrix(1, 2));
+    EXPECT_EQ(7, secondMatrix(2, 0));
+    EXPECT_EQ(8, secondMatrix(2, 1));
+    EXPECT_EQ(9, secondMatrix(2, 2));
+}
+
+/*
+ * Testing move constructor
+ */
+TEST(Matrix, Move) {
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix(std::move(firstMatrix));
+    firstMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    EXPECT_EQ(3, secondMatrix.getRows());
+    EXPECT_EQ(3, secondMatrix.getColoumns());
+    EXPECT_EQ(1, secondMatrix(0, 0));
+    EXPECT_EQ(2, secondMatrix(0, 1));
+    EXPECT_EQ(3, secondMatrix(0, 2));
+    EXPECT_EQ(4, secondMatrix(1, 0));
+    EXPECT_EQ(5, secondMatrix(1, 1));
+    EXPECT_EQ(6, secondMatrix(1, 2));
+    EXPECT_EQ(7, secondMatrix(2, 0));
+    EXPECT_EQ(8, secondMatrix(2, 1));
+    EXPECT_EQ(9, secondMatrix(2, 2));
+}
+
+/*
  * Testing eqaulity operator
  */
 TEST(Matrix, Equality) {
@@ -98,6 +138,44 @@ TEST(Matrix, Subtraction) {
     ASSERT_EQ(0, fourthMatrix(2, 0));
     ASSERT_EQ(0, fourthMatrix(2, 1));
     ASSERT_EQ(0, fourthMatrix(2, 2));
+}
+
+/*
+ * Testing multiplication operator with a scalar
+ */
+TEST(Matrix, ScalarMultiplication) {
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {2, 4, 6, 8, 10, 12, 14, 16, 18};
+
+    Matrix<> fourthMatrix = firstMatrix * 2;
+    ASSERT_EQ(2, fourthMatrix(0, 0));
+    ASSERT_EQ(4, fourthMatrix(0, 1));
+    ASSERT_EQ(6, fourthMatrix(0, 2));
+    ASSERT_EQ(8, fourthMatrix(1, 0));
+    ASSERT_EQ(10, fourthMatrix(1, 1));
+    ASSERT_EQ(12, fourthMatrix(1, 2));
+    ASSERT_EQ(14, fourthMatrix(2, 0));
+    ASSERT_EQ(16, fourthMatrix(2, 1));
+    ASSERT_EQ(18, fourthMatrix(2, 2));
+}
+
+/*
+ * Testing division operator with a scalar
+ */
+TEST(Matrix, ScalarDivision) {
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {2, 4, 6, 8, 10, 12, 14, 16, 18};
+
+    Matrix<> fourthMatrix = secondMatrix / 2;
+    ASSERT_EQ(1, fourthMatrix(0, 0));
+    ASSERT_EQ(2, fourthMatrix(0, 1));
+    ASSERT_EQ(3, fourthMatrix(0, 2));
+    ASSERT_EQ(4, fourthMatrix(1, 0));
+    ASSERT_EQ(5, fourthMatrix(1, 1));
+    ASSERT_EQ(6, fourthMatrix(1, 2));
+    ASSERT_EQ(7, fourthMatrix(2, 0));
+    ASSERT_EQ(8, fourthMatrix(2, 1));
+    ASSERT_EQ(9, fourthMatrix(2, 2));
 }
 
 /*

@@ -16,6 +16,46 @@ TEST(Triangle, Creation) {
 }
 
 /*
+ * Testing copy constructor
+ */
+TEST(Triangle, Copy) {
+    Point2D<> point1(1, 2);
+    Point2D<> point2(3, 4);
+    Point2D<> point3(5, 6);
+    Triangle2D<> firstTriangle(point1, point2, point3);
+    Triangle2D<> secondTriangle(firstTriangle);
+
+    firstTriangle = {Point2D<>(4, 5), Point2D<>(6, 7), Point2D<>(8, 9)};
+
+    EXPECT_EQ(1, secondTriangle.getA().x());
+    EXPECT_EQ(2, secondTriangle.getA().y());
+    EXPECT_EQ(3, secondTriangle.getB().x());
+    EXPECT_EQ(4, secondTriangle.getB().y());
+    EXPECT_EQ(5, secondTriangle.getC().x());
+    EXPECT_EQ(6, secondTriangle.getC().y());
+}
+
+/*
+ * Testing move constructor
+ */
+TEST(Triangle, Move) {
+    Point2D<> point1(1, 2);
+    Point2D<> point2(3, 4);
+    Point2D<> point3(5, 6);
+    Triangle2D<> firstTriangle(point1, point2, point3);
+    Triangle2D<> secondTriangle(std::move(firstTriangle));
+
+    firstTriangle = {Point2D<>(4, 5), Point2D<>(6, 7), Point2D<>(8, 9)};
+
+    EXPECT_EQ(1, secondTriangle.getA().x());
+    EXPECT_EQ(2, secondTriangle.getA().y());
+    EXPECT_EQ(3, secondTriangle.getB().x());
+    EXPECT_EQ(4, secondTriangle.getB().y());
+    EXPECT_EQ(5, secondTriangle.getC().x());
+    EXPECT_EQ(6, secondTriangle.getC().y());
+}
+
+/*
  * Testing triangle area
  */
 TEST(Triangle, Area) {

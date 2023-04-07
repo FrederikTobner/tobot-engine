@@ -18,6 +18,22 @@ TEST(Vector3D, Copy) {
     Vector3D<> firstVector(5, 3, 6);
     Vector3D<> secondVector(firstVector);
 
+    firstVector = {4, 5, 6};
+
+    EXPECT_EQ(5, secondVector.x);
+    EXPECT_EQ(3, secondVector.y);
+    EXPECT_EQ(6, secondVector.z);
+}
+
+/*
+ * Testing move constructor
+ */
+TEST(Vector3D, Move) {
+    Vector3D<> firstVector(5, 3, 6);
+    Vector3D<> secondVector(std::move(firstVector));
+
+    firstVector = {4, 5, 6};
+
     EXPECT_EQ(5, secondVector.x);
     EXPECT_EQ(3, secondVector.y);
     EXPECT_EQ(6, secondVector.z);

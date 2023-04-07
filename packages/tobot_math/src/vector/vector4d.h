@@ -22,6 +22,9 @@ namespace Tobot::Math {
             Vector4D(T x, T y, T z, T w);
             Vector4D(Vector4D & vec);
             Vector4D(std::initializer_list<T> list);
+            Vector4D(const Vector4D && vec);
+            Vector4D<T> & operator=(const Vector4D<T> & vec);
+            Vector4D<T> & operator=(const Vector4D<T> && vec);
 
             /// @brief Adds two vectors together
             /// @param lVec The left vector
@@ -153,6 +156,42 @@ namespace Tobot::Math {
             }
             ++i;
         }
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T>::Vector4D(const Vector4D<T> && vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    /// @return Vector4D<T> The copy of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator=(const Vector4D<T> & vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        this->z = vec.z;
+        this->w = vec.w;
+        return *this;
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    /// @return Vector4D<T> The copy of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator=(const Vector4D<T> && vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        this->z = vec.z;
+        this->w = vec.w;
+        return *this;
     }
 
     /// @brief Adds two vectors together

@@ -14,12 +14,21 @@ TEST(Rectangle, Creation) {
 }
 
 /*
+ * Testing rectangle creation with list
+ */
+TEST(Rectangle, CreationWithList) {
+    Rectangle2D<> rectangle = {1, 2, 2, 2, 0};
+}
+
+/*
  * Testing copy constructor
  */
 TEST(Rectangle, Copy) {
     Point2D<> point1(1, 2);
     Rectangle2D<> firstRectangle(point1, 2, 2, 0);
     Rectangle2D<> secondRectangle(firstRectangle);
+
+    firstRectangle = {4, 5, 2, 2, 0};
 
     EXPECT_EQ(1, secondRectangle.getCenter().x());
     EXPECT_EQ(2, secondRectangle.getCenter().y());

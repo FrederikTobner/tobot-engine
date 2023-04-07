@@ -18,6 +18,10 @@ namespace Tobot::Math {
             /// @param radius Radius of the circle
             Circle(const Point2D<T> & center, const T & radius);
 
+            /// @brief Constructor
+            /// @param list List of values to initialize the circle
+            Circle(const std::initializer_list<T> list);
+
             /// @brief Copy constructor
             /// @param circle Circle to copy
             Circle(const Circle<T> & circle);
@@ -105,6 +109,18 @@ namespace Tobot::Math {
     Circle<T>::Circle(const Point2D<T> & center, const T & radius) {
         m_center = center;
         m_radius = radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Circle<T>::Circle(std::initializer_list<T> list) {
+        if (list.size() != 3) {
+            throw std::invalid_argument("Circle initializer list must have 3 elements");
+        }
+
+        auto it = list.begin();
+        m_center = Point2D<T>(*it, *(it + 1));
+        m_radius = *(it + 2);
     }
 
     template <typename T>

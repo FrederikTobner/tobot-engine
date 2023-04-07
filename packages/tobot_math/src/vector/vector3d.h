@@ -20,7 +20,10 @@ namespace Tobot::Math {
 
             Vector3D(T x, T y, T z);
             Vector3D(Vector3D & vec);
+            Vector3D(Vector3D && vec);
             Vector3D(std::initializer_list<T> list);
+            Vector3D<T> & operator=(const Vector3D<T> & vec);
+            Vector3D<T> & operator=(Vector3D<T> && vec);
 
             /// @brief Calculates the sum of two vectors
             /// @param lVec The left vector
@@ -136,6 +139,11 @@ namespace Tobot::Math {
     Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector3D<T>::Vector3D(Vector3D && vec) : x(vec.x), y(vec.y), z(vec.z) {
+    }
+
     /// @brief Constructs a new Vector3D object
     /// @tparam T The type of the vector
     /// @param list The list of components of the vector
@@ -148,6 +156,32 @@ namespace Tobot::Math {
         this->x = *list.begin();
         this->y = *(list.begin() + 1);
         this->z = *(list.begin() + 2);
+    }
+
+    /// @brief Assigns the vector to the right vector
+    /// @tparam T The type of the vector
+    /// @param vec The vector to assign
+    /// @return Vector3D<T> The assigned vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector3D<T> & Vector3D<T>::operator=(const Vector3D<T> & vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        this->z = vec.z;
+        return *this;
+    }
+
+    /// @brief Assigns the vector to the right vector
+    /// @tparam T  The type of the vector
+    /// @param vec The vector to assign
+    /// @return  Vector3D<T> The assigned vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector3D<T> & Vector3D<T>::operator=(Vector3D<T> && vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        this->z = vec.z;
+        return *this;
     }
 
     /// @brief Calculates the sum of two vectors and assigns the result to the left vector

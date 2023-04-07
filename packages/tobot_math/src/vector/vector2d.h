@@ -19,7 +19,10 @@ namespace Tobot::Math {
 
             Vector2D(T x, T y);
             Vector2D(Vector2D & vec);
+            Vector2D(Vector2D && vec);
             Vector2D(std::initializer_list<T> list);
+            Vector2D<T> & operator=(const Vector2D<T> & vec);
+            Vector2D<T> & operator=(Vector2D<T> && vec);
 
             /// @brief Addition operator for two vectors
             /// @param lVec The left vector
@@ -128,6 +131,14 @@ namespace Tobot::Math {
 
     /// @brief Constructor for the Vector2D class
     /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T>::Vector2D(Vector2D && vec) : x(vec.x), y(vec.y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
     /// @param list The list of values to initialize the vector with
     template <typename T>
         requires ArithmeticFloatingPoint<T>
@@ -137,6 +148,30 @@ namespace Tobot::Math {
         }
         this->x = *list.begin();
         this->y = *(list.begin() + 1);
+    }
+
+    /// @brief Assignment operator for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    /// @return Vector2D<T> The copied vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T> & Vector2D<T>::operator=(const Vector2D<T> & vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        return *this;
+    }
+
+    /// @brief Assignment operator for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    /// @return Vector2D<T> The copied vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> && vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        return *this;
     }
 
     /// @brief Adds two vectors together and stores the result in the first vector

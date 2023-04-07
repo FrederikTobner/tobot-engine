@@ -33,6 +33,10 @@ namespace Tobot::Math {
                 os << "(" << plane.a << ", " << plane.b << ", " << plane.c << ", " << plane.d << ")";
                 return os;
             }
+            T getA() const;
+            T getB() const;
+            T getC() const;
+            T getD() const;
 
         private:
             T a;
@@ -260,6 +264,30 @@ namespace Tobot::Math {
         requires ArithmeticFloatingPoint<T> bool
     Plane<T>::operator!=(const Plane<T> & plane) const {
         return a != plane.a || b != plane.b || c != plane.c || d != plane.d;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Plane<T>::getA() const {
+        return a;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Plane<T>::getB() const {
+        return b;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Plane<T>::getC() const {
+        return c;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Plane<T>::getD() const {
+        return d;
     }
 
 } // namespace Tobot::Math

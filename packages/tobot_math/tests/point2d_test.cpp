@@ -12,14 +12,56 @@ TEST(Point2D, CanBeCreatedWithList) {
 }
 
 /*
+ * Testing point creation
+ */
+TEST(Point2D, CanBeCreatedWithXAndY) {
+    Point2D<> point(1, 2);
+}
+
+/*
  * Testing copy constructor
  */
 TEST(Point2D, Copy) {
     Point2D<> firstPoint(5, 3);
     Point2D<> secondPoint(firstPoint);
 
+    firstPoint = {4, 5};
+
     EXPECT_EQ(5, secondPoint.x());
     EXPECT_EQ(3, secondPoint.y());
+}
+
+/*
+ * Testing move constructor
+ */
+TEST(Point2D, Move) {
+    Point2D<> firstPoint(5, 3);
+    Point2D<> secondPoint(std::move(firstPoint));
+
+    firstPoint = {4, 5};
+
+    EXPECT_EQ(5, secondPoint.x());
+    EXPECT_EQ(3, secondPoint.y());
+}
+
+/*
+ * Testing equality operator
+ */
+TEST(Point2D, EqualityOperator) {
+    Point2D<> point1(1, 2);
+    Point2D<> point2(1, 2);
+
+    EXPECT_TRUE(point1 == point2);
+}
+
+/*
+ * Testing inequality operator
+ */
+TEST(Point2D, InequalityOperator) {
+    Point2D<> point1(1, 2);
+    Point2D<> point2(3, 4);
+
+    EXPECT_TRUE(point1 != point2);
 }
 
 /*

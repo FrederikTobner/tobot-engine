@@ -11,7 +11,11 @@ namespace Tobot::Math {
         public:
             Rectangle2D() = default;
 
+            Rectangle2D(T x, T y, T width, T height, T rotation);
+
             Rectangle2D(const Point2D<T> & center, const T & width, const T & height, const T & rotation);
+
+            Rectangle2D(std::initializer_list<T> list);
 
             Rectangle2D(const Rectangle2D<T> & rectangle);
 
@@ -47,6 +51,36 @@ namespace Tobot::Math {
             T height;
             T rotation;
     };
+
+    /// @brief Constructor
+    /// @tparam T Type of the rectangle
+    /// @param x X coordinate of the center of the rectangle
+    /// @param y Y coordinate of the center of the rectangle
+    /// @param width Width of the rectangle
+    /// @param height Height of the rectangle
+    /// @param rotation Rotation of the rectangle
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Rectangle2D<T>::Rectangle2D(T x, T y, T width, T height, T rotation)
+        : center(x, y), width(width), height(height), rotation(rotation) {
+    }
+
+    /// @brief Constructor
+    /// @tparam T Type of the rectangle
+    /// @param list List of values to initialize the rectangle
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Rectangle2D<T>::Rectangle2D(std::initializer_list<T> list) {
+        if (list.size() != 5) {
+            throw std::invalid_argument("Invalid number of arguments");
+        }
+
+        auto it = list.begin();
+        center = Point2D<T>(*it, *(it + 1));
+        width = *(it + 2);
+        height = *(it + 3);
+        rotation = *(it + 4);
+    }
 
     /// @brief Models a Cicle in 2D space
     /// @tparam T Type of the rectangle

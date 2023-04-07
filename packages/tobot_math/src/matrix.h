@@ -39,8 +39,8 @@ namespace Tobot::Math {
             Matrix<T, m, n> & operator=(Matrix<T, m, n> && mat);
             Matrix<T, m, n> operator+(const Matrix<T, m, n> & mat) const;
             Matrix<T, m, n> operator-(const Matrix<T, m, n> & mat) const;
-            Matrix<T, m, n> & operator*(const T & scalar) const;
-            Matrix<T, m, n> & operator/(const T & scalar) const;
+            Matrix<T, m, n> operator*(const T & scalar) const;
+            Matrix<T, m, n> operator/(const T & scalar) const;
             Matrix<T, m, n> & operator+=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator-=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator*=(const T & scalar);
@@ -268,7 +268,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The product of the matrix and the scalar
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator*(const T & scalar) const {
+    Matrix<T, m, n> Matrix<T, m, n>::operator*(const T & scalar) const {
         std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -286,7 +286,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The quotient of the matrix and the scalar
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator/(const T & scalar) const {
+    Matrix<T, m, n> Matrix<T, m, n>::operator/(const T & scalar) const {
         std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -307,7 +307,7 @@ namespace Tobot::Math {
     Matrix<T, m, n> & Matrix<T, m, n>::operator+=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
-                this->m_matrix[i][j] += mat[i][j];
+                m_matrix[i][j] += mat(i, j);
             }
         }
         return *this;
