@@ -130,3 +130,20 @@ TEST(Matrix3DTest, Determinant) {
     Matrix3D matrix3D({1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f});
     EXPECT_EQ(matrix3D.determinant(), 0.0f);
 }
+
+/*
+ * Tetsing the creation of the inverse of a matrix.
+ */
+TEST(Matrix3DTest, Inverse) {
+    Matrix3D matrix3D({1.0f, 2.0f, -1.0f, 2.0f, 1.0f, 2.0f, -1.0f, 2.0f, 1.0f});
+    Matrix3D matrix3D2 = !matrix3D;
+    EXPECT_EQ(matrix3D2[0][0], 0.1875f);  // 3 / 16
+    EXPECT_EQ(matrix3D2[0][1], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix3D2[0][2], -0.3125f); // -5 / 16
+    EXPECT_EQ(matrix3D2[1][0], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix3D2[1][1], 0.0f);     // 0
+    EXPECT_EQ(matrix3D2[1][2], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix3D2[2][0], -0.3125f); // -5 / 16
+    EXPECT_EQ(matrix3D2[2][1], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix3D2[2][2], 0.1875f);  // 3 / 16
+}

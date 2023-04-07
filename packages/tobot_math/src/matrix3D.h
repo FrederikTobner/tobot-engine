@@ -9,14 +9,21 @@ namespace Tobot::Math {
     class Matrix3D {
 
         public:
-            struct Row;
+            class Row;
 
             /// @brief Default constructor
             Matrix3D();
 
+            Matrix3D(float fval, float sval, float tval, float foval, float fifval, float sixval, float seval,
+                     float eightval, float nineval);
+
             /// @brief Constructor
             /// @param data Data to initialize the matrix with
-            Matrix3D(float[3][3]);
+            Matrix3D(float data[3][3]);
+
+            /// @brief Constructor
+            /// @param data Data to initialize the matrix with
+            Matrix3D(std::array<std::array<float, 3>, 3> data);
 
             /// @brief Constructor
             /// @param data Data to initialize the matrix with
@@ -128,6 +135,21 @@ namespace Tobot::Math {
             /// @return Rotated matrix
             Matrix3D rotation(const float & angle, const Point2D & point);
 
+            /// Rotatates the matrix by the given angle around the x axis
+            /// @param angle Angle to rotate by
+            /// @return Rotated matrix
+            Matrix3D makeRotationX(const float & angle);
+
+            /// Rotatates the matrix by the given angle around the y axis
+            /// @param angle Angle to rotate by
+            /// @return Rotated matrix
+            Matrix3D makeRotationY(const float & angle);
+
+            /// @brief Rotates the matrix by the given angle around the z axis
+            /// @param angle Angle to rotate by
+            /// @return Rotated matrix
+            Matrix3D makeRotationZ(const float & angle);
+
             /// Scales the matrix by the given factors around the given point
             /// @param x X factor
             /// @param y Y factor
@@ -163,6 +185,6 @@ namespace Tobot::Math {
             };
 
         private:
-            float m_data[3][3];
+            std::array<std::array<float, 3>, 3> m_data;
     };
 } // namespace Tobot::Math

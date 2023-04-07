@@ -67,9 +67,31 @@ TEST(Matrix, Inequality) {
  */
 TEST(Matrix, Determinant) {
     Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {1.0f, 2.0f, -1.0f, 2.0f, 1.0f, 2.0f, -1.0f, 2.0f, 1.0f};
     Matrix<> thirdMatrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     ASSERT_EQ(0, firstMatrix.determinant());
-    ASSERT_EQ(0, secondMatrix.determinant());
+    /*det A = 1 (cofactor of 1) + 2 (cofactor of 2) + (-1) cofactor of (-1)
+     * = 1(-3) + 2(-4) + (-1)5
+     * = -3 - 8 - 5
+     * = -16
+     */
+    ASSERT_EQ(-16.0f, secondMatrix.determinant());
     ASSERT_EQ(0, thirdMatrix.determinant());
+}
+
+/*
+ * Testing matrix inversion
+ */
+TEST(Matrix, Inversion) {
+    Matrix<> matrix({1.0f, 2.0f, -1.0f, 2.0f, 1.0f, 2.0f, -1.0f, 2.0f, 1.0f});
+    Matrix<> matrix2 = matrix.inverse();
+    EXPECT_EQ(matrix2[0][0], 0.1875f);  // 3 / 16
+    EXPECT_EQ(matrix2[0][1], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[0][2], -0.3125f); // -5 / 16
+    EXPECT_EQ(matrix2[1][0], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[1][1], 0.0f);     // 0
+    EXPECT_EQ(matrix2[1][2], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[2][0], -0.3125f); // -5 / 16
+    EXPECT_EQ(matrix2[2][1], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[2][2], 0.1875f);  // 3 / 16
 }

@@ -15,13 +15,14 @@ namespace Tobot::Math {
 
         public:
             // Represents a row of the matrix
-            struct Row;
+            class Row;
 
             explicit Matrix();
             explicit Matrix(const Matrix<T, m, n> & mat);
             explicit Matrix(const std::vector<T> values);
             Matrix(const std::initializer_list<T> list);
             explicit Matrix(Matrix<T, m, n> && mat);
+            Matrix(std::array<std::array<T, n>, m> values);
             ~Matrix();
 
             inline T & operator()(std::size_t i, std::size_t j);
@@ -61,7 +62,7 @@ namespace Tobot::Math {
             T determinant() const;
             T cofactor(std::size_t i, std::size_t j) const;
             T minor(std::size_t i, std::size_t j) const;
-            Matrix<T, m, n> inverse() const;
+            Matrix<T, m, n> inverse();
             Matrix<T, m, n> transpose() const;
             Matrix<T, m, n> adjoint() const;
             Matrix<T, m, n> identity() const;
@@ -170,6 +171,13 @@ namespace Tobot::Math {
                 this->m_matrix[i][j] = *it;
             }
         }
+    }
+
+    template <typename T, std::size_t m, std::size_t n>
+        requires Arithmetic<T>
+    Matrix<T, m, n>::Matrix(std::array<std::array<T, n>, m> mat) : rowsCount(m), columnsCount(n) {
+        static_assert(m > 0 && n > 0);
+        m_matrix = mat;
     }
 
     template <typename T, std::size_t m, std::size_t n>
@@ -457,16 +465,16 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The inverse of the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
-    inline Matrix<T, m, n> Matrix<T, m, n>::inverse() const {
+    inline Matrix<T, m, n> Matrix<T, m, n>::inverse() {
         static_assert(m == n, "Matrix must be square");
-        Matrix<T, m, n> inverse;
+        std::array<std::array<T, n>, m> inverted;
         T det = this->determinant();
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
-                inverse[j][i] = this->cofactor(i, j) / det;
+                inverted[j][i] = this->cofactor(i, j) / det;
             }
         }
-        return inverse;
+        return Matrix<T, m, n>(inverted);
     }
 
     /// @brief Calculates the transpose of the matrix
@@ -512,7 +520,7 @@ namespace Tobot::Math {
     template <typename T, std::size_t m, std::size_t n>
         requires Arithmetic<T>
     Matrix<T, m, n> Matrix<T, m, n>::identity() const {
-        Matrix<T, m, n> identity();
+        Matrix<T, m, n> identity(*this->m_matrix);
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 identity[i][j] = (i == j) ? 1 : 0;

@@ -42,7 +42,11 @@ namespace Tobot::Math {
             /// @param scalar The scalar
             /// @param vec The vector
             /// @return Vector3D<T> The product of the vector and the scalar
-            friend inline Vector3D<T> operator*(const T scalar, Vector3D<T> vec) {
+            friend inline Vector3D<T> operator*(const T scalar, Vector3D<T> & vec) {
+                return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+            }
+
+            friend inline Vector3D<T> operator*(const T scalar, const Vector3D<T> vec) {
                 return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
             }
 
@@ -58,7 +62,11 @@ namespace Tobot::Math {
             /// @param scalar The scalar
             /// @param vec The vector
             /// @return Vector3D<T> The division of the vector and the scalar
-            friend inline Vector3D<T> operator/(const T scalar, Vector3D<T> vec) {
+            friend inline Vector3D<T> operator/(const T scalar, Vector3D<T> & vec) {
+                return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
+            }
+
+            friend inline Vector3D<T> operator/(const T scalar, const Vector3D<T> vec) {
                 return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
             }
 
@@ -108,8 +116,6 @@ namespace Tobot::Math {
             T Dot(const Vector3D<T> & vec);
 
             Vector3D<T> Cross(const Vector3D<T> & vec);
-
-            Vector3D<T> FromAngle(T angle);
     };
 
     /// @brief Constructs a new Vector3D object
