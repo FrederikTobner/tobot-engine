@@ -8,7 +8,7 @@ namespace Tobot::Core {
     class RenderObject {
         private:
             const char * m_Id;
-            Tobot::Math::Vector2D<int> m_Position;
+            Tobot::Math::Vector2D<float> m_Position;
             bool m_Visible;
 
         protected:
@@ -26,7 +26,7 @@ namespace Tobot::Core {
             virtual void dispose() = 0;
 
             const char * getId();
-            Tobot::Math::Vector2D<int> getPosition();
+            Tobot::Math::Vector2D<float> getPosition();
             bool isVisible();
     };
 } // namespace Tobot::Core

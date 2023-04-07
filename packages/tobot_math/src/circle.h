@@ -14,7 +14,7 @@ namespace Tobot::Math {
             /// @brief Constructor
             /// @param center Center of the circle
             /// @param radius Radius of the circle
-            Circle(const Point2D & center, const float & radius);
+            Circle(const Point2D<float> & center, const float & radius);
 
             /// @brief Copy constructor
             /// @param circle Circle to copy
@@ -69,7 +69,7 @@ namespace Tobot::Math {
 
             /// @brief Get the center of the circle
             /// @return Center of the circle
-            Point2D center() const;
+            Point2D<float> center() const;
 
             /// @brief Get the radius of the circle
             /// @return Radius of the circle
@@ -77,7 +77,7 @@ namespace Tobot::Math {
 
             /// @brief Set the center of the circle
             /// @param center Center of the circle
-            void setCenter(const Point2D &);
+            void setCenter(const Point2D<float> &);
 
             /// @brief Set the radius of the circle
             /// @param radius Radius of the circle
@@ -88,7 +88,7 @@ namespace Tobot::Math {
             float getArea() const;
 
         private:
-            Point2D m_center;
+            Point2D<float> m_center;
             float m_radius;
     };
 } // namespace Tobot::Math

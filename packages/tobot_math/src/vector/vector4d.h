@@ -10,7 +10,7 @@ namespace Tobot::Math {
     /// @brief A 4D vector class
     /// @tparam T The type of the vector
     template <typename T = float>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     class Vector4D : Vector<T> {
 
         public:
@@ -116,7 +116,7 @@ namespace Tobot::Math {
     /// @param z The z component of the vector
     /// @param w The w component of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T>::Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {
     }
 
@@ -124,7 +124,7 @@ namespace Tobot::Math {
     /// @tparam T The underlying type of the vector
     /// @param vec The vector to copy
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T>::Vector4D(Vector4D<T> & vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
     }
 
@@ -132,7 +132,7 @@ namespace Tobot::Math {
     /// @tparam T The underlying type of the vector
     /// @param list The list of components for the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T>::Vector4D(std::initializer_list<T> list) {
         assert(list.size() == 4);
         std::size_t i = 0;
@@ -160,7 +160,7 @@ namespace Tobot::Math {
     /// @param vec The vector to add to this vector
     /// @return Vector4D<T> The sum of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T> & Vector4D<T>::operator+=(const Vector4D<T> & vec) {
         this->x += vec.x;
         this->y += vec.y;
@@ -174,7 +174,7 @@ namespace Tobot::Math {
     /// @param vec The vector to subtract from this vector
     /// @return Vector4D<T> The difference of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T> & Vector4D<T>::operator-=(const Vector4D<T> & vec) {
         this->x -= vec.x;
         this->y -= vec.y;
@@ -188,7 +188,7 @@ namespace Tobot::Math {
     /// @param scalar The scalar to multiply the vector by
     /// @return Vector4D<T> The product of the vector and the scalar
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T> & Vector4D<T>::operator*=(const T scalar) {
         this->x *= scalar;
         this->y *= scalar;
@@ -202,7 +202,7 @@ namespace Tobot::Math {
     /// @param scalar The scalar to divide the vector by
     /// @return Vector4D<T> The quotient of the vector and the scalar
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T> & Vector4D<T>::operator/=(const T scalar) {
         this->x /= scalar;
         this->y /= scalar;
@@ -216,7 +216,7 @@ namespace Tobot::Math {
     /// @param i The index of the value to get
     /// @return T& The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T & Vector4D<T>::operator()(std::size_t i) {
         assert(i < 4);
         switch (i) {
@@ -246,7 +246,7 @@ namespace Tobot::Math {
     /// @param i The index of the value to get
     /// @return T The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector4D<T>::operator()(std::size_t i) const {
         assert(4 > i);
         switch (i) {
@@ -276,7 +276,7 @@ namespace Tobot::Math {
     /// @param i The index of the value to get
     /// @return T& The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T & Vector4D<T>::operator[](std::size_t i) {
         assert(i < 4);
         switch (i) {
@@ -306,7 +306,7 @@ namespace Tobot::Math {
     /// @param i The index of the value to get
     /// @return T The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector4D<T>::operator[](std::size_t i) const {
         assert(i < 4);
         switch (i) {
@@ -336,7 +336,7 @@ namespace Tobot::Math {
     /// @param vec The vector to compare against
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
-        requires Arithmetic<T> bool
+        requires ArithmeticFloatingPoint<T> bool
     Vector4D<T>::operator==(const Vector4D<T> & vec) const {
         return this->x == vec.x && this->y == vec.y && this->z == vec.z && this->w == vec.w;
     }
@@ -346,7 +346,7 @@ namespace Tobot::Math {
     /// @param vec The vector to compare against
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
-        requires Arithmetic<T> bool
+        requires ArithmeticFloatingPoint<T> bool
     Vector4D<T>::operator!=(const Vector4D<T> & vec) const {
         return this->x != vec.x || this->y != vec.y || this->z != vec.z || this->w != vec.w;
     }
@@ -355,7 +355,7 @@ namespace Tobot::Math {
     /// @tparam T The underlying type of the vector
     /// @return T The magnitude of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline T Vector4D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
     }
@@ -363,7 +363,7 @@ namespace Tobot::Math {
     /// @brief Normalizes the vector
     /// @tparam T The underlying type of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline void Vector4D<T>::Normalize() {
         *this /= this->Magnitude();
     }
@@ -372,7 +372,7 @@ namespace Tobot::Math {
     /// @tparam T The underlying type of the vector
     /// @return std::size_t The size of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline std::size_t Vector4D<T>::GetSize() {
         return 4;
     }
@@ -382,7 +382,7 @@ namespace Tobot::Math {
     /// @param vec The vector to dot with
     /// @return T The dot product of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector4D<T>::Dot(const Vector4D<T> & vec) {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z + this->w * vec.w;
     }

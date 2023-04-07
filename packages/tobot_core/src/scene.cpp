@@ -16,7 +16,7 @@ void Scene::add(const char * layerId, GameEntity * gameEntity) {
 }
 
 void Scene::addLayer(Layer * layer) {
-    this->m_Layers[layer->id] = layer;
+    this->m_Layers[layer->id.c_str()] = layer;
 }
 
 void Scene::prepareTextures(SDL_Renderer * renderer) {
@@ -38,7 +38,7 @@ void Scene::update() {
         layers = sortedLayers;
     }
 
-    for (auto layer: this->m_Layers) {
+    for (auto layer : this->m_Layers) {
         layers.push_back(layer.second);
     }
 

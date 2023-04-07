@@ -14,6 +14,7 @@ namespace Tobot::Math {
             /// @brief Default constructor
             Matrix3D();
 
+            /// @brief Constructs a matrix with the given values
             Matrix3D(float fval, float sval, float tval, float foval, float fifval, float sixval, float seval,
                      float eightval, float nineval);
 
@@ -112,7 +113,7 @@ namespace Tobot::Math {
                 return Row(*this, row);
             }
 
-            /// @brief Calculates the determinant of the matrix
+            /// Calculates the determinant of the matrix
             /// @return Determinant of the matrix
             float determinant() const;
 
@@ -133,7 +134,7 @@ namespace Tobot::Math {
             /// @param angle Angle to rotate by
             /// @param point Point to rotate around
             /// @return Rotated matrix
-            Matrix3D rotation(const float & angle, const Point2D & point);
+            Matrix3D rotation(const float & angle, const Point2D<float> & point);
 
             /// Rotatates the matrix by the given angle around the x axis
             /// @param angle Angle to rotate by
@@ -155,21 +156,21 @@ namespace Tobot::Math {
             /// @param y Y factor
             /// @param point Point to scale around
             /// @return Scaled matrix
-            Matrix3D scale(const float & x, const float & y, const Point2D & point);
+            Matrix3D scale(const float & x, const float & y, const Point2D<float> & point);
 
             /// Translates the matrix by the given factors around the given point
             /// @param x X factor
             /// @param y Y factor
             /// @param point Point to translate around
             /// @return Translated matrix
-            Matrix3D translation(const float & x, const float & y, const Point2D & point);
+            Matrix3D translation(const float & x, const float & y, const Point2D<float> & point);
 
             /// Shears the matrix by the given factors around the given point
             /// @param x X factor
             /// @param y Y factor
             /// @param point Point to shear around
             /// @return Sheared matrix
-            Matrix3D shear(const float & x, const float & y, const Point2D & point);
+            Matrix3D shear(const float & x, const float & y, const Point2D<float> & point);
 
             /// @brief Models a row of a matrix
             /// @details This struct is used to access the elements of a row of a matrix

@@ -7,7 +7,7 @@ void Tobot::Core::RenderObject::setVisible(bool visible) {
 }
 
 void Tobot::Core::RenderObject::incrementPosition() {
-    this->m_Position += Tobot::Math::Vector2D<int>(1, 1);
+    this->m_Position += Tobot::Math::Vector2D<float>(1.0, 1.0);
 }
 
 RenderObject::RenderObject(const char * id, int x, int y) : m_Id(id), m_Position(x, y) {
@@ -17,7 +17,7 @@ const char * RenderObject::getId() {
     return this->m_Id;
 }
 
-Tobot::Math::Vector2D<int> RenderObject::getPosition() {
+Tobot::Math::Vector2D<float> RenderObject::getPosition() {
     return this->m_Position;
 }
 

@@ -95,3 +95,20 @@ TEST(Matrix, Inversion) {
     EXPECT_EQ(matrix2[2][1], 0.25f);    // 1 / 4
     EXPECT_EQ(matrix2[2][2], 0.1875f);  // 3 / 16
 }
+
+/*
+ * Testing matrix inversion with inversion operator
+ */
+TEST(Matrix, InversionOperator) {
+    Matrix<> matrix({1.0f, 2.0f, -1.0f, 2.0f, 1.0f, 2.0f, -1.0f, 2.0f, 1.0f});
+    Matrix<> matrix2 = !matrix;
+    EXPECT_EQ(matrix2[0][0], 0.1875f);  // 3 / 16
+    EXPECT_EQ(matrix2[0][1], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[0][2], -0.3125f); // -5 / 16
+    EXPECT_EQ(matrix2[1][0], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[1][1], 0.0f);     // 0
+    EXPECT_EQ(matrix2[1][2], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[2][0], -0.3125f); // -5 / 16
+    EXPECT_EQ(matrix2[2][1], 0.25f);    // 1 / 4
+    EXPECT_EQ(matrix2[2][2], 0.1875f);  // 3 / 16
+}

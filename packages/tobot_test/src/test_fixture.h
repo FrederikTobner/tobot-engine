@@ -18,12 +18,12 @@ namespace Tobot::Tooling::Test {
             std::queue<TestCase> testQueue;
 
             /// @brief The name of the fixture
-            char const * fixtureName;
+            std::string fixtureName;
 
         public:
             /// @brief Constructor of the testfixture Class
             /// @param fixtureName The name of the testfixture
-            TestFixture(char const * fixtureName);
+            TestFixture(std::string fixtureName);
 
             /// Destructor of the testfixture Class
             ~TestFixture();

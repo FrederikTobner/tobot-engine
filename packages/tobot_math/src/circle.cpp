@@ -2,7 +2,7 @@
 
 using namespace Tobot::Math;
 
-Circle::Circle(const Point2D & center, const float & radius) {
+Circle::Circle(const Point2D<float> & center, const float & radius) {
     m_center = center;
     m_radius = radius;
 }
@@ -53,7 +53,7 @@ bool Circle::operator>=(const Circle & circle) const {
     return m_radius >= circle.m_radius;
 }
 
-Point2D Circle::center() const {
+Point2D<float> Circle::center() const {
     return m_center;
 }
 
@@ -61,7 +61,7 @@ float Circle::radius() const {
     return m_radius;
 }
 
-void Circle::setCenter(const Point2D & center) {
+void Circle::setCenter(const Point2D<float> & center) {
     m_center = center;
 }
 

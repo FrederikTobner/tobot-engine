@@ -5,7 +5,7 @@
 
 namespace Tobot::Math {
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     class Vector {
 
         public:
@@ -26,7 +26,7 @@ namespace Tobot::Math {
     };
 
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector<T>::Vector() {
     }
 } // namespace Tobot::Math

@@ -240,7 +240,7 @@ Matrix3D Matrix3D::reflection(const float & angle) {
     return result;
 }
 
-Matrix3D Matrix3D::rotation(const float & angle, const Point2D & point) {
+Matrix3D Matrix3D::rotation(const float & angle, const Point2D<float> & point) {
     Matrix3D result;
     result.m_data[0][0] = cos(angle);
     result.m_data[0][1] = -sin(angle);
@@ -270,7 +270,7 @@ Matrix3D Matrix3D::makeRotationZ(const float & angle) {
     return (Matrix3D(cosAngle, -sinAngle, 0.0f, sinAngle, cosAngle, 0.0f, 0.0f, 0.0f, 1));
 }
 
-Matrix3D Matrix3D::scale(const float & x, const float & y, const Point2D & point) {
+Matrix3D Matrix3D::scale(const float & x, const float & y, const Point2D<float> & point) {
     Matrix3D result;
     result.m_data[0][0] = x;
     result.m_data[1][1] = y;
@@ -280,7 +280,7 @@ Matrix3D Matrix3D::scale(const float & x, const float & y, const Point2D & point
     return result;
 }
 
-Matrix3D Matrix3D::translation(const float & x, const float & y, const Point2D & point) {
+Matrix3D Matrix3D::translation(const float & x, const float & y, const Point2D<float> & point) {
     Matrix3D result;
     result.m_data[0][2] = x;
     result.m_data[1][2] = y;
@@ -290,7 +290,7 @@ Matrix3D Matrix3D::translation(const float & x, const float & y, const Point2D &
     return result;
 }
 
-Matrix3D Matrix3D::shear(const float & x, const float & y, const Point2D & point) {
+Matrix3D Matrix3D::shear(const float & x, const float & y, const Point2D<float> & point) {
     Matrix3D result;
     result.m_data[0][1] = x;
     result.m_data[1][0] = y;

@@ -16,7 +16,6 @@ set(TOBOT_MATH_HEADER_FILES
 set(TOBOT_MATH_SOURCE_FILES
 "circle.cpp"
 "matrix3d.cpp"
-"point2D.cpp"
 )
 
 add_library(tobot-math ${TOBOT_MATH_HEADER_FILES} ${TOBOT_MATH_SOURCE_FILES})

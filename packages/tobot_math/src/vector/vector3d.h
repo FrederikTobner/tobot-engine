@@ -10,7 +10,7 @@ namespace Tobot::Math {
     /// @brief A 3D vector class
     /// @tparam T The type of the vector
     template <typename T = float>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     class Vector3D : Vector<T> {
 
         public:
@@ -124,7 +124,7 @@ namespace Tobot::Math {
     /// @param y The y component of the vector
     /// @param z The z component of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
     }
 
@@ -132,7 +132,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the vector
     /// @param vec The vector to copy
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
@@ -140,7 +140,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the vector
     /// @param list The list of components of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T>::Vector3D(std::initializer_list<T> list) {
         if (list.size() != 3) {
             throw std::invalid_argument("The list must have exactly 3 elements");
@@ -155,7 +155,7 @@ namespace Tobot::Math {
     /// @param vec The vector to add
     /// @return Vector3D<T> The sum of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T> & Vector3D<T>::operator+=(const Vector3D<T> & vec) {
         this->x += vec.x;
         this->y += vec.y;
@@ -168,7 +168,7 @@ namespace Tobot::Math {
     /// @param vec The vector to substract
     /// @return Vector3D<T> The difference of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T> & Vector3D<T>::operator-=(const Vector3D<T> & vec) {
         this->x -= vec.x;
         this->y -= vec.y;
@@ -181,7 +181,7 @@ namespace Tobot::Math {
     /// @param scalar The scalar
     /// @return Vector3D<T> The product of the vector and the scalar
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T> & Vector3D<T>::operator*=(const T scalar) {
         this->x *= scalar;
         this->y *= scalar;
@@ -194,7 +194,7 @@ namespace Tobot::Math {
     /// @param scalar The scalar
     /// @return Vector3D<T> The division of the vector and the scalar
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T> & Vector3D<T>::operator/=(const T scalar) {
         this->x /= scalar;
         this->y /= scalar;
@@ -207,7 +207,7 @@ namespace Tobot::Math {
     /// @param i The index of the component
     /// @return T& The component at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T & Vector3D<T>::operator()(std::size_t i) {
         assert(i < 3);
         switch (i) {
@@ -235,7 +235,7 @@ namespace Tobot::Math {
     /// @param i The index of the component
     /// @return T The component at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector3D<T>::operator()(std::size_t i) const {
         assert(i < 3);
         switch (i) {
@@ -263,7 +263,7 @@ namespace Tobot::Math {
     /// @param i The index of the component
     /// @return T& The component at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T & Vector3D<T>::operator[](std::size_t i) {
         assert(i < 3);
         switch (i) {
@@ -291,7 +291,7 @@ namespace Tobot::Math {
     /// @param i The index of the component
     /// @return T The component at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector3D<T>::operator[](std::size_t i) const {
         assert(i < 3);
         switch (i) {
@@ -319,7 +319,7 @@ namespace Tobot::Math {
     /// @param vec The vector to compare
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
-        requires Arithmetic<T> bool
+        requires ArithmeticFloatingPoint<T> bool
     Vector3D<T>::operator==(const Vector3D<T> & vec) const {
         return this->x == vec.x && this->y == vec.y && this->z == vec.z;
     }
@@ -329,7 +329,7 @@ namespace Tobot::Math {
     /// @param vec The vector to compare
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
-        requires Arithmetic<T> bool
+        requires ArithmeticFloatingPoint<T> bool
     Vector3D<T>::operator!=(const Vector3D<T> & vec) const {
         return this->x != vec.x || this->y != vec.y || this->z != vec.z;
     }
@@ -338,7 +338,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the vector
     /// @return T The magnitude of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline T Vector3D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
     }
@@ -346,7 +346,7 @@ namespace Tobot::Math {
     /// @brief Normalizes the vector
     /// @tparam T The type of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline void Vector3D<T>::Normalize() {
         *this /= this->Magnitude();
     }
@@ -355,7 +355,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the vector
     /// @return std::size_t The size of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline std::size_t Vector3D<T>::GetSize() {
         return 3;
     }
@@ -365,7 +365,7 @@ namespace Tobot::Math {
     /// @param vec The vector to calculate the dot product with
     /// @return T The dot product of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector3D<T>::Dot(const Vector3D<T> & vec) {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z;
     }
@@ -375,7 +375,7 @@ namespace Tobot::Math {
     /// @param vec The vector to calculate the cross product with
     /// @return Vector3D<T> The cross product of the two vectors
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector3D<T> Vector3D<T>::Cross(const Vector3D<T> & vec) {
         return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
                            this->x * vec.y - this->y * vec.x);

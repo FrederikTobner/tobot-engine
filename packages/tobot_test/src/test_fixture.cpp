@@ -9,7 +9,7 @@
 
 using namespace Tobot::Tooling::Test;
 
-TestFixture::TestFixture(char const * fixtureName) {
+TestFixture::TestFixture(std::string fixtureName) {
     this->fixtureName = fixtureName;
 }
 

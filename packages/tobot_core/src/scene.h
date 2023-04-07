@@ -8,14 +8,11 @@
 #include "layer.h"
 #include "render_object.h"
 
-
 namespace Tobot::Core {
     class Scene {
         private:
-            
             const char * m_BaseLayerId = "baseLayer";
             std::unordered_map<const char *, Layer *> m_Layers;
-
 
         protected:
             const char * m_Id;

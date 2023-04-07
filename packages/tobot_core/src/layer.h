@@ -4,18 +4,17 @@
 #include <iostream>
 #include <string>
 
-
 #include "game_entity.h"
 
 namespace Tobot::Core {
     class Layer {
         public:
-            int order;
+            std::size_t order;
 
-            const char *id;
+            std::string id;
 
-            std::unordered_map<const char *, GameEntity *> entities;
+            std::unordered_map<std::string, GameEntity *> entities;
 
-            Layer(const char  *id, int order);
+            Layer(std::string id, std::size_t order);
     };
 } // namespace Tobot::Core

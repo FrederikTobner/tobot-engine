@@ -2,5 +2,5 @@
 
 using namespace Tobot::Core;
 
-Layer::Layer(const char * id, int order) : id(id), order(order) {
+Layer::Layer(std::string id, std::size_t order) : id(id), order(order) {
 }
