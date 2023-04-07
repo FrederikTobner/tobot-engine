@@ -82,6 +82,25 @@ TEST(Matrix, Addition) {
 }
 
 /*
+ * Testing subtraction operator
+ */
+TEST(Matrix, Subtraction) {
+    Matrix<> firstMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Matrix<> secondMatrix = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    Matrix<> fourthMatrix = firstMatrix - secondMatrix;
+    ASSERT_EQ(0, fourthMatrix(0, 0));
+    ASSERT_EQ(0, fourthMatrix(0, 1));
+    ASSERT_EQ(0, fourthMatrix(0, 2));
+    ASSERT_EQ(0, fourthMatrix(1, 0));
+    ASSERT_EQ(0, fourthMatrix(1, 1));
+    ASSERT_EQ(0, fourthMatrix(1, 2));
+    ASSERT_EQ(0, fourthMatrix(2, 0));
+    ASSERT_EQ(0, fourthMatrix(2, 1));
+    ASSERT_EQ(0, fourthMatrix(2, 2));
+}
+
+/*
  * Testing determinant calculation
  */
 TEST(Matrix, Determinant) {

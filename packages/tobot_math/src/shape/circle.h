@@ -6,7 +6,7 @@
 
 namespace Tobot::Math {
     /// @brief Models a Cicle in 2D space
-    template <typename T>
+    template <typename T = float>
         requires ArithmeticFloatingPoint<T>
     class Circle {
         public:
@@ -75,7 +75,7 @@ namespace Tobot::Math {
 
             /// @brief Get the radius of the circle
             /// @return Radius of the circle
-            float radius() const;
+            T radius() const;
 
             /// @brief Set the center of the circle
             /// @param center Center of the circle
@@ -89,6 +89,12 @@ namespace Tobot::Math {
             /// @return Area of the circle
             T getArea() const;
 
+            /// @brief Get the circumference of the circle
+            /// @return Circumference of the circle
+            T getCircumference() const;
+
+            T getDistance(const Point2D<T> &) const;
+
         private:
             Point2D<T> m_center;
             T m_radius;
@@ -96,28 +102,28 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle::Circle(const Point2D<T> & center, const T & radius) {
+    Circle<T>::Circle(const Point2D<T> & center, const T & radius) {
         m_center = center;
         m_radius = radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle::Circle(const Circle<T> & circle) {
+    Circle<T>::Circle(const Circle<T> & circle) {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle::Circle(Circle<T> && circle) noexcept {
+    Circle<T>::Circle(Circle<T> && circle) noexcept {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T> & Circle::operator=(const Circle<T> & circle) {
+    Circle<T> & Circle<T>::operator=(const Circle<T> & circle) {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
         return *this;
@@ -125,7 +131,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T> & Circle::operator=(Circle<T> && circle) noexcept {
+    Circle<T> & Circle<T>::operator=(Circle<T> && circle) noexcept {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
         return *this;
@@ -133,68 +139,84 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle::operator==(const Circle<T> & circle) const {
+    Circle<T>::operator==(const Circle<T> & circle) const {
         return (m_center == circle.m_center) && (m_radius == circle.m_radius);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle::operator!=(const Circle<T> & circle) const {
+    Circle<T>::operator!=(const Circle<T> & circle) const {
         return (m_center != circle.m_center) || (m_radius != circle.m_radius);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle::operator<(const Circle<T> & circle) const {
+    Circle<T>::operator<(const Circle<T> & circle) const {
         return m_radius < circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle::operator>(const Circle<T> & circle) const {
+    Circle<T>::operator>(const Circle<T> & circle) const {
         return m_radius > circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle::operator<=(const Circle<T> & circle) const {
+    Circle<T>::operator<=(const Circle<T> & circle) const {
         return m_radius <= circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle::operator>=(const Circle<T> & circle) const {
+    Circle<T>::operator>=(const Circle<T> & circle) const {
         return m_radius >= circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<float> Circle::center() const {
+    Point2D<T> Circle<T>::center() const {
         return m_center;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    float Circle::radius() const {
+    T Circle<T>::radius() const {
         return m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    void Circle::setCenter(const Point2D<T> & center) {
+    void Circle<T>::setCenter(const Point2D<T> & center) {
         m_center = center;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    void Circle::setRadius(const T & radius) {
+    void Circle<T>::setRadius(const T & radius) {
         m_radius = radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Circle::getArea() const {
+    T Circle<T>::getArea() const {
+        // Area of a circle is pi * radius^2
         return MATH_PI * pow(m_radius, 2);
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Circle<T>::getCircumference() const {
+        // Circumference of a circle is 2 * pi * radius
+        return 2 * MATH_PI * m_radius;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    T Circle<T>::getDistance(const Point2D<T> & point) const {
+        // Distance between the points subtracted by the radius of the circle
+        // will give the distance from the point to the circle
+        return m_center.distance(point) - m_radius;
     }
 
 } // namespace Tobot::Math

@@ -38,7 +38,9 @@ namespace Tobot::Math {
             Matrix<T, m, n> & operator=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator=(Matrix<T, m, n> && mat);
             Matrix<T, m, n> operator+(const Matrix<T, m, n> & mat) const;
+            Matrix<T, m, n> operator-(const Matrix<T, m, n> & mat) const;
             Matrix<T, m, n> & operator*(const T & scalar) const;
+            Matrix<T, m, n> & operator/(const T & scalar) const;
             Matrix<T, m, n> & operator+=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator-=(const Matrix<T, m, n> & mat);
             Matrix<T, m, n> & operator*=(const T & scalar);
@@ -246,6 +248,18 @@ namespace Tobot::Math {
         return Matrix<T, m, n>(result);
     }
 
+    template <typename T, std::size_t m, std::size_t n>
+        requires ArithmeticFloatingPoint<T>
+    Matrix<T, m, n> Matrix<T, m, n>::operator-(const Matrix<T, m, n> & mat) const {
+        std::array<std::array<T, n>, m> result;
+        for (std::size_t i = 0; i < rowsCount; i++) {
+            for (std::size_t j = 0; j < columnsCount; j++) {
+                result[i][j] = this->m_matrix[i][j] - mat.m_matrix[i][j];
+            }
+        }
+        return Matrix<T, m, n>(result);
+    }
+
     /// Multiplies the Matrix by a scalar
     /// @tparam T The underlying type of the matrix
     /// @tparam m The number of rows in the matrix
@@ -255,13 +269,31 @@ namespace Tobot::Math {
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
     Matrix<T, m, n> & Matrix<T, m, n>::operator*(const T & scalar) const {
-        Matrix<T, m, n> result;
+        std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 result[i][j] = this->m_matrix[i][j] * scalar;
             }
         }
-        return result;
+        return Matrix<T, m, n>(result);
+    }
+
+    /// Divides the Matrix by a scalar
+    /// @tparam T The underlying type of the matrix
+    /// @tparam m The number of rows in the matrix
+    /// @tparam n The number of coloumns in the matrix
+    /// @param scalar The scalar to divide by
+    /// @return Matrix<T, m, n> The quotient of the matrix and the scalar
+    template <typename T, std::size_t m, std::size_t n>
+        requires ArithmeticFloatingPoint<T>
+    Matrix<T, m, n> & Matrix<T, m, n>::operator/(const T & scalar) const {
+        std::array<std::array<T, n>, m> result;
+        for (std::size_t i = 0; i < rowsCount; i++) {
+            for (std::size_t j = 0; j < columnsCount; j++) {
+                result[i][j] = this->m_matrix[i][j] / scalar;
+            }
+        }
+        return Matrix<T, m, n>(result);
     }
 
     /// @brief Add a matrix to this matrix

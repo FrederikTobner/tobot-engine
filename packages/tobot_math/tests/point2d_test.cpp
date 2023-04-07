@@ -2,19 +2,21 @@
 
 #include "point2d.h"
 
+using namespace Tobot::Math;
+
 /*
  * Testing point creation
  */
 TEST(Point2D, CanBeCreatedWithList) {
-    Tobot::Math::Point2D<> point = {1, 2};
+    Point2D<> point = {1, 2};
 }
 
 /*
  * Testing copy constructor
  */
 TEST(Point2D, Copy) {
-    Tobot::Math::Point2D<> firstPoint(5, 3);
-    Tobot::Math::Point2D<> secondPoint(firstPoint);
+    Point2D<> firstPoint(5, 3);
+    Point2D<> secondPoint(firstPoint);
 
     EXPECT_EQ(5, secondPoint.x());
     EXPECT_EQ(3, secondPoint.y());
@@ -24,8 +26,10 @@ TEST(Point2D, Copy) {
  * Testing point distance
  */
 TEST(Point2D, Distance) {
-    Tobot::Math::Point2D<> point1(5, 3);
-    Tobot::Math::Point2D<> point2(4, 2);
+    Point2D<> point1(0, 0);
+    Point2D<> point2(3, 4);
 
-    EXPECT_EQ(1.41421354f, point1.distance(point2));
+    // Distance between (0, 0) and (3, 4) is 5, because sqrt(3^2 + 4^2) = 5
+    // Pythagoras theorem
+    EXPECT_EQ(5.0f, point1.distance(point2));
 }

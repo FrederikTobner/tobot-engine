@@ -1,15 +1,17 @@
 set(TOBOT_MATH_HEADER_FILES
-"shape/circle.h"
 "concepts.h"
 "dimension.h"
-"vector/vector.h"
-"vector/vector2d.h"
-"vector/vector3d.h"
-"vector/vector4d.h"
 "matrix.h"
 "plane.h"
 "point2D.h"
 "include/tobot_math.h"
+"shape/circle.h"
+"shape/polygon.h"
+"shape/triangle.h"
+"vector/vector.h"
+"vector/vector2d.h"
+"vector/vector3d.h"
+"vector/vector4d.h"
 )
 
 add_library(tobot-math INTERFACE)
