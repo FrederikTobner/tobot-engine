@@ -22,7 +22,7 @@ jobs:
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_SDL=OFF
 
     - name: Building Tests
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target tobot-data-structures_TESTS tobot-math_TESTS tobot-test_TESTS
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target tobot-data-structures_TESTS tobot-lang_TESTS tobot-math_TESTS tobot-test_TESTS
 
     - name: Running tests
       run: cd build && ctest -C ${{env.BUILD_TYPE}} 
