@@ -75,6 +75,15 @@ namespace Tobot::Math {
 
             bool isConvex() const;
 
+            friend std::ostream & operator<<(std::ostream & os, const Polygon2D<T> & polygon) {
+                os << "Polygon2D(";
+                for (const auto & point : polygon.points) {
+                    os << point << ", ";
+                }
+                os << ")";
+                return os;
+            }
+
         private:
             std::vector<Point2D<T>> points;
     };

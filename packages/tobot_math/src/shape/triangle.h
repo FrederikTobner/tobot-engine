@@ -71,6 +71,11 @@ namespace Tobot::Math {
 
             T getAngleC() const;
 
+            friend std::ostream & operator<<(std::ostream & os, const Triangle2D<T> & triangle) {
+                os << "Triangle2D(" << triangle.m_a << ", " << triangle.m_b << ", " << triangle.m_c << ")";
+                return os;
+            }
+
         private:
             Point2D<T> m_a;
             Point2D<T> m_b;

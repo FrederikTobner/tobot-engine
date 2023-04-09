@@ -99,6 +99,11 @@ namespace Tobot::Math {
 
             T getDistance(const Point2D<T> &) const;
 
+            friend std::ostream & operator<<(std::ostream & os, const Circle<T> & circle) {
+                os << "Circle: center = " << circle.m_center << ", radius = " << circle.m_radius;
+                return os;
+            }
+
         private:
             Point2D<T> m_center;
             T m_radius;

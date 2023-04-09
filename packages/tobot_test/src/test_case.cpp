@@ -7,7 +7,7 @@
 
 using namespace Tobot::Tooling::Test;
 
-TestCase::TestCase(void (*testFunction)(TestState * state), char const * testName) {
+TestCase::TestCase(void (*testFunction)(TestState * state), std::string testName) {
     this->testName = testName;
     this->testFunction = testFunction;
 }

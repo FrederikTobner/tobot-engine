@@ -67,6 +67,15 @@ namespace Tobot::Math {
                         return parent(row, col);
                     }
             };
+            friend std::ostream & operator<<(std::ostream & os, const Matrix<T, m, n> & mat) {
+                for (std::size_t i = 0; i < mat.rowsCount; i++) {
+                    for (std::size_t j = 0; j < mat.columnsCount; j++) {
+                        os << mat(i, j) << " ";
+                    }
+                    os << std::endl;
+                }
+                return os;
+            }
 
         private:
             std::size_t rowsCount;

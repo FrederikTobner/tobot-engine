@@ -9,13 +9,13 @@
 namespace Tobot::Tooling::Debug {
 // Asserts are only defined for debug builds
 #if BUILD_TYPE_DEBUG
-#define TOBOT_ASSERT(condition)                                                                                                        \
-    {                                                                                                                                  \
-        if (!(condition)) {                                                                                                            \
-            std::cout << "Assertion Failed: "<< #condition << "\n\tin file" << __FILE__ << ", line " << __LINE__ << "\n\tfunction: "<< \
-                   __PRETTY_FUNCTION__);                                                                                               \
-            __debugbreak();                                                                                                            \
-        }                                                                                                                              \
+#define TOBOT_ASSERT(condition)                                                                                   \
+    {                                                                                                             \
+        if (!(condition)) {                                                                                       \
+            std::cout << "Assertion Failed: " << #condition << "\n\tin file" << __FILE__ << ", line " << __LINE__ \
+                      << "\n\tfunction: " << __PRETTY_FUNCTION__ << "\n";                                         \
+            __debugbreak();                                                                                       \
+        }                                                                                                         \
     }
 #else
 #define TOBOT_ASSERT(x)

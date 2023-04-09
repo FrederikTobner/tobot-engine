@@ -88,6 +88,11 @@ namespace Tobot::Math {
             /// @param y Y coordinate
             void setY(const T &);
 
+            friend std::ostream & operator<<(std::ostream & os, const Point2D<T> & point) {
+                os << "Point2D(" << point.m_x << ", " << point.m_y << ")";
+                return os;
+            }
+
         private:
             /// @brief X coordinate
             T m_x;

@@ -45,6 +45,12 @@ namespace Tobot::Math {
 
             bool contains(const Point2D<T> &) const;
 
+            friend std::ostream & operator<<(std::ostream & os, const Rectangle2D<T> & rectangle) {
+                os << "Rectangle2D(" << rectangle.center << ", " << rectangle.width << ", " << rectangle.height << ", "
+                   << rectangle.rotation << ")";
+                return os;
+            }
+
         private:
             Point2D<T> center;
             T width;

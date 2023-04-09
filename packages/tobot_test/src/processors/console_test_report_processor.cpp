@@ -22,16 +22,16 @@ void ConsoleTestReportProcessor::handleTestReport(TestReport report, size_t tota
     this->executedTestCounter++;
     if (report.state->passed) {
         printf("%zu/%zu Test #%zu: %s.%s\t Passed ...\n", this->executedTestCounter, totalNumberOfTests,
-               this->executedTestCounter, fixtureName.c_str(), report.correspondingTest.testName);
+               this->executedTestCounter, fixtureName.c_str(), report.correspondingTest.testName.c_str());
         this->passedTestCounter++;
     } else {
         printf("%zu/%zu Test#%zu: %s.%s\t Failed ...\n", this->executedTestCounter, totalNumberOfTests,
-               this->executedTestCounter, fixtureName.c_str(), report.correspondingTest.testName);
+               this->executedTestCounter, fixtureName.c_str(), report.correspondingTest.testName.c_str());
     }
 }
 
 void ConsoleTestReportProcessor::preHandleTestReport(TestCase test, size_t totalNumberOfTests,
                                                      std::string const & fixtureName) {
     std::scoped_lock lock(m_mutex);
-    printf("Start %zu: %s.%s\n", this->executedTestCounter + 1, fixtureName.c_str(), test.testName);
+    printf("Start %zu: %s.%s\n", this->executedTestCounter + 1, fixtureName.c_str(), test.testName.c_str());
 }
