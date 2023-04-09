@@ -1,6 +1,4 @@
-#include "pre_compiled_header.h"
-
-#include "expression.h"
+#pragma once
 
 namespace Tobot::Language {
 
@@ -9,14 +7,19 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    class SimpleExpression {
+    class ParsingContext {
 
         public:
-            SimpleExpression(T2 type, std::vector<T1> tokens);
-            ~SimpleExpression();
+            ParsingContext(T2 type);
+            virtual ~ParsingContext() = 0;
 
         private:
             T2 type;
-            std::vector<T1> tokens;
     };
+
+    template <typename T1, typename T2>
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    ParsingContext<T1, T2>::ParsingContext(T2 type) {
+        this->type = type;
+    }
 } // namespace Tobot::Language

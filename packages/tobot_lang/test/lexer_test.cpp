@@ -21,7 +21,7 @@ TEST(Lexer, CanBeCreated) {
     std::vector<TokenizationRule<TokenTypes>> definitions = {{NUMBER, "[0-9]+"},  {PLUS, "\\+"}, {MINUS, "-"},
                                                              {STAR, "\\*"},       {SLASH, "/"},  {LEFT_PAREN, "\\("},
                                                              {RIGHT_PAREN, "\\)"}};
-    Lexer<TokenTypes> lexer("- 123", definitions);
+    Lexer<TokenTypes> lexer(definitions);
 }
 
 /*
@@ -31,8 +31,8 @@ TEST(Lexer, CanTokenizeSingleToken) {
     std::vector<TokenizationRule<TokenTypes>> definitions = {{NUMBER, "[0-9]+"},  {PLUS, "\\+"}, {MINUS, "-"},
                                                              {STAR, "\\*"},       {SLASH, "/"},  {LEFT_PAREN, "\\("},
                                                              {RIGHT_PAREN, "\\)"}};
-    Lexer<TokenTypes> lexer("-", definitions);
-    std::vector<Token<TokenTypes>> tokens = lexer.tokenize();
+    Lexer<TokenTypes> lexer(definitions);
+    std::vector<Token<TokenTypes>> tokens = lexer.tokenize("-");
     ASSERT_EQ(tokens.size(), 1);
     ASSERT_EQ(tokens[0].getType(), MINUS);
     ASSERT_EQ(tokens[0].getLexeme(), "-");
@@ -47,8 +47,8 @@ TEST(Lexer, CanTokenizeMultipleTokens) {
     std::vector<TokenizationRule<TokenTypes>> definitions = {{NUMBER, "[0-9]+"},  {PLUS, "\\+"}, {MINUS, "-"},
                                                              {STAR, "\\*"},       {SLASH, "/"},  {LEFT_PAREN, "\\("},
                                                              {RIGHT_PAREN, "\\)"}};
-    Lexer<TokenTypes> lexer("- 123", definitions);
-    std::vector<Token<TokenTypes>> tokens = lexer.tokenize();
+    Lexer<TokenTypes> lexer(definitions);
+    std::vector<Token<TokenTypes>> tokens = lexer.tokenize("- 123");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), MINUS);
     ASSERT_EQ(tokens[0].getLexeme(), "-");
@@ -67,8 +67,8 @@ TEST(Lexer, CanTokenizeComplexExpression) {
     std::vector<TokenizationRule<TokenTypes>> definitions = {{NUMBER, "[0-9]+"},  {PLUS, "\\+"}, {MINUS, "-"},
                                                              {STAR, "\\*"},       {SLASH, "/"},  {LEFT_PAREN, "\\("},
                                                              {RIGHT_PAREN, "\\)"}};
-    Lexer<TokenTypes> lexer("1 + 2 * 3 - 4 / 5", definitions);
-    std::vector<Token<TokenTypes>> tokens = lexer.tokenize();
+    Lexer<TokenTypes> lexer(definitions);
+    std::vector<Token<TokenTypes>> tokens = lexer.tokenize("1 + 2 * 3 - 4 / 5");
     ASSERT_EQ(tokens.size(), 9);
     ASSERT_EQ(tokens[0].getType(), NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");
@@ -115,8 +115,8 @@ TEST(Lexer, CanHandleLineBreaks) {
     std::vector<TokenizationRule<TokenTypes>> rules = {{NUMBER, "[0-9]+"},  {PLUS, "\\+"}, {MINUS, "-"},
                                                        {STAR, "\\*"},       {SLASH, "/"},  {LEFT_PAREN, "\\("},
                                                        {RIGHT_PAREN, "\\)"}};
-    Lexer<TokenTypes> lexer("1 \n2", rules);
-    std::vector<Token<TokenTypes>> tokens = lexer.tokenize();
+    Lexer<TokenTypes> lexer(rules);
+    std::vector<Token<TokenTypes>> tokens = lexer.tokenize("1 \n2");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");
@@ -135,8 +135,8 @@ TEST(Lexer, CanHandleMultipleLineBreaks) {
     std::vector<TokenizationRule<TokenTypes>> rules = {{NUMBER, "[0-9]+"},  {PLUS, "\\+"}, {MINUS, "-"},
                                                        {STAR, "\\*"},       {SLASH, "/"},  {LEFT_PAREN, "\\("},
                                                        {RIGHT_PAREN, "\\)"}};
-    Lexer<TokenTypes> lexer("1 \n\n2", rules);
-    std::vector<Token<TokenTypes>> tokens = lexer.tokenize();
+    Lexer<TokenTypes> lexer(rules);
+    std::vector<Token<TokenTypes>> tokens = lexer.tokenize("1 \n\n2");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");

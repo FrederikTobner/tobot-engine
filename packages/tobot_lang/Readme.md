@@ -1,3 +1,3 @@
 # tobot-lang
 
-Tools for lexical analysis and parsing of text files.
+Tools for generating lexical analyzers and parsers for programming languages, markup languages, and other text formats.

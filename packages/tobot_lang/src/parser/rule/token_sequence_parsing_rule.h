@@ -7,7 +7,7 @@
 #include "parsing_rule.h"
 
 namespace Tobot::Language {
-    /// @brief Simplest parsing rule that matches a single token
+    /// @brief Simplest parsing rule that matches a sequence of tokens
     /// @tparam T1 The type of the token type enum
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
@@ -27,7 +27,7 @@ namespace Tobot::Language {
             std::vector<T1> tokens;
     };
 
-    /// @brief Creates a new token parsing rule
+    /// @brief Creates a new token sequence parsing rule
     /// @tparam T1 The type of the token type enum
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
@@ -67,6 +67,7 @@ namespace Tobot::Language {
                 return false;
             }
         }
+        current += this->tokens.size();
         return true;
     }
 

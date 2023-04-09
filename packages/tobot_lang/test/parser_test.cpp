@@ -5,6 +5,7 @@
 
 using namespace Tobot::Language;
 
+// Different types of tokens
 enum TokenTypes {
     NUMBER,
     PLUS,
@@ -13,7 +14,8 @@ enum TokenTypes {
     SLASH
 };
 
-enum parsingRules {
+// Different types of parsing rules - producing an expression, term, factor or a number
+enum ParsingRules {
     EXPRESSION,
     TERM,
     FACTOR,
@@ -25,10 +27,24 @@ enum parsingRules {
  */
 TEST(Parser, CanBeCreated) {
     std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
-    TokenSequenceParsingRule<TokenTypes, parsingRules> tokenSequenceRule(NUMBER_RULE, {NUMBER});
+    TokenSequenceParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, {NUMBER});
     // We need to use a pointer here because the vector will try to copy the object
     // Should we solved in the future
-    ParsingRule<TokenTypes, parsingRules> * parsingRule = &tokenSequenceRule;
-    std::vector<ParsingRule<TokenTypes, parsingRules> *> leParsingRules = {parsingRule};
-    Parser<TokenTypes, parsingRules> parser(leParsingRules);
+    ParsingRule<TokenTypes, ParsingRules> * parsingRule = &tokenSequenceRule;
+    std::vector<ParsingRule<TokenTypes, ParsingRules> *> leParsingRules = {parsingRule};
+    Parser<TokenTypes, ParsingRules> parser(leParsingRules);
+}
+
+/*
+ * Tests whether the Parser can parse a single token
+ */
+TEST(Parser, CanParseSingleToken) {
+    std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
+    TokenSequenceParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, {NUMBER});
+    // We need to use a pointer here because the vector will try to copy the object
+    // Should we solved in the future
+    ParsingRule<TokenTypes, ParsingRules> * parsingRule = &tokenSequenceRule;
+    std::vector<ParsingRule<TokenTypes, ParsingRules> *> leParsingRules = {parsingRule};
+    Parser<TokenTypes, ParsingRules> parser(leParsingRules);
+    AbstractSyntaxTree<TokenTypes, ParsingRules> tree = parser.parse(tokens);
 }

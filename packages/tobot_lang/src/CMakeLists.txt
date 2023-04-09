@@ -6,7 +6,7 @@ set(DATA_STRUCTURES_HEADER_FILES
 "parser/expression/expression.h"
 "parser/expression/complex_expression.h"
 "parser/expression/simple_expression.h"
-"parser/expression_tree.h"
+"parser/abstract_syntax_tree.h.h"
 "parser/regex_quantifier.h"
 "parser/rule/parsing_rule.h"
 "parser/rule/quantified_parsing_rule.h"
