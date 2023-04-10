@@ -14,9 +14,6 @@ namespace Tobot::Language {
             QuantifiedParsingRule(std::pair<ParsingRule<T1, T2>, RegexQuantifier> rule, T2 type);
             ~QuantifiedParsingRule();
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
-            operator ParsingRule<T1, T2>() {
-                return *this;
-            }
 
         private:
             std::vector<std::pair<ParsingRule<T1, T2>, RegexQuantifier>> rule;

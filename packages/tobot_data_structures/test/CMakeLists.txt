@@ -16,6 +16,8 @@ set(TOBOT_DATA_STRUCTURES_TEST_SOURCES
 "graph_test.cpp"
 "main.cpp"
 "red_black_tree_test.cpp"
+"tree_test.cpp"
+"tree_node_test.cpp"
 )
 
 # Set all test files

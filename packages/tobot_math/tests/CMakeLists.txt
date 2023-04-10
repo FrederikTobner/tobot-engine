@@ -14,6 +14,7 @@ set(TOBOT_MATH_TESTS tobot-math_TESTS)
 # Set all test files
 set(TEST_SOURCES
 "circle_test.cpp"
+"gradient_test.cpp"
 "main.cpp"
 "matrix_test.cpp"
 "plane_test.cpp"

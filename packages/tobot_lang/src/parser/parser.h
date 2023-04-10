@@ -3,10 +3,11 @@
 #include "../pre_compiled_header.h"
 
 #include "../token.h"
-#include "abstract_syntax_tree.h"
 #include "rule/parsing_rule.h"
 #include "rule/quantified_parsing_rule.h"
-#include "rule/token_sequence_parsing_rule.h"
+#include "rule/sequence_parsing_rule.h"
+#include "tobot_data_structures.h"
+
 
 namespace Tobot::Language {
     template <typename T1, typename T2>
@@ -15,7 +16,7 @@ namespace Tobot::Language {
         public:
             Parser(std::vector<ParsingRule<T1, T2> *> grammer);
             ~Parser();
-            AbstractSyntaxTree<T1, T2> parse(std::vector<Token<T1>> tokens);
+            Tobot::DataStructures::Tree::Tree<std::pair<T1, T2>> parse(std::vector<Token<T1>> tokens);
 
         private:
             /// @brief The grammer used for parsing
@@ -44,15 +45,16 @@ namespace Tobot::Language {
 
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    AbstractSyntaxTree<T1, T2> Parser<T1, T2>::parse(std::vector<Token<T1>> tokens) {
+    Tobot::DataStructures::Tree::Tree<std::pair<T1, T2>> Parser<T1, T2>::parse(std::vector<Token<T1>> tokens) {
         start = current = 0;
         end = 0;
-        AbstractSyntaxTree<T1, T2> * tree = new AbstractSyntaxTree<T1, T2>();
+        Tobot::DataStructures::Tree::Tree<std::pair<T1, T2>> * tree =
+            new Tobot::DataStructures::Tree::Tree<std::pair<T1, T2>>();
         while (current < tokens.size()) {
             start = current;
             for (auto rule : this->grammer) {
                 if (rule->apply(tokens, current)) {
-                    // TODO: Add node to the tree
+                    // TODO: Add node to the tree from the top level rule
                     break;
                 }
             }

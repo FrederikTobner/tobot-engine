@@ -23,7 +23,7 @@ add_executable(${TOBOT_LANG_TESTS} ${TOBOT_LANG_TEST_SOURCES})
 target_include_directories(${TOBOT_LANG_TESTS} PUBLIC "${SOURCE_PATH_LANG}/include")
 
 # Link google test
-target_link_libraries(${TOBOT_LANG_TESTS} PUBLIC GTest::gtest_main tobot-data-structures)
+target_link_libraries(${TOBOT_LANG_TESTS} PUBLIC GTest::gtest_main tobot-lang)
 
 include(GoogleTest)
 gtest_discover_tests(${TOBOT_LANG_TESTS})

@@ -1,23 +1,27 @@
-set(DATA_STRUCTURES_HEADER_FILES
+set(LANG_HEADER_FILES
 "token.h"
 "lexer/tokenization_rule.h"
 "lexer/lexer.h"
 "include/tobot_lang.h"
-"parser/expression/expression.h"
-"parser/expression/complex_expression.h"
-"parser/expression/simple_expression.h"
-"parser/abstract_syntax_tree.h.h"
+"parser/context/parsing_context.h"
+"parser/context/complex_parsing_context.h"
+"parser/context/simple_parsing_context.h"
 "parser/regex_quantifier.h"
 "parser/rule/parsing_rule.h"
 "parser/rule/quantified_parsing_rule.h"
-"parser/rule/token_sequence_parsing_rule.h"
+"parser/rule/sequence_parsing_rule.h"
+"parser/rule/terminal_parsing_rule.h"
 )
 
 add_library(tobot-lang INTERFACE)
 
-target_sources(tobot-lang INTERFACE ${DATA_STRUCTURES_HEADER_FILES})
+target_sources(tobot-lang INTERFACE ${LANG_HEADER_FILES})
 
 set_target_properties(tobot-lang PROPERTIES LINKER_LANGUAGE CXX)
+
+target_link_libraries(tobot-lang INTERFACE tobot-data-structures)
+
+target_include_directories(tobot-lang INTERFACE "${SOURCE_PATH_DATA_STRUCTURES}/include")
 
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)

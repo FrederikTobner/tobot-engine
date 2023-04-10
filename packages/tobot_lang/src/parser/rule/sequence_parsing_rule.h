@@ -12,19 +12,16 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    class TokenSequenceParsingRule : public Tobot::Language::ParsingRule<T1, T2> {
+    class ParsingRuleSequence : public Tobot::Language::ParsingRule<T1, T2> {
         public:
-            TokenSequenceParsingRule(T2 type, std::vector<T1> tokens);
-            ~TokenSequenceParsingRule();
+            ParsingRuleSequence(T2 type, std::vector<ParsingRule<T1, T2>> tokens);
+            ~ParsingRuleSequence();
 
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
-            operator ParsingRule<T1, T2>() {
-                return *this;
-            }
 
         private:
             T2 type;
-            std::vector<T1> tokens;
+            std::vector<ParsingRule<T1, T2>> rules;
     };
 
     /// @brief Creates a new token sequence parsing rule
@@ -32,7 +29,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    TokenSequenceParsingRule<T1, T2>::TokenSequenceParsingRule(T2 type, std::vector<T1> tokens) {
+    ParsingRuleSequence<T1, T2>::ParsingRuleSequence(T2 type, std::vector<ParsingRule<T1, T2>> tokens) {
         this->type = type;
         this->tokens = tokens;
     }
@@ -42,7 +39,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    TokenSequenceParsingRule<T1, T2>::~TokenSequenceParsingRule() {
+    ParsingRuleSequence<T1, T2>::~ParsingRuleSequence() {
     }
 
     /// @brief Applies the token parsing rule to a vector of tokens
@@ -53,7 +50,7 @@ namespace Tobot::Language {
     /// @return True if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    TokenSequenceParsingRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+    ParsingRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
         if (current >= tokens.size()) {
             return false;
         }

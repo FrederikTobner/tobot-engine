@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../dimension.h"
+#include "../gradient2D.h"
 #include "../matrix.h"
 #include "../plane.h"
 #include "../point2D.h"

@@ -9,7 +9,7 @@ namespace Tobot::DataStructures::Tree {
     /// @brief AVL Tree implementation
     /// @tparam T Type of the tree values
     template <typename T>
-    class AVLTree : BinarySearchTree<T> {
+    class AVLTree : public BinarySearchTree<T> {
         public:
             struct Node {
                     T value;

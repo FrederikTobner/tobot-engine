@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "tobot_data_structures.h"
 #include "tobot_lang.h"
 #include <vector>
 
@@ -27,7 +28,7 @@ enum ParsingRules {
  */
 TEST(Parser, CanBeCreated) {
     std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
-    TokenSequenceParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, {NUMBER});
+    TerminalParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, NUMBER);
     // We need to use a pointer here because the vector will try to copy the object
     // Should we solved in the future
     ParsingRule<TokenTypes, ParsingRules> * parsingRule = &tokenSequenceRule;
@@ -40,11 +41,11 @@ TEST(Parser, CanBeCreated) {
  */
 TEST(Parser, CanParseSingleToken) {
     std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
-    TokenSequenceParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, {NUMBER});
+    TerminalParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, NUMBER);
     // We need to use a pointer here because the vector will try to copy the object
     // Should we solved in the future
     ParsingRule<TokenTypes, ParsingRules> * parsingRule = &tokenSequenceRule;
     std::vector<ParsingRule<TokenTypes, ParsingRules> *> leParsingRules = {parsingRule};
     Parser<TokenTypes, ParsingRules> parser(leParsingRules);
-    AbstractSyntaxTree<TokenTypes, ParsingRules> tree = parser.parse(tokens);
+    Tobot::DataStructures::Tree::Tree<std::pair<TokenTypes, ParsingRules>> tree = parser.parse(tokens);
 }

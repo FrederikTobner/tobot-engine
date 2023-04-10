@@ -12,7 +12,7 @@ namespace Tobot::DataStructures::Tree {
     /// or black. These colors are used to ensure the tree remains approximately balanced during insertions and
     /// deletions.
     template <typename T>
-    class RedBlackTree : BinarySearchTree<T> {
+    class RedBlackTree : public BinarySearchTree<T> {
         public:
             /// @brief The node structure for the RedBlackTree class
             struct Node {
