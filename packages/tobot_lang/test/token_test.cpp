@@ -4,15 +4,9 @@
 
 using namespace Tobot::Language;
 
+// Different types of tokens
 enum TokenTypes {
-    NUMBER,
-    PLUS,
-    MINUS,
-    STAR,
-    SLASH,
-    LEFT_PAREN,
-    RIGHT_PAREN,
-    END_OF_FILE
+    NUMBER
 };
 
 /*

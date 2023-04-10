@@ -6,7 +6,7 @@
 
 namespace Tobot::Language {
 
-    /// @brief Models a expression that
+    /// @brief Models the parsing context corresponding to a non-terminal production rule
     /// @tparam T1 The type of the token type enum
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>

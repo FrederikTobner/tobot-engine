@@ -6,11 +6,10 @@ set(LANG_HEADER_FILES
 "parser/context/parsing_context.h"
 "parser/context/complex_parsing_context.h"
 "parser/context/simple_parsing_context.h"
-"parser/regex_quantifier.h"
-"parser/rule/parsing_rule.h"
-"parser/rule/quantified_parsing_rule.h"
-"parser/rule/sequence_parsing_rule.h"
-"parser/rule/terminal_parsing_rule.h"
+"parser/rule/production_rule.h"
+"parser/rule/quantified_production_rule.h"
+"parser/rule/production_rule_sequence.h"
+"parser/rule/terminal_production_rule.h"
 )
 
 add_library(tobot-lang INTERFACE)

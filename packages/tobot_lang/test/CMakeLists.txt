@@ -15,6 +15,8 @@ set(TOBOT_LANG_TEST_SOURCES
 "lexer_test.cpp" 
 "parser_test.cpp"
 "token_test.cpp"
+"terminal_production_rule_test.cpp"
+"production_rule_sequence_test.cpp"
 )
 
 add_executable(${TOBOT_LANG_TESTS} ${TOBOT_LANG_TEST_SOURCES})

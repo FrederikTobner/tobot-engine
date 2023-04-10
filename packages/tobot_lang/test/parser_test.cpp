@@ -5,6 +5,7 @@
 #include <vector>
 
 using namespace Tobot::Language;
+using namespace Tobot::DataStructures::Tree;
 
 // Different types of tokens
 enum TokenTypes {
@@ -15,8 +16,8 @@ enum TokenTypes {
     SLASH
 };
 
-// Different types of parsing rules - producing an expression, term, factor or a number
-enum ParsingRules {
+// Different symbols in the grammar
+enum GrammarSymbols {
     EXPRESSION,
     TERM,
     FACTOR,
@@ -27,25 +28,22 @@ enum ParsingRules {
  * Tests whether the Parser can be created
  */
 TEST(Parser, CanBeCreated) {
-    std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
-    TerminalParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, NUMBER);
-    // We need to use a pointer here because the vector will try to copy the object
-    // Should we solved in the future
-    ParsingRule<TokenTypes, ParsingRules> * parsingRule = &tokenSequenceRule;
-    std::vector<ParsingRule<TokenTypes, ParsingRules> *> leParsingRules = {parsingRule};
-    Parser<TokenTypes, ParsingRules> parser(leParsingRules);
+    std::unique_ptr<ProductionRule<TokenTypes, GrammarSymbols>> numberParsingRule =
+        std::make_unique<TerminalProductionRule<TokenTypes, GrammarSymbols>>(NUMBER_RULE, NUMBER);
+    std::unique_ptr<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>> leGrammar =
+        std::make_unique<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>>(numberParsingRule.get());
+    Parser<TokenTypes, GrammarSymbols> parser(leGrammar.get());
 }
 
 /*
- * Tests whether the Parser can parse a single token
+ * Tests whether the Parser can parse
  */
 TEST(Parser, CanParseSingleToken) {
+    std::unique_ptr<ProductionRule<TokenTypes, GrammarSymbols>> numberParsingRule =
+        std::make_unique<TerminalProductionRule<TokenTypes, GrammarSymbols>>(NUMBER_RULE, NUMBER);
+    std::unique_ptr<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>> leGrammar =
+        std::make_unique<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>>(numberParsingRule.get());
     std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
-    TerminalParsingRule<TokenTypes, ParsingRules> tokenSequenceRule(NUMBER_RULE, NUMBER);
-    // We need to use a pointer here because the vector will try to copy the object
-    // Should we solved in the future
-    ParsingRule<TokenTypes, ParsingRules> * parsingRule = &tokenSequenceRule;
-    std::vector<ParsingRule<TokenTypes, ParsingRules> *> leParsingRules = {parsingRule};
-    Parser<TokenTypes, ParsingRules> parser(leParsingRules);
-    Tobot::DataStructures::Tree::Tree<std::pair<TokenTypes, ParsingRules>> tree = parser.parse(tokens);
+    Parser<TokenTypes, GrammarSymbols> parser(leGrammar.get());
+    Tobot::DataStructures::Tree::Tree<std::pair<TokenTypes, GrammarSymbols>> tree = parser.parse(tokens);
 }

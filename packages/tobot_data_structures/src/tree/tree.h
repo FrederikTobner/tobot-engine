@@ -14,6 +14,7 @@ namespace Tobot::DataStructures::Tree {
     class Tree {
         public:
             Tree();
+            Tree(T data);
             Tree(TreeNode<T> * root);
             ~Tree();
             std::size_t getSize() const;
@@ -44,6 +45,14 @@ namespace Tobot::DataStructures::Tree {
 
     /// @brief Construct a new Tree object with a root node
     /// @tparam T The type of the data stored in the tree
+    /// @param data The data to store in the root node
+    template <typename T>
+    Tree<T>::Tree(T data) {
+        this->root = new TreeNode<T>(data);
+    }
+
+    /// @brief Construct a new Tree object with a root node
+    /// @tparam T The type of the data stored in the tree
     /// @param root The root node of the tree
     template <typename T>
     Tree<T>::Tree(TreeNode<T> * root) {
@@ -56,6 +65,7 @@ namespace Tobot::DataStructures::Tree {
     Tree<T>::~Tree() {
         if (root) {
             delete root;
+            root = nullptr;
         }
     }
 

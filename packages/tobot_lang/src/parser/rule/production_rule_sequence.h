@@ -2,9 +2,8 @@
 
 #include "../pre_compiled_header.h"
 
-#include "../regex_quantifier.h"
 #include "../token.h"
-#include "parsing_rule.h"
+#include "production_rule.h"
 
 namespace Tobot::Language {
     /// @brief Simplest parsing rule that matches a sequence of tokens
@@ -12,16 +11,16 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    class ParsingRuleSequence : public Tobot::Language::ParsingRule<T1, T2> {
+    class ProductionRuleSequence : public Tobot::Language::ProductionRule<T1, T2> {
         public:
-            ParsingRuleSequence(T2 type, std::vector<ParsingRule<T1, T2>> tokens);
-            ~ParsingRuleSequence();
+            ProductionRuleSequence(T2 type, std::vector<ProductionRule<T1, T2> *> rules);
+            ~ProductionRuleSequence();
 
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
 
         private:
             T2 type;
-            std::vector<ParsingRule<T1, T2>> rules;
+            std::vector<ProductionRule<T1, T2> *> rules;
     };
 
     /// @brief Creates a new token sequence parsing rule
@@ -29,9 +28,9 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ParsingRuleSequence<T1, T2>::ParsingRuleSequence(T2 type, std::vector<ParsingRule<T1, T2>> tokens) {
+    ProductionRuleSequence<T1, T2>::ProductionRuleSequence(T2 type, std::vector<ProductionRule<T1, T2> *> rules) {
         this->type = type;
-        this->tokens = tokens;
+        this->rules = rules;
     }
 
     /// @brief Destroys a token parsing rule
@@ -39,7 +38,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ParsingRuleSequence<T1, T2>::~ParsingRuleSequence() {
+    ProductionRuleSequence<T1, T2>::~ProductionRuleSequence() {
     }
 
     /// @brief Applies the token parsing rule to a vector of tokens
@@ -50,21 +49,14 @@ namespace Tobot::Language {
     /// @return True if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    ParsingRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
-        if (current >= tokens.size()) {
-            return false;
-        }
-
-        for (std::size_t i = 0; i < this->tokens.size(); i++) {
-            if (current + i >= tokens.size()) {
-                return false;
-            }
-
-            if (tokens[current + i].getType() != this->tokens[i]) {
+    ProductionRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+        std::size_t start = current;
+        for (auto rule : this->rules) {
+            if (!rule->apply(tokens, current)) {
+                current = start;
                 return false;
             }
         }
-        current += this->tokens.size();
         return true;
     }
 

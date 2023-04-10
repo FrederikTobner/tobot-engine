@@ -10,10 +10,10 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    class ParsingRule {
+    class ProductionRule {
         public:
-            ParsingRule();
-            virtual ~ParsingRule();
+            ProductionRule();
+            virtual ~ProductionRule();
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current) = 0;
     };
 
@@ -22,7 +22,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ParsingRule<T1, T2>::ParsingRule() {
+    ProductionRule<T1, T2>::ProductionRule() {
     }
 
     /// @brief Destroys a parsing rule
@@ -30,7 +30,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ParsingRule<T1, T2>::~ParsingRule() {
+    ProductionRule<T1, T2>::~ProductionRule() {
     }
 
 } // namespace Tobot::Language
