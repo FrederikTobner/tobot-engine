@@ -7,43 +7,31 @@
 using namespace Tobot::Language;
 using namespace Tobot::DataStructures::Tree;
 
-// Different types of tokens
-enum TokenTypes {
-    NUMBER,
-    PLUS,
-    MINUS,
-    STAR,
-    SLASH
-};
+TOBOT_ENUM(TokenTypes, NUMBER, PLUS, MINUS, STAR, SLASH)
 
-// Different symbols in the grammar
-enum GrammarSymbols {
-    EXPRESSION,
-    TERM,
-    FACTOR,
-    NUMBER_RULE,
-};
-
+TOBOT_ENUM(GrammarSymbols, EXPRESSION, TERM, FACTOR, NUMBER_RULE)
 /*
  * Tests whether the Parser can be created
  */
 TEST(Parser, CanBeCreated) {
-    std::unique_ptr<ProductionRule<TokenTypes, GrammarSymbols>> numberParsingRule =
-        std::make_unique<TerminalProductionRule<TokenTypes, GrammarSymbols>>(NUMBER_RULE, NUMBER);
-    std::unique_ptr<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>> leGrammar =
-        std::make_unique<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>>(numberParsingRule.get());
-    Parser<TokenTypes, GrammarSymbols> parser(leGrammar.get());
+    std::unique_ptr<ProductionRule<TokenTypes::Value, GrammarSymbols::Value>> numberParsingRule =
+        std::make_unique<TerminalProductionRule<TokenTypes::Value, GrammarSymbols::Value>>(GrammarSymbols::NUMBER_RULE,
+                                                                                           TokenTypes::NUMBER);
+    std::unique_ptr<Tree<ProductionRule<TokenTypes::Value, GrammarSymbols::Value> *>> leGrammar =
+        std::make_unique<Tree<ProductionRule<TokenTypes::Value, GrammarSymbols::Value> *>>(numberParsingRule.get());
+    Parser<TokenTypes::Value, GrammarSymbols::Value> parser(leGrammar.get());
 }
 
 /*
  * Tests whether the Parser can parse
  */
 TEST(Parser, CanParseSingleToken) {
-    std::unique_ptr<ProductionRule<TokenTypes, GrammarSymbols>> numberParsingRule =
-        std::make_unique<TerminalProductionRule<TokenTypes, GrammarSymbols>>(NUMBER_RULE, NUMBER);
-    std::unique_ptr<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>> leGrammar =
-        std::make_unique<Tree<ProductionRule<TokenTypes, GrammarSymbols> *>>(numberParsingRule.get());
-    std::vector<Token<TokenTypes>> tokens = {{NUMBER, "123", 1, 1}};
-    Parser<TokenTypes, GrammarSymbols> parser(leGrammar.get());
-    Tobot::DataStructures::Tree::Tree<std::pair<TokenTypes, GrammarSymbols>> tree = parser.parse(tokens);
+    std::unique_ptr<ProductionRule<TokenTypes::Value, GrammarSymbols::Value>> numberParsingRule =
+        std::make_unique<TerminalProductionRule<TokenTypes::Value, GrammarSymbols::Value>>(GrammarSymbols::NUMBER_RULE,
+                                                                                           TokenTypes::NUMBER);
+    std::unique_ptr<Tree<ProductionRule<TokenTypes::Value, GrammarSymbols::Value> *>> leGrammar =
+        std::make_unique<Tree<ProductionRule<TokenTypes::Value, GrammarSymbols::Value> *>>(numberParsingRule.get());
+    std::vector<Token<TokenTypes::Value>> tokens = {{TokenTypes::NUMBER, "123", 1, 1}};
+    Parser<TokenTypes::Value, GrammarSymbols::Value> parser(leGrammar.get());
+    Tobot::DataStructures::Tree::Tree<std::pair<TokenTypes::Value, GrammarSymbols::Value>> tree = parser.parse(tokens);
 }

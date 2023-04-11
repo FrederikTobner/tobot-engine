@@ -53,6 +53,7 @@ namespace Tobot::Language {
         std::size_t start = current;
         for (auto rule : this->rules) {
             if (!rule->apply(tokens, current)) {
+                // Backtracking if the rule failed
                 current = start;
                 return false;
             }

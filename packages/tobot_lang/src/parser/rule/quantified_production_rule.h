@@ -149,9 +149,12 @@ namespace Tobot::Language {
         requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
     QuantifiedProductionRule<T1, T2>::applyExactly(std::vector<Token<T1>> tokens, std::size_t & current,
                                                    ProductionRule<T1, T2> rule, std::size_t count) {
-        std::size_t currentCount = current;
+        std::size_t start = current;
         for (std::size_t i = 0; i < count; i++) {
             if (!rule.apply(tokens, current)) {
+                if (i == 0) {
+                    current = start;
+                }
                 return false;
             }
             current++;
@@ -171,17 +174,21 @@ namespace Tobot::Language {
         requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
     QuantifiedProductionRule<T1, T2>::applyAtLeast(std::vector<Token<T1>> tokens, std::size_t & current,
                                                    ProductionRule<T1, T2> rule, std::size_t count) {
-        std::size_t currentCount = current;
+        std::size_t start = current;
         for (std::size_t i = 0; i < count; i++) {
-            if (!rule.apply(tokens, currentCount)) {
+            if (!rule.apply(tokens, current)) {
+                if (i != 0) {
+                    // Backtracking is required
+                    current = start;
+                }
                 return false;
             }
-            currentCount++;
+            current++;
         }
-        while (rule.apply(tokens, currentCount)) {
-            currentCount++;
+
+        while (rule.apply(tokens, current)) {
+            current++;
         }
-        current = currentCount;
         return true;
     }
 
@@ -189,20 +196,23 @@ namespace Tobot::Language {
         requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
     QuantifiedProductionRule<T1, T2>::applyBetween(std::vector<Token<T1>> tokens, std::size_t & current,
                                                    ProductionRule<T1, T2> rule, std::size_t min, std::size_t max) {
-        std::size_t currentCount = current;
+        std::size_t start = current;
         for (std::size_t i = 0; i < min; i++) {
-            if (!rule.apply(tokens, currentCount)) {
+            if (!rule.apply(tokens, current)) {
+                if (i != 0) {
+                    current = start;
+                }
                 return false;
             }
-            currentCount++;
+            current++;
         }
         for (std::size_t i = min; i < max + 1; i++) {
-            if (!rule.apply(tokens, currentCount)) {
-                current = currentCount;
+            if (!rule.apply(tokens, current)) {
                 return true;
             }
-            currentCount++;
+            current++;
         }
+        current = start;
         return false;
     }
 

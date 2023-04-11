@@ -13,6 +13,7 @@ set(TOBOT_DATA_STRUCTURES_TESTS tobot-data-structures_TESTS)
 
 set(TOBOT_DATA_STRUCTURES_TEST_SOURCES 
 "avl_tree_test.cpp"
+"enum_test.cpp"
 "graph_test.cpp"
 "main.cpp"
 "red_black_tree_test.cpp"

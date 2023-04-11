@@ -1,4 +1,5 @@
 set(DATA_STRUCTURES_HEADER_FILES
+"enum.h"
 "graph/undirected_graph.h"
 "include/tobot_data_structures.h"
 "tree/avl_tree.h"
