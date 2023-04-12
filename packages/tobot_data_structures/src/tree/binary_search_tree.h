@@ -1,3 +1,11 @@
+/**
+ * @file binary_search_tree.h
+ * @brief File containing a abstract class for a binary search tree
+ * @details A binary search tree is a binary tree where the value of each node is greater than the value of all nodes in
+ * the left subtree and less than the value of all nodes in the right subtree. This class is used as a base class for
+ * the RedBlackTree and the AVLTree implementations.
+ */
+
 #pragma once
 
 namespace Tobot::DataStructures::Tree {

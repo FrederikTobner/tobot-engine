@@ -5,7 +5,7 @@
 TOBOT_ENUM(Number, ONE, TWO, THREE)
 
 /*
- * Tests whether an object of of the class we generated with the ENUM_CLASS macro can be created
+ * Tests whether an object of the class we generated with the ENUM_CLASS macro can be created
  */
 TEST(ENUM, CanBeCreated) {
     Number number = Number::ONE;

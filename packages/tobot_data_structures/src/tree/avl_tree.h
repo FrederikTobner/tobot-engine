@@ -1,8 +1,18 @@
+/**
+ * @file avl_tree.h
+ * @brief File containing a template implementation of a AVL Tree
+ * @details A AVL Tree is a self balancing binary search tree. It is a binary search tree where the difference between
+ * the height of the left and right subtree of a node is at most 1.
+ * @see https://en.wikipedia.org/wiki/AVL_tree
+ */
+
 #pragma once
 
 #include "../pre_compiled_header.h"
 
 #include "binary_search_tree.h"
+
+#include "binary_tree_traversal.h"
 
 namespace Tobot::DataStructures::Tree {
 
@@ -55,9 +65,6 @@ namespace Tobot::DataStructures::Tree {
 
             Node * createNode(T value);
             void deleteNode(Node * node);
-            void traverseInOrder(Node * node, std::function<void(T)> callback);
-            void traversePreOrder(Node * node, std::function<void(T)> callback);
-            void traversePostOrder(Node * node, std::function<void(T)> callback);
             void print(Node * node, int level);
     };
 
@@ -352,39 +359,11 @@ namespace Tobot::DataStructures::Tree {
     }
 
     /// Traverse the tree in order
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start the traversal from
-    /// @param callback The callback to call for each node
-    template <typename T>
-    void AVLTree<T>::traverseInOrder(Node * node, std::function<void(T)> callback) {
-        if (node == nullptr) {
-            return;
-        }
-        traverseInOrder(node->left, callback);
-        callback(node->value);
-        traverseInOrder(node->right, callback);
-    }
-
-    /// Traverse the tree in order
     ///  @tparam T The type of the value stored in the tree
     ///  @param callback The callback to call for each node
     template <typename T>
     void AVLTree<T>::traverseInOrder(std::function<void(T)> callback) {
-        traverseInOrder(root, callback);
-    }
-
-    /// Traverse the tree in pre order
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start the traversal from
-    /// @param callback The callback to call for each node
-    template <typename T>
-    void AVLTree<T>::traversePreOrder(Node * node, std::function<void(T)> callback) {
-        if (node == nullptr) {
-            return;
-        }
-        callback(node->value);
-        traversePreOrder(node->left, callback);
-        traversePreOrder(node->right, callback);
+        Tobot::DataStructures::Tree::traverseInOrder(root, callback, (Node *)nullptr);
     }
 
     /// Traverse the tree in pre order
@@ -392,21 +371,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     template <typename T>
     void AVLTree<T>::traversePreOrder(std::function<void(T)> callback) {
-        traversePreOrder(root, callback);
-    }
-
-    /// Traverse the tree in post order
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start the traversal from
-    /// @param callback The callback to call for each node
-    template <typename T>
-    void AVLTree<T>::traversePostOrder(Node * node, std::function<void(T)> callback) {
-        if (node == nullptr) {
-            return;
-        }
-        traversePostOrder(node->left, callback);
-        traversePostOrder(node->right, callback);
-        callback(node->value);
+        Tobot::DataStructures::Tree::traversePreOrder(root, callback, (Node *)nullptr);
     }
 
     /// Traverse the tree in post order
@@ -414,7 +379,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     template <typename T>
     void AVLTree<T>::traversePostOrder(std::function<void(T)> callback) {
-        traversePostOrder(root, callback);
+        Tobot::DataStructures::Tree::traversePostOrder(root, callback, (Node *)nullptr);
     }
 
     /// Prints the tree in a human readable format

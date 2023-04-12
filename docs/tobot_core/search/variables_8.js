@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tempfail_0',['TEMPFAIL',['../class_tobot_1_1_core_1_1_exit_code.html#a3cd481a74bda2b757c92ef80690d5f42',1,'Tobot::Core::ExitCode']]]
+  ['software_0',['SOFTWARE',['../class_tobot_1_1_core_1_1_exit_code.html#acdf94456ff24b4ee01c18036dd151549',1,'Tobot::Core::ExitCode']]],
+  ['sp_5fscenestack_1',['sp_SceneStack',['../class_tobot_1_1_core_1_1_scene_manager.html#ac1226dea7b6f8a56ba09b1cfe1aff5cc',1,'Tobot::Core::SceneManager']]]
 ];

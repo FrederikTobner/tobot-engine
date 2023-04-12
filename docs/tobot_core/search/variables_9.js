@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['unavailable_0',['UNAVAILABLE',['../class_tobot_1_1_core_1_1_exit_code.html#a07493f04bf2eaa985ba07039da2940f9',1,'Tobot::Core::ExitCode']]],
-  ['usage_1',['USAGE',['../class_tobot_1_1_core_1_1_exit_code.html#ac68b68047ec0e8846ab1a1f126b46648',1,'Tobot::Core::ExitCode']]]
+  ['tempfail_0',['TEMPFAIL',['../class_tobot_1_1_core_1_1_exit_code.html#af25f7aecc123c26faf8583acc840c07b',1,'Tobot::Core::ExitCode']]]
 ];

@@ -26,7 +26,8 @@ var NAVTREE =
 [
   [ "tobot-math", "index.html", [
     [ "Main Page", "index.html", [
-      [ "Introduction", "index.html#intro_sec", null ]
+      [ "Introduction", "index.html#intro_sec", null ],
+      [ "License", "index.html#license_sec", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
@@ -35,22 +36,29 @@ var NAVTREE =
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Data Fields", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
+      [ "File List", "files.html", "files_dup" ],
+      [ "Globals", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Macros", "globals_defs.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"class_tobot_1_1_math_1_1_plane.html#aea0cf8e9a4b6601901827d9a9781e3d8",
+"class_tobot_1_1_math_1_1_vector2_d.html#af8301b061d8ec3e828eed0afa5c90e24"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

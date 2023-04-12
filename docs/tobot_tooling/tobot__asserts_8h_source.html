@@ -95,23 +95,29 @@ $(document).ready(function(){initNavTree('tobot__asserts_8h_source.html',''); in
 <div class="contents">
 <a href="tobot__asserts_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../logging/logger.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="namespace_tobot.html">    9</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_tobot_1_1_tooling_1_1_debug.html">Tobot::Tooling::Debug</a> {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// Asserts are only defined for debug builds</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifdef BUILD_TYPE_DEBUG</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define TOBOT_ASSERT(condition)                               \</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">    {                                                         \</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">        if (!(condition)) {                                   \</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">            LOG_ERROR_AT(&quot;Assertion Failed: %s&quot;</span>, #condition); \</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            __debugbreak();                                   \</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        }                                                     \</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    }</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="tobot__asserts_8h.html#a15688653caee9270df1b64b54a49fc99">   20</a></span><span class="preprocessor">#define TOBOT_ASSERT(x)</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>} <span class="comment">// namespace Tobot::Tooling::Debug</span></div>
-<div class="ttc" id="anamespace_tobot_1_1_tooling_1_1_debug_html"><div class="ttname"><a href="namespace_tobot_1_1_tooling_1_1_debug.html">Tobot::Tooling::Debug</a></div><div class="ttdef"><b>Definition:</b> tobot_asserts.h:9</div></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="namespace_tobot.html">    7</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_tobot_1_1_tooling_1_1_debug.html">Tobot::Tooling::Debug</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// Asserts are only defined for debug builds</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#if BUILD_TYPE_DEBUG</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Filename macro - filename without the path</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define __PRETTY_FILE__ (strrchr(__FILE__, &#39;/&#39;) ? strrchr(__FILE__, &#39;/&#39;) + 1 : __FILE__)</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define TOBOT_ASSERT(condition)                                                                              \</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">    {                                                                                                        \</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">        if (!(condition)) {                                                                                  \</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">            std::cout &lt;&lt; &quot;Assertion Failed: &quot;</span> &lt;&lt; #condition &lt;&lt; &quot;\n\tin file&quot; &lt;&lt; __PRETTY_FILE__ &lt;&lt; &quot;, line &quot; \</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                      &lt;&lt; __LINE__ &lt;&lt; &quot;\n\tfunction: &quot; &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot;\n&quot;;                        \</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            __debugbreak();                                                                                  \</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        }                                                                                                    \</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="tobot__asserts_8h.html#a15688653caee9270df1b64b54a49fc99">   26</a></span><span class="preprocessor">#define TOBOT_ASSERT(x)</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>} <span class="comment">// namespace Tobot::Tooling::Debug</span></div>
+<div class="ttc" id="anamespace_tobot_1_1_tooling_1_1_debug_html"><div class="ttname"><a href="namespace_tobot_1_1_tooling_1_1_debug.html">Tobot::Tooling::Debug</a></div><div class="ttdef"><b>Definition:</b> tobot_asserts.h:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

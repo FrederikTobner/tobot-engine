@@ -1,5 +1,31 @@
 var searchData=
 [
-  ['main_20page_0',['Main Page',['../index.html',1,'']]],
-  ['main_2edox_1',['main.dox',['../main_8dox.html',1,'']]]
+  ['geta_0',['getA',['../class_tobot_1_1_math_1_1_plane.html#adeed23fddb3d000dc51df3ea5a54556d',1,'Tobot::Math::Plane::getA()'],['../class_tobot_1_1_math_1_1_triangle2_d.html#aaa5ed8e191630faee290b23c5a7afe40',1,'Tobot::Math::Triangle2D::getA() const']]],
+  ['getanglea_1',['getAngleA',['../class_tobot_1_1_math_1_1_triangle2_d.html#afd7ba357ae1b4c7e6b97fd62f058897d',1,'Tobot::Math::Triangle2D']]],
+  ['getangleb_2',['getAngleB',['../class_tobot_1_1_math_1_1_triangle2_d.html#a6e3ac1b01c17efb5bad5ec693dea71a1',1,'Tobot::Math::Triangle2D']]],
+  ['getanglec_3',['getAngleC',['../class_tobot_1_1_math_1_1_triangle2_d.html#abeb7ac389feeca6fd06ca69dface2f0b',1,'Tobot::Math::Triangle2D']]],
+  ['getarea_4',['getArea',['../class_tobot_1_1_math_1_1_triangle2_d.html#a983846fea34e1d36ef6db54878480f97',1,'Tobot::Math::Triangle2D::getArea()'],['../class_tobot_1_1_math_1_1_circle.html#a983846fea34e1d36ef6db54878480f97',1,'Tobot::Math::Circle::getArea()'],['../class_tobot_1_1_math_1_1_polygon2_d.html#a983846fea34e1d36ef6db54878480f97',1,'Tobot::Math::Polygon2D::getArea()'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#a983846fea34e1d36ef6db54878480f97',1,'Tobot::Math::Rectangle2D::getArea()']]],
+  ['getb_5',['getB',['../class_tobot_1_1_math_1_1_plane.html#ad5c72001ada8846ac1eb3905a42b4ca3',1,'Tobot::Math::Plane::getB()'],['../class_tobot_1_1_math_1_1_triangle2_d.html#adc2c33beb7d565a1cee932e23ddb07ae',1,'Tobot::Math::Triangle2D::getB()']]],
+  ['getc_6',['getC',['../class_tobot_1_1_math_1_1_plane.html#a062b65619ff8635acc6afdeb5e5ef8bb',1,'Tobot::Math::Plane::getC()'],['../class_tobot_1_1_math_1_1_triangle2_d.html#ad69f5fbe3db039917f335e56c15f2995',1,'Tobot::Math::Triangle2D::getC()']]],
+  ['getcenter_7',['getCenter',['../class_tobot_1_1_math_1_1_rectangle2_d.html#acb071f0869b7bb11a5876e1d1d763811',1,'Tobot::Math::Rectangle2D']]],
+  ['getcentroid_8',['getCentroid',['../class_tobot_1_1_math_1_1_polygon2_d.html#a942bf1e4539ad512c21b795603a9a667',1,'Tobot::Math::Polygon2D']]],
+  ['getcircumference_9',['getCircumference',['../class_tobot_1_1_math_1_1_circle.html#ae7494539042f553726f95d35b12fe51d',1,'Tobot::Math::Circle']]],
+  ['getcoloumns_10',['getColoumns',['../class_tobot_1_1_math_1_1_matrix.html#a522f65c4805148303264ab967b33a1cc',1,'Tobot::Math::Matrix']]],
+  ['getd_11',['getD',['../class_tobot_1_1_math_1_1_plane.html#a71023e37ad3c803394d362348750f37b',1,'Tobot::Math::Plane']]],
+  ['getdistance_12',['getDistance',['../class_tobot_1_1_math_1_1_circle.html#a1bf70b11cf3d6a89738b8210eca121b3',1,'Tobot::Math::Circle']]],
+  ['getheight_13',['getHeight',['../class_tobot_1_1_math_1_1_rectangle2_d.html#af6ab5e512121b1939765d84190274905',1,'Tobot::Math::Rectangle2D']]],
+  ['getnormal_14',['getNormal',['../class_tobot_1_1_math_1_1_plane.html#a9e5b9bbcb035d4667481bc5893d7c476',1,'Tobot::Math::Plane']]],
+  ['getnumberofpoints_15',['getNumberOfPoints',['../class_tobot_1_1_math_1_1_polygon2_d.html#aa86bad99920f09f8b0255cf63bf1352c',1,'Tobot::Math::Polygon2D']]],
+  ['getperimeter_16',['getPerimeter',['../class_tobot_1_1_math_1_1_polygon2_d.html#a22247a0aecc4134c6cb58c7e6d61144e',1,'Tobot::Math::Polygon2D::getPerimeter()'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#a22247a0aecc4134c6cb58c7e6d61144e',1,'Tobot::Math::Rectangle2D::getPerimeter()'],['../class_tobot_1_1_math_1_1_triangle2_d.html#a22247a0aecc4134c6cb58c7e6d61144e',1,'Tobot::Math::Triangle2D::getPerimeter()']]],
+  ['getpoints_17',['getPoints',['../class_tobot_1_1_math_1_1_polygon2_d.html#a887af1175c4ad40e5e29c428c4e34f1a',1,'Tobot::Math::Polygon2D']]],
+  ['getrotation_18',['getRotation',['../class_tobot_1_1_math_1_1_rectangle2_d.html#aa8eb11f6ed789aa833443eccf9336d4a',1,'Tobot::Math::Rectangle2D']]],
+  ['getrows_19',['getRows',['../class_tobot_1_1_math_1_1_matrix.html#ac9864c6b31d53256473da31f77c16749',1,'Tobot::Math::Matrix']]],
+  ['getsize_20',['GetSize',['../class_tobot_1_1_math_1_1_vector.html#a0fbd4ba63813396485cb1c6ad1a04527',1,'Tobot::Math::Vector::GetSize()'],['../class_tobot_1_1_math_1_1_vector2_d.html#a70ea26b5d7f207df5c357593c4b58f77',1,'Tobot::Math::Vector2D::GetSize()'],['../class_tobot_1_1_math_1_1_vector3_d.html#a70ea26b5d7f207df5c357593c4b58f77',1,'Tobot::Math::Vector3D::GetSize()'],['../class_tobot_1_1_math_1_1_vector4_d.html#a70ea26b5d7f207df5c357593c4b58f77',1,'Tobot::Math::Vector4D::GetSize()']]],
+  ['getslope_21',['getSlope',['../class_tobot_1_1_math_1_1_gradient2_d.html#ac15b7b50952a0025e733709d92099b5e',1,'Tobot::Math::Gradient2D::getSlope()'],['../class_tobot_1_1_math_1_1_gradient2_d.html#a5c1cd3c0ca498ebcdadd01f80d657467',1,'Tobot::Math::Gradient2D::getSlope() const']]],
+  ['getwidth_22',['getWidth',['../class_tobot_1_1_math_1_1_rectangle2_d.html#a773c93a80be0be8ab6bf1baf0e31c2ae',1,'Tobot::Math::Rectangle2D']]],
+  ['getx_23',['getX',['../class_tobot_1_1_math_1_1_point2_d.html#ae7228a9062ab9c730963dc74d20cd11c',1,'Tobot::Math::Point2D']]],
+  ['gety_24',['getY',['../class_tobot_1_1_math_1_1_point2_d.html#a041196d4ab62202e60291f0f35416018',1,'Tobot::Math::Point2D']]],
+  ['getyintercept_25',['getYIntercept',['../class_tobot_1_1_math_1_1_gradient2_d.html#a16585ab599cd9ff11f0e14c1565dfdb5',1,'Tobot::Math::Gradient2D::getYIntercept()'],['../class_tobot_1_1_math_1_1_gradient2_d.html#aca0fdd952b8103e27acc8ecdd602018f',1,'Tobot::Math::Gradient2D::getYIntercept() const']]],
+  ['gradient2d_26',['Gradient2D',['../class_tobot_1_1_math_1_1_gradient2_d.html#ae3c21fc1c83c58abd50147b8cadc87bd',1,'Tobot::Math::Gradient2D::Gradient2D(T m_slope, T m_yIntercept)'],['../class_tobot_1_1_math_1_1_gradient2_d.html#ac62d38903e257c9d76dff4bf43fe1e76',1,'Tobot::Math::Gradient2D::Gradient2D(Gradient2D&lt; T &gt; const &amp;gradient)'],['../class_tobot_1_1_math_1_1_gradient2_d.html#aa846f90ae489dfc7ef106e8c7e0854af',1,'Tobot::Math::Gradient2D::Gradient2D(Gradient2D&lt; T &gt; &amp;&amp;gradient) noexcept'],['../class_tobot_1_1_math_1_1_gradient2_d.html',1,'Gradient2D&lt; T &gt;']]],
+  ['gradient2d_2eh_27',['gradient2D.h',['../gradient2_d_8h.html',1,'']]]
 ];

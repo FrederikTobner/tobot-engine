@@ -1,8 +1,18 @@
+/**
+ * @file red_black_tree.h
+ * @brief File containing a template implementation of a RedBlackTree
+ * @details A red-black tree is a self-balancing binary search tree. It is a binary search tree with one extra bit of
+ * storage per node: its color, which can be either red or black. These colors are used to ensure the tree remains
+ * approximately balanced during insertions and deletions.
+ */
+
 #pragma once
 
 #include "../pre_compiled_header.h"
 
 #include "binary_search_tree.h"
+
+#include "binary_tree_traversal.h"
 
 namespace Tobot::DataStructures::Tree {
 
@@ -105,9 +115,6 @@ namespace Tobot::DataStructures::Tree {
             Node * successor(Node * node);
             Node * predecessor(Node * node);
             void print(Node * node);
-            void traverseInOrder(Node * node, std::function<void(T)> callback);
-            void traversePreOrder(Node * node, std::function<void(T)> callback);
-            void traversePostOrder(Node * node, std::function<void(T)> callback);
             void clear(Node * node);
     };
 
@@ -519,38 +526,12 @@ namespace Tobot::DataStructures::Tree {
         }
     }
 
-    /// Traverse the tree in order and call the given function on each node
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start traversing from
-    /// @param callback The function to call on each node
-    template <typename T>
-    void RedBlackTree<T>::traverseInOrder(Node * node, std::function<void(T)> callback) {
-        if (node != this->nil) {
-            this->traverseInOrder(node->left, callback);
-            callback(node->value);
-            this->traverseInOrder(node->right, callback);
-        }
-    }
-
     /// Traverses the tree in order and calls the given function on each node
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
     void RedBlackTree<T>::traverseInOrder(std::function<void(T)> callback) {
-        this->traverseInOrder(this->root, callback);
-    }
-
-    /// Traverse the tree in pre order and call the given function on each node
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start traversing from
-    /// @param callback The function to call on each node
-    template <typename T>
-    void RedBlackTree<T>::traversePreOrder(Node * node, std::function<void(T)> callback) {
-        if (node != this->nil) {
-            callback(node->value);
-            this->traversePreOrder(node->left, callback);
-            this->traversePreOrder(node->right, callback);
-        }
+        Tobot::DataStructures::Tree::traverseInOrder(this->root, callback, this->nil);
     }
 
     /// Traverses the tree in pre order and calls the given function on each node
@@ -558,20 +539,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The function to call on each node
     template <typename T>
     void RedBlackTree<T>::traversePreOrder(std::function<void(T)> callback) {
-        this->traversePreOrder(this->root, callback);
-    }
-
-    /// Traverse the tree in post order and call the given function on each node
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start traversing from
-    /// @param callback The function to call on each node
-    template <typename T>
-    void RedBlackTree<T>::traversePostOrder(Node * node, std::function<void(T)> callback) {
-        if (node != this->nil) {
-            this->traversePostOrder(node->left, callback);
-            this->traversePostOrder(node->right, callback);
-            callback(node->value);
-        }
+        Tobot::DataStructures::Tree::traversePreOrder(this->root, callback, this->nil);
     }
 
     /// Traverses the tree in post order and calls the given function on each node
@@ -579,7 +547,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The function to call on each node
     template <typename T>
     void RedBlackTree<T>::traversePostOrder(std::function<void(T)> callback) {
-        this->traversePostOrder(this->root, callback);
+        Tobot::DataStructures::Tree::traversePostOrder(this->root, callback, this->nil);
     }
 
     /// Clears the tree

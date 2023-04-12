@@ -3,6 +3,8 @@ set(DATA_STRUCTURES_HEADER_FILES
 "graph/undirected_graph.h"
 "include/tobot_data_structures.h"
 "tree/avl_tree.h"
+"tree/binary_search_tree.h"
+"tree/binary_tree_traversal.h"
 "tree/red_black_tree.h"
 "tree/tree.h"
 "tree/tree_node.h"

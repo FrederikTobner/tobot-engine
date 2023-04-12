@@ -314,19 +314,19 @@ namespace Tobot::Tooling::Logging {
 
         private:
             /// @brief The current log priority of the logger
-            LogPriority priority = LogPriority::INFO_PRIORITY;
+            std::atomic<LogPriority> priority = LogPriority::INFO_PRIORITY;
             /// @brief The logLevel colors of the logger
-            uint8_t logLevelColors[6] = {7, 2, 3, 6, 4, 4};
+            std::atomic<uint8_t> logLevelColors[6] = {7, 2, 3, 6, 4, 4};
             /// @brief The path of the file the logger writes to, if logging to a file is enabled
-            char const * filepath;
+            std::atomic<char const *> filepath;
             /// @brief The timestamp format of the logger
-            char const * timeStampFormat = "%d.%m.%Y - %H:%M:%S";
+            std::atomic<char const *> timeStampFormat = "%d.%m.%Y - %H:%M:%S";
             /// @brief Pointer to the output file the logger writes to, if logging to a file is enabled
-            FILE * file;
+            std::atomic<FILE *> file;
             /// @brief for thread safety
             std::mutex log_mutex;
             /// @brief The names of the loglevels the logger provides
-            char const * logLevelStrings[6] = {"Trace", "Debug", "Info", "Warn", "Error", "Critical"};
+            char const * const logLevelStrings[6] = {"Trace", "Debug", "Info", "Warn", "Error", "Critical"};
 
             /// @brief Constructor of the logger
             Logger();
