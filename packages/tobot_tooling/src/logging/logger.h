@@ -48,7 +48,7 @@ namespace Tobot::Tooling::Logging {
 
             /// @brief Changes the time-format of the logger insance
             /// @param new_format The new time-format that is set
-            static void SetTimeStampFormat(const char * new_format) {
+            static void SetTimeStampFormat(char const * new_format) {
                 get_Instance().timeStampFormat = new_format;
             }
 
@@ -333,12 +333,12 @@ namespace Tobot::Tooling::Logging {
 
             /// @brief
             /// @param
-            Logger(const Logger &) = delete;
+            Logger(Logger const &) = delete;
 
             /// @brief
             /// @param
             /// @return
-            Logger & operator=(const Logger &) = delete;
+            Logger & operator=(Logger const &) = delete;
 
             /// @brief Destructor of the logger
             ~Logger();

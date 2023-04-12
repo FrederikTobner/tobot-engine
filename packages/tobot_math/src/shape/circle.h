@@ -16,15 +16,15 @@ namespace Tobot::Math {
             /// @brief Constructor
             /// @param center Center of the circle
             /// @param radius Radius of the circle
-            Circle(const Point2D<T> & center, const T & radius);
+            Circle(Point2D<T> const & center, T const & radius);
 
             /// @brief Constructor
             /// @param list List of values to initialize the circle
-            Circle(const std::initializer_list<T> list);
+            Circle(std::initializer_list<T> const list);
 
             /// @brief Copy constructor
             /// @param circle Circle to copy
-            Circle(const Circle<T> & circle);
+            Circle(Circle<T> const & circle);
 
             /// @brief Move constructor
             /// @param circle Circle to move
@@ -36,7 +36,7 @@ namespace Tobot::Math {
             /// @brief Copy assignment operator
             /// @param circle Circle to copy
             /// @return Reference to this
-            Circle<T> & operator=(const Circle<T> &);
+            Circle<T> & operator=(Circle<T> const &);
 
             /// @brief Move assignment operator
             /// @param circle Circle to move
@@ -46,32 +46,32 @@ namespace Tobot::Math {
             /// @brief Equality operator
             /// @param circle Circle to compare
             /// @return True if equal, false otherwise
-            bool operator==(const Circle<T> &) const;
+            bool operator==(Circle<T> const &) const;
 
             /// @brief Inequality operator
             /// @param circle Circle to compare
             /// @return True if not equal, false otherwise
-            bool operator!=(const Circle<T> &) const;
+            bool operator!=(Circle<T> const &) const;
 
             /// @brief Less than operator
             /// @param circle Circle to compare
             /// @return True if less than, false otherwise
-            bool operator<(const Circle<T> &) const;
+            bool operator<(Circle<T> const &) const;
 
             /// @brief Greater than operator
             /// @param circle Circle to compare
             /// @return True if greater than, false otherwise
-            bool operator>(const Circle<T> &) const;
+            bool operator>(Circle<T> const &) const;
 
             /// @brief Less than or equal operator
             /// @param circle Circle to compare
             /// @return True if less than or equal, false otherwise
-            bool operator<=(const Circle<T> &) const;
+            bool operator<=(Circle<T> const &) const;
 
             /// @brief Greater than or equal operator
             /// @param circle Circle to compare
             /// @return True if greater than or equal, false otherwise
-            bool operator>=(const Circle<T> &) const;
+            bool operator>=(Circle<T> const &) const;
 
             /// @brief Get the center of the circle
             /// @return Center of the circle
@@ -83,11 +83,11 @@ namespace Tobot::Math {
 
             /// @brief Set the center of the circle
             /// @param center Center of the circle
-            void setCenter(const Point2D<T> &);
+            void setCenter(Point2D<T> const &);
 
             /// @brief Set the radius of the circle
             /// @param radius Radius of the circle
-            void setRadius(const T &);
+            void setRadius(T const &);
 
             /// @brief Get the area of the circle
             /// @return Area of the circle
@@ -99,7 +99,7 @@ namespace Tobot::Math {
 
             T getDistance(const Point2D<T> &) const;
 
-            friend std::ostream & operator<<(std::ostream & os, const Circle<T> & circle) {
+            friend std::ostream & operator<<(std::ostream & os, Circle<T> const & circle) {
                 os << "Circle: center = " << circle.m_center << ", radius = " << circle.m_radius;
                 return os;
             }
@@ -111,7 +111,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T>::Circle(const Point2D<T> & center, const T & radius) {
+    Circle<T>::Circle(Point2D<T> const & center, T const & radius) {
         m_center = center;
         m_radius = radius;
     }
@@ -130,7 +130,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T>::Circle(const Circle<T> & circle) {
+    Circle<T>::Circle(Circle<T> const & circle) {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }
@@ -144,7 +144,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T> & Circle<T>::operator=(const Circle<T> & circle) {
+    Circle<T> & Circle<T>::operator=(Circle<T> const & circle) {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
         return *this;
@@ -160,37 +160,37 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator==(const Circle<T> & circle) const {
+    Circle<T>::operator==(Circle<T> const & circle) const {
         return (m_center == circle.m_center) && (m_radius == circle.m_radius);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator!=(const Circle<T> & circle) const {
+    Circle<T>::operator!=(Circle<T> const & circle) const {
         return (m_center != circle.m_center) || (m_radius != circle.m_radius);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator<(const Circle<T> & circle) const {
+    Circle<T>::operator<(Circle<T> const & circle) const {
         return m_radius < circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator>(const Circle<T> & circle) const {
+    Circle<T>::operator>(Circle<T> const & circle) const {
         return m_radius > circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator<=(const Circle<T> & circle) const {
+    Circle<T>::operator<=(Circle<T> const & circle) const {
         return m_radius <= circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator>=(const Circle<T> & circle) const {
+    Circle<T>::operator>=(Circle<T> const & circle) const {
         return m_radius >= circle.m_radius;
     }
 
@@ -208,13 +208,13 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    void Circle<T>::setCenter(const Point2D<T> & center) {
+    void Circle<T>::setCenter(Point2D<T> const & center) {
         m_center = center;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    void Circle<T>::setRadius(const T & radius) {
+    void Circle<T>::setRadius(T const & radius) {
         m_radius = radius;
     }
 
@@ -234,7 +234,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Circle<T>::getDistance(const Point2D<T> & point) const {
+    T Circle<T>::getDistance(Point2D<T> const & point) const {
         // Distance between the points subtracted by the radius of the circle
         // will give the distance from the point to the circle
         return m_center.distance(point) - m_radius;

@@ -22,14 +22,14 @@ namespace Tobot::Math {
             Vector3D(Vector3D & vec);
             Vector3D(Vector3D && vec);
             Vector3D(std::initializer_list<T> list);
-            Vector3D<T> & operator=(const Vector3D<T> & vec);
+            Vector3D<T> & operator=(Vector3D<T> const & vec);
             Vector3D<T> & operator=(Vector3D<T> && vec);
 
             /// @brief Calculates the sum of two vectors
             /// @param lVec The left vector
             /// @param rVec The right vector
             /// @return Vector3D<T> The sum of the two vectors
-            friend inline Vector3D<T> operator+(Vector3D<T> lVec, const Vector3D<T> & rVec) {
+            friend inline Vector3D<T> operator+(Vector3D<T> lVec, Vector3D<T> const & rVec) {
                 return Vector3D(lVec.x + rVec.x, lVec.y + rVec.y, lVec.z + rVec.z);
             }
 
@@ -37,7 +37,7 @@ namespace Tobot::Math {
             /// @param lVec The left vector
             /// @param rVec The right vector
             /// @return Vector3D<T> The difference of the two vectors
-            friend inline Vector3D<T> operator-(Vector3D<T> lVec, const Vector3D<T> & rVec) {
+            friend inline Vector3D<T> operator-(Vector3D<T> lVec, Vector3D<T> const & rVec) {
                 return Vector3D(lVec.x - rVec.x, lVec.y - rVec.y, lVec.z - rVec.z);
             }
 
@@ -45,11 +45,11 @@ namespace Tobot::Math {
             /// @param scalar The scalar
             /// @param vec The vector
             /// @return Vector3D<T> The product of the vector and the scalar
-            friend inline Vector3D<T> operator*(const T scalar, Vector3D<T> & vec) {
+            friend inline Vector3D<T> operator*(T const scalar, Vector3D<T> & vec) {
                 return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
             }
 
-            friend inline Vector3D<T> operator*(const T scalar, const Vector3D<T> vec) {
+            friend inline Vector3D<T> operator*(T const scalar, Vector3D<T> const vec) {
                 return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
             }
 
@@ -57,7 +57,7 @@ namespace Tobot::Math {
             /// @param vec The vector
             /// @param scalar The scalar
             /// @return Vector3D<T> The product of the vector and the scalar
-            friend inline Vector3D<T> operator*(Vector3D<T> vec, const T scalar) {
+            friend inline Vector3D<T> operator*(Vector3D<T> vec, T const scalar) {
                 return Vector3D(vec.x * scalar, vec.y * scalar, vec.z * scalar);
             }
 
@@ -65,11 +65,11 @@ namespace Tobot::Math {
             /// @param scalar The scalar
             /// @param vec The vector
             /// @return Vector3D<T> The division of the vector and the scalar
-            friend inline Vector3D<T> operator/(const T scalar, Vector3D<T> & vec) {
+            friend inline Vector3D<T> operator/(T const scalar, Vector3D<T> & vec) {
                 return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
             }
 
-            friend inline Vector3D<T> operator/(const T scalar, const Vector3D<T> vec) {
+            friend inline Vector3D<T> operator/(T const scalar, Vector3D<T> const vec) {
                 return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
             }
 
@@ -77,17 +77,17 @@ namespace Tobot::Math {
             /// @param vec The vector
             /// @param scalar The scalar
             /// @return Vector3D<T> The division of the vector and the scalar
-            friend inline Vector3D<T> operator/(Vector3D<T> vec, const T scalar) {
+            friend inline Vector3D<T> operator/(Vector3D<T> vec, T const scalar) {
                 return Vector3D(vec.x / scalar, vec.y / scalar, vec.z / scalar);
             }
 
-            Vector3D<T> & operator+=(const Vector3D<T> & vec);
+            Vector3D<T> & operator+=(Vector3D<T> const & vec);
 
-            Vector3D<T> & operator-=(const Vector3D<T> & vec);
+            Vector3D<T> & operator-=(Vector3D<T> const & vec);
 
-            Vector3D<T> & operator*=(const T scalar);
+            Vector3D<T> & operator*=(T const scalar);
 
-            Vector3D<T> & operator/=(const T scalar);
+            Vector3D<T> & operator/=(T const scalar);
 
             T & operator()(std::size_t i);
 
@@ -97,15 +97,15 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
-            bool operator==(const Vector3D<T> & vec) const;
+            bool operator==(Vector3D<T> const & vec) const;
 
-            bool operator!=(const Vector3D<T> & vec) const;
+            bool operator!=(Vector3D<T> const & vec) const;
 
             /// @brief Appends the vector to the output stream
             /// @param os The output stream
             /// @param vec The vector
             /// @return std::ostream The output stream
-            friend std::ostream operator<<(std::ostream & os, const Vector3D<T> & vec) {
+            friend std::ostream operator<<(std::ostream & os, Vector3D<T> const & vec) {
                 os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
                 return os;
             }
@@ -116,9 +116,9 @@ namespace Tobot::Math {
 
             inline std::size_t GetSize();
 
-            T Dot(const Vector3D<T> & vec);
+            T Dot(Vector3D<T> const & vec);
 
-            Vector3D<T> Cross(const Vector3D<T> & vec);
+            Vector3D<T> Cross(Vector3D<T> const & vec);
     };
 
     /// @brief Constructs a new Vector3D object
@@ -164,7 +164,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The assigned vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> & Vector3D<T>::operator=(const Vector3D<T> & vec) {
+    Vector3D<T> & Vector3D<T>::operator=(Vector3D<T> const & vec) {
         this->x = vec.x;
         this->y = vec.y;
         this->z = vec.z;
@@ -190,7 +190,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The sum of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> & Vector3D<T>::operator+=(const Vector3D<T> & vec) {
+    Vector3D<T> & Vector3D<T>::operator+=(Vector3D<T> const & vec) {
         this->x += vec.x;
         this->y += vec.y;
         this->z += vec.z;
@@ -203,7 +203,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The difference of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> & Vector3D<T>::operator-=(const Vector3D<T> & vec) {
+    Vector3D<T> & Vector3D<T>::operator-=(Vector3D<T> const & vec) {
         this->x -= vec.x;
         this->y -= vec.y;
         this->z -= vec.z;
@@ -216,7 +216,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The product of the vector and the scalar
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> & Vector3D<T>::operator*=(const T scalar) {
+    Vector3D<T> & Vector3D<T>::operator*=(T const scalar) {
         this->x *= scalar;
         this->y *= scalar;
         this->z *= scalar;
@@ -229,7 +229,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The division of the vector and the scalar
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> & Vector3D<T>::operator/=(const T scalar) {
+    Vector3D<T> & Vector3D<T>::operator/=(T const scalar) {
         this->x /= scalar;
         this->y /= scalar;
         this->z /= scalar;
@@ -354,7 +354,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Vector3D<T>::operator==(const Vector3D<T> & vec) const {
+    Vector3D<T>::operator==(Vector3D<T> const & vec) const {
         return this->x == vec.x && this->y == vec.y && this->z == vec.z;
     }
 
@@ -364,7 +364,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Vector3D<T>::operator!=(const Vector3D<T> & vec) const {
+    Vector3D<T>::operator!=(Vector3D<T> const & vec) const {
         return this->x != vec.x || this->y != vec.y || this->z != vec.z;
     }
 
@@ -400,7 +400,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector3D<T>::Dot(const Vector3D<T> & vec) {
+    T Vector3D<T>::Dot(Vector3D<T> const & vec) {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z;
     }
 
@@ -410,7 +410,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The cross product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> Vector3D<T>::Cross(const Vector3D<T> & vec) {
+    Vector3D<T> Vector3D<T>::Cross(Vector3D<T> const & vec) {
         return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
                            this->x * vec.y - this->y * vec.x);
     }

@@ -27,8 +27,8 @@ TEST(Point2D, Copy) {
 
     firstPoint = {4, 5};
 
-    EXPECT_EQ(5, secondPoint.x());
-    EXPECT_EQ(3, secondPoint.y());
+    EXPECT_EQ(5, secondPoint.getX());
+    EXPECT_EQ(3, secondPoint.getY());
 }
 
 /*
@@ -40,8 +40,8 @@ TEST(Point2D, Move) {
 
     firstPoint = {4, 5};
 
-    EXPECT_EQ(5, secondPoint.x());
-    EXPECT_EQ(3, secondPoint.y());
+    EXPECT_EQ(5, secondPoint.getX());
+    EXPECT_EQ(3, secondPoint.getY());
 }
 
 /*

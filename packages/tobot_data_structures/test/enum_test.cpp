@@ -7,7 +7,7 @@ TOBOT_ENUM(Number, ONE, TWO, THREE)
 /*
  * Tests whether an object of of the class we generated with the ENUM_CLASS macro can be created
  */
-TEST(Enum, CanBeCreated) {
+TEST(ENUM, CanBeCreated) {
     Number number = Number::ONE;
 }
 
@@ -15,7 +15,7 @@ TEST(Enum, CanBeCreated) {
  * Tests whether we can get all the values of the enum
  */
 TEST(ENUM, CanReturnAllValues) {
-    Number::Value * values = Number::values();
+    Number::Enum const * const values = Number::values();
     ASSERT_EQ(values[0], Number::ONE);
     ASSERT_EQ(values[1], Number::TWO);
     ASSERT_EQ(values[2], Number::THREE);
@@ -70,6 +70,19 @@ TEST(Enum, CanBeRetrievedByIndex) {
  * Tests whether the enum ordinal is correct
  */
 TEST(Enum, OrdinalIsCorrect) {
-    Number number = Number::ONE;
+    Number number = Number::Enum::ONE;
     ASSERT_EQ(number.ordinal(), 0);
+}
+
+/*
+ * Tests whether the enum can be iterated over
+ */
+TEST(Enum, CanBeIteratedOver) {
+    std::vector<Number::Enum> values;
+    for (auto it = Number::begin(); it != Number::end(); ++it) {
+        values.push_back(*it);
+    }
+    ASSERT_EQ(values[0], Number::ONE);
+    ASSERT_EQ(values[1], Number::TWO);
+    ASSERT_EQ(values[2], Number::THREE);
 }

@@ -26,37 +26,89 @@ namespace Tobot::DataStructures::Tree {
             RedBlackTree(RedBlackTree<T> & tree);
             RedBlackTree(std::initializer_list<T> list);
             ~RedBlackTree();
-            void Insert(T value);
-            void Delete(T value);
-            bool Contains(T value);
-            Node * Search(T value);
-            void Print();
-            void TraverseInOrder(std::function<void(T)> callback);
-            void TraversePreOrder(std::function<void(T)> callback);
-            void TraversePostOrder(std::function<void(T)> callback);
-            void Clear();
-            std::size_t GetSize();
-            friend std::ostream & operator<<(std::ostream & os, const RedBlackTree<T> & tree) {
+            void insert(T value);
+            void remove(T value);
+            bool contains(T value);
+            Node * search(T value);
+            void print();
+            void traverseInOrder(std::function<void(T)> callback);
+            void traversePreOrder(std::function<void(T)> callback);
+            void traversePostOrder(std::function<void(T)> callback);
+            void clear();
+            std::size_t getSize();
+            friend std::ostream & operator<<(std::ostream & os, RedBlackTree<T> const & tree) {
                 TraverseInOrder(tree.root, [&os](T value) { os << value << ", "; });
+            }
+            class iterator : public std::iterator<std::input_iterator_tag, T> {
+                public:
+                    iterator(Node * node, Node * nil) {
+                        this->node = node;
+                        this->nil = nil;
+                    }
+                    iterator & operator++() {
+                        if (this->node->right != this->nil) {
+                            this->node = this->node->right;
+                            while (this->node->left != this->nil) {
+                                this->node = this->node->left;
+                            }
+                        } else {
+                            Node * parent = this->node->parent;
+                            while (this->node == parent->right) {
+                                this->node = parent;
+                                parent = parent->parent;
+                            }
+                            if (this->node->right != parent) {
+                                this->node = parent;
+                            }
+                        }
+                        return *this;
+                    }
+                    iterator operator++(int) {
+                        iterator tmp(*this);
+                        operator++();
+                        return tmp;
+                    }
+                    bool operator==(const iterator & rhs) {
+                        return this->node == rhs.node;
+                    }
+                    bool operator!=(const iterator & rhs) {
+                        return this->node != rhs.node;
+                    }
+                    T & operator*() {
+                        return this->node->value;
+                    }
+                    T * operator->() {
+                        return &this->node->value;
+                    }
+
+                private:
+                    Node * node;
+                    Node * nil;
+            };
+            iterator begin() {
+                return iterator(getMinimum(this->root), this->nil);
+            }
+            iterator end() {
+                return iterator(this->nil, this->nil);
             }
 
         private:
             Node * root;
             Node * nil;
-            void LeftRotate(Node * node);
-            void RightRotate(Node * node);
-            void InsertFixup(Node * node);
-            void DeleteFixup(Node * node);
-            void Transplant(Node * u, Node * v);
-            Node * Minimum(Node * node);
-            Node * Maximum(Node * node);
-            Node * Successor(Node * node);
-            Node * Predecessor(Node * node);
-            void Print(Node * node);
-            void TraverseInOrder(Node * node, std::function<void(T)> callback);
-            void TraversePreOrder(Node * node, std::function<void(T)> callback);
-            void TraversePostOrder(Node * node, std::function<void(T)> callback);
-            void Clear(Node * node);
+            void leftRotate(Node * node);
+            void rightRotate(Node * node);
+            void insertFixup(Node * node);
+            void deleteFixup(Node * node);
+            void transplant(Node * u, Node * v);
+            Node * getMinimum(Node * node);
+            Node * getMaximum(Node * node);
+            Node * successor(Node * node);
+            Node * predecessor(Node * node);
+            void print(Node * node);
+            void traverseInOrder(Node * node, std::function<void(T)> callback);
+            void traversePreOrder(Node * node, std::function<void(T)> callback);
+            void traversePostOrder(Node * node, std::function<void(T)> callback);
+            void clear(Node * node);
     };
 
     /// @brief Constructor for the RedBlackTree class
@@ -82,7 +134,7 @@ namespace Tobot::DataStructures::Tree {
         this->nil->parent = nullptr;
         this->nil->isRed = false;
         this->root = this->nil;
-        tree.TraverseInOrder([&](T value) { this->Insert(value); });
+        tree.traverseInOrder([&](T value) { this->insert(value); });
     }
 
     /// Creates a RebBlackTree from a list of values
@@ -97,7 +149,7 @@ namespace Tobot::DataStructures::Tree {
         this->nil->isRed = false;
         this->root = this->nil;
         for (T value : list) {
-            this->Insert(value);
+            this->insert(value);
         }
     }
 
@@ -112,7 +164,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to rotate the tree at
     template <typename T>
-    void RedBlackTree<T>::LeftRotate(Node * node) {
+    void RedBlackTree<T>::leftRotate(Node * node) {
         Node * y = node->right;
         node->right = y->left;
         if (y->left != this->nil) {
@@ -134,7 +186,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T  The type of the value stored in the tree
     /// @param node  The node to rotate the tree at
     template <typename T>
-    void RedBlackTree<T>::RightRotate(Node * node) {
+    void RedBlackTree<T>::rightRotate(Node * node) {
         Node * y = node->left;
         node->left = y->right;
         if (y->right != this->nil) {
@@ -156,7 +208,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to insert into the tree
     template <typename T>
-    void RedBlackTree<T>::InsertFixup(Node * node) {
+    void RedBlackTree<T>::insertFixup(Node * node) {
         while (node->parent->isRed) {
             if (node->parent == node->parent->parent->left) {
                 Node * y = node->parent->parent->right;
@@ -168,11 +220,11 @@ namespace Tobot::DataStructures::Tree {
                 } else {
                     if (node == node->parent->right) {
                         node = node->parent;
-                        this->LeftRotate(node);
+                        this->leftRotate(node);
                     }
                     node->parent->isRed = false;
                     node->parent->parent->isRed = true;
-                    this->RightRotate(node->parent->parent);
+                    this->rightRotate(node->parent->parent);
                 }
             } else {
                 Node * y = node->parent->parent->left;
@@ -184,11 +236,11 @@ namespace Tobot::DataStructures::Tree {
                 } else {
                     if (node == node->parent->left) {
                         node = node->parent;
-                        this->RightRotate(node);
+                        this->rightRotate(node);
                     }
                     node->parent->isRed = false;
                     node->parent->parent->isRed = true;
-                    this->LeftRotate(node->parent->parent);
+                    this->leftRotate(node->parent->parent);
                 }
             }
         }
@@ -199,7 +251,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param value The value of the node to delete
     template <typename T>
-    void RedBlackTree<T>::Insert(T value) {
+    void RedBlackTree<T>::insert(T value) {
         Node * z = new Node;
         z->value = value;
         z->left = this->nil;
@@ -224,14 +276,14 @@ namespace Tobot::DataStructures::Tree {
         } else {
             y->right = z;
         }
-        this->InsertFixup(z);
+        this->insertFixup(z);
     }
 
     /// @brief Delete a node from the tree
     /// @tparam T The type of the value stored in the tree
     /// @param value The value of the node to delete
     template <typename T>
-    void RedBlackTree<T>::Delete(T value) {
+    void RedBlackTree<T>::remove(T value) {
         Node * z = this->root;
         while (z != this->nil && z->value != value) {
             if (value < z->value) {
@@ -248,109 +300,30 @@ namespace Tobot::DataStructures::Tree {
         bool yOriginalColor = y->isRed;
         if (z->left == this->nil) {
             x = z->right;
-            this->Transplant(z, z->right);
+            this->transplant(z, z->right);
         } else if (z->right == this->nil) {
             x = z->left;
-            this->Transplant(z, z->left);
+            this->transplant(z, z->left);
         } else {
-            y = this->Minimum(z->right);
+            y = this->getMinimum(z->right);
             yOriginalColor = y->isRed;
             x = y->right;
             if (y->parent == z) {
                 x->parent = y;
             } else {
-                this->Transplant(y, y->right);
+                this->transplant(y, y->right);
                 y->right = z->right;
                 y->right->parent = y;
             }
-            this->Transplant(z, y);
+            this->transplant(z, y);
             y->left = z->left;
             y->left->parent = y;
             y->isRed = z->isRed;
         }
         if (!yOriginalColor) {
-            this->DeleteFixup(x);
+            this->deleteFixup(x);
         }
         delete z;
-    }
-
-    /// @brief Fix the tree after a node has been deleted
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start fixing the tree at
-    template <typename T>
-    void RedBlackTree<T>::DeleteFixup(Node * node) {
-        while (node != this->root && !node->isRed) {
-            if (node == node->parent->left) {
-                Node * w = node->parent->right;
-                if (w->isRed) {
-                    w->isRed = false;
-                    node->parent->isRed = true;
-                    this->LeftRotate(node->parent);
-                    w = node->parent->right;
-                }
-                if (!w->left->isRed && !w->right->isRed) {
-                    w->isRed = true;
-                    node = node->parent;
-                } else {
-                    if (!w->right->isRed) {
-                        w->left->isRed = false;
-                        w->isRed = true;
-                        this->RightRotate(w);
-                        w = node->parent->right;
-                    }
-                    w->isRed = node->parent->isRed;
-                    node->parent->isRed = false;
-                    w->right->isRed = false;
-                    this->LeftRotate(node->parent);
-                    node = this->root;
-                }
-            } else {
-                Node * w = node->parent->left;
-                if (w->isRed) {
-                    w->isRed = false;
-                    node->parent->isRed = true;
-                    this->RightRotate(node->parent);
-                    w = node->parent->left;
-                }
-                if (!w->right->isRed && !w->left->isRed) {
-                    w->isRed = true;
-                    node = node->parent;
-                } else {
-                    if (!w->left->isRed) {
-                        w->right->isRed = false;
-                        w->isRed = true;
-                        this->LeftRotate(w);
-                        w = node->parent->left;
-                    }
-                    w->isRed = node->parent->isRed;
-                    node->parent->isRed = false;
-                    w->left->isRed = false;
-                    this->RightRotate(node->parent);
-                    node = this->root;
-                }
-            }
-        }
-        node->isRed = false;
-    }
-
-    /// @brief Transplant one node for another
-    /// @tparam T The type of the value stored in the tree
-    /// @param value The value of the node to delete
-    /// @return The node with the given value
-    template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::Search(T value) {
-        Node * x = this->root;
-        while (x != this->nil && x->value != value) {
-            if (value < x->value) {
-                x = x->left;
-            } else {
-                x = x->right;
-            }
-        }
-        if (x->value != value) {
-            return nullptr;
-        }
-        return x;
     }
 
     /// @brief Check if the tree contains a node with the given value
@@ -358,7 +331,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to check for
     /// @return True if the tree contains a node with the given value, false otherwise
     template <typename T>
-    bool RedBlackTree<T>::Contains(T value) {
+    bool RedBlackTree<T>::contains(T value) {
         Node * x = this->root;
         while (x != this->nil && x->value != value) {
             if (value < x->value) {
@@ -373,12 +346,91 @@ namespace Tobot::DataStructures::Tree {
         return x;
     }
 
+    /// @brief Fix the tree after a node has been deleted
+    /// @tparam T The type of the value stored in the tree
+    /// @param node The node to start fixing the tree at
+    template <typename T>
+    void RedBlackTree<T>::deleteFixup(Node * node) {
+        while (node != this->root && !node->isRed) {
+            if (node == node->parent->left) {
+                Node * w = node->parent->right;
+                if (w->isRed) {
+                    w->isRed = false;
+                    node->parent->isRed = true;
+                    this->leftRotate(node->parent);
+                    w = node->parent->right;
+                }
+                if (!w->left->isRed && !w->right->isRed) {
+                    w->isRed = true;
+                    node = node->parent;
+                } else {
+                    if (!w->right->isRed) {
+                        w->left->isRed = false;
+                        w->isRed = true;
+                        this->rightRotate(w);
+                        w = node->parent->right;
+                    }
+                    w->isRed = node->parent->isRed;
+                    node->parent->isRed = false;
+                    w->right->isRed = false;
+                    this->leftRotate(node->parent);
+                    node = this->root;
+                }
+            } else {
+                Node * w = node->parent->left;
+                if (w->isRed) {
+                    w->isRed = false;
+                    node->parent->isRed = true;
+                    this->rightRotate(node->parent);
+                    w = node->parent->left;
+                }
+                if (!w->right->isRed && !w->left->isRed) {
+                    w->isRed = true;
+                    node = node->parent;
+                } else {
+                    if (!w->left->isRed) {
+                        w->right->isRed = false;
+                        w->isRed = true;
+                        this->leftRotate(w);
+                        w = node->parent->left;
+                    }
+                    w->isRed = node->parent->isRed;
+                    node->parent->isRed = false;
+                    w->left->isRed = false;
+                    this->rightRotate(node->parent);
+                    node = this->root;
+                }
+            }
+        }
+        node->isRed = false;
+    }
+
+    /// @brief Transplant one node for another
+    /// @tparam T The type of the value stored in the tree
+    /// @param value The value of the node to delete
+    /// @return The node with the given value
+    template <typename T>
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::search(T value) {
+        Node * x = this->root;
+        while (x != this->nil && x->value != value) {
+            if (value < x->value) {
+                x = x->left;
+            } else {
+                x = x->right;
+            }
+        }
+        if (x->value != value) {
+            return nullptr;
+        }
+        return x;
+    }
+
     /// @brief Transplant one node for another
     /// @tparam T The type of the value stored in the tree
     /// @param u The node to transplant
     /// @param v The node to transplant with
     template <typename T>
-    void RedBlackTree<T>::Transplant(Node * u, Node * v) {
+    void RedBlackTree<T>::transplant(Node * u, Node * v) {
         if (u->parent == this->nil) {
             this->root = v;
         } else if (u == u->parent->left) {
@@ -394,7 +446,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to start searching from
     /// @return The node with the minimum value
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::Minimum(Node * node) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::getMinimum(Node * node) {
         while (node->left != this->nil) {
             node = node->left;
         }
@@ -406,7 +458,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param x The node to start searching from
     /// @return The node with the maximum value
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::Maximum(Node * node) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::getMaximum(Node * node) {
         while (node->right != this->nil) {
             node = node->right;
         }
@@ -418,9 +470,9 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the successor of
     /// @return The successor of the given node
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::Successor(Node * node) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::successor(Node * node) {
         if (node->right != this->nil) {
-            return this->Minimum(node->right);
+            return this->getMinimum(node->right);
         }
         Node * y = node->parent;
         while (y != this->nil && node == y->right) {
@@ -435,9 +487,9 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the predecessor of
     /// @return The predecessor of the given node
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::Predecessor(Node * node) {
+    typename RedBlackTree<T>::Node * RedBlackTree<T>::predecessor(Node * node) {
         if (node->left != this->nil) {
-            return this->Maximum(node->left);
+            return this->getMaximum(node->left);
         }
         Node * y = node->parent;
         while (y != this->nil && node == y->left) {
@@ -450,8 +502,8 @@ namespace Tobot::DataStructures::Tree {
     /// @brief Print the tree to the console
     /// @tparam T The type of the value stored in the tree
     template <typename T>
-    void RedBlackTree<T>::Print() {
-        this->Print(this->root);
+    void RedBlackTree<T>::print() {
+        this->print(this->root);
         std::cout << std::endl;
     }
 
@@ -459,11 +511,11 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to start printing from
     template <typename T>
-    void RedBlackTree<T>::Print(Node * node) {
+    void RedBlackTree<T>::print(Node * node) {
         if (node != this->nil) {
-            this->Print(node->left);
+            this->print(node->left);
             std::cout << node->value << " ";
-            this->Print(node->right);
+            this->print(node->right);
         }
     }
 
@@ -472,11 +524,11 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to start traversing from
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::TraverseInOrder(Node * node, std::function<void(T)> callback) {
+    void RedBlackTree<T>::traverseInOrder(Node * node, std::function<void(T)> callback) {
         if (node != this->nil) {
-            this->TraverseInOrder(node->left, callback);
+            this->traverseInOrder(node->left, callback);
             callback(node->value);
-            this->TraverseInOrder(node->right, callback);
+            this->traverseInOrder(node->right, callback);
         }
     }
 
@@ -484,8 +536,8 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::TraverseInOrder(std::function<void(T)> callback) {
-        this->TraverseInOrder(this->root, callback);
+    void RedBlackTree<T>::traverseInOrder(std::function<void(T)> callback) {
+        this->traverseInOrder(this->root, callback);
     }
 
     /// Traverse the tree in pre order and call the given function on each node
@@ -493,11 +545,11 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to start traversing from
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::TraversePreOrder(Node * node, std::function<void(T)> callback) {
+    void RedBlackTree<T>::traversePreOrder(Node * node, std::function<void(T)> callback) {
         if (node != this->nil) {
             callback(node->value);
-            this->TraversePreOrder(node->left, callback);
-            this->TraversePreOrder(node->right, callback);
+            this->traversePreOrder(node->left, callback);
+            this->traversePreOrder(node->right, callback);
         }
     }
 
@@ -505,8 +557,8 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::TraversePreOrder(std::function<void(T)> callback) {
-        this->TraversePreOrder(this->root, callback);
+    void RedBlackTree<T>::traversePreOrder(std::function<void(T)> callback) {
+        this->traversePreOrder(this->root, callback);
     }
 
     /// Traverse the tree in post order and call the given function on each node
@@ -514,10 +566,10 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to start traversing from
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::TraversePostOrder(Node * node, std::function<void(T)> callback) {
+    void RedBlackTree<T>::traversePostOrder(Node * node, std::function<void(T)> callback) {
         if (node != this->nil) {
-            this->TraversePostOrder(node->left, callback);
-            this->TraversePostOrder(node->right, callback);
+            this->traversePostOrder(node->left, callback);
+            this->traversePostOrder(node->right, callback);
             callback(node->value);
         }
     }
@@ -526,15 +578,15 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::TraversePostOrder(std::function<void(T)> callback) {
-        this->TraversePostOrder(this->root, callback);
+    void RedBlackTree<T>::traversePostOrder(std::function<void(T)> callback) {
+        this->traversePostOrder(this->root, callback);
     }
 
     /// Clears the tree
     ///  @tparam T The type of the value stored in the tree
     template <typename T>
-    void RedBlackTree<T>::Clear() {
-        this->Clear(this->root);
+    void RedBlackTree<T>::clear() {
+        this->clear(this->root);
         this->root = this->nil;
     }
 
@@ -542,10 +594,10 @@ namespace Tobot::DataStructures::Tree {
     ///  @tparam T The type of the value stored in the tree
     ///  @param node The node to start clearing from
     template <typename T>
-    void RedBlackTree<T>::Clear(Node * node) {
+    void RedBlackTree<T>::clear(Node * node) {
         if (node != this->nil) {
-            this->Clear(node->left);
-            this->Clear(node->right);
+            this->clear(node->left);
+            this->clear(node->right);
             delete node;
         }
     }
@@ -554,9 +606,9 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @return The amount of nodes in the tree
     template <typename T>
-    std::size_t RedBlackTree<T>::GetSize() {
+    std::size_t RedBlackTree<T>::getSize() {
         std::size_t size = 0;
-        TraverseInOrder([&size](T value) { size++; });
+        traverseInOrder([&size](T value) { size++; });
         return size;
     }
 

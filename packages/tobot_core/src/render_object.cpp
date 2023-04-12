@@ -10,7 +10,7 @@ void Tobot::Core::RenderObject::incrementPosition() {
     this->m_Position += Tobot::Math::Vector2D<float>(1.0, 1.0);
 }
 
-RenderObject::RenderObject(const char * id, int x, int y) : m_Id(id), m_Position(x, y) {
+RenderObject::RenderObject(char const * id, int x, int y) : m_Id(id), m_Position(x, y) {
 }
 
 const char * RenderObject::getId() {

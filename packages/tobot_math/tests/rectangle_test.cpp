@@ -30,8 +30,8 @@ TEST(Rectangle, Copy) {
 
     firstRectangle = {4, 5, 2, 2, 0};
 
-    EXPECT_EQ(1, secondRectangle.getCenter().x());
-    EXPECT_EQ(2, secondRectangle.getCenter().y());
+    EXPECT_EQ(1, secondRectangle.getCenter().getX());
+    EXPECT_EQ(2, secondRectangle.getCenter().getY());
     EXPECT_EQ(2, secondRectangle.getWidth());
     EXPECT_EQ(2, secondRectangle.getHeight());
     EXPECT_EQ(0, secondRectangle.getRotation());

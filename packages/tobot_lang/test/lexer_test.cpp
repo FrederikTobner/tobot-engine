@@ -7,7 +7,7 @@ using namespace Tobot::Language;
 
 TOBOT_ENUM(Token_Type, NUMBER, PLUS, MINUS, STAR, SLASH, LEFT_PAREN, RIGHT_PAREN)
 
-std::vector<TokenizationRule<Token_Type::Value>> rules = {
+std::vector<TokenizationRule<Token_Type::Enum>> rules = {
     {Token_Type::NUMBER, "[0-9]+"},  {Token_Type::PLUS, "\\+"}, {Token_Type::MINUS, "-"},
     {Token_Type::STAR, "\\*"},       {Token_Type::SLASH, "/"},  {Token_Type::LEFT_PAREN, "\\("},
     {Token_Type::RIGHT_PAREN, "\\)"}};
@@ -15,15 +15,15 @@ std::vector<TokenizationRule<Token_Type::Value>> rules = {
  * Tests whether the Lexer can be created
  */
 TEST(Lexer, CanBeCreated) {
-    Lexer<Token_Type::Value> lexer(rules);
+    Lexer<Token_Type::Enum> lexer(rules);
 }
 
 /*
  * Tests whether the Lexer can tokenize a single token
  */
 TEST(Lexer, CanTokenizeSingleToken) {
-    Lexer<Token_Type::Value> lexer(rules);
-    std::vector<Token<Token_Type::Value>> tokens = lexer.tokenize("-");
+    Lexer<Token_Type::Enum> lexer(rules);
+    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("-");
     ASSERT_EQ(tokens.size(), 1);
     ASSERT_EQ(tokens[0].getType(), Token_Type::MINUS);
     ASSERT_EQ(tokens[0].getLexeme(), "-");
@@ -35,8 +35,8 @@ TEST(Lexer, CanTokenizeSingleToken) {
  * Tests whether the Lexer can tokenize multiple tokens
  */
 TEST(Lexer, CanTokenizeMultipleTokens) {
-    Lexer<Token_Type::Value> lexer(rules);
-    std::vector<Token<Token_Type::Value>> tokens = lexer.tokenize("- 123");
+    Lexer<Token_Type::Enum> lexer(rules);
+    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("- 123");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), Token_Type::MINUS);
     ASSERT_EQ(tokens[0].getLexeme(), "-");
@@ -52,8 +52,8 @@ TEST(Lexer, CanTokenizeMultipleTokens) {
  * Tests whether the Lexer can tokenize a complex expression
  */
 TEST(Lexer, CanTokenizeComplexExpression) {
-    Lexer<Token_Type::Value> lexer(rules);
-    std::vector<Token<Token_Type::Value>> tokens = lexer.tokenize("1 + 2 * 3 - 4 / 5");
+    Lexer<Token_Type::Enum> lexer(rules);
+    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("1 + 2 * 3 - 4 / 5");
     ASSERT_EQ(tokens.size(), 9);
     ASSERT_EQ(tokens[0].getType(), Token_Type::NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");
@@ -79,7 +79,7 @@ TEST(Lexer, CanTokenizeComplexExpression) {
     ASSERT_EQ(tokens[5].getLexeme(), "-");
     ASSERT_EQ(tokens[5].getLine(), 1);
     ASSERT_EQ(tokens[5].getColumn(), 11);
-    ASSERT_EQ(tokens[6].getType(), Token_Type::NUMBER);
+    ASSERT_EQ(tokens[6].getType(), Token_Type::Enum::NUMBER);
     ASSERT_EQ(tokens[6].getLexeme(), "4");
     ASSERT_EQ(tokens[6].getLine(), 1);
     ASSERT_EQ(tokens[6].getColumn(), 13);
@@ -97,8 +97,8 @@ TEST(Lexer, CanTokenizeComplexExpression) {
  * Tests whether the Lexer can handle line breaks
  */
 TEST(Lexer, CanHandleLineBreaks) {
-    Lexer<Token_Type::Value> lexer(rules);
-    std::vector<Token<Token_Type::Value>> tokens = lexer.tokenize("1 \n2");
+    Lexer<Token_Type::Enum> lexer(rules);
+    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("1 \n2");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), Token_Type::NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");
@@ -114,8 +114,8 @@ TEST(Lexer, CanHandleLineBreaks) {
  * Tests whether the Lexer can handle multiple line breaks
  */
 TEST(Lexer, CanHandleMultipleLineBreaks) {
-    Lexer<Token_Type::Value> lexer(rules);
-    std::vector<Token<Token_Type::Value>> tokens = lexer.tokenize("1 \n\n2");
+    Lexer<Token_Type::Enum> lexer(rules);
+    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("1 \n\n2");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), Token_Type::NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");

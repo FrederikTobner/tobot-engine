@@ -13,23 +13,23 @@ namespace Tobot::Math {
         public:
             Plane();
             Plane(T a, T b, T c, T d);
-            Plane(const Vector3D<T> & normal, T d);
-            Plane(const Vector3D<T> & normal, const Vector3D<T> & point);
-            Plane(const Vector3D<T> & point1, const Vector3D<T> & point2, const Vector3D<T> & point3);
-            Plane(const Plane<T> & plane);
+            Plane(Vector3D<T> const & normal, T d);
+            Plane(Vector3D<T> const & normal, Vector3D<T> const & point);
+            Plane(Vector3D<T> const & point1, Vector3D<T> const & point2, Vector3D<T> const & point3);
+            Plane(Plane<T> const & plane);
             Plane(Plane<T> && plane);
-            Plane<T> & operator=(const Plane<T> & plane);
+            Plane<T> & operator=(Plane<T> const & plane);
             Plane<T> & operator=(Plane<T> && plane);
             ~Plane();
             T & operator()(std::size_t i);
             T operator()(std::size_t i) const;
             T & operator[](std::size_t i);
             T operator[](std::size_t i) const;
-            T Distance(const Vector3D<T> & point) const;
-            Vector3D<T> GetNormal() const;
-            bool operator==(const Plane<T> & plane) const;
-            bool operator!=(const Plane<T> & plane) const;
-            friend std::ostream & operator<<(std::ostream & os, const Plane<T> & plane) {
+            T distance(const Vector3D<T> & point) const;
+            Vector3D<T> getNormal() const;
+            bool operator==(Plane<T> const & plane) const;
+            bool operator!=(Plane<T> const & plane) const;
+            friend std::ostream & operator<<(std::ostream & os, Plane<T> const & plane) {
                 os << "(" << plane.a << ", " << plane.b << ", " << plane.c << ", " << plane.d << ")";
                 return os;
             }
@@ -63,7 +63,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(const Vector3D<T> & normal, T d) : a(normal(0)), b(normal(1)), c(normal(2)), d(d) {
+    Plane<T>::Plane(Vector3D<T> const & normal, T d) : a(normal(0)), b(normal(1)), c(normal(2)), d(d) {
     }
 
     /// @brief Constructor
@@ -72,7 +72,7 @@ namespace Tobot::Math {
     /// @param point A point on the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(const Vector3D<T> & normal, const Vector3D<T> & point)
+    Plane<T>::Plane(Vector3D<T> const & normal, Vector3D<T> const & point)
         : a(normal(0)), b(normal(1)), c(normal(2)), d(-normal.Dot(point)) {
     }
 
@@ -83,7 +83,7 @@ namespace Tobot::Math {
     /// @param point3 The third point on the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(const Vector3D<T> & point1, const Vector3D<T> & point2, const Vector3D<T> & point3) {
+    Plane<T>::Plane(Vector3D<T> const & point1, Vector3D<T> const & point2, Vector3D<T> const & point3) {
         Vector<T> normal = (point2 - point1).Cross(point3 - point1);
         normal.Normalize();
         a = normal(0);
@@ -97,7 +97,7 @@ namespace Tobot::Math {
     /// @param plane The plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(const Plane<T> & plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
+    Plane<T>::Plane(Plane<T> const & plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
     }
 
     /// @brief Get the distance between the plane and a point
@@ -114,7 +114,7 @@ namespace Tobot::Math {
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T> & Plane<T>::operator=(const Plane<T> & plane) {
+    Plane<T> & Plane<T>::operator=(Plane<T> const & plane) {
         a = plane.a;
         b = plane.b;
         c = plane.c;
@@ -233,7 +233,7 @@ namespace Tobot::Math {
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::Distance(const Vector3D<T> & point) const {
+    T Plane<T>::distance(Vector3D<T> const & point) const {
         return a * point(0) + b * point(1) + c * point(2) + d;
     }
 
@@ -242,7 +242,7 @@ namespace Tobot::Math {
     /// @return The normal of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> Plane<T>::GetNormal() const {
+    Vector3D<T> Plane<T>::getNormal() const {
         return Vector3D<T>(a, b, c);
     }
 
@@ -252,7 +252,7 @@ namespace Tobot::Math {
     /// @return true if the plane is equal to another plane, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Plane<T>::operator==(const Plane<T> & plane) const {
+    Plane<T>::operator==(Plane<T> const & plane) const {
         return a == plane.a && b == plane.b && c == plane.c && d == plane.d;
     }
 
@@ -262,7 +262,7 @@ namespace Tobot::Math {
     /// @return true if the plane is not equal to another plane, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Plane<T>::operator!=(const Plane<T> & plane) const {
+    Plane<T>::operator!=(Plane<T> const & plane) const {
         return a != plane.a || b != plane.b || c != plane.c || d != plane.d;
     }
 

@@ -2,7 +2,7 @@
 
 using namespace Tobot::Core;
 
-Scene::Scene(const char * id) : m_Id(id) {
+Scene::Scene(char const * id) : m_Id(id) {
     Layer * baseLayer = new Layer(this->m_BaseLayerId, 0);
     this->m_Layers[this->m_BaseLayerId] = baseLayer;
 }
@@ -11,7 +11,7 @@ void Scene::add(GameEntity * gameEntity) {
     this->m_Layers.at(this->m_BaseLayerId)->entities[gameEntity->getId()] = gameEntity;
 }
 
-void Scene::add(const char * layerId, GameEntity * gameEntity) {
+void Scene::add(char const * layerId, GameEntity * gameEntity) {
     this->m_Layers.at(this->m_BaseLayerId)->entities.insert(std::make_pair(gameEntity->getId(), gameEntity));
 }
 
@@ -59,7 +59,7 @@ void Scene::render(SDL_Renderer * renderer) {
     }
 }
 
-void Scene::destroy(const char * id) {
+void Scene::destroy(char const * id) {
     for (auto layer : this->m_Layers) {
         for (auto entity : layer.second->entities) {
             if (entity.first == id) {
@@ -78,4 +78,7 @@ void Scene::destroyAll() {
 }
 
 Scene::~Scene() {
+    for (auto layer : this->m_Layers) {
+        delete layer.second;
+    }
 }

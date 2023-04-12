@@ -11,18 +11,19 @@ namespace Tobot::Language {
         public:
             TokenizationRule(T type, std::string regex);
             ~TokenizationRule();
-            T getType();
-            std::regex getPattern();
+            T const getType();
+            std::regex const getPattern();
 
         private:
-            std::pair<T, std::regex> rule;
+            T type;
+            std::regex pattern;
     };
 
     template <typename T>
         requires std::is_enum_v<T>
     TokenizationRule<T>::TokenizationRule(T type, std::string regex) {
-        // We add a ^ to the regex to ensure that the lexer only matches from the beginning of the string
-        this->rule = std::make_pair(type, std::regex('^' + regex));
+        this->type = type;
+        this->pattern = std::regex("^" + regex);
     }
 
     template <typename T>
@@ -32,13 +33,13 @@ namespace Tobot::Language {
 
     template <typename T>
         requires std::is_enum_v<T>
-    T TokenizationRule<T>::getType() {
-        return this->rule.first;
+    T const TokenizationRule<T>::getType() {
+        return this->type;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::regex TokenizationRule<T>::getPattern() {
-        return this->rule.second;
+    std::regex const TokenizationRule<T>::getPattern() {
+        return this->pattern;
     }
 } // namespace Tobot::Language

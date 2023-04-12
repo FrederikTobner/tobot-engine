@@ -9,10 +9,10 @@ namespace Tobot::Language {
         public:
             Token(T type, std::string lexeme, std::size_t line, std::size_t column);
             ~Token();
-            T getType();
-            std::string getLexeme();
-            std::size_t getLine();
-            std::size_t getColumn();
+            T const getType();
+            std::string const getLexeme();
+            std::size_t const getLine();
+            std::size_t const getColumn();
 
         private:
             T type;
@@ -37,25 +37,25 @@ namespace Tobot::Language {
 
     template <typename T>
         requires std::is_enum_v<T>
-    T Token<T>::getType() {
+    T const Token<T>::getType() {
         return this->type;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::string Token<T>::getLexeme() {
+    std::string const Token<T>::getLexeme() {
         return this->lexeme;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::size_t Token<T>::getLine() {
+    std::size_t const Token<T>::getLine() {
         return this->line;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::size_t Token<T>::getColumn() {
+    std::size_t const Token<T>::getColumn() {
         return this->column;
     }
 } // namespace Tobot::Language

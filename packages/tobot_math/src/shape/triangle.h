@@ -16,11 +16,11 @@ namespace Tobot::Math {
             /// @param a First point
             /// @param b Second point
             /// @param c Third point
-            Triangle2D(const Point2D<T> & a, const Point2D<T> & b, const Point2D<T> & c);
+            Triangle2D(Point2D<T> const & a, Point2D<T> const & b, Point2D<T> const & c);
 
             /// @brief Copy constructor
             /// @param triangle Triangle2D to copy
-            Triangle2D(const Triangle2D<T> & triangle);
+            Triangle2D(Triangle2D<T> const & triangle);
 
             /// @brief Move constructor
             /// @param triangle Triangle2D to move
@@ -32,7 +32,7 @@ namespace Tobot::Math {
             /// @brief Copy assignment operator
             /// @param triangle Triangle2D to copy
             /// @return Reference to this
-            Triangle2D<T> & operator=(const Triangle2D<T> &);
+            Triangle2D<T> & operator=(Triangle2D<T> const &);
 
             /// @brief Move assignment operator
             /// @param triangle Triangle2D to move
@@ -42,12 +42,12 @@ namespace Tobot::Math {
             /// @brief Equality operator
             /// @param triangle Triangle2D to compare
             /// @return True if equal, false otherwise
-            bool operator==(const Triangle2D<T> &) const;
+            bool operator==(Triangle2D<T> const &) const;
 
             /// @brief Inequality operator
             /// @param triangle Triangle2D to compare
             /// @return True if not equal, false otherwise
-            bool operator!=(const Triangle2D<T> &) const;
+            bool operator!=(Triangle2D<T> const &) const;
 
             /// @brief Get the first point
             /// @return First point
@@ -71,7 +71,7 @@ namespace Tobot::Math {
 
             T getAngleC() const;
 
-            friend std::ostream & operator<<(std::ostream & os, const Triangle2D<T> & triangle) {
+            friend std::ostream & operator<<(std::ostream & os, Triangle2D<T> const & triangle) {
                 os << "Triangle2D(" << triangle.m_a << ", " << triangle.m_b << ", " << triangle.m_c << ")";
                 return os;
             }
@@ -89,7 +89,7 @@ namespace Tobot::Math {
     /// @param c The third point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Triangle2D<T>::Triangle2D(const Point2D<T> & a, const Point2D<T> & b, const Point2D<T> & c)
+    Triangle2D<T>::Triangle2D(Point2D<T> const & a, Point2D<T> const & b, Point2D<T> const & c)
         : m_a(a), m_b(b), m_c(c) {
     }
 
@@ -98,7 +98,7 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Triangle2D<T>::Triangle2D(const Triangle2D<T> & triangle)
+    Triangle2D<T>::Triangle2D(Triangle2D<T> const & triangle)
         : m_a(triangle.m_a), m_b(triangle.m_b), m_c(triangle.m_c) {
     }
 
@@ -117,7 +117,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Triangle2D<T> & Triangle2D<T>::operator=(const Triangle2D<T> & triangle) {
+    Triangle2D<T> & Triangle2D<T>::operator=(Triangle2D<T> const & triangle) {
         m_a = triangle.m_a;
         m_b = triangle.m_b;
         m_c = triangle.m_c;
@@ -143,7 +143,7 @@ namespace Tobot::Math {
     /// @return True if equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Triangle2D<T>::operator==(const Triangle2D<T> & triangle) const {
+    Triangle2D<T>::operator==(Triangle2D<T> const & triangle) const {
         return m_a == triangle.m_a && m_b == triangle.m_b && m_c == triangle.m_c;
     }
 
@@ -153,7 +153,7 @@ namespace Tobot::Math {
     /// @return True if not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Triangle2D<T>::operator!=(const Triangle2D<T> & triangle) const {
+    Triangle2D<T>::operator!=(Triangle2D<T> const & triangle) const {
         return !(*this == triangle);
     }
 

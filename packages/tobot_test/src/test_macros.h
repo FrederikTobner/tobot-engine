@@ -8,7 +8,9 @@
 #include <iostream>
 
 namespace Tobot::Tooling::Test {
-#define TBTT_TEST(testsuiteName, testName, ...) \
+#define TBTT_TEST(testsuiteName, testName, ...)                                         \
+    static_assert(sizeof(#testsuiteName) > 1, "The test suite name must not be empty"); \
+    static_assert(sizeof(#testName) > 1, "The test name must not be empty");            \
     void tobot_##testsuiteName##_##testName##_test(Tobot::Tooling::Test::TestState * state)
 
 #define TBTT_ASSERT_TRUE(condition)                                                                                  \

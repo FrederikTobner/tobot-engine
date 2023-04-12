@@ -22,15 +22,15 @@ namespace Tobot::Math {
             Vector4D(T x, T y, T z, T w);
             Vector4D(Vector4D & vec);
             Vector4D(std::initializer_list<T> list);
-            Vector4D(const Vector4D && vec);
-            Vector4D<T> & operator=(const Vector4D<T> & vec);
-            Vector4D<T> & operator=(const Vector4D<T> && vec);
+            Vector4D(Vector4D const && vec);
+            Vector4D<T> & operator=(Vector4D<T> const & vec);
+            Vector4D<T> & operator=(Vector4D<T> const && vec);
 
             /// @brief Adds two vectors together
             /// @param lVec The left vector
             /// @param rVec The right vector
             /// @return Vector4D<T> The sum of the two vectors
-            friend inline Vector4D<T> operator+(Vector4D<T> lVec, const Vector4D<T> & rVec) {
+            friend inline Vector4D<T> operator+(Vector4D<T> lVec, Vector4D<T> const & rVec) {
                 return Vector4D(lVec.x + rVec.x, lVec.y + rVec.y, lVec.z + rVec.z, lVec.w + rVec.w);
             }
 
@@ -38,7 +38,7 @@ namespace Tobot::Math {
             /// @param lVec The left vector
             /// @param rVec The right vector
             /// @return Vector4D<T> The difference of the two vectors
-            friend inline Vector4D<T> operator-(Vector4D<T> lVec, const Vector4D<T> & rVec) {
+            friend inline Vector4D<T> operator-(Vector4D<T> lVec, Vector4D<T> const & rVec) {
                 return Vector4D(lVec.x - rVec.x, lVec.y - rVec.y, lVec.z - rVec.z, lVec.w - rVec.w);
             }
 
@@ -46,7 +46,7 @@ namespace Tobot::Math {
             /// @param scalar The scalar to multiply the vector by
             /// @param vec The vector to multiply by the scalar
             /// @return Vector4D<T> The product of the vector and the scalar
-            friend inline Vector4D<T> operator*(const T scalar, Vector4D<T> vec) {
+            friend inline Vector4D<T> operator*(T const scalar, Vector4D<T> vec) {
                 return Vector4D(vec.x * scalar, vec.y * scalar, vec.z * scalar, vec.w * scalar);
             }
 
@@ -54,7 +54,7 @@ namespace Tobot::Math {
             /// @param vec The vector to multiply by the scalar
             /// @param scalar The scalar to multiply the vector by
             /// @return Vector4D<T> The product of the vector and the scalar
-            friend inline Vector4D<T> operator*(Vector4D<T> vec, const T scalar) {
+            friend inline Vector4D<T> operator*(Vector4D<T> vec, T const scalar) {
                 return Vector4D(vec.x * scalar, vec.y * scalar, vec.z * scalar, vec.w * scalar);
             }
 
@@ -62,7 +62,7 @@ namespace Tobot::Math {
             /// @param scalar The scalar to divide the vector by
             /// @param vec The vector to divide by the scalar
             /// @return Vector4D<T> The quotient of the vector and the scalar
-            friend inline Vector4D<T> operator/(const T scalar, Vector4D<T> vec) {
+            friend inline Vector4D<T> operator/(T const scalar, Vector4D<T> vec) {
                 return Vector4D(vec.x / scalar, vec.y / scalar, vec.z /= scalar, vec.w / scalar);
             }
 
@@ -70,17 +70,17 @@ namespace Tobot::Math {
             /// @param vec The vector to divide by the scalar
             /// @param scalar The scalar to divide the vector by
             /// @return Vector4D<T> The quotient of the vector and the scalar
-            friend inline Vector4D<T> operator/(Vector4D<T> vec, const T scalar) {
+            friend inline Vector4D<T> operator/(Vector4D<T> vec, T const scalar) {
                 return Vector4D(vec.x / scalar, vec.y / scalar, vec.z / scalar, vec.w / scalar);
             }
 
-            Vector4D<T> & operator+=(const Vector4D<T> & vec);
+            Vector4D<T> & operator+=(Vector4D<T> const & vec);
 
-            Vector4D<T> & operator-=(const Vector4D<T> & vec);
+            Vector4D<T> & operator-=(Vector4D<T> const & vec);
 
-            Vector4D<T> & operator*=(const T scalar);
+            Vector4D<T> & operator*=(T const scalar);
 
-            Vector4D<T> & operator/=(const T scalar);
+            Vector4D<T> & operator/=(T const scalar);
 
             T & operator()(std::size_t i);
 
@@ -90,15 +90,15 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
-            bool operator==(const Vector4D<T> & vec) const;
+            bool operator==(Vector4D<T> const & vec) const;
 
-            bool operator!=(const Vector4D<T> & vec) const;
+            bool operator!=(Vector4D<T> const & vec) const;
 
             /// @brief Appends the vector to the output stream
             /// @param os The output stream
             /// @param vec The vector to append to the output stream
             /// @return std::ostream The output stream
-            friend std::ostream operator<<(std::ostream & os, const Vector4D<T> & vec) {
+            friend std::ostream operator<<(std::ostream & os, Vector4D<T> const & vec) {
                 os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ", " << vec.w << ")";
                 return os;
             }
@@ -109,7 +109,7 @@ namespace Tobot::Math {
 
             inline std::size_t GetSize();
 
-            T Dot(const Vector4D<T> & vec);
+            T Dot(Vector4D<T> const & vec);
     };
 
     /// @brief Creates a new Vector4D object
@@ -163,7 +163,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T>::Vector4D(const Vector4D<T> && vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
+    Vector4D<T>::Vector4D(Vector4D<T> const && vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
     }
 
     /// @brief Creates a new Vector4D object
@@ -172,7 +172,7 @@ namespace Tobot::Math {
     /// @return Vector4D<T> The copy of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T> & Vector4D<T>::operator=(const Vector4D<T> & vec) {
+    Vector4D<T> & Vector4D<T>::operator=(Vector4D<T> const & vec) {
         this->x = vec.x;
         this->y = vec.y;
         this->z = vec.z;
@@ -186,7 +186,7 @@ namespace Tobot::Math {
     /// @return Vector4D<T> The copy of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T> & Vector4D<T>::operator=(const Vector4D<T> && vec) {
+    Vector4D<T> & Vector4D<T>::operator=(Vector4D<T> const && vec) {
         this->x = vec.x;
         this->y = vec.y;
         this->z = vec.z;
@@ -200,7 +200,7 @@ namespace Tobot::Math {
     /// @return Vector4D<T> The sum of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T> & Vector4D<T>::operator+=(const Vector4D<T> & vec) {
+    Vector4D<T> & Vector4D<T>::operator+=(Vector4D<T> const & vec) {
         this->x += vec.x;
         this->y += vec.y;
         this->z += vec.z;
@@ -214,7 +214,7 @@ namespace Tobot::Math {
     /// @return Vector4D<T> The difference of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T> & Vector4D<T>::operator-=(const Vector4D<T> & vec) {
+    Vector4D<T> & Vector4D<T>::operator-=(Vector4D<T> const & vec) {
         this->x -= vec.x;
         this->y -= vec.y;
         this->z -= vec.z;
@@ -228,7 +228,7 @@ namespace Tobot::Math {
     /// @return Vector4D<T> The product of the vector and the scalar
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T> & Vector4D<T>::operator*=(const T scalar) {
+    Vector4D<T> & Vector4D<T>::operator*=(T const scalar) {
         this->x *= scalar;
         this->y *= scalar;
         this->z *= scalar;
@@ -242,7 +242,7 @@ namespace Tobot::Math {
     /// @return Vector4D<T> The quotient of the vector and the scalar
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector4D<T> & Vector4D<T>::operator/=(const T scalar) {
+    Vector4D<T> & Vector4D<T>::operator/=(T const scalar) {
         this->x /= scalar;
         this->y /= scalar;
         this->z /= scalar;
@@ -376,7 +376,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Vector4D<T>::operator==(const Vector4D<T> & vec) const {
+    Vector4D<T>::operator==(Vector4D<T> const & vec) const {
         return this->x == vec.x && this->y == vec.y && this->z == vec.z && this->w == vec.w;
     }
 
@@ -386,7 +386,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Vector4D<T>::operator!=(const Vector4D<T> & vec) const {
+    Vector4D<T>::operator!=(Vector4D<T> const & vec) const {
         return this->x != vec.x || this->y != vec.y || this->z != vec.z || this->w != vec.w;
     }
 
@@ -422,7 +422,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector4D<T>::Dot(const Vector4D<T> & vec) {
+    T Vector4D<T>::Dot(Vector4D<T> const & vec) {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z + this->w * vec.w;
     }
 

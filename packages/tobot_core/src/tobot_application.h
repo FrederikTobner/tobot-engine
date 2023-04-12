@@ -63,7 +63,7 @@ namespace Tobot::Core {
             void setInitialScene(Tobot::Core::Scene * scene);
 
         public:
-            TobotApplication(const char * name);
+            TobotApplication(char const * name);
             virtual ~TobotApplication();
             void initialize();
             void run();

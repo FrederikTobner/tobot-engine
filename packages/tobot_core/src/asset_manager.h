@@ -5,6 +5,6 @@
 namespace Tobot::Core {
     class AssetManager {
         public:
-            static SDL_Surface * loadTexture(const char * path);
+            static SDL_Surface * loadTexture(char const * path);
     };
 } // namespace Tobot::Core

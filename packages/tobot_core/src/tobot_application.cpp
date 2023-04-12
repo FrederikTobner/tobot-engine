@@ -12,6 +12,15 @@
 using namespace Tobot::Core;
 using namespace Tobot::Tooling::Logging;
 
+// virtual constructor
+TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
+}
+
+// virtual destructor
+TobotApplication::~TobotApplication() {
+    this->quit();
+}
+
 void TobotApplication::initialize() {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     LOG_INFO("\n  _______    _           _     ______             _            \n\
@@ -87,15 +96,6 @@ void TobotApplication::update() {
 
 void Tobot::Core::TobotApplication::setInitialScene(Tobot::Core::Scene * scene) {
     this->p_CurrentScene = scene;
-}
-
-// virtual constructor
-TobotApplication::TobotApplication(const char * name) : m_ApplicationName(name) {
-}
-
-// virtual destructor
-TobotApplication::~TobotApplication() {
-    this->quit();
 }
 
 void TobotApplication::render() {

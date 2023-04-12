@@ -18,7 +18,7 @@ TEST(RedBlackTree, CanBeCreated) {
  */
 TEST(RedBlackTree, CanInsert) {
     RedBlackTree<int> leTree;
-    leTree.Insert(1);
+    leTree.insert(1);
 }
 
 /*
@@ -26,9 +26,9 @@ TEST(RedBlackTree, CanInsert) {
  */
 TEST(RedBlackTree, CanInsertMultiple) {
     RedBlackTree<int> leTree;
-    leTree.Insert(1);
-    leTree.Insert(2);
-    leTree.Insert(3);
+    leTree.insert(1);
+    leTree.insert(2);
+    leTree.insert(3);
 }
 
 /*
@@ -36,12 +36,12 @@ TEST(RedBlackTree, CanInsertMultiple) {
  */
 TEST(RedBlackTree, CanInsertMultipleAndFind) {
     RedBlackTree<int> leTree;
-    leTree.Insert(1);
-    leTree.Insert(2);
-    leTree.Insert(3);
-    ASSERT_EQ(leTree.Search(1)->value, 1);
-    ASSERT_EQ(leTree.Search(2)->value, 2);
-    ASSERT_EQ(leTree.Search(3)->value, 3);
+    leTree.insert(1);
+    leTree.insert(2);
+    leTree.insert(3);
+    ASSERT_EQ(leTree.search(1)->value, 1);
+    ASSERT_EQ(leTree.search(2)->value, 2);
+    ASSERT_EQ(leTree.search(3)->value, 3);
 }
 
 /*
@@ -49,9 +49,9 @@ TEST(RedBlackTree, CanInsertMultipleAndFind) {
  */
 TEST(RedBlackTree, CanDelete) {
     RedBlackTree<int> leTree;
-    leTree.Insert(1);
-    leTree.Delete(1);
-    ASSERT_FALSE(leTree.Contains(1));
+    leTree.insert(1);
+    leTree.remove(1);
+    ASSERT_FALSE(leTree.contains(1));
 }
 
 /*
@@ -60,7 +60,7 @@ TEST(RedBlackTree, CanDelete) {
 TEST(RedBlackTree, TraverseInOrder) {
     RedBlackTree<int> leTree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::queue<int> result;
-    leTree.TraverseInOrder([&result](int value) { result.push(value); });
+    leTree.traverseInOrder([&result](int value) { result.push(value); });
 
     for (size_t i = 0; i < 10; i++) {
         ASSERT_EQ(result.front(), i + 1);
@@ -74,7 +74,7 @@ TEST(RedBlackTree, TraverseInOrder) {
 TEST(RedBlackTree, TraversePreOrder) {
     RedBlackTree<int> leTree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::queue<int> result;
-    leTree.TraversePreOrder([&result](int value) { result.push(value); });
+    leTree.traversePreOrder([&result](int value) { result.push(value); });
     ASSERT_EQ(result.front(), 4);
     result.pop();
     ASSERT_EQ(result.front(), 2);
@@ -103,7 +103,7 @@ TEST(RedBlackTree, TraversePreOrder) {
 TEST(RedBlackTree, TraversePostOrder) {
     RedBlackTree<int> leTree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::queue<int> result;
-    leTree.TraversePostOrder([&result](int value) { result.push(value); });
+    leTree.traversePostOrder([&result](int value) { result.push(value); });
 
     ASSERT_EQ(result.front(), 1);
     result.pop();
@@ -132,8 +132,8 @@ TEST(RedBlackTree, TraversePostOrder) {
  */
 TEST(RedBlackTree, CanClear) {
     RedBlackTree<int> leTree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    leTree.Clear();
-    ASSERT_EQ(leTree.GetSize(), 0);
+    leTree.clear();
+    ASSERT_EQ(leTree.getSize(), 0);
 }
 
 /*
@@ -142,5 +142,21 @@ TEST(RedBlackTree, CanClear) {
 TEST(RedBlackTree, CanCopy) {
     RedBlackTree<int> leTree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     RedBlackTree<int> leTree2 = leTree;
-    ASSERT_EQ(leTree.GetSize(), leTree2.GetSize());
+    ASSERT_EQ(leTree.getSize(), leTree2.getSize());
+}
+
+/*
+ * Tests whether the RedBlackTree can be iterated over
+ */
+TEST(RedBlackTree, CanIterate) {
+    RedBlackTree<int> leTree = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::queue<int> result;
+    for (auto it = leTree.begin(); it != leTree.end(); it++) {
+        result.push(*it);
+    }
+
+    for (size_t i = 0; i < 10; i++) {
+        ASSERT_EQ(result.front(), i + 1);
+        result.pop();
+    }
 }

@@ -11,8 +11,8 @@ using namespace Tobot::Math;
 TEST(Circle, Creation) {
     Point2D<> lePoint(1, 2);
     Circle<> leCircle(lePoint, 3);
-    EXPECT_EQ(1, leCircle.center().x());
-    EXPECT_EQ(2, leCircle.center().y());
+    EXPECT_EQ(1, leCircle.center().getX());
+    EXPECT_EQ(2, leCircle.center().getY());
     EXPECT_EQ(3, leCircle.radius());
 }
 
@@ -21,8 +21,8 @@ TEST(Circle, Creation) {
  */
 TEST(Circle, CreationList) {
     Circle<> leCircle = {1, 2, 3};
-    EXPECT_EQ(1, leCircle.center().x());
-    EXPECT_EQ(2, leCircle.center().y());
+    EXPECT_EQ(1, leCircle.center().getX());
+    EXPECT_EQ(2, leCircle.center().getY());
     EXPECT_EQ(3, leCircle.radius());
 }
 
@@ -35,8 +35,8 @@ TEST(Circle, Copy) {
     Circle<> secondCircle(firstCircle);
     firstCircle = {4, 5, 6};
 
-    EXPECT_EQ(1, secondCircle.center().x());
-    EXPECT_EQ(2, secondCircle.center().y());
+    EXPECT_EQ(1, secondCircle.center().getX());
+    EXPECT_EQ(2, secondCircle.center().getY());
     EXPECT_EQ(3, secondCircle.radius());
 }
 
@@ -49,8 +49,8 @@ TEST(Circle, Move) {
     Circle<> secondCircle(std::move(firstCircle));
     firstCircle = {4, 5, 6};
 
-    EXPECT_EQ(1, secondCircle.center().x());
-    EXPECT_EQ(2, secondCircle.center().y());
+    EXPECT_EQ(1, secondCircle.center().getX());
+    EXPECT_EQ(2, secondCircle.center().getY());
     EXPECT_EQ(3, secondCircle.radius());
 }
 

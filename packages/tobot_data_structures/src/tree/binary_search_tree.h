@@ -6,15 +6,15 @@ namespace Tobot::DataStructures::Tree {
     class BinarySearchTree {
         public:
             BinarySearchTree();
-            virtual void Insert(T value) = 0;
-            virtual void Delete(T value) = 0;
-            virtual bool Contains(T value) = 0;
-            virtual void Print() = 0;
-            virtual void TraverseInOrder(std::function<void(T)> callback) = 0;
-            virtual void TraversePreOrder(std::function<void(T)> callback) = 0;
-            virtual void TraversePostOrder(std::function<void(T)> callback) = 0;
-            virtual void Clear() = 0;
-            virtual std::size_t GetSize() = 0;
+            virtual void insert(T value) = 0;
+            virtual void remove(T value) = 0;
+            virtual bool contains(T value) = 0;
+            virtual void print() = 0;
+            virtual void traverseInOrder(std::function<void(T)> callback) = 0;
+            virtual void traversePreOrder(std::function<void(T)> callback) = 0;
+            virtual void traversePostOrder(std::function<void(T)> callback) = 0;
+            virtual void clear() = 0;
+            virtual std::size_t getSize() = 0;
     }; // class BinarySearchTree
 
     template <typename T>

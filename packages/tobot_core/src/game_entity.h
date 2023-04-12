@@ -19,8 +19,8 @@ namespace Tobot::Core {
             void prepareRects();
 
         public:
-            GameEntity(const char * id, int x, int y, SDL_Texture * texture);
-            GameEntity(const char * id, int x, int y);
+            GameEntity(char const * id, int x, int y, SDL_Texture * texture);
+            GameEntity(char const * id, int x, int y);
 
             virtual ~GameEntity() = 0;
 

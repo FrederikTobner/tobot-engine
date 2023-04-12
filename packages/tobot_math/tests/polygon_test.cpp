@@ -28,10 +28,10 @@ TEST(Polygon, Copy) {
     firstPolygon = {{4, 5}, {6, 7}, {8, 9}};
 
     EXPECT_EQ(3, secondPolygon.getPoints().size());
-    EXPECT_EQ(1, secondPolygon.getPoints()[0].x());
-    EXPECT_EQ(2, secondPolygon.getPoints()[0].y());
-    EXPECT_EQ(3, secondPolygon.getPoints()[1].x());
-    EXPECT_EQ(4, secondPolygon.getPoints()[1].y());
-    EXPECT_EQ(5, secondPolygon.getPoints()[2].x());
-    EXPECT_EQ(6, secondPolygon.getPoints()[2].y());
+    EXPECT_EQ(1, secondPolygon.getPoints()[0].getX());
+    EXPECT_EQ(2, secondPolygon.getPoints()[0].getY());
+    EXPECT_EQ(3, secondPolygon.getPoints()[1].getX());
+    EXPECT_EQ(4, secondPolygon.getPoints()[1].getY());
+    EXPECT_EQ(5, secondPolygon.getPoints()[2].getX());
+    EXPECT_EQ(6, secondPolygon.getPoints()[2].getY());
 }

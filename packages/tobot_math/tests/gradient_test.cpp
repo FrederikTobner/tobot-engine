@@ -28,6 +28,6 @@ TEST(Gradient2D, Intersection) {
     Point2D<> * intersection = firstGradient.intersection(secondGradient);
     ASSERT_TRUE(intersection);
     // The intersection is (1, 1)
-    EXPECT_EQ(-1, intersection->x());
-    EXPECT_EQ(1, intersection->y());
+    EXPECT_EQ(-1, intersection->getX());
+    EXPECT_EQ(1, intersection->getY());
 }

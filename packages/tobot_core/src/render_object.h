@@ -18,7 +18,7 @@ namespace Tobot::Core {
             void incrementPosition();
 
         public:
-            RenderObject(const char * id, int x, int y);
+            RenderObject(char const * id, int x, int y);
             virtual ~RenderObject() = 0;
 
             virtual void update() = 0;

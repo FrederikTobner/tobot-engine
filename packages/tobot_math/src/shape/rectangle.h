@@ -13,23 +13,23 @@ namespace Tobot::Math {
 
             Rectangle2D(T x, T y, T width, T height, T rotation);
 
-            Rectangle2D(const Point2D<T> & center, const T & width, const T & height, const T & rotation);
+            Rectangle2D(Point2D<T> const & center, T const & width, T const & height, T const & rotation);
 
             Rectangle2D(std::initializer_list<T> list);
 
-            Rectangle2D(const Rectangle2D<T> & rectangle);
+            Rectangle2D(Rectangle2D<T> const & rectangle);
 
             Rectangle2D(Rectangle2D<T> &&) noexcept;
 
             ~Rectangle2D() = default;
 
-            Rectangle2D<T> & operator=(const Rectangle2D<T> &);
+            Rectangle2D<T> & operator=(Rectangle2D<T> const &);
 
             Rectangle2D<T> & operator=(Rectangle2D<T> &&) noexcept;
 
-            bool operator==(const Rectangle2D<T> &) const;
+            bool operator==(Rectangle2D<T> const &) const;
 
-            bool operator!=(const Rectangle2D<T> &) const;
+            bool operator!=(Rectangle2D<T> const &) const;
 
             Point2D<T> getCenter() const;
 
@@ -43,9 +43,9 @@ namespace Tobot::Math {
 
             T getPerimeter() const;
 
-            bool contains(const Point2D<T> &) const;
+            bool contains(Point2D<T> const &) const;
 
-            friend std::ostream & operator<<(std::ostream & os, const Rectangle2D<T> & rectangle) {
+            friend std::ostream & operator<<(std::ostream & os, Rectangle2D<T> const & rectangle) {
                 os << "Rectangle2D(" << rectangle.center << ", " << rectangle.width << ", " << rectangle.height << ", "
                    << rectangle.rotation << ")";
                 return os;
@@ -96,7 +96,7 @@ namespace Tobot::Math {
     /// @param rotation Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(const Point2D<T> & center, const T & width, const T & height, const T & rotation)
+    Rectangle2D<T>::Rectangle2D(Point2D<T> const & center, T const & width, T const & height, T const & rotation)
         : center(center), width(width), height(height), rotation(rotation) {
     }
 
@@ -105,7 +105,7 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(const Rectangle2D<T> & rectangle)
+    Rectangle2D<T>::Rectangle2D(Rectangle2D<T> const & rectangle)
         : center(rectangle.center), width(rectangle.width), height(rectangle.height), rotation(rectangle.rotation) {
     }
 
@@ -125,7 +125,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T> & Rectangle2D<T>::operator=(const Rectangle2D<T> & rectangle) {
+    Rectangle2D<T> & Rectangle2D<T>::operator=(Rectangle2D<T> const & rectangle) {
         center = rectangle.center;
         width = rectangle.width;
         height = rectangle.height;
@@ -153,7 +153,7 @@ namespace Tobot::Math {
     /// @return True if the two rectangles are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Rectangle2D<T>::operator==(const Rectangle2D<T> & rectangle) const {
+    Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const {
         return center == rectangle.center && width == rectangle.width && height == rectangle.height &&
                rotation == rectangle.rotation;
     }
@@ -164,7 +164,7 @@ namespace Tobot::Math {
     /// @return True if the two rectangles are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Rectangle2D<T>::operator!=(const Rectangle2D<T> & rectangle) const {
+    Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const {
         return center != rectangle.center || width != rectangle.width || height != rectangle.height ||
                rotation != rectangle.rotation;
     }
@@ -229,20 +229,21 @@ namespace Tobot::Math {
     /// @return True if the point is inside the rectangle, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Rectangle2D<T>::contains(const Point2D<T> & point) const {
+    Rectangle2D<T>::contains(Point2D<T> const & point) const {
         return rotation == 0.0
-                   ? point.x() >= center.x() - width / 2 && point.x() <= center.x() + width / 2 &&
-                         point.y() >= center.y() - height / 2 && point.y() <= center.y() + height / 2
-                   : (point.x() - center.x()) * std::cos(rotation) - (point.y() - center.y()) * std::sin(rotation) <=
+                   ? point.getX() >= center.getX() - width / 2 && point.getX() <= center.getX() + width / 2 &&
+                         point.getY() >= center.getY() - height / 2 && point.getY() <= center.getY() + height / 2
+                   : (point.getX() - center.getX()) * std::cos(rotation) -
+                                 (point.getY() - center.getY()) * std::sin(rotation) <=
                              width / 2 &&
-                         (point.x() - center.x()) * std::cos(rotation) -
-                                 (point.y() - center.y()) * std::sin(rotation) >=
+                         (point.getX() - center.getX()) * std::cos(rotation) -
+                                 (point.getY() - center.getY()) * std::sin(rotation) >=
                              -width / 2 &&
-                         (point.x() - center.x()) * std::sin(rotation) +
-                                 (point.y() - center.y()) * std::cos(rotation) <=
+                         (point.getX() - center.getX()) * std::sin(rotation) +
+                                 (point.getY() - center.getY()) * std::cos(rotation) <=
                              height / 2 &&
-                         (point.x() - center.x()) * std::sin(rotation) +
-                                 (point.y() - center.y()) * std::cos(rotation) >=
+                         (point.getX() - center.getX()) * std::sin(rotation) +
+                                 (point.getY() - center.getY()) * std::cos(rotation) >=
                              -height / 2;
     }
 

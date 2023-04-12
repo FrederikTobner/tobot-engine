@@ -13,12 +13,12 @@ namespace Tobot::DataStructures::Tree {
             void addChild(TreeNode<T> * child);
             void addChildAt(TreeNode<T> * child, std::size_t index);
             T & getValue();
-            const T & getValue() const;
+            T const & getValue() const;
             void setValue(T data);
             void removeChild(TreeNode<T> * child);
             void removeChildByIndex(std::size_t index);
             std::vector<TreeNode<T> *> & getChildren();
-            const std::vector<TreeNode<T> *> & getChildren() const;
+            std::vector<TreeNode<T> *> const & getChildren() const;
 
         private:
             T data;
@@ -61,7 +61,7 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    const T & TreeNode<T>::getValue() const {
+    T const & TreeNode<T>::getValue() const {
         return this->data;
     }
 
@@ -93,7 +93,7 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    const std::vector<TreeNode<T> *> & TreeNode<T>::getChildren() const {
+    std::vector<TreeNode<T> *> const & TreeNode<T>::getChildren() const {
         return this->children;
     }
 

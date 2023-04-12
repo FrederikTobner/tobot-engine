@@ -16,15 +16,15 @@ namespace Tobot::Math {
 
             /// @brief Constructor
             /// @param points Points of the polygon
-            Polygon2D(const std::vector<Point2D<T>> & points);
+            Polygon2D(std::vector<Point2D<T>> const & points);
 
             /// @brief Constructor
             /// @param points Points of the polygon
-            Polygon2D(const std::initializer_list<Point2D<T>> & points);
+            Polygon2D(std::initializer_list<Point2D<T>> const & points);
 
             /// @brief Copy constructor
             /// @param polygon Polygon to copy
-            Polygon2D(const Polygon2D<T> & polygon);
+            Polygon2D(Polygon2D<T> const & polygon);
 
             /// @brief Move constructor
             /// @param polygon Polygon to move
@@ -36,7 +36,7 @@ namespace Tobot::Math {
             /// @brief Copy assignment operator
             /// @param polygon Polygon to copy
             /// @return Reference to this
-            Polygon2D<T> & operator=(const Polygon2D<T> &);
+            Polygon2D<T> & operator=(Polygon2D<T> const &);
 
             /// @brief Move assignment operator
             /// @param polygon Polygon to move
@@ -46,12 +46,12 @@ namespace Tobot::Math {
             /// @brief Equality operator
             /// @param polygon Polygon to compare
             /// @return True if equal, false otherwise
-            bool operator==(const Polygon2D<T> &) const;
+            bool operator==(Polygon2D<T> const &) const;
 
             /// @brief Inequality operator
             /// @param polygon Polygon to compare
             /// @return True if not equal, false otherwise
-            bool operator!=(const Polygon2D<T> &) const;
+            bool operator!=(Polygon2D<T> const &) const;
 
             /// @brief Get the points of the polygon
             /// @return Points of the polygon
@@ -75,7 +75,7 @@ namespace Tobot::Math {
 
             bool isConvex() const;
 
-            friend std::ostream & operator<<(std::ostream & os, const Polygon2D<T> & polygon) {
+            friend std::ostream & operator<<(std::ostream & os, Polygon2D<T> const & polygon) {
                 os << "Polygon2D(";
                 for (const auto & point : polygon.points) {
                     os << point << ", ";
@@ -92,21 +92,21 @@ namespace Tobot::Math {
     /// @param points Points of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Polygon2D<T>::Polygon2D(const std::vector<Point2D<T>> & points) : points(points) {
+    Polygon2D<T>::Polygon2D(std::vector<Point2D<T>> const & points) : points(points) {
     }
 
     /// @brief Constructor
     /// @param points Points of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Polygon2D<T>::Polygon2D(const std::initializer_list<Point2D<T>> & points) : points(points) {
+    Polygon2D<T>::Polygon2D(std::initializer_list<Point2D<T>> const & points) : points(points) {
     }
 
     /// @brief Copy constructor
     /// @param polygon Polygon to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Polygon2D<T>::Polygon2D(const Polygon2D<T> & polygon) : points(polygon.points) {
+    Polygon2D<T>::Polygon2D(Polygon2D<T> const & polygon) : points(polygon.points) {
     }
 
     /// @brief Move constructor
@@ -121,7 +121,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Polygon2D<T> & Polygon2D<T>::operator=(const Polygon2D<T> & polygon) {
+    Polygon2D<T> & Polygon2D<T>::operator=(Polygon2D<T> const & polygon) {
         points = polygon.points;
         return *this;
     }
@@ -141,7 +141,7 @@ namespace Tobot::Math {
     /// @return True if equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Polygon2D<T>::operator==(const Polygon2D<T> & polygon) const {
+    Polygon2D<T>::operator==(Polygon2D<T> const & polygon) const {
         return points == polygon.points;
     }
 
@@ -150,7 +150,7 @@ namespace Tobot::Math {
     /// @return True if not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T> bool
-    Polygon2D<T>::operator!=(const Polygon2D<T> & polygon) const {
+    Polygon2D<T>::operator!=(Polygon2D<T> const & polygon) const {
         return points != polygon.points;
     }
 

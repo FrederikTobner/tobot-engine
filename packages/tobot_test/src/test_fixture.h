@@ -34,7 +34,7 @@ namespace Tobot::Tooling::Test {
 
             /// @brief Adds multiple testcases to the testfixture
             /// @param cases The cases that are added to the fixture
-            void addTestCases(const std::vector<TestCase> & cases);
+            void addTestCases(std::vector<TestCase> const & cases);
 
             /// @brief Executes all the tests in the fixture
             /// @param processor The TestReportProcessor that handles all the testreports of the executed testcases

@@ -27,12 +27,12 @@ TEST(Triangle, Copy) {
 
     firstTriangle = {Point2D<>(4, 5), Point2D<>(6, 7), Point2D<>(8, 9)};
 
-    EXPECT_EQ(1, secondTriangle.getA().x());
-    EXPECT_EQ(2, secondTriangle.getA().y());
-    EXPECT_EQ(3, secondTriangle.getB().x());
-    EXPECT_EQ(4, secondTriangle.getB().y());
-    EXPECT_EQ(5, secondTriangle.getC().x());
-    EXPECT_EQ(6, secondTriangle.getC().y());
+    EXPECT_EQ(1, secondTriangle.getA().getX());
+    EXPECT_EQ(2, secondTriangle.getA().getY());
+    EXPECT_EQ(3, secondTriangle.getB().getX());
+    EXPECT_EQ(4, secondTriangle.getB().getY());
+    EXPECT_EQ(5, secondTriangle.getC().getX());
+    EXPECT_EQ(6, secondTriangle.getC().getY());
 }
 
 /*
@@ -47,12 +47,12 @@ TEST(Triangle, Move) {
 
     firstTriangle = {Point2D<>(4, 5), Point2D<>(6, 7), Point2D<>(8, 9)};
 
-    EXPECT_EQ(1, secondTriangle.getA().x());
-    EXPECT_EQ(2, secondTriangle.getA().y());
-    EXPECT_EQ(3, secondTriangle.getB().x());
-    EXPECT_EQ(4, secondTriangle.getB().y());
-    EXPECT_EQ(5, secondTriangle.getC().x());
-    EXPECT_EQ(6, secondTriangle.getC().y());
+    EXPECT_EQ(1, secondTriangle.getA().getX());
+    EXPECT_EQ(2, secondTriangle.getA().getY());
+    EXPECT_EQ(3, secondTriangle.getB().getX());
+    EXPECT_EQ(4, secondTriangle.getB().getY());
+    EXPECT_EQ(5, secondTriangle.getC().getX());
+    EXPECT_EQ(6, secondTriangle.getC().getY());
 }
 
 /*

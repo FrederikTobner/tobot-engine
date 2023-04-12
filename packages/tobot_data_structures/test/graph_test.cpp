@@ -45,23 +45,23 @@ TEST(UndirectedGraph, CanBeCreatedWithVectorOfVerticesAndVectorOfEdges) {
  */
 TEST(UndirectedGraph, CanBeCopied) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
     UndirectedGraph<int> leGraph2 = leGraph;
-    ASSERT_TRUE(leGraph2.ContainsVertex(1));
-    ASSERT_TRUE(leGraph2.ContainsVertex(2));
-    ASSERT_TRUE(leGraph2.ContainsVertex(3));
-    ASSERT_TRUE(leGraph2.ContainsVertex(4));
-    ASSERT_TRUE(leGraph2.ContainsEdge(1, 2));
-    ASSERT_TRUE(leGraph2.ContainsEdge(2, 3));
-    ASSERT_TRUE(leGraph2.ContainsEdge(3, 1));
-    ASSERT_TRUE(leGraph2.ContainsEdge(4, 1));
+    ASSERT_TRUE(leGraph2.containsVertex(1));
+    ASSERT_TRUE(leGraph2.containsVertex(2));
+    ASSERT_TRUE(leGraph2.containsVertex(3));
+    ASSERT_TRUE(leGraph2.containsVertex(4));
+    ASSERT_TRUE(leGraph2.containsEdge(1, 2));
+    ASSERT_TRUE(leGraph2.containsEdge(2, 3));
+    ASSERT_TRUE(leGraph2.containsEdge(3, 1));
+    ASSERT_TRUE(leGraph2.containsEdge(4, 1));
 }
 
 /*
@@ -69,15 +69,15 @@ TEST(UndirectedGraph, CanBeCopied) {
  */
 TEST(UndirectedGraph, CanGetNeighbors) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
-    std::vector<int> neighbors = leGraph.GetNeighbors(1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
+    std::vector<int> neighbors = leGraph.getNeighbors(1);
     ASSERT_EQ(3, neighbors.size());
     ASSERT_TRUE(std::find(neighbors.begin(), neighbors.end(), 2) != neighbors.end());
     ASSERT_TRUE(std::find(neighbors.begin(), neighbors.end(), 3) != neighbors.end());
@@ -89,18 +89,18 @@ TEST(UndirectedGraph, CanGetNeighbors) {
  */
 TEST(UndirectedGraph, CanFindVertex) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
-    ASSERT_TRUE(leGraph.ContainsVertex(1));
-    ASSERT_TRUE(leGraph.ContainsVertex(2));
-    ASSERT_TRUE(leGraph.ContainsVertex(3));
-    ASSERT_TRUE(leGraph.ContainsVertex(4));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
+    ASSERT_TRUE(leGraph.containsVertex(1));
+    ASSERT_TRUE(leGraph.containsVertex(2));
+    ASSERT_TRUE(leGraph.containsVertex(3));
+    ASSERT_TRUE(leGraph.containsVertex(4));
 }
 
 /*
@@ -108,23 +108,23 @@ TEST(UndirectedGraph, CanFindVertex) {
  */
 TEST(UndirectedGraph, CanBeMoved) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
     UndirectedGraph<int> leGraph2 = std::move(leGraph);
-    ASSERT_TRUE(leGraph2.ContainsVertex(1));
-    ASSERT_TRUE(leGraph2.ContainsVertex(2));
-    ASSERT_TRUE(leGraph2.ContainsVertex(3));
-    ASSERT_TRUE(leGraph2.ContainsVertex(4));
-    ASSERT_TRUE(leGraph2.ContainsEdge(1, 2));
-    ASSERT_TRUE(leGraph2.ContainsEdge(2, 3));
-    ASSERT_TRUE(leGraph2.ContainsEdge(3, 1));
-    ASSERT_TRUE(leGraph2.ContainsEdge(4, 1));
+    ASSERT_TRUE(leGraph2.containsVertex(1));
+    ASSERT_TRUE(leGraph2.containsVertex(2));
+    ASSERT_TRUE(leGraph2.containsVertex(3));
+    ASSERT_TRUE(leGraph2.containsVertex(4));
+    ASSERT_TRUE(leGraph2.containsEdge(1, 2));
+    ASSERT_TRUE(leGraph2.containsEdge(2, 3));
+    ASSERT_TRUE(leGraph2.containsEdge(3, 1));
+    ASSERT_TRUE(leGraph2.containsEdge(4, 1));
 }
 
 /*
@@ -132,7 +132,7 @@ TEST(UndirectedGraph, CanBeMoved) {
  */
 TEST(UndirectedGraph, CanAddVertex) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
+    leGraph.addVertex(1);
 }
 
 /*
@@ -140,9 +140,9 @@ TEST(UndirectedGraph, CanAddVertex) {
  */
 TEST(UndirectedGraph, CanAddMultipleVertices) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
 }
 
 /*
@@ -150,9 +150,9 @@ TEST(UndirectedGraph, CanAddMultipleVertices) {
  */
 TEST(UndirectedGraph, CanAddEdge) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddEdge(1, 2);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addEdge(1, 2);
 }
 
 /*
@@ -160,12 +160,12 @@ TEST(UndirectedGraph, CanAddEdge) {
  */
 TEST(UndirectedGraph, CanAddMultipleEdges) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
 }
 
 /*
@@ -173,15 +173,15 @@ TEST(UndirectedGraph, CanAddMultipleEdges) {
  */
 TEST(UndirectedGraph, CanAddMultipleEdgesAndRemove) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.RemoveEdge(1, 2);
-    leGraph.RemoveEdge(2, 3);
-    leGraph.RemoveEdge(3, 1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.removeEdge(1, 2);
+    leGraph.removeEdge(2, 3);
+    leGraph.removeEdge(3, 1);
 }
 
 /*
@@ -189,20 +189,20 @@ TEST(UndirectedGraph, CanAddMultipleEdgesAndRemove) {
  */
 TEST(UndirectedGraph, CanFindEdge) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
-    ASSERT_TRUE(leGraph.ContainsEdge(1, 2));
-    ASSERT_TRUE(leGraph.ContainsEdge(2, 3));
-    ASSERT_TRUE(leGraph.ContainsEdge(3, 1));
-    ASSERT_TRUE(leGraph.ContainsEdge(4, 1));
-    ASSERT_FALSE(leGraph.ContainsEdge(4, 2));
-    ASSERT_FALSE(leGraph.ContainsEdge(4, 3));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
+    ASSERT_TRUE(leGraph.containsEdge(1, 2));
+    ASSERT_TRUE(leGraph.containsEdge(2, 3));
+    ASSERT_TRUE(leGraph.containsEdge(3, 1));
+    ASSERT_TRUE(leGraph.containsEdge(4, 1));
+    ASSERT_FALSE(leGraph.containsEdge(4, 2));
+    ASSERT_FALSE(leGraph.containsEdge(4, 3));
 }
 
 /*
@@ -210,15 +210,15 @@ TEST(UndirectedGraph, CanFindEdge) {
  */
 TEST(UndirectedGraph, CanFindComponent) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
-    std::vector<int> component = leGraph.GetConnectedComponent(1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
+    std::vector<int> component = leGraph.getConnectedComponent(1);
     ASSERT_EQ(4, component.size());
     ASSERT_TRUE(std::find(component.begin(), component.end(), 1) != component.end());
     ASSERT_TRUE(std::find(component.begin(), component.end(), 2) != component.end());
@@ -231,23 +231,23 @@ TEST(UndirectedGraph, CanFindComponent) {
  */
 TEST(UndirectedGraph, CanClear) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 1);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveAllEdgesAndVertices();
-    ASSERT_FALSE(leGraph.ContainsVertex(1));
-    ASSERT_FALSE(leGraph.ContainsVertex(2));
-    ASSERT_FALSE(leGraph.ContainsVertex(3));
-    ASSERT_FALSE(leGraph.ContainsVertex(4));
-    ASSERT_FALSE(leGraph.ContainsEdge(1, 2));
-    ASSERT_FALSE(leGraph.ContainsEdge(2, 3));
-    ASSERT_FALSE(leGraph.ContainsEdge(3, 1));
-    ASSERT_FALSE(leGraph.ContainsEdge(4, 1));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 1);
+    leGraph.addEdge(4, 1);
+    leGraph.removeAllEdgesAndVertices();
+    ASSERT_FALSE(leGraph.containsVertex(1));
+    ASSERT_FALSE(leGraph.containsVertex(2));
+    ASSERT_FALSE(leGraph.containsVertex(3));
+    ASSERT_FALSE(leGraph.containsVertex(4));
+    ASSERT_FALSE(leGraph.containsEdge(1, 2));
+    ASSERT_FALSE(leGraph.containsEdge(2, 3));
+    ASSERT_FALSE(leGraph.containsEdge(3, 1));
+    ASSERT_FALSE(leGraph.containsEdge(4, 1));
 }
 
 /*
@@ -255,13 +255,13 @@ TEST(UndirectedGraph, CanClear) {
  */
 TEST(UndirectedGraph, CanDetectAcyclic) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(3, 4);
-    ASSERT_TRUE(leGraph.IsAcyclic());
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(3, 4);
+    ASSERT_TRUE(leGraph.isAcyclic());
 }
 
 /*
@@ -269,15 +269,15 @@ TEST(UndirectedGraph, CanDetectAcyclic) {
  */
 TEST(UndirectedGraph, CanDetectCycle) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    ASSERT_TRUE(leGraph.IsCyclic());
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    ASSERT_TRUE(leGraph.isCyclic());
 }
 
 /*
@@ -285,34 +285,34 @@ TEST(UndirectedGraph, CanDetectCycle) {
  */
 TEST(UndirectedGraph, EqualityOperator) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
     UndirectedGraph<int> leGraph2;
-    leGraph2.AddVertex(1);
-    leGraph2.AddVertex(2);
-    leGraph2.AddVertex(3);
-    leGraph2.AddVertex(4);
-    leGraph2.AddEdge(1, 2);
-    leGraph2.AddEdge(2, 3);
-    leGraph2.AddEdge(3, 4);
-    leGraph2.AddEdge(4, 1);
+    leGraph2.addVertex(1);
+    leGraph2.addVertex(2);
+    leGraph2.addVertex(3);
+    leGraph2.addVertex(4);
+    leGraph2.addEdge(1, 2);
+    leGraph2.addEdge(2, 3);
+    leGraph2.addEdge(3, 4);
+    leGraph2.addEdge(4, 1);
     ASSERT_TRUE(leGraph == leGraph2);
     UndirectedGraph<int> leGraph3;
-    leGraph3.AddVertex(1);
-    leGraph3.AddVertex(2);
-    leGraph3.AddVertex(3);
-    leGraph3.AddVertex(4);
-    leGraph3.AddEdge(1, 2);
-    leGraph3.AddEdge(2, 3);
-    leGraph3.AddEdge(3, 4);
-    leGraph3.AddEdge(4, 1);
-    leGraph3.AddEdge(1, 3);
+    leGraph3.addVertex(1);
+    leGraph3.addVertex(2);
+    leGraph3.addVertex(3);
+    leGraph3.addVertex(4);
+    leGraph3.addEdge(1, 2);
+    leGraph3.addEdge(2, 3);
+    leGraph3.addEdge(3, 4);
+    leGraph3.addEdge(4, 1);
+    leGraph3.addEdge(1, 3);
     ASSERT_FALSE(leGraph == leGraph3);
 }
 
@@ -321,34 +321,34 @@ TEST(UndirectedGraph, EqualityOperator) {
  */
 TEST(UndirectedGraph, InequalityOperator) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
     UndirectedGraph<int> leGraph2;
-    leGraph2.AddVertex(1);
-    leGraph2.AddVertex(2);
-    leGraph2.AddVertex(3);
-    leGraph2.AddVertex(4);
-    leGraph2.AddEdge(1, 2);
-    leGraph2.AddEdge(2, 3);
-    leGraph2.AddEdge(3, 4);
-    leGraph2.AddEdge(4, 1);
-    leGraph2.AddEdge(1, 3);
+    leGraph2.addVertex(1);
+    leGraph2.addVertex(2);
+    leGraph2.addVertex(3);
+    leGraph2.addVertex(4);
+    leGraph2.addEdge(1, 2);
+    leGraph2.addEdge(2, 3);
+    leGraph2.addEdge(3, 4);
+    leGraph2.addEdge(4, 1);
+    leGraph2.addEdge(1, 3);
     ASSERT_TRUE(leGraph != leGraph2);
     UndirectedGraph<int> leGraph3;
-    leGraph3.AddVertex(1);
-    leGraph3.AddVertex(2);
-    leGraph3.AddVertex(3);
-    leGraph3.AddVertex(4);
-    leGraph3.AddEdge(1, 2);
-    leGraph3.AddEdge(2, 3);
-    leGraph3.AddEdge(3, 4);
-    leGraph3.AddEdge(4, 1);
+    leGraph3.addVertex(1);
+    leGraph3.addVertex(2);
+    leGraph3.addVertex(3);
+    leGraph3.addVertex(4);
+    leGraph3.addEdge(1, 2);
+    leGraph3.addEdge(2, 3);
+    leGraph3.addEdge(3, 4);
+    leGraph3.addEdge(4, 1);
     ASSERT_FALSE(leGraph != leGraph3);
 }
 
@@ -357,18 +357,18 @@ TEST(UndirectedGraph, InequalityOperator) {
  */
 TEST(UndirectedGraph, CanRemoveVertex) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveVertex(1);
-    ASSERT_FALSE(leGraph.ContainsVertex(1));
-    ASSERT_FALSE(leGraph.ContainsEdge(1, 2));
-    ASSERT_FALSE(leGraph.ContainsEdge(4, 1));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeVertex(1);
+    ASSERT_FALSE(leGraph.containsVertex(1));
+    ASSERT_FALSE(leGraph.containsEdge(1, 2));
+    ASSERT_FALSE(leGraph.containsEdge(4, 1));
 }
 
 /*
@@ -376,16 +376,16 @@ TEST(UndirectedGraph, CanRemoveVertex) {
  */
 TEST(UndirectedGraph, CanRemoveEdge) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveEdge(1, 2);
-    ASSERT_FALSE(leGraph.ContainsEdge(1, 2));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeEdge(1, 2);
+    ASSERT_FALSE(leGraph.containsEdge(1, 2));
 }
 
 /*
@@ -393,19 +393,19 @@ TEST(UndirectedGraph, CanRemoveEdge) {
  */
 TEST(UndirectedGraph, CanRemoveMultipleVertices) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveVertices({1, 2, 3});
-    ASSERT_FALSE(leGraph.ContainsVertex(1));
-    ASSERT_FALSE(leGraph.ContainsVertex(2));
-    ASSERT_FALSE(leGraph.ContainsVertex(3));
-    ASSERT_TRUE(leGraph.ContainsVertex(4));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeVertices({1, 2, 3});
+    ASSERT_FALSE(leGraph.containsVertex(1));
+    ASSERT_FALSE(leGraph.containsVertex(2));
+    ASSERT_FALSE(leGraph.containsVertex(3));
+    ASSERT_TRUE(leGraph.containsVertex(4));
 }
 
 /*
@@ -413,19 +413,19 @@ TEST(UndirectedGraph, CanRemoveMultipleVertices) {
  */
 TEST(UndirectedGraph, CanRemoveMultipleEdges) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveEdges({{1, 2}, {2, 3}, {3, 4}});
-    ASSERT_FALSE(leGraph.ContainsEdge(1, 2));
-    ASSERT_FALSE(leGraph.ContainsEdge(2, 3));
-    ASSERT_FALSE(leGraph.ContainsEdge(3, 4));
-    ASSERT_TRUE(leGraph.ContainsEdge(4, 1));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeEdges({{1, 2}, {2, 3}, {3, 4}});
+    ASSERT_FALSE(leGraph.containsEdge(1, 2));
+    ASSERT_FALSE(leGraph.containsEdge(2, 3));
+    ASSERT_FALSE(leGraph.containsEdge(3, 4));
+    ASSERT_TRUE(leGraph.containsEdge(4, 1));
 }
 
 /*
@@ -433,19 +433,19 @@ TEST(UndirectedGraph, CanRemoveMultipleEdges) {
  */
 TEST(UndirectedGraph, CanRemoveAllVertices) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveAllVertices();
-    ASSERT_FALSE(leGraph.ContainsVertex(1));
-    ASSERT_FALSE(leGraph.ContainsVertex(2));
-    ASSERT_FALSE(leGraph.ContainsVertex(3));
-    ASSERT_FALSE(leGraph.ContainsVertex(4));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeAllVertices();
+    ASSERT_FALSE(leGraph.containsVertex(1));
+    ASSERT_FALSE(leGraph.containsVertex(2));
+    ASSERT_FALSE(leGraph.containsVertex(3));
+    ASSERT_FALSE(leGraph.containsVertex(4));
 }
 
 /*
@@ -453,19 +453,19 @@ TEST(UndirectedGraph, CanRemoveAllVertices) {
  */
 TEST(UndirectedGraph, CanRemoveAllEdges) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveAllEdges();
-    ASSERT_FALSE(leGraph.ContainsEdge(1, 2));
-    ASSERT_FALSE(leGraph.ContainsEdge(2, 3));
-    ASSERT_FALSE(leGraph.ContainsEdge(3, 4));
-    ASSERT_FALSE(leGraph.ContainsEdge(4, 1));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeAllEdges();
+    ASSERT_FALSE(leGraph.containsEdge(1, 2));
+    ASSERT_FALSE(leGraph.containsEdge(2, 3));
+    ASSERT_FALSE(leGraph.containsEdge(3, 4));
+    ASSERT_FALSE(leGraph.containsEdge(4, 1));
 }
 
 /*
@@ -473,23 +473,23 @@ TEST(UndirectedGraph, CanRemoveAllEdges) {
  */
 TEST(UndirectedGraph, CanRemoveAllEdgesAndVertices) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.RemoveAllEdgesAndVertices();
-    ASSERT_FALSE(leGraph.ContainsVertex(1));
-    ASSERT_FALSE(leGraph.ContainsVertex(2));
-    ASSERT_FALSE(leGraph.ContainsVertex(3));
-    ASSERT_FALSE(leGraph.ContainsVertex(4));
-    ASSERT_FALSE(leGraph.ContainsEdge(1, 2));
-    ASSERT_FALSE(leGraph.ContainsEdge(2, 3));
-    ASSERT_FALSE(leGraph.ContainsEdge(3, 4));
-    ASSERT_FALSE(leGraph.ContainsEdge(4, 1));
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.removeAllEdgesAndVertices();
+    ASSERT_FALSE(leGraph.containsVertex(1));
+    ASSERT_FALSE(leGraph.containsVertex(2));
+    ASSERT_FALSE(leGraph.containsVertex(3));
+    ASSERT_FALSE(leGraph.containsVertex(4));
+    ASSERT_FALSE(leGraph.containsEdge(1, 2));
+    ASSERT_FALSE(leGraph.containsEdge(2, 3));
+    ASSERT_FALSE(leGraph.containsEdge(3, 4));
+    ASSERT_FALSE(leGraph.containsEdge(4, 1));
 }
 
 /*
@@ -497,18 +497,18 @@ TEST(UndirectedGraph, CanRemoveAllEdgesAndVertices) {
  */
 TEST(UndirectedGraph, CanRemoveAllCycles) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.AddEdge(1, 3);
-    ASSERT_TRUE(leGraph.IsCyclic());
-    leGraph.RemoveAllCycles();
-    ASSERT_FALSE(leGraph.IsCyclic());
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.addEdge(1, 3);
+    ASSERT_TRUE(leGraph.isCyclic());
+    leGraph.removeAllCycles();
+    ASSERT_FALSE(leGraph.isCyclic());
 }
 
 /*
@@ -516,18 +516,18 @@ TEST(UndirectedGraph, CanRemoveAllCycles) {
  */
 TEST(UndirectedGraph, CanRemoveAllConnectedComponents) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.AddEdge(1, 3);
-    ASSERT_EQ(leGraph.GetComponents().size(), 1);
-    leGraph.RemoveAllConnectedComponents();
-    ASSERT_EQ(leGraph.GetComponents().size(), 0);
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.addEdge(1, 3);
+    ASSERT_EQ(leGraph.getComponents().size(), 1);
+    leGraph.removeAllConnectedComponents();
+    ASSERT_EQ(leGraph.getComponents().size(), 0);
 }
 
 /*
@@ -535,19 +535,19 @@ TEST(UndirectedGraph, CanRemoveAllConnectedComponents) {
  */
 TEST(UndirectedGraph, CanRemoveEverything) {
     UndirectedGraph<int> leGraph;
-    leGraph.AddVertex(1);
-    leGraph.AddVertex(2);
-    leGraph.AddVertex(3);
-    leGraph.AddVertex(4);
-    leGraph.AddEdge(1, 2);
-    leGraph.AddEdge(2, 3);
-    leGraph.AddEdge(3, 4);
-    leGraph.AddEdge(4, 1);
-    leGraph.AddEdge(1, 3);
-    ASSERT_EQ(leGraph.GetComponents().size(), 1);
-    ASSERT_TRUE(leGraph.IsCyclic());
-    leGraph.RemoveAll();
-    ASSERT_EQ(leGraph.GetVertexCount(), 0);
-    ASSERT_EQ(leGraph.GetConnectedComponentCount(), 0);
-    ASSERT_FALSE(leGraph.IsCyclic());
+    leGraph.addVertex(1);
+    leGraph.addVertex(2);
+    leGraph.addVertex(3);
+    leGraph.addVertex(4);
+    leGraph.addEdge(1, 2);
+    leGraph.addEdge(2, 3);
+    leGraph.addEdge(3, 4);
+    leGraph.addEdge(4, 1);
+    leGraph.addEdge(1, 3);
+    ASSERT_EQ(leGraph.getComponents().size(), 1);
+    ASSERT_TRUE(leGraph.isCyclic());
+    leGraph.removeAll();
+    ASSERT_EQ(leGraph.getVertexCount(), 0);
+    ASSERT_EQ(leGraph.getConnectedComponentCount(), 0);
+    ASSERT_FALSE(leGraph.isCyclic());
 }
