@@ -86,8 +86,8 @@ namespace Tobot::Math {
     /// @param gradient The gradient to compare to
     /// @return True if the gradients are equal, false otherwise
     template <typename T = float>
-        requires ArithmeticFloatingPoint<T> bool
-    Gradient2D<T>::operator==(Gradient2D<T> const & gradient) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Gradient2D<T>::operator==(Gradient2D<T> const & gradient) const {
         return this->m_slope == gradient.m_slope && this->m_yIntercept == gradient.m_yIntercept;
     }
 
@@ -96,8 +96,8 @@ namespace Tobot::Math {
     /// @param gradient The gradient to compare to
     /// @return True if the gradients are not equal, false otherwise
     template <typename T = float>
-        requires ArithmeticFloatingPoint<T> bool
-    Gradient2D<T>::operator!=(Gradient2D<T> const & gradient) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Gradient2D<T>::operator!=(Gradient2D<T> const & gradient) const {
         return !(*this == gradient);
     }
 
@@ -142,8 +142,8 @@ namespace Tobot::Math {
     /// @param intersection The gradient to check for intersection
     /// @return true if the gradients intersect, false otherwise
     template <typename T = float>
-        requires ArithmeticFloatingPoint<T> bool
-    Gradient2D<T>::intersects(Gradient2D<T> const & intersection) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Gradient2D<T>::intersects(Gradient2D<T> const & intersection) const {
         // If the slopes are equal, then the gradients are parallel and do not intersect
         return this->m_slope != intersection.m_slope;
     }
@@ -153,8 +153,8 @@ namespace Tobot::Math {
     /// @param intersection The point to check for intersection
     /// @return true if the gradient intersects the point, false otherwise
     template <typename T = float>
-        requires ArithmeticFloatingPoint<T> bool
-    Gradient2D<T>::intersects(Point2D<T> & intersection) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Gradient2D<T>::intersects(Point2D<T> & intersection) const {
         if (this->at(intersection.x) == intersection.y) {
             return true;
         }

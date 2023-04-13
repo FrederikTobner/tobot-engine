@@ -331,8 +331,8 @@ namespace Tobot::Math {
     /// @param vec The vector to compare to
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Vector2D<T>::operator==(Vector2D<T> const & vec) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Vector2D<T>::operator==(Vector2D<T> const & vec) const {
         return this->x == vec.x && this->y == vec.y;
     }
 
@@ -341,8 +341,8 @@ namespace Tobot::Math {
     /// @param vec The vector to compare to
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Vector2D<T>::operator!=(Vector2D<T> const & vec) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Vector2D<T>::operator!=(Vector2D<T> const & vec) const {
         return this->x != vec.x || this->y != vec.y;
     }
 

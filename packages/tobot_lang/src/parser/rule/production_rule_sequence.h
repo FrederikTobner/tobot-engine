@@ -48,8 +48,8 @@ namespace Tobot::Language {
     /// @param current The current index in the vector of tokens
     /// @return True if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    ProductionRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool ProductionRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
         std::size_t start = current;
         for (auto rule : this->rules) {
             if (!rule->apply(tokens, current)) {

@@ -6,6 +6,10 @@
 
 #pragma once
 
+#include "../pre_compiled_header.h"
+
+#include "../concepts.h"
+
 namespace Tobot::DataStructures::Tree {
 
     /// @brief Traverses a binary tree in order
@@ -15,9 +19,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     /// @param nil The null representation of a node
     template <typename T1, typename T2>
-        requires std::is_member_pointer_v<decltype(&T1::left)> && std::is_member_pointer_v<decltype(&T1::right)> &&
-                 std::is_member_pointer_v<decltype(&T1::value)> && std::is_same<decltype(T1::value), T2>::value
-    void traverseInOrder(T1 * node, std::function<void(T2)> callback, T1 * nil) {
+        requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
+    void traverseInOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) {
         if (node != nil) {
             traverseInOrder(node->left, callback, nil);
             callback(node->value);
@@ -32,9 +35,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     /// @param nil The null representation of a node
     template <typename T1, typename T2>
-        requires std::is_member_pointer_v<decltype(&T1::left)> && std::is_member_pointer_v<decltype(&T1::right)> &&
-                 std::is_member_pointer_v<decltype(&T1::value)> && std::is_same<decltype(T1::value), T2>::value
-    void traversePreOrder(T1 * node, std::function<void(T2)> callback, T1 * nil) {
+        requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
+    void traversePreOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) {
         if (node != nil) {
             callback(node->value);
             traversePreOrder(node->left, callback, nil);
@@ -49,13 +51,31 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     /// @param nil The null representation of a node
     template <typename T1, typename T2>
-        requires std::is_member_pointer_v<decltype(&T1::left)> && std::is_member_pointer_v<decltype(&T1::right)> &&
-                 std::is_member_pointer_v<decltype(&T1::value)> && std::is_same<decltype(T1::value), T2>::value
-    void traversePostOrder(T1 * node, std::function<void(T2)> callback, T1 * nil) {
+        requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
+    void traversePostOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) {
         if (node != nil) {
             traversePostOrder(node->left, callback, nil);
             traversePostOrder(node->right, callback, nil);
             callback(node->value);
         }
     }
+
+    template <typename T1>
+        requires IsBinarySearchTreeNode<T1> decltype(auto)
+    getMinimum(T1 * node, T1 const * const nil) {
+        while (node->left != nil) {
+            node = node->left;
+        }
+        return node;
+    }
+
+    template <typename T1>
+        requires IsBinarySearchTreeNode<T1> decltype(auto)
+    getMaximum(T1 * node, T1 const * const nil) {
+        while (node->right != nil) {
+            node = node->right;
+        }
+        return node;
+    }
+
 } // namespace Tobot::DataStructures::Tree

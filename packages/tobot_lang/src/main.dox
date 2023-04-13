@@ -2,6 +2,8 @@
 * \mainpage Main Page
 * \section intro_sec Introduction
 * Welcome to the technical documentation of the tobot-lang library. <br>
+* This library is a part of the tobot-lang project. <br>
+* The goal of this library is to create a simple way to create a parser based on a grammar. <br>
 * \section license_sec License
 * Copyright &copy; 2023 by Julian Otto and <a href="mailto:f.tobner@gmail.com">Frederik Tobner</a>. <br>
 * Permission to use, copy, modify, and distribute this software and its documentation under the terms of the GNU General Public License is hereby granted. <br>

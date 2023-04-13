@@ -8,7 +8,6 @@
 #include "rule/quantified_production_rule.h"
 #include "tobot_data_structures.h"
 
-
 using namespace Tobot::DataStructures::Tree;
 
 namespace Tobot::Language {

@@ -68,8 +68,8 @@ namespace Tobot::Math {
     /// @param dim The dimension to compare to
     /// @return true If the dimensions are equal
     template <typename T>
-        requires Arithmetic<T> bool
-    Dimension<T>::operator==(Dimension<T> const & dim) const {
+        requires Arithmetic<T>
+    bool Dimension<T>::operator==(Dimension<T> const & dim) const {
         return width == dim.width && height == dim.height;
     }
 
@@ -78,8 +78,8 @@ namespace Tobot::Math {
     /// @param dim The dimension to compare to
     /// @return true If the dimensions are not equal
     template <typename T>
-        requires Arithmetic<T> bool
-    Dimension<T>::operator!=(Dimension<T> const & dim) const {
+        requires Arithmetic<T>
+    bool Dimension<T>::operator!=(Dimension<T> const & dim) const {
         return !(*this == dim);
     }
 } // namespace Tobot::Math

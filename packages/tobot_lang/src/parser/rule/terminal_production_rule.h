@@ -31,8 +31,8 @@ namespace Tobot::Language {
     }
 
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    TerminalProductionRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool TerminalProductionRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
         if (tokens[current].getType() == this->tokenType) {
             current++;
             return true;

@@ -10,7 +10,7 @@ IF NOT EXIST ..\packages (
 )
 
 IF NOT EXIST ..\.clang-format (
-    ECHO Can not find source directory
+    ECHO Can not find formatting file
     EXIT 74
 )
 

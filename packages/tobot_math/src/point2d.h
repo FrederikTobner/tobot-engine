@@ -139,14 +139,14 @@ namespace Tobot::Math {
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Point2D<T>::operator==(Point2D<T> const & point) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Point2D<T>::operator==(Point2D<T> const & point) const {
         return (m_x == point.m_x) && (m_y == point.m_y);
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Point2D<T>::operator!=(Point2D<T> const & point) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Point2D<T>::operator!=(Point2D<T> const & point) const {
         return (m_x != point.m_x) || (m_y != point.m_y);
     }
 

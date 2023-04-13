@@ -4,6 +4,8 @@
 
 namespace Tobot::DataStructures::Tree {
 
+    /// @brief Models the node of a tree data structure.
+    /// @tparam T The type of the data stored in the node.
     template <typename T>
     class TreeNode {
         public:

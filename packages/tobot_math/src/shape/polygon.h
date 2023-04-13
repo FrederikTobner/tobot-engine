@@ -140,8 +140,8 @@ namespace Tobot::Math {
     /// @param polygon Polygon to compare
     /// @return True if equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Polygon2D<T>::operator==(Polygon2D<T> const & polygon) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Polygon2D<T>::operator==(Polygon2D<T> const & polygon) const {
         return points == polygon.points;
     }
 
@@ -149,8 +149,8 @@ namespace Tobot::Math {
     /// @param polygon Polygon to compare
     /// @return True if not equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Polygon2D<T>::operator!=(Polygon2D<T> const & polygon) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Polygon2D<T>::operator!=(Polygon2D<T> const & polygon) const {
         return points != polygon.points;
     }
 
@@ -218,8 +218,8 @@ namespace Tobot::Math {
     /// @brief Check if the polygon is convex
     /// @return True if the polygon is convex, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Polygon2D<T>::isConvex() const {
+        requires ArithmeticFloatingPoint<T>
+    bool Polygon2D<T>::isConvex() const {
         if (points.size() <= 3) {
             return true;
         }

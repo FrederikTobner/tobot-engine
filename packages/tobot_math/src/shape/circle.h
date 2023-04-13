@@ -159,38 +159,38 @@ namespace Tobot::Math {
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator==(Circle<T> const & circle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Circle<T>::operator==(Circle<T> const & circle) const {
         return (m_center == circle.m_center) && (m_radius == circle.m_radius);
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator!=(Circle<T> const & circle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Circle<T>::operator!=(Circle<T> const & circle) const {
         return (m_center != circle.m_center) || (m_radius != circle.m_radius);
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator<(Circle<T> const & circle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Circle<T>::operator<(Circle<T> const & circle) const {
         return m_radius < circle.m_radius;
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator>(Circle<T> const & circle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Circle<T>::operator>(Circle<T> const & circle) const {
         return m_radius > circle.m_radius;
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator<=(Circle<T> const & circle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Circle<T>::operator<=(Circle<T> const & circle) const {
         return m_radius <= circle.m_radius;
     }
 
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Circle<T>::operator>=(Circle<T> const & circle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Circle<T>::operator>=(Circle<T> const & circle) const {
         return m_radius >= circle.m_radius;
     }
 

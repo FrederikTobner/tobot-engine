@@ -152,8 +152,8 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to compare to
     /// @return True if the two rectangles are equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const {
         return center == rectangle.center && width == rectangle.width && height == rectangle.height &&
                rotation == rectangle.rotation;
     }
@@ -163,8 +163,8 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to compare to
     /// @return True if the two rectangles are not equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const {
         return center != rectangle.center || width != rectangle.width || height != rectangle.height ||
                rotation != rectangle.rotation;
     }
@@ -228,8 +228,8 @@ namespace Tobot::Math {
     /// @param point Point to check
     /// @return True if the point is inside the rectangle, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Rectangle2D<T>::contains(Point2D<T> const & point) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Rectangle2D<T>::contains(Point2D<T> const & point) const {
         return rotation == 0.0
                    ? point.getX() >= center.getX() - width / 2 && point.getX() <= center.getX() + width / 2 &&
                          point.getY() >= center.getY() - height / 2 && point.getY() <= center.getY() + height / 2

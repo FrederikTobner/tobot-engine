@@ -142,8 +142,8 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to compare
     /// @return True if equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Triangle2D<T>::operator==(Triangle2D<T> const & triangle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Triangle2D<T>::operator==(Triangle2D<T> const & triangle) const {
         return m_a == triangle.m_a && m_b == triangle.m_b && m_c == triangle.m_c;
     }
 
@@ -152,8 +152,8 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to compare
     /// @return True if not equal, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Triangle2D<T>::operator!=(Triangle2D<T> const & triangle) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Triangle2D<T>::operator!=(Triangle2D<T> const & triangle) const {
         return !(*this == triangle);
     }
 

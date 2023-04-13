@@ -12,7 +12,7 @@
 
 #include "binary_search_tree.h"
 
-#include "binary_tree_traversal.h"
+#include "binary_tree_algorithms.h"
 
 namespace Tobot::DataStructures::Tree {
 
@@ -41,9 +41,9 @@ namespace Tobot::DataStructures::Tree {
             bool contains(T value);
             Node * search(T value);
             void print();
-            void traverseInOrder(std::function<void(T)> callback);
-            void traversePreOrder(std::function<void(T)> callback);
-            void traversePostOrder(std::function<void(T)> callback);
+            void traverseInOrder(std::function<void(T)> callback) const;
+            void traversePreOrder(std::function<void(T)> callback) const;
+            void traversePostOrder(std::function<void(T)> callback) const;
             void clear();
             std::size_t getSize();
             friend std::ostream & operator<<(std::ostream & os, RedBlackTree<T> const & tree) {
@@ -96,7 +96,7 @@ namespace Tobot::DataStructures::Tree {
                     Node * nil;
             };
             iterator begin() {
-                return iterator(getMinimum(this->root), this->nil);
+                return iterator(Tobot::DataStructures::Tree::getMinimum(this->root, this->nil), this->nil);
             }
             iterator end() {
                 return iterator(this->nil, this->nil);
@@ -110,8 +110,6 @@ namespace Tobot::DataStructures::Tree {
             void insertFixup(Node * node);
             void deleteFixup(Node * node);
             void transplant(Node * u, Node * v);
-            Node * getMinimum(Node * node);
-            Node * getMaximum(Node * node);
             Node * successor(Node * node);
             Node * predecessor(Node * node);
             void print(Node * node);
@@ -312,7 +310,7 @@ namespace Tobot::DataStructures::Tree {
             x = z->left;
             this->transplant(z, z->left);
         } else {
-            y = this->getMinimum(z->right);
+            y = Tobot::DataStructures::Tree::getMinimum(z->right, this->nil);
             yOriginalColor = y->isRed;
             x = y->right;
             if (y->parent == z) {
@@ -448,30 +446,6 @@ namespace Tobot::DataStructures::Tree {
         v->parent = u->parent;
     }
 
-    /// @brief Get the minimum value in the tree
-    /// @tparam T The type of the value stored in the tree
-    /// @param node The node to start searching from
-    /// @return The node with the minimum value
-    template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::getMinimum(Node * node) {
-        while (node->left != this->nil) {
-            node = node->left;
-        }
-        return node;
-    }
-
-    /// @brief Get the maximum value in the tree
-    /// @tparam T The type of the value stored in the tree
-    /// @param x The node to start searching from
-    /// @return The node with the maximum value
-    template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::getMaximum(Node * node) {
-        while (node->right != this->nil) {
-            node = node->right;
-        }
-        return node;
-    }
-
     /// @brief Get the successor of a node
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to get the successor of
@@ -479,7 +453,7 @@ namespace Tobot::DataStructures::Tree {
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::successor(Node * node) {
         if (node->right != this->nil) {
-            return this->getMinimum(node->right);
+            return Tobot::DataStructures::Tree::getMinimum(node->right, this->nil);
         }
         Node * y = node->parent;
         while (y != this->nil && node == y->right) {
@@ -496,7 +470,7 @@ namespace Tobot::DataStructures::Tree {
     template <typename T>
     typename RedBlackTree<T>::Node * RedBlackTree<T>::predecessor(Node * node) {
         if (node->left != this->nil) {
-            return this->getMaximum(node->left);
+            return Tobot::DataStructures::Tree::getMaximum(node->left, this->nil);
         }
         Node * y = node->parent;
         while (y != this->nil && node == y->left) {
@@ -530,7 +504,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::traverseInOrder(std::function<void(T)> callback) {
+    void RedBlackTree<T>::traverseInOrder(std::function<void(T)> callback) const {
         Tobot::DataStructures::Tree::traverseInOrder(this->root, callback, this->nil);
     }
 
@@ -538,7 +512,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::traversePreOrder(std::function<void(T)> callback) {
+    void RedBlackTree<T>::traversePreOrder(std::function<void(T)> callback) const {
         Tobot::DataStructures::Tree::traversePreOrder(this->root, callback, this->nil);
     }
 
@@ -546,7 +520,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::traversePostOrder(std::function<void(T)> callback) {
+    void RedBlackTree<T>::traversePostOrder(std::function<void(T)> callback) const {
         Tobot::DataStructures::Tree::traversePostOrder(this->root, callback, this->nil);
     }
 

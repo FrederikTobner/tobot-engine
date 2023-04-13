@@ -117,8 +117,8 @@ namespace Tobot::Language {
     /// @tparam T The type of the token type enum
     /// @return true if the lexer is at the end of the source code, false otherwise
     template <typename T>
-        requires std::is_enum_v<T> bool
-    Lexer<T>::isAtEnd(std::string source, std::size_t start) {
+        requires std::is_enum_v<T>
+    bool Lexer<T>::isAtEnd(std::string source, std::size_t start) {
         return start >= source.length();
     }
 } // namespace Tobot::Language

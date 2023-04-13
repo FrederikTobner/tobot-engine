@@ -12,7 +12,7 @@
 
 #include "binary_search_tree.h"
 
-#include "binary_tree_traversal.h"
+#include "binary_tree_algorithms.h"
 
 namespace Tobot::DataStructures::Tree {
 
@@ -36,11 +36,13 @@ namespace Tobot::DataStructures::Tree {
             void remove(T value);
             bool contains(T value);
             Node * search(T value);
-            void traverseInOrder(std::function<void(T)> callback);
-            void traversePreOrder(std::function<void(T)> callback);
-            void traversePostOrder(std::function<void(T)> callback);
+            void traverseInOrder(std::function<void(T)> callback) const;
+            void traversePreOrder(std::function<void(T)> callback) const;
+            void traversePostOrder(std::function<void(T)> callback) const;
             void print();
             void clear();
+            Node * getMaximum();
+            Node * getMinimum();
             std::size_t getSize();
             friend std::ostream & operator<<(std::ostream & os, AVLTree<T> const & tree) {
                 TraverseInOrder([&](T value) { os << value << ", "; });
@@ -57,8 +59,6 @@ namespace Tobot::DataStructures::Tree {
             Node * rotateRight(Node * node);
             Node * rotateLeftRight(Node * node);
             Node * rotateRightLeft(Node * node);
-            Node * getMaximum(Node * node);
-            Node * getMinimum(Node * node);
 
             int getHeight(Node * node);
             int getBalance(Node * node);
@@ -293,11 +293,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the minimum value from
     /// @return The minimum value in the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::getMinimum(Node * node) {
-        if (node->left == nullptr) {
-            return node;
-        }
-        return getMinimum(node->left);
+    typename AVLTree<T>::Node * AVLTree<T>::getMinimum() {
+        Tobot::DataStructures::Tree::getMinimum(root, (Node *)nullptr);
     }
 
     /// @brief Gets the maximum value in the tree
@@ -305,11 +302,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the maximum value from
     /// @return The maximum value in the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::getMaximum(Node * node) {
-        if (node->right == nullptr) {
-            return node;
-        }
-        return getMaximum(node->right);
+    typename AVLTree<T>::Node * AVLTree<T>::getMaximum() {
+        Tobot::DataStructures::Tree::getMaximum(root, (Node *)nullptr);
     }
 
     /// @brief Get the height of a node
@@ -362,7 +356,7 @@ namespace Tobot::DataStructures::Tree {
     ///  @tparam T The type of the value stored in the tree
     ///  @param callback The callback to call for each node
     template <typename T>
-    void AVLTree<T>::traverseInOrder(std::function<void(T)> callback) {
+    void AVLTree<T>::traverseInOrder(std::function<void(T)> callback) const {
         Tobot::DataStructures::Tree::traverseInOrder(root, callback, (Node *)nullptr);
     }
 
@@ -370,7 +364,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The callback to call for each node
     template <typename T>
-    void AVLTree<T>::traversePreOrder(std::function<void(T)> callback) {
+    void AVLTree<T>::traversePreOrder(std::function<void(T)> callback) const {
         Tobot::DataStructures::Tree::traversePreOrder(root, callback, (Node *)nullptr);
     }
 
@@ -378,7 +372,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The callback to call for each node
     template <typename T>
-    void AVLTree<T>::traversePostOrder(std::function<void(T)> callback) {
+    void AVLTree<T>::traversePostOrder(std::function<void(T)> callback) const {
         Tobot::DataStructures::Tree::traversePostOrder(root, callback, (Node *)nullptr);
     }
 

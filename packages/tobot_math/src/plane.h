@@ -251,8 +251,8 @@ namespace Tobot::Math {
     /// @param plane The plane to check
     /// @return true if the plane is equal to another plane, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Plane<T>::operator==(Plane<T> const & plane) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Plane<T>::operator==(Plane<T> const & plane) const {
         return a == plane.a && b == plane.b && c == plane.c && d == plane.d;
     }
 
@@ -261,8 +261,8 @@ namespace Tobot::Math {
     /// @param plane The plane to check
     /// @return true if the plane is not equal to another plane, false otherwise
     template <typename T>
-        requires ArithmeticFloatingPoint<T> bool
-    Plane<T>::operator!=(Plane<T> const & plane) const {
+        requires ArithmeticFloatingPoint<T>
+    bool Plane<T>::operator!=(Plane<T> const & plane) const {
         return a != plane.a || b != plane.b || c != plane.c || d != plane.d;
     }
 

@@ -64,8 +64,8 @@ namespace Tobot::Language {
     /// @param current The current token
     /// @return true if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
         switch (rule.second) {
         case RegexQuantifier::ZERO_OR_MORE:
             return this->applyZeroOrMore(tokens, current, rule.first);
@@ -90,9 +90,9 @@ namespace Tobot::Language {
     /// @param rule The rule to apply
     /// @return true if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::applyZeroOrMore(std::vector<Token<T1>> tokens, std::size_t & current,
-                                                      ProductionRule<T1, T2> rule) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::applyZeroOrMore(std::vector<Token<T1>> tokens, std::size_t & current,
+                                                           ProductionRule<T1, T2> rule) {
         while (rule.apply(tokens, current)) {
             current++;
         }
@@ -107,9 +107,9 @@ namespace Tobot::Language {
     /// @param rule The rule to apply
     /// @return true if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::applyOneOrMore(std::vector<Token<T1>> tokens, std::size_t & current,
-                                                     ProductionRule<T1, T2> rule) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::applyOneOrMore(std::vector<Token<T1>> tokens, std::size_t & current,
+                                                          ProductionRule<T1, T2> rule) {
         if (!rule.apply(tokens, current)) {
             return false;
         }
@@ -128,9 +128,9 @@ namespace Tobot::Language {
     /// @param rule The rule to apply
     /// @return true if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::applyZeroOrOne(std::vector<Token<T1>> tokens, std::size_t & current,
-                                                     ProductionRule<T1, T2> rule) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::applyZeroOrOne(std::vector<Token<T1>> tokens, std::size_t & current,
+                                                          ProductionRule<T1, T2> rule) {
         if (rule.apply(tokens, current)) {
             current++;
         }
@@ -146,9 +146,9 @@ namespace Tobot::Language {
     /// @param count The number of times to apply the rule
     /// @return true if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::applyExactly(std::vector<Token<T1>> tokens, std::size_t & current,
-                                                   ProductionRule<T1, T2> rule, std::size_t count) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::applyExactly(std::vector<Token<T1>> tokens, std::size_t & current,
+                                                        ProductionRule<T1, T2> rule, std::size_t count) {
         std::size_t start = current;
         for (std::size_t i = 0; i < count; i++) {
             if (!rule.apply(tokens, current)) {
@@ -171,9 +171,9 @@ namespace Tobot::Language {
     /// @param count The number of times to apply the rule
     /// @return true if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::applyAtLeast(std::vector<Token<T1>> tokens, std::size_t & current,
-                                                   ProductionRule<T1, T2> rule, std::size_t count) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::applyAtLeast(std::vector<Token<T1>> tokens, std::size_t & current,
+                                                        ProductionRule<T1, T2> rule, std::size_t count) {
         std::size_t start = current;
         for (std::size_t i = 0; i < count; i++) {
             if (!rule.apply(tokens, current)) {
@@ -193,9 +193,9 @@ namespace Tobot::Language {
     }
 
     template <typename T1, typename T2>
-        requires std::is_enum_v<T1> && std::is_enum_v<T2> bool
-    QuantifiedProductionRule<T1, T2>::applyBetween(std::vector<Token<T1>> tokens, std::size_t & current,
-                                                   ProductionRule<T1, T2> rule, std::size_t min, std::size_t max) {
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    bool QuantifiedProductionRule<T1, T2>::applyBetween(std::vector<Token<T1>> tokens, std::size_t & current,
+                                                        ProductionRule<T1, T2> rule, std::size_t min, std::size_t max) {
         std::size_t start = current;
         for (std::size_t i = 0; i < min; i++) {
             if (!rule.apply(tokens, current)) {
