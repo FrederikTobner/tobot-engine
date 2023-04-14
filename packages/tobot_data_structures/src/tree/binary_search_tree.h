@@ -10,10 +10,10 @@
 
 namespace Tobot::DataStructures::Tree {
 
+    /// @brief Interface for a binary search tree
+    /// @tparam T The type of the values stored in the tree
     template <typename T>
-    class BinarySearchTree {
-        public:
-            BinarySearchTree();
+    struct BinarySearchTree {
             virtual void insert(T value) = 0;
             virtual void remove(T value) = 0;
             virtual bool contains(T value) = 0;
@@ -24,8 +24,4 @@ namespace Tobot::DataStructures::Tree {
             virtual void clear() = 0;
             virtual std::size_t getSize() = 0;
     }; // class BinarySearchTree
-
-    template <typename T>
-    BinarySearchTree<T>::BinarySearchTree() {
-    }
 } // namespace Tobot::DataStructures::Tree

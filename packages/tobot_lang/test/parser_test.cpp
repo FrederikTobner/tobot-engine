@@ -14,10 +14,9 @@ TOBOT_ENUM(GrammarSymbols, EXPRESSION, TERM, FACTOR, NUMBER_RULE)
  * Tests whether the Parser can be created
  */
 TEST(Parser, CanBeCreated) {
-    std::unique_ptr<ProductionRule<TokenTypes::Enum, GrammarSymbols::Enum>> numberParsingRule =
-        std::make_unique<TerminalProductionRule<TokenTypes::Enum, GrammarSymbols::Enum>>(GrammarSymbols::NUMBER_RULE,
-                                                                                         TokenTypes::NUMBER);
-    std::unique_ptr<Tree<ProductionRule<TokenTypes::Enum, GrammarSymbols::Enum> *>> leGrammar =
+    auto numberParsingRule = std::make_unique<TerminalProductionRule<TokenTypes::Enum, GrammarSymbols::Enum>>(
+        GrammarSymbols::NUMBER_RULE, TokenTypes::NUMBER);
+    auto leGrammar =
         std::make_unique<Tree<ProductionRule<TokenTypes::Enum, GrammarSymbols::Enum> *>>(numberParsingRule.get());
     Parser<TokenTypes::Enum, GrammarSymbols::Enum> parser(leGrammar.get());
 }
@@ -26,10 +25,9 @@ TEST(Parser, CanBeCreated) {
  * Tests whether the Parser can parse
  */
 TEST(Parser, CanParseSingleToken) {
-    std::unique_ptr<ProductionRule<TokenTypes::Enum, GrammarSymbols::Enum>> numberParsingRule =
-        std::make_unique<TerminalProductionRule<TokenTypes::Enum, GrammarSymbols::Enum>>(GrammarSymbols::NUMBER_RULE,
-                                                                                         TokenTypes::NUMBER);
-    std::unique_ptr<Tree<ProductionRule<TokenTypes::Enum, GrammarSymbols::Enum> *>> leGrammar =
+    auto numberParsingRule = std::make_unique<TerminalProductionRule<TokenTypes::Enum, GrammarSymbols::Enum>>(
+        GrammarSymbols::NUMBER_RULE, TokenTypes::NUMBER);
+    auto leGrammar =
         std::make_unique<Tree<ProductionRule<TokenTypes::Enum, GrammarSymbols::Enum> *>>(numberParsingRule.get());
     std::vector<Token<TokenTypes::Enum>> tokens = {{TokenTypes::NUMBER, "123", 1, 1}};
     Parser<TokenTypes::Enum, GrammarSymbols::Enum> parser(leGrammar.get());

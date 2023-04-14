@@ -337,18 +337,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return True if the tree contains a node with the given value, false otherwise
     template <typename T>
     bool RedBlackTree<T>::contains(T value) {
-        Node * x = this->root;
-        while (x != this->nil && x->value != value) {
-            if (value < x->value) {
-                x = x->left;
-            } else {
-                x = x->right;
-            }
-        }
-        if (x->value != value) {
-            return false;
-        }
-        return x;
+        return Tobot::DataStructures::Tree::containsWithoutNullCheck(this->root, this->nil, value);
     }
 
     /// @brief Fix the tree after a node has been deleted

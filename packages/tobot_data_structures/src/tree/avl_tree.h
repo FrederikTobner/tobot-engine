@@ -123,7 +123,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return True if the tree contains the value, false otherwise
     template <typename T>
     bool AVLTree<T>::contains(T value) {
-        return search(value) != nullptr;
+        return Tobot::DataStructures::Tree::containsWithNullCheck(this->root, (Node *)nullptr, value);
     }
 
     /// @brief Search for a value in the tree
@@ -152,7 +152,9 @@ namespace Tobot::DataStructures::Tree {
         } else {
             return node;
         }
-        node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+        int leftHeight = getHeight(node->left);
+        int rightHeight = getHeight(node->right);
+        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
         int balance = getBalance(node);
         if (balance > 1 && value < node->left->value) {
             return rotateRight(node);
@@ -205,7 +207,9 @@ namespace Tobot::DataStructures::Tree {
         if (node == nullptr) {
             return node;
         }
-        node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+        int leftHeight = getHeight(node->left);
+        int rightHeight = getHeight(node->right);
+        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
         int balance = getBalance(node);
         if (balance > 1 && getBalance(node->left) >= 0) {
             return rotateRight(node);
@@ -248,8 +252,12 @@ namespace Tobot::DataStructures::Tree {
         Node * right_left = right->left;
         right->left = node;
         node->right = right_left;
-        node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
-        right->height = std::max(getHeight(right->left), getHeight(right->right)) + 1;
+        int leftHeight = getHeight(node->left);
+        int rightHeight = getHeight(node->right);
+        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
+        int rightleftHeight = getHeight(right->left);
+        int rightrightHeight = getHeight(right->right);
+        right->height = 1 + rightleftHeight > rightrightHeight ? rightleftHeight : rightrightHeight;
         return right;
     }
 
@@ -263,8 +271,12 @@ namespace Tobot::DataStructures::Tree {
         Node * left_right = left->right;
         left->right = node;
         node->left = left_right;
-        node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
-        left->height = std::max(getHeight(left->left), getHeight(left->right)) + 1;
+        int leftHeight = getHeight(node->left);
+        int rightHeight = getHeight(node->right);
+        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
+        int leftleftHeight = getHeight(left->left);
+        int leftrightHeight = getHeight(left->right);
+        left->height = 1 + leftleftHeight > leftrightHeight ? leftleftHeight : leftrightHeight;
         return left;
     }
 
