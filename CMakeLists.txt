@@ -30,6 +30,7 @@ elseif(WIN32)
     endif() # psapi.h
 endif()
 
+add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 
 get_filename_component(SOURCE_PATH_CORE ${PROJECT_SOURCE_DIR}/packages/tobot_core/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_DATA_STRUCTURES ${PROJECT_SOURCE_DIR}/packages/tobot_data_structures/src ABSOLUTE)
@@ -38,8 +39,6 @@ get_filename_component(SOURCE_PATH_LANG ${PROJECT_SOURCE_DIR}/packages/tobot_lan
 get_filename_component(SOURCE_PATH_MATH ${PROJECT_SOURCE_DIR}/packages/tobot_math/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_TEST ${PROJECT_SOURCE_DIR}/packages/tobot_test/src ABSOLUTE)
 get_filename_component(SOURCE_PATH_TOOLING ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src ABSOLUTE)
-
-add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 
 # enabling tests
 enable_testing()

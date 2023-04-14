@@ -3,8 +3,6 @@ include(../cmake/tobot_detect.cmake)
 Tobot_Detect_Platform()
 Tobot_Detect_Compiler()
 
-
-
 add_subdirectory(tobot_data_structures)
 
 add_subdirectory(tobot_io)
