@@ -154,7 +154,7 @@ namespace Tobot::DataStructures::Tree {
         }
         int leftHeight = getHeight(node->left);
         int rightHeight = getHeight(node->right);
-        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
+        node->height = 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
         int balance = getBalance(node);
         if (balance > 1 && value < node->left->value) {
             return rotateRight(node);
@@ -209,7 +209,7 @@ namespace Tobot::DataStructures::Tree {
         }
         int leftHeight = getHeight(node->left);
         int rightHeight = getHeight(node->right);
-        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
+        node->height = 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
         int balance = getBalance(node);
         if (balance > 1 && getBalance(node->left) >= 0) {
             return rotateRight(node);
@@ -254,10 +254,10 @@ namespace Tobot::DataStructures::Tree {
         node->right = right_left;
         int leftHeight = getHeight(node->left);
         int rightHeight = getHeight(node->right);
-        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
+        node->height = 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
         int rightleftHeight = getHeight(right->left);
         int rightrightHeight = getHeight(right->right);
-        right->height = 1 + rightleftHeight > rightrightHeight ? rightleftHeight : rightrightHeight;
+        right->height = 1 + (rightleftHeight > rightrightHeight ? rightleftHeight : rightrightHeight);
         return right;
     }
 
@@ -273,10 +273,10 @@ namespace Tobot::DataStructures::Tree {
         node->left = left_right;
         int leftHeight = getHeight(node->left);
         int rightHeight = getHeight(node->right);
-        node->height = 1 + leftHeight > rightHeight ? leftHeight : rightHeight;
+        node->height = 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
         int leftleftHeight = getHeight(left->left);
         int leftrightHeight = getHeight(left->right);
-        left->height = 1 + leftleftHeight > leftrightHeight ? leftleftHeight : leftrightHeight;
+        left->height = 1 + (leftleftHeight > leftrightHeight ? leftleftHeight : leftrightHeight);
         return left;
     }
 
