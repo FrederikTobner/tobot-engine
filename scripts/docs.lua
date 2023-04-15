@@ -56,7 +56,7 @@ end
 
 -- Document each project
 for _, subdir in ipairs(subdirs) do
-    document_project(subdir)
+    document_project(subdir .. "/src")
 end
 
 

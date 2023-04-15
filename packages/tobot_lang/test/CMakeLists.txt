@@ -9,7 +9,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(TOBOT_LANG_TESTS tobot-lang_TESTS)
+set(TOBOT_LANG_TESTS tobot-lang-tests)
 
 set(TOBOT_LANG_TEST_SOURCES
 "lexer_test.cpp" 

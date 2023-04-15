@@ -6,4 +6,3 @@
 #include <functional>
 #include <iostream>
 #include <vector>
-

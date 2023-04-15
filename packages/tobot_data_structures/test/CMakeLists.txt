@@ -9,7 +9,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(TOBOT_DATA_STRUCTURES_TESTS tobot-data-structures_TESTS)
+set(TOBOT_DATA_STRUCTURES_TESTS tobot-data-structures-tests)
 
 set(TOBOT_DATA_STRUCTURES_TEST_SOURCES 
 "avl_tree_test.cpp"

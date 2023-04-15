@@ -15,14 +15,13 @@ function createFile(filename, filepath, text)
     local file, errormsg = io.open(filepath .. "/" .. filename, "w")    
     -- check if the file was opened successfully
     if not file then
-        print("Error creating file: " .. errormsg)
-        return false
+        print("Error creating file: " .. errormsg .. " (filename: " .. filename .. " filepath: " .. filepath .. ")")
+        os.exit(1)
     end    
     -- write text to the file
     file:write(text)    
     -- close the file
     file:close()
-    return true
 end
 
 -- Function for appending text to a file
@@ -31,14 +30,13 @@ function appendToFile(filename, filepath, text)
     local file, errormsg = io.open(filepath .. "/" .. filename, "a")    
     -- check if the file was opened successfully
     if not file then
-        print("Error opening file: " .. errormsg)
-        return false
+        print("Error opening file: " .. errormsg .. " (filename: " .. filename .. " filepath: " .. filepath .. ")")
+        os.exit(1)
     end    
     -- write text to the end of the file
     file:write(text)    
     -- close the file
     file:close()
-    return true
 end
 
 -- Function for checking if the library name is valid
@@ -61,13 +59,16 @@ function checkLibraryName(name)
     end
 end
 
-function insertTextIntoFile(filename, filepath, targetString, insertText)
+function insertTextIntoFile(filename, filepath, targetString, insertText, insertAfterTargetString)
     local file = io.open(filepath .. "/" .. filename, "r")
     if file then
         local contents = file:read("*all")
         file:close()
         local position = contents:find(targetString)
         if position then
+            if insertAfterTargetString then
+                position = position + string.len(targetString)
+            end
         contents = contents:sub(1, position - 1) .. insertText .. contents:sub(position)
         file = io.open(filepath .. "/" .. filename, "w")
         file:write(contents)
@@ -76,72 +77,14 @@ function insertTextIntoFile(filename, filepath, targetString, insertText)
             print("Target string not found in file.")
         end
     else
-        print("Error opening file.")
+        print("Error opening file." .. " (filename: " .. filename .. " filepath: " .. filepath .. ")")
+        os.exit(1)
     end
 end
-  
-  
 
--- check if an argument was provided
-if #arg < 1 then
-    print("Usage: lua scriptname.lua libraryname")
-    os.exit(1)
-end
-  
--- get the library name from the first argument
-local libraryName = arg[1]
-
-checkLibraryName(libraryName)
-
-local libraryNameWithUnderScore = string.gsub(libraryName, "-", "_")
-local libraryRootDirectory = "../packages/" .. libraryNameWithUnderScore
-local librarySourceDirectory = "../packages/" .. libraryNameWithUnderScore .. "/src"
-local libraryTestDirectory = "../packages/" .. libraryNameWithUnderScore .. "/test"
-local librarySourcePathVariable = "SOURCE_PATH" .. string.upper(string.sub(libraryNameWithUnderScore, 6))
-  
--- create the folder with the library name
-createDirectory(libraryRootDirectory)
-
--- create the src and test folders
-createDirectory(librarySourceDirectory)
-createDirectory(libraryTestDirectory)
-
--- create the CMakeLists.txt files
-createFile("CMakeLists.txt", libraryRootDirectory, "add_subdirectory(src)\n\
-add_subdirectory(test)\n")
-createFile("CMakeLists.txt", librarySourceDirectory, "add_library(" .. libraryName .. " <PLACEHOLDER>)\n\
-# Precompiles dependencies to speed up compilation of the target\n\
-if(MSVC)\n\
-    # VisualStudio only accepts header files that also have a source file    \n\
-    target_precompile_headers(" .. libraryName .. " PUBLIC pre_compiled_header.h pre_compled_header.cpp)\n\
-else()\n\
-    target_precompile_headers(" .. libraryName .. " PUBLIC pre_compiled_header.h)\n\
-endif()\n")
-createFile("pre_compiled_header.h", librarySourceDirectory, "#pragma once\n")
-createFile("pre_compiled_header.cpp", librarySourceDirectory, "#include \"pre_compiled_header.h\"\n")
-createFile("README.md", libraryRootDirectory, "# " .. libraryName .. "\n")
-createFile("CMakeLists.txt", libraryTestDirectory, "# include google test\n\
-include(FetchContent)\n\
-FetchContent_Declare(\n\
-  googletest\n\
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip\n\
-)\n\
-\n\
-# For Windows: Prevent overriding the parent project's compiler/linker settings\n\
-set(gtest_force_shared_crt ON CACHE BOOL \"\" FORCE)\n\
-FetchContent_MakeAvailable(googletest)\n\
-add_executable(" .. libraryName .. "-test <PLACEHOLDER>)\n\
-target_link_libraries(" .. libraryName .. "-test " .. libraryName .. ")\n\
-target_include_directories(" .. libraryName .. "-test PUBLIC \"${" .. librarySourcePathVariable .. "}/include\")\n")
-
--- append the library to the CMakeLists.txt file in the root directory
-appendToFile("CMakeLists.txt", "../packages", "add_subdirectory(" .. libraryNameWithUnderScore .. ")\n")
-
--- Create a variable that contains the path to the source directory of the library
-insertTextIntoFile("CMakeLists.txt", "..", "get_filename_component", "get_filename_component(" .. librarySourcePathVariable .." ${PROJECT_SOURCE_DIR}/packages/" .. libraryNameWithUnderScore .."/src ABSOLUTE)\n")
-
--- TODO: We should create the doxygen file's here as well
-createFile("Doxyfile" ,librarySourceDirectory, "# Doxyfile 1.9.5\
+-- Creating the Doxyfile
+function createDoxyFile(librarySourceDirectory, libraryName, libraryNameWithUnderScore)
+    createFile("Doxyfile" ,librarySourceDirectory, "# Doxyfile 1.9.5\
 \
 # This file describes the settings to be used by the documentation system\
 # doxygen (www.doxygen.org) for a project.\
@@ -2868,16 +2811,116 @@ GENERATE_LEGEND        = YES\
 # The default value is: YES.\
 \
 DOT_CLEANUP            = YES")
+end
 
+-- Create a CMakeLists.txt file for a library test directory
+function createTestCMakeLists(libraryTestDirectory, libraryName, librarySourcePathVariable)
+    createFile("CMakeLists.txt", libraryTestDirectory, "# include google test\n\
+    include(FetchContent)\n\
+    FetchContent_Declare(\n\
+      googletest\n\
+      URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip\n\
+    )\n\
+    \n\
+    # For Windows: Prevent overriding the parent project's compiler/linker settings\n\
+    set(gtest_force_shared_crt ON CACHE BOOL \"\" FORCE)\n\
+    FetchContent_MakeAvailable(googletest)\n\
+    add_executable(" .. libraryName .. "-test <PLACEHOLDER>)\n\
+    target_link_libraries(" .. libraryName .. "-tests " .. libraryName .. ")\n\
+    target_include_directories(" .. libraryName .. "-test PUBLIC \"${" .. librarySourcePathVariable .. "}/include\")\n")
+end
 
-createFile("main.dox" ,librarySourceDirectory, "/** \
+-- Creating the main dox file for the library documentation
+function createMainDoxFile(librarySourceDirectory, libraryName)
+    createFile("main.dox" ,librarySourceDirectory, "/** \
 * \\mainpage Main Page\
 * \\section intro_sec Introduction\
 * Welcome to the technical documentation of the " .. libraryName .. " library. <br>\
 * \\section license_sec License\
-* Copyright &copy; 2023 by Julian Otto and  <a href=\"mailto:f.tobner@gmail.com\">Frederik Tobner</a>. <br>\
+* Copyright &copy; 2023 by Julian Otto and W<a href=\"mailto:f.tobner@gmail.com\">Frederik Tobner</a>. <br>\
 * Permission to use, copy, modify, and distribute this software and its documentation under the terms of the GNU General Public License is hereby granted. <br>\
 * No representations are made about the suitability of this software for any purpose. <br>\
 * It is provided \"as is\" without express or implied warranty. <br>\
 * See the <a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">GNU General Public License</a> for more details.\
 */")
+end
+-- Creating the CMakelists.txt file for the library in the source directory
+function createSrcCMakeLists(librarySourceDirectory, libraryName)
+    createFile("CMakeLists.txt", librarySourceDirectory, "add_library(" .. libraryName .. " <PLACEHOLDER>)\n\
+# Precompiles dependencies to speed up compilation of the target\n\
+if(MSVC)\n\
+    # VisualStudio only accepts header files that also have a source file    \n\
+    target_precompile_headers(" .. libraryName .. " PUBLIC pre_compiled_header.h pre_compled_header.cpp)\n\
+else()\n\
+    target_precompile_headers(" .. libraryName .. " PUBLIC pre_compiled_header.h)\n\
+endif()\n")
+end
+
+function main(args)
+    -- check if an argument was provided
+    if #args < 1 then
+        print("Usage: lua scriptname.lua libraryname")
+        os.exit(1)
+    end
+    
+    -- get the library name from the first argument
+    local libraryName = args[1]
+
+    -- check if the library name is valid
+    checkLibraryName(libraryName)
+
+    -- create the library name with underscores
+    local libraryNameWithUnderScore = string.gsub(libraryName, "-", "_")
+
+    -- create the path variables
+    local libraryRootDirectory = "../packages/" .. libraryNameWithUnderScore
+    local librarySourceDirectory = "../packages/" .. libraryNameWithUnderScore .. "/src"
+    local libraryTestDirectory = "../packages/" .. libraryNameWithUnderScore .. "/test"
+
+    -- create the path variable for the CMakeLists.txt file
+    local librarySourcePathVariable = "SOURCE_PATH" .. string.upper(string.sub(libraryNameWithUnderScore, 6))
+    
+    -- create the folder with the library name
+    createDirectory(libraryRootDirectory)
+
+    -- create the src and test folders
+    createDirectory(librarySourceDirectory)
+    createDirectory(libraryTestDirectory)
+
+    -- create the CMakeLists.txt file for the root directory of the library
+    createFile("CMakeLists.txt", libraryRootDirectory, "add_subdirectory(src)\n\
+    add_subdirectory(test)\n")
+
+    -- Creating the CMakeLists.txt file for the source directory
+    createSrcCMakeLists(librarySourceDirectory, libraryName)
+
+    -- Creating the precompiled header files
+    createFile("pre_compiled_header.h", librarySourceDirectory, "#pragma once\n")
+
+    -- Creating the precompiled header files
+    createFile("pre_compiled_header.cpp", librarySourceDirectory, "#include \"pre_compiled_header.h\"\n")
+
+    -- Creating the readme file
+    createFile("README.md", libraryRootDirectory, "# " .. libraryName .. "\n")
+
+    -- Creating the test CMakeLists.txt file for the test directory
+    createTestCMakeLists(libraryTestDirectory, libraryName, librarySourcePathVariable)
+
+    -- append the library to the CMakeLists.txt file in the root directory
+    appendToFile("CMakeLists.txt", "../packages", "add_subdirectory(" .. libraryNameWithUnderScore .. ")\n")
+
+    -- Create a variable that contains the path to the source directory of the library
+    insertTextIntoFile("CMakeLists.txt", "..", "get_filename_component", "get_filename_component(" .. librarySourcePathVariable .." ${PROJECT_SOURCE_DIR}/packages/" .. libraryNameWithUnderScore .."/src ABSOLUTE)\n", false)
+
+    -- Creating the doxygen file's
+    createDoxyFile(librarySourceDirectory, libraryName, libraryNameWithUnderScore)
+
+    -- Creating the main dox file
+    createMainDoxFile(librarySourceDirectory, libraryName)
+
+    -- Adding the tests to our workflow
+    insertTextIntoFile("tests.yaml", "../.github/workflows", "--target", " " .. libraryName .. "-tests", true)
+end
+
+-- Calling our main function
+main(arg)

@@ -19,9 +19,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     /// @param nil The null representation of a node
     template <typename T1, typename T2>
-        requires IsBinarySearchTreeNode<T1> &&
-                 IsValueInBinarySearchTreeNode<T1, T2>
-                 auto traverseInOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) -> void {
+        requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
+    auto traverseInOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) -> void {
         if (node != nil) {
             traverseInOrder(node->left, callback, nil);
             callback(node->value);
@@ -36,9 +35,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     /// @param nil The null representation of a node
     template <typename T1, typename T2>
-        requires IsBinarySearchTreeNode<T1> &&
-                 IsValueInBinarySearchTreeNode<T1, T2>
-                 auto traversePreOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) -> void {
+        requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
+    auto traversePreOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) -> void {
         if (node != nil) {
             callback(node->value);
             traversePreOrder(node->left, callback, nil);
@@ -53,9 +51,8 @@ namespace Tobot::DataStructures::Tree {
     /// @param callback The callback to call for each node
     /// @param nil The null representation of a node
     template <typename T1, typename T2>
-        requires IsBinarySearchTreeNode<T1> &&
-                 IsValueInBinarySearchTreeNode<T1, T2>
-                 auto traversePostOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) -> void {
+        requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
+    auto traversePostOrder(T1 * node, std::function<void(T2)> callback, T1 const * const nil) -> void {
         if (node != nil) {
             traversePostOrder(node->left, callback, nil);
             traversePostOrder(node->right, callback, nil);
@@ -100,8 +97,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return true if the value is contained in the tree, false otherwise
     template <typename T1, typename T2>
         requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
-                                           auto containsWithNullCheck(T1 * root, T1 const * const nil, T2 value)
-                                               -> bool {
+    auto containsWithNullCheck(T1 * root, T1 const * const nil, T2 value) -> bool {
         T1 * x = root;
         while (x != nil && x->value != value) {
             if (value < x->value) {
@@ -125,8 +121,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return true if the value is contained in the tree, false otherwise
     template <typename T1, typename T2>
         requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
-                                           auto containsWithoutNullCheck(T1 * root, T1 const * const nil, T2 value)
-                                               -> bool {
+    auto containsWithoutNullCheck(T1 * root, T1 const * const nil, T2 value) -> bool {
         T1 * x = root;
         while (x != nil && x->value != value) {
             if (value < x->value) {
