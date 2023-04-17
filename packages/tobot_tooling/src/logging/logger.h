@@ -383,7 +383,8 @@ namespace Tobot::Tooling::Logging {
                     }
 #endif
                     printf(format, args...);
-                    std::cout << std::endl;
+                    std::cout << "\n";
+
 #ifdef OS_WINDOWS
                     if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 7);
@@ -442,7 +443,7 @@ namespace Tobot::Tooling::Logging {
                         SetConsoleTextAttribute(console_color, 7);
                     }
 #endif
-                    std::cout << " (on line " << line_number << " in " << source_file << std::endl;
+                    std::cout << " (on line " << line_number << " in " << source_file << ")\n";
                     if (this->file) {
                         fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[log_priority]);
                         if (log_priority == LogPriority::CRITICAL_PRIORITY) {

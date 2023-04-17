@@ -394,8 +394,8 @@ namespace Tobot::DataStructures {
     /// @param edges The edges to remove.
     template <typename T>
     void UndirectedGraph<T>::removeEdges(std::vector<std::pair<T, T>> edges) {
-        for (std::pair<T, T> edge : edges) {
-            removeEdge(edge.first, edge.second);
+        for (auto [firstVertex, secondVertex] : edges) {
+            removeEdge(firstVertex, secondVertex);
         }
     }
 
@@ -634,11 +634,11 @@ namespace Tobot::DataStructures {
     template <typename T>
     std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex) const {
         std::vector<T> neighbors;
-        for (std::pair<T, T> edge : edges) {
-            if (edge.first == vertex) {
-                neighbors.push_back(edge.second);
-            } else if (edge.second == vertex) {
-                neighbors.push_back(edge.first);
+        for (auto [firstVertex, secondVertex] : edges) {
+            if (firstVertex == vertex) {
+                neighbors.push_back(secondVertex);
+            } else if (secondVertex == vertex) {
+                neighbors.push_back(firstVertex);
             }
         }
         return neighbors;

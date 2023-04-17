@@ -20,9 +20,9 @@ void Scene::addLayer(Layer * layer) {
 }
 
 void Scene::prepareTextures(SDL_Renderer * renderer) {
-    for (auto layer : this->m_Layers) {
-        for (auto entity : layer.second->entities) {
-            entity.second->initializeTexture(renderer);
+    for (auto [layerId, layer] : this->m_Layers) {
+        for (auto [enitityId, entity] : layer->entities) {
+            entity->initializeTexture(renderer);
         }
     }
 }
@@ -37,8 +37,8 @@ void Scene::update() {
     // - rougly))
     std::vector<Layer *> layers;
     if (this->m_Layers.size() > 0) {
-        for (auto & pair : this->m_Layers) {
-            layers.push_back(pair.second);
+        for (auto & [layerId, layer] : this->m_Layers) {
+            layers.push_back(layer);
         }
         std::sort(layers.begin(), layers.end(), [](Layer * a, Layer * b) { return a->order < b->order; });
     }
@@ -51,35 +51,35 @@ void Scene::update() {
 }
 
 void Scene::render(SDL_Renderer * renderer) {
-    for (auto object : this->m_Layers) {
-        for (auto entity : object.second->entities) {
-            if (entity.second->isVisible()) {
-                entity.second->render(renderer);
+    for (auto [layerId, layer] : this->m_Layers) {
+        for (auto [enitityId, entity] : layer->entities) {
+            if (entity->isVisible()) {
+                entity->render(renderer);
             }
         }
     }
 }
 
 void Scene::destroy(char const * id) {
-    for (auto layer : this->m_Layers) {
-        for (auto entity : layer.second->entities) {
-            if (entity.first == id) {
-                entity.second->dispose();
+    for (auto [layerId, layer] : this->m_Layers) {
+        for (auto [enitityId, entity] : layer->entities) {
+            if (enitityId == id) {
+                entity->dispose();
             }
         }
     }
 }
 
 void Scene::destroyAll() {
-    for (auto layer : this->m_Layers) {
-        for (auto entity : layer.second->entities) {
-            entity.second->dispose();
+    for (auto [layerId, layer] : this->m_Layers) {
+        for (auto [enitityId, entity] : layer->entities) {
+            entity->dispose();
         }
     }
 }
 
 Scene::~Scene() {
-    for (auto layer : this->m_Layers) {
-        delete layer.second;
+    for (auto [layerId, layer] : this->m_Layers) {
+        delete layer;
     }
 }

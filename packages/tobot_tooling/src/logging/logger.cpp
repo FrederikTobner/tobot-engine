@@ -29,6 +29,10 @@ void Logger::enable_file_out() {
     strcat(buffer, LOGS_FOLDER_PATH);
     strcat(buffer, fileNameBuffer);
     filepath = strcat(buffer, "_log.txt");
+    enable_file_out(filepath);
+}
+
+void Logger::enable_file_out(char const * filePath) {
     if (file) {
         fclose(file);
     }

@@ -79,7 +79,7 @@ TEST(Lexer, CanTokenizeComplexExpression) {
     ASSERT_EQ(tokens[5].getLexeme(), "-");
     ASSERT_EQ(tokens[5].getLine(), 1);
     ASSERT_EQ(tokens[5].getColumn(), 11);
-    ASSERT_EQ(tokens[6].getType(), Token_Type::Enum::NUMBER);
+    ASSERT_EQ(tokens[6].getType(), Token_Type::NUMBER);
     ASSERT_EQ(tokens[6].getLexeme(), "4");
     ASSERT_EQ(tokens[6].getLine(), 1);
     ASSERT_EQ(tokens[6].getColumn(), 13);

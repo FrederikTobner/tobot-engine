@@ -58,7 +58,7 @@ namespace Tobot::Language {
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
     void Parser<T1, T2>::reportError(std::string message, std::size_t current, std::vector<Token<T1>> tokens) {
         std::cout << "Error: " << message << " at " << tokens[current].getLine() << ":" << tokens[current].getColumn()
-                  << std::endl;
+                  << "\n";
     }
 
 } // namespace Tobot::Language
