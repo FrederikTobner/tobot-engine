@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['width_0',['width',['../class_tobot_1_1_math_1_1_dimension.html#a8e1fef771849523192ceeacb5fa38407',1,'Tobot::Math::Dimension']]]
+  ['b_0',['b',['../class_tobot_1_1_math_1_1_plane.html#adab634951eeadcd5a7c8840eefbf780f',1,'Tobot::Math::Plane']]]
 ];

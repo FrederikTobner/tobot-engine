@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tobotapplication_0',['TobotApplication',['../class_tobot_1_1_core_1_1_tobot_application.html',1,'Tobot::Core']]]
+  ['scene_0',['Scene',['../class_tobot_1_1_core_1_1_scene.html',1,'Tobot::Core']]],
+  ['scenemanager_1',['SceneManager',['../class_tobot_1_1_core_1_1_scene_manager.html',1,'Tobot::Core']]]
 ];

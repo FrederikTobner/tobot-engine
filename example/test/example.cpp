@@ -2,16 +2,16 @@
 
 using namespace Tobot::Tooling::Test;
 
-TBTT_TEST(example, first) {
-    TBTT_EXPECT_TRUE(1 < 5);
-    TBTT_ASSERT_TRUE(true);
-    TBTT_ASSERT_STR_EQUAL("first", "first");
+TOBOT_TEST(example, first) {
+    TOBOT_EXPECT_TRUE(1 < 5);
+    TOBOT_ASSERT_TRUE(true);
+    TOBOT_ASSERT_STR_EQUAL("first", "first");
 }
 
-TBTT_TEST(example, second) {
-    TBTT_EXPECT_TRUE(3 < 1);
-    TBTT_ASSERT_TRUE(1 == 1);
-    TBTT_ASSERT_STR_EQUAL("second", "second");
+TOBOT_TEST(example, second) {
+    TOBOT_EXPECT_TRUE(3 < 1);
+    TOBOT_ASSERT_TRUE(1 == 1);
+    TOBOT_ASSERT_STR_EQUAL("second", "second");
 }
 
 int main(int argc, char const ** argv) {

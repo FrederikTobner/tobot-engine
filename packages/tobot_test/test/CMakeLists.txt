@@ -9,7 +9,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(TOBOT_TEST_TESTS tobot-test_TESTS)
+set(TOBOT_TEST_TESTS tobot-test-tests)
 
 # Set all test files
 set(TEST_SOURCES test_state_test.cpp main.cpp)

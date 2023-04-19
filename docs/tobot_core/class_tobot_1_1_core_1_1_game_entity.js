@@ -1,7 +1,7 @@
 var class_tobot_1_1_core_1_1_game_entity =
 [
-    [ "GameEntity", "class_tobot_1_1_core_1_1_game_entity.html#ad78a5d540f344dce7b75a76559678ca9", null ],
-    [ "GameEntity", "class_tobot_1_1_core_1_1_game_entity.html#ad85592aa96d1f4fb2677ec68f5d1b28f", null ],
+    [ "GameEntity", "class_tobot_1_1_core_1_1_game_entity.html#a75a2d5193035e7a855ea69395e037428", null ],
+    [ "GameEntity", "class_tobot_1_1_core_1_1_game_entity.html#af0e598eef09239a9a355515c8e3181f4", null ],
     [ "~GameEntity", "class_tobot_1_1_core_1_1_game_entity.html#a5a4db8c5a4ffe46c562ad0287086f97a", null ],
     [ "dispose", "class_tobot_1_1_core_1_1_game_entity.html#a17dcd11096032a7285df4fda0b0d848f", null ],
     [ "initializeTexture", "class_tobot_1_1_core_1_1_game_entity.html#adc3fecfcce540eae24660febb6fecb6d", null ],

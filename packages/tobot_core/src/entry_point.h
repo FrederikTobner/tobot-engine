@@ -5,7 +5,7 @@
 extern Tobot::Core::TobotApplication * Tobot::Core::CreateApplication();
 
 int main(int argc, char ** argv) {
-    Tobot::Core::TobotApplication * application = Tobot::Core::CreateApplication();
+    std::unique_ptr<Tobot::Core::TobotApplication> application(Tobot::Core::CreateApplication());
     application->initialize();
     application->run();
     return 0;

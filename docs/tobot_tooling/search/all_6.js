@@ -14,10 +14,10 @@ var searchData=
   ['log_5ftrace_5fat_11',['LOG_TRACE_AT',['../logger_8h.html#a1327a0d4eff6bf05f6555db462f23b1e',1,'logger.h']]],
   ['log_5fwarn_12',['LOG_WARN',['../logger_8h.html#a31e7ff3be0d7ddbd843b3335b534bd03',1,'logger.h']]],
   ['log_5fwarn_5fat_13',['LOG_WARN_AT',['../logger_8h.html#a0325d8cdff0b45338195351a463c7b1b',1,'logger.h']]],
-  ['logger_14',['Logger',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a4fac0c9f6ee2dce6abd726264b9195f7',1,'Tobot::Tooling::Logging::Logger::Logger()'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aa7f3dbfbd2426b4874750f08bd23bd7f',1,'Tobot::Tooling::Logging::Logger::Logger(const Logger &amp;)=delete'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html',1,'Logger']]],
+  ['logger_14',['Logger',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a4fac0c9f6ee2dce6abd726264b9195f7',1,'Tobot::Tooling::Logging::Logger::Logger()'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a9864d2d04c3c87cd73fd758263f0ee66',1,'Tobot::Tooling::Logging::Logger::Logger(Logger const &amp;)=delete'],['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html',1,'Logger']]],
   ['logger_2ecpp_15',['logger.cpp',['../logger_8cpp.html',1,'']]],
   ['logger_2eh_16',['logger.h',['../logger_8h.html',1,'']]],
-  ['loglevelcolors_17',['logLevelColors',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0db00cd1b71e2032d0e57c12fd5ddf2e',1,'Tobot::Tooling::Logging::Logger']]],
-  ['loglevelstrings_18',['logLevelStrings',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#acc4b54e4583179af76c9066b8f2cf18d',1,'Tobot::Tooling::Logging::Logger']]],
+  ['loglevelcolors_17',['logLevelColors',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ac412f7cfb9a3fc139f4e6f795986a35e',1,'Tobot::Tooling::Logging::Logger']]],
+  ['loglevelstrings_18',['logLevelStrings',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a868fcf045bd4e05181283dc512469a7c',1,'Tobot::Tooling::Logging::Logger']]],
   ['logpriority_19',['LogPriority',['../namespace_tobot_1_1_tooling_1_1_logging.html#aa8b1c6568df4ee385e4d1d12f7153f02',1,'Tobot::Tooling::Logging']]]
 ];

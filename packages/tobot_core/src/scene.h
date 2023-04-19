@@ -8,17 +8,14 @@
 #include "layer.h"
 #include "render_object.h"
 
-
 namespace Tobot::Core {
     class Scene {
         private:
-            
-            const char * m_BaseLayerId = "baseLayer";
-            std::unordered_map<const char *, Layer *> m_Layers;
-
+            char const * m_BaseLayerId = "baseLayer";
+            std::unordered_map<char const *, Layer *> m_Layers;
 
         protected:
-            const char * m_Id;
+            char const * m_Id;
 
             /**
              * @brief Adds a new GameEntity to the base layer
@@ -32,15 +29,15 @@ namespace Tobot::Core {
              *
              * @param layerId
              */
-            void add(const char * layerId, GameEntity *);
+            void add(char const * layerId, GameEntity *);
 
             void addLayer(Layer * layer);
 
-            void destroy(const char * id);
+            void destroy(char const * id);
             void destroyAll();
 
         public:
-            Scene(const char * id);
+            Scene(char const * id);
             virtual ~Scene() = 0;
 
             void prepareTextures(SDL_Renderer * renderer);

@@ -9,7 +9,7 @@
 
 using namespace Tobot::Tooling::Test;
 
-TestFixture::TestFixture(char const * fixtureName) {
+TestFixture::TestFixture(std::string fixtureName) {
     this->fixtureName = fixtureName;
 }
 
@@ -20,7 +20,7 @@ void TestFixture::addTestCase(TestCase testCase) {
     this->testQueue.push(testCase);
 }
 
-void TestFixture::addTestCases(const std::vector<TestCase> & cases) {
+void TestFixture::addTestCases(std::vector<TestCase> const & cases) {
     for (TestCase testCase : cases) {
         this->testQueue.push(testCase);
     }

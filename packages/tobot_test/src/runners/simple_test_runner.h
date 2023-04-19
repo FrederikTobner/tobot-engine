@@ -31,7 +31,7 @@ namespace Tobot::Tooling::Test {
             /// @brief Executes all the TestCase's that are stored in the TestFixture's that this TestRunner will
             /// execute
             virtual void runAll();
-            SimpleTestRunner & operator=(const SimpleTestRunner & rhs){};
+            SimpleTestRunner & operator=(SimpleTestRunner const & rhs);
     };
 
 } // namespace Tobot::Tooling::Test

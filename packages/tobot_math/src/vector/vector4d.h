@@ -2,12 +2,15 @@
 
 #include "pre_compiled_header.h"
 
-#include "concepts.h"
+#include "../concepts.h"
 #include "vector.h"
 
 namespace Tobot::Math {
-    template <typename T>
-        requires Arithmetic<T>
+
+    /// @brief A 4D vector class
+    /// @tparam T The type of the vector
+    template <typename T = float>
+        requires ArithmeticFloatingPoint<T>
     class Vector4D : Vector<T> {
 
         public:
@@ -17,38 +20,67 @@ namespace Tobot::Math {
             T w;
 
             Vector4D(T x, T y, T z, T w);
+            Vector4D(Vector4D & vec);
+            Vector4D(std::initializer_list<T> list);
+            Vector4D(Vector4D const && vec);
+            Vector4D<T> & operator=(Vector4D<T> const & vec);
+            Vector4D<T> & operator=(Vector4D<T> const && vec);
 
-            friend inline Vector4D<T> operator+(Vector4D<T> lVec, const Vector4D<T> & rVec) {
+            /// @brief Adds two vectors together
+            /// @param lVec The left vector
+            /// @param rVec The right vector
+            /// @return Vector4D<T> The sum of the two vectors
+            friend inline Vector4D<T> operator+(Vector4D<T> lVec, Vector4D<T> const & rVec) {
                 return Vector4D(lVec.x + rVec.x, lVec.y + rVec.y, lVec.z + rVec.z, lVec.w + rVec.w);
             }
 
-            friend inline Vector4D<T> operator-(Vector4D<T> lVec, const Vector4D<T> & rVec) {
+            /// @brief Subtracts two vectors
+            /// @param lVec The left vector
+            /// @param rVec The right vector
+            /// @return Vector4D<T> The difference of the two vectors
+            friend inline Vector4D<T> operator-(Vector4D<T> lVec, Vector4D<T> const & rVec) {
                 return Vector4D(lVec.x - rVec.x, lVec.y - rVec.y, lVec.z - rVec.z, lVec.w - rVec.w);
             }
 
-            friend inline Vector4D<T> operator*(const T scalar, Vector4D<T> vec) {
+            /// @brief Multiplies a vector by a scalar
+            /// @param scalar The scalar to multiply the vector by
+            /// @param vec The vector to multiply by the scalar
+            /// @return Vector4D<T> The product of the vector and the scalar
+            friend inline Vector4D<T> operator*(T const scalar, Vector4D<T> vec) {
                 return Vector4D(vec.x * scalar, vec.y * scalar, vec.z * scalar, vec.w * scalar);
             }
 
-            friend inline Vector4D<T> operator*(Vector4D<T> vec, const T scalar) {
+            /// @brief Multiplies a vector by a scalar
+            /// @param vec The vector to multiply by the scalar
+            /// @param scalar The scalar to multiply the vector by
+            /// @return Vector4D<T> The product of the vector and the scalar
+            friend inline Vector4D<T> operator*(Vector4D<T> vec, T const scalar) {
                 return Vector4D(vec.x * scalar, vec.y * scalar, vec.z * scalar, vec.w * scalar);
             }
 
-            friend inline Vector4D<T> operator/(const T scalar, Vector4D<T> vec) {
+            /// @brief Divides a vector by a scalar
+            /// @param scalar The scalar to divide the vector by
+            /// @param vec The vector to divide by the scalar
+            /// @return Vector4D<T> The quotient of the vector and the scalar
+            friend inline Vector4D<T> operator/(T const scalar, Vector4D<T> vec) {
                 return Vector4D(vec.x / scalar, vec.y / scalar, vec.z /= scalar, vec.w / scalar);
             }
 
-            friend inline Vector4D<T> operator/(Vector4D<T> vec, const T scalar) {
+            /// @brief Divides a vector by a scalar
+            /// @param vec The vector to divide by the scalar
+            /// @param scalar The scalar to divide the vector by
+            /// @return Vector4D<T> The quotient of the vector and the scalar
+            friend inline Vector4D<T> operator/(Vector4D<T> vec, T const scalar) {
                 return Vector4D(vec.x / scalar, vec.y / scalar, vec.z / scalar, vec.w / scalar);
             }
 
-            Vector4D<T> & operator+=(const Vector4D<T> & vec);
+            Vector4D<T> & operator+=(Vector4D<T> const & vec);
 
-            Vector4D<T> & operator-=(const Vector4D<T> & vec);
+            Vector4D<T> & operator-=(Vector4D<T> const & vec);
 
-            Vector4D<T> & operator*=(const T scalar);
+            Vector4D<T> & operator*=(T const scalar);
 
-            Vector4D<T> & operator/=(const T scalar);
+            Vector4D<T> & operator/=(T const scalar);
 
             T & operator()(std::size_t i);
 
@@ -58,23 +90,117 @@ namespace Tobot::Math {
 
             T operator[](std::size_t i) const;
 
+            bool operator==(Vector4D<T> const & vec) const;
+
+            bool operator!=(Vector4D<T> const & vec) const;
+
+            /// @brief Appends the vector to the output stream
+            /// @param os The output stream
+            /// @param vec The vector to append to the output stream
+            /// @return std::ostream The output stream
+            friend std::ostream operator<<(std::ostream & os, Vector4D<T> const & vec) {
+                os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ", " << vec.w << ")";
+                return os;
+            }
+
             inline T Magnitude();
 
             inline void Normalize();
 
             inline std::size_t GetSize();
 
-            T Dot(const Vector4D<T> & vec);
+            T Dot(Vector4D<T> const & vec);
     };
 
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param x The x component of the vector
+    /// @param y The y component of the vector
+    /// @param z The z component of the vector
+    /// @param w The w component of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     Vector4D<T>::Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {
     }
 
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
     template <typename T>
-        requires Arithmetic<T>
-    Vector4D<T> & Vector4D<T>::operator+=(const Vector4D<T> & vec) {
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T>::Vector4D(Vector4D<T> & vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param list The list of components for the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T>::Vector4D(std::initializer_list<T> list) {
+        assert(list.size() == 4);
+        std::size_t i = 0;
+        for (auto it = list.begin(); it != list.end(); ++it) {
+            switch (i) {
+            case 0:
+                this->x = *it;
+                break;
+            case 1:
+                this->y = *it;
+                break;
+            case 2:
+                this->z = *it;
+                break;
+            case 3:
+                this->w = *it;
+                break;
+            }
+            ++i;
+        }
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T>::Vector4D(Vector4D<T> const && vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    /// @return Vector4D<T> The copy of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator=(Vector4D<T> const & vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        this->z = vec.z;
+        this->w = vec.w;
+        return *this;
+    }
+
+    /// @brief Creates a new Vector4D object
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to copy
+    /// @return Vector4D<T> The copy of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator=(Vector4D<T> const && vec) {
+        this->x = vec.x;
+        this->y = vec.y;
+        this->z = vec.z;
+        this->w = vec.w;
+        return *this;
+    }
+
+    /// @brief Adds two vectors together
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to add to this vector
+    /// @return Vector4D<T> The sum of the two vectors
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator+=(Vector4D<T> const & vec) {
         this->x += vec.x;
         this->y += vec.y;
         this->z += vec.z;
@@ -82,9 +208,13 @@ namespace Tobot::Math {
         return *this;
     }
 
+    /// @brief Subtracts two vectors
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to subtract from this vector
+    /// @return Vector4D<T> The difference of the two vectors
     template <typename T>
-        requires Arithmetic<T>
-    Vector4D<T> & Vector4D<T>::operator-=(const Vector4D<T> & vec) {
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator-=(Vector4D<T> const & vec) {
         this->x -= vec.x;
         this->y -= vec.y;
         this->z -= vec.z;
@@ -92,9 +222,13 @@ namespace Tobot::Math {
         return *this;
     }
 
+    /// @brief Multiplies a vector by a scalar
+    /// @tparam T The underlying type of the vector
+    /// @param scalar The scalar to multiply the vector by
+    /// @return Vector4D<T> The product of the vector and the scalar
     template <typename T>
-        requires Arithmetic<T>
-    Vector4D<T> & Vector4D<T>::operator*=(const T scalar) {
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator*=(T const scalar) {
         this->x *= scalar;
         this->y *= scalar;
         this->z *= scalar;
@@ -102,9 +236,13 @@ namespace Tobot::Math {
         return *this;
     }
 
+    /// @brief Divides a vector by a scalar
+    /// @tparam T The underlying type of the vector
+    /// @param scalar The scalar to divide the vector by
+    /// @return Vector4D<T> The quotient of the vector and the scalar
     template <typename T>
-        requires Arithmetic<T>
-    Vector4D<T> & Vector4D<T>::operator/=(const T scalar) {
+        requires ArithmeticFloatingPoint<T>
+    Vector4D<T> & Vector4D<T>::operator/=(T const scalar) {
         this->x /= scalar;
         this->y /= scalar;
         this->z /= scalar;
@@ -112,8 +250,12 @@ namespace Tobot::Math {
         return *this;
     }
 
+    /// @brief Gets a value from the vector at the specified index
+    /// @tparam T The underlying type of the vector
+    /// @param i The index of the value to get
+    /// @return T& The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T & Vector4D<T>::operator()(std::size_t i) {
         assert(i < 4);
         switch (i) {
@@ -138,10 +280,14 @@ namespace Tobot::Math {
         }
     }
 
+    /// @brief Gets a value from the vector at the specified index
+    /// @tparam T The underlying type of the vector
+    /// @param i The index of the value to get
+    /// @return T The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector4D<T>::operator()(std::size_t i) const {
-        assert(i < 4);
+        assert(4 > i);
         switch (i) {
         case 0:
             return this->x;
@@ -164,8 +310,12 @@ namespace Tobot::Math {
         }
     }
 
+    /// @brief Gets a value from the vector at the specified index
+    /// @tparam T The underlying type of the vector
+    /// @param i The index of the value to get
+    /// @return T& The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T & Vector4D<T>::operator[](std::size_t i) {
         assert(i < 4);
         switch (i) {
@@ -190,8 +340,12 @@ namespace Tobot::Math {
         }
     }
 
+    /// @brief Gets a value from the vector at the specified index
+    /// @tparam T The underlying type of the vector
+    /// @param i The index of the value to get
+    /// @return T The value at the specified index
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     T Vector4D<T>::operator[](std::size_t i) const {
         assert(i < 4);
         switch (i) {
@@ -216,27 +370,59 @@ namespace Tobot::Math {
         }
     }
 
+    /// Compare two vectors for equality
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to compare against
+    /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
+    bool Vector4D<T>::operator==(Vector4D<T> const & vec) const {
+        return this->x == vec.x && this->y == vec.y && this->z == vec.z && this->w == vec.w;
+    }
+
+    /// Compare two vectors for inequality
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to compare against
+    /// @return bool True if the vectors are not equal, false otherwise
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    bool Vector4D<T>::operator!=(Vector4D<T> const & vec) const {
+        return this->x != vec.x || this->y != vec.y || this->z != vec.z || this->w != vec.w;
+    }
+
+    /// @brief Gets the magnitude of the vector
+    /// @tparam T The underlying type of the vector
+    /// @return T The magnitude of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
     inline T Vector4D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
     }
 
+    /// @brief Normalizes the vector
+    /// @tparam T The underlying type of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline void Vector4D<T>::Normalize() {
         *this /= this->Magnitude();
     }
 
+    /// @brief Gets the size of the vector
+    /// @tparam T The underlying type of the vector
+    /// @return std::size_t The size of the vector
     template <typename T>
-        requires Arithmetic<T>
+        requires ArithmeticFloatingPoint<T>
     inline std::size_t Vector4D<T>::GetSize() {
         return 4;
     }
 
+    /// @brief Gets the dot product of two vectors
+    /// @tparam T The underlying type of the vector
+    /// @param vec The vector to dot with
+    /// @return T The dot product of the two vectors
     template <typename T>
-        requires Arithmetic<T>
-    T Vector4D<T>::Dot(const Vector4D<T> & vec) {
+        requires ArithmeticFloatingPoint<T>
+    T Vector4D<T>::Dot(Vector4D<T> const & vec) {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z + this->w * vec.w;
     }
 

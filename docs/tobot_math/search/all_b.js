@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['radius_0',['radius',['../class_tobot_1_1_math_1_1_circle.html#a7398428c8df3e0a2cdf78c993a5d0a91',1,'Tobot::Math::Circle']]],
+  ['rectangle_2eh_1',['rectangle.h',['../rectangle_8h.html',1,'']]],
+  ['rectangle2d_2',['Rectangle2D',['../class_tobot_1_1_math_1_1_rectangle2_d.html#a58424c1f60f32d5eb6abde266b7de067',1,'Tobot::Math::Rectangle2D::Rectangle2D()=default'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#ad1146e125be6f375518b08a380e7f5ba',1,'Tobot::Math::Rectangle2D::Rectangle2D(T x, T y, T width, T height, T rotation)'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#a8f51a1ee8b700edeafed741b7b48eb5d',1,'Tobot::Math::Rectangle2D::Rectangle2D(Point2D&lt; T &gt; const &amp;center, T const &amp;width, T const &amp;height, T const &amp;rotation)'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#af463a372a4daeaf173fd476c07afd6b5',1,'Tobot::Math::Rectangle2D::Rectangle2D(std::initializer_list&lt; T &gt; list)'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#a77c899f00032bb0a4d8962bbd9131897',1,'Tobot::Math::Rectangle2D::Rectangle2D(Rectangle2D&lt; T &gt; const &amp;rectangle)'],['../class_tobot_1_1_math_1_1_rectangle2_d.html#adedda75a86d900076bb7c3651416bc25',1,'Tobot::Math::Rectangle2D::Rectangle2D(Rectangle2D&lt; T &gt; &amp;&amp;) noexcept'],['../class_tobot_1_1_math_1_1_rectangle2_d.html',1,'Rectangle2D&lt; T &gt;']]],
+  ['rotation_3',['rotation',['../class_tobot_1_1_math_1_1_rectangle2_d.html#a1b422d3ac530ef8219855148cc18261e',1,'Tobot::Math::Rectangle2D']]],
+  ['row_4',['row',['../class_tobot_1_1_math_1_1_matrix_1_1_row.html#a3dd12922e70bf8529d8b3c0d688263fd',1,'Tobot::Math::Matrix::Row']]],
+  ['row_5',['Row',['../class_tobot_1_1_math_1_1_matrix_1_1_row.html#a5b0656a705bd751c2eba18f4f495e1ae',1,'Tobot::Math::Matrix::Row::Row()'],['../class_tobot_1_1_math_1_1_matrix_1_1_row.html',1,'Matrix&lt; T, m, n &gt;::Row']]],
+  ['rowscount_6',['rowsCount',['../class_tobot_1_1_math_1_1_matrix.html#af1714c45b0748a6600be821813bc372d',1,'Tobot::Math::Matrix']]]
+];

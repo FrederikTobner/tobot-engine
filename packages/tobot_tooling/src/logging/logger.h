@@ -48,7 +48,7 @@ namespace Tobot::Tooling::Logging {
 
             /// @brief Changes the time-format of the logger insance
             /// @param new_format The new time-format that is set
-            static void SetTimeStampFormat(const char * new_format) {
+            static void SetTimeStampFormat(char const * new_format) {
                 get_Instance().timeStampFormat = new_format;
             }
 
@@ -314,31 +314,31 @@ namespace Tobot::Tooling::Logging {
 
         private:
             /// @brief The current log priority of the logger
-            LogPriority priority = LogPriority::INFO_PRIORITY;
+            std::atomic<LogPriority> priority = LogPriority::INFO_PRIORITY;
             /// @brief The logLevel colors of the logger
-            uint8_t logLevelColors[6] = {7, 2, 3, 6, 4, 4};
+            std::atomic<uint8_t> logLevelColors[6] = {7, 2, 3, 6, 4, 4};
             /// @brief The path of the file the logger writes to, if logging to a file is enabled
-            char const * filepath;
+            std::atomic<char const *> filepath;
             /// @brief The timestamp format of the logger
-            char const * timeStampFormat = "%d.%m.%Y - %H:%M:%S";
+            std::atomic<char const *> timeStampFormat = "%d.%m.%Y - %H:%M:%S";
             /// @brief Pointer to the output file the logger writes to, if logging to a file is enabled
-            FILE * file;
+            std::atomic<FILE *> file;
             /// @brief for thread safety
             std::mutex log_mutex;
             /// @brief The names of the loglevels the logger provides
-            char const * logLevelStrings[6] = {"Trace", "Debug", "Info", "Warn", "Error", "Critical"};
+            char const * const logLevelStrings[6] = {"Trace", "Debug", "Info", "Warn", "Error", "Critical"};
 
             /// @brief Constructor of the logger
             Logger();
 
             /// @brief
             /// @param
-            Logger(const Logger &) = delete;
+            Logger(Logger const &) = delete;
 
             /// @brief
             /// @param
             /// @return
-            Logger & operator=(const Logger &) = delete;
+            Logger & operator=(Logger const &) = delete;
 
             /// @brief Destructor of the logger
             ~Logger();
@@ -383,7 +383,8 @@ namespace Tobot::Tooling::Logging {
                     }
 #endif
                     printf(format, args...);
-                    std::cout << std::endl;
+                    std::cout << "\n";
+
 #ifdef OS_WINDOWS
                     if (log_priority == CRITICAL_PRIORITY) {
                         SetConsoleTextAttribute(console_color, 7);
@@ -442,7 +443,7 @@ namespace Tobot::Tooling::Logging {
                         SetConsoleTextAttribute(console_color, 7);
                     }
 #endif
-                    std::cout << " (on line " << line_number << " in " << source_file << std::endl;
+                    std::cout << " (on line " << line_number << " in " << source_file << ")\n";
                     if (this->file) {
                         fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[log_priority]);
                         if (log_priority == LogPriority::CRITICAL_PRIORITY) {

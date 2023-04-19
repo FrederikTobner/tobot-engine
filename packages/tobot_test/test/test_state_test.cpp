@@ -4,12 +4,12 @@
 
 using namespace Tobot::Tooling::Test;
 
-TBTT_TEST(testState, fails) {
-    TBTT_ASSERT_TRUE(false);
+TOBOT_TEST(testState, fails) {
+    TOBOT_ASSERT_TRUE(false);
 }
 
-TBTT_TEST(testState, passes) {
-    TBTT_ASSERT_TRUE(true);
+TOBOT_TEST(testState, passes) {
+    TOBOT_ASSERT_TRUE(true);
 }
 
 TEST(testState, CanFail) {

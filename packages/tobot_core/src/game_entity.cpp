@@ -2,11 +2,11 @@
 
 using namespace Tobot::Core;
 
-GameEntity::GameEntity(const char * id, int x, int y, SDL_Texture * texture) : RenderObject(id, x, y) {
+GameEntity::GameEntity(char const * id, int x, int y, SDL_Texture * texture) : RenderObject(id, x, y) {
     this->p_Texture = texture;
 }
 
-GameEntity::GameEntity(const char * id, int x, int y) : RenderObject(id, x, y) {
+GameEntity::GameEntity(char const * id, int x, int y) : RenderObject(id, x, y) {
 }
 
 void GameEntity::setTexture(SDL_Surface * texture) {

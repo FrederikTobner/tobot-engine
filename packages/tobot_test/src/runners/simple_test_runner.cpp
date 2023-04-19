@@ -29,3 +29,9 @@ void SimpleTestRunner::runAll() {
         this->fixtureQueue.pop();
     }
 }
+
+SimpleTestRunner & SimpleTestRunner::operator=(SimpleTestRunner const & rhs) {
+    this->fixtureQueue = rhs.fixtureQueue;
+    this->processor = rhs.processor;
+    return *this;
+};

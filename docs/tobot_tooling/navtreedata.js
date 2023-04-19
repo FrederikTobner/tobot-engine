@@ -26,7 +26,8 @@ var NAVTREE =
 [
   [ "tobot-tooling", "index.html", [
     [ "Main Page", "index.html", [
-      [ "Introduction", "index.html#intro_sec", null ]
+      [ "Introduction", "index.html#intro_sec", null ],
+      [ "License", "index.html#license_sec", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],

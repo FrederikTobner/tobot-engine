@@ -2,7 +2,7 @@ var searchData=
 [
   ['debug_0',['Debug',['../namespace_tobot_1_1_tooling_1_1_debug.html',1,'Tobot::Tooling']]],
   ['logging_1',['Logging',['../namespace_tobot_1_1_tooling_1_1_logging.html',1,'Tobot::Tooling']]],
-  ['timestampformat_2',['timeStampFormat',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a35fe3ffa7ab472f2f1cf72533bc06283',1,'Tobot::Tooling::Logging::Logger']]],
+  ['timestampformat_2',['timeStampFormat',['../class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a79b091141c2240f3baa4715794deac10',1,'Tobot::Tooling::Logging::Logger']]],
   ['tobot_3',['Tobot',['../namespace_tobot.html',1,'']]],
   ['tobot_5fassert_4',['TOBOT_ASSERT',['../tobot__asserts_8h.html#a15688653caee9270df1b64b54a49fc99',1,'tobot_asserts.h']]],
   ['tobot_5fasserts_2eh_5',['tobot_asserts.h',['../tobot__asserts_8h.html',1,'']]],

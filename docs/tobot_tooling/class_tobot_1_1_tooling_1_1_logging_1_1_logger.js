@@ -1,7 +1,7 @@
 var class_tobot_1_1_tooling_1_1_logging_1_1_logger =
 [
     [ "Logger", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a4fac0c9f6ee2dce6abd726264b9195f7", null ],
-    [ "Logger", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aa7f3dbfbd2426b4874750f08bd23bd7f", null ],
+    [ "Logger", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a9864d2d04c3c87cd73fd758263f0ee66", null ],
     [ "~Logger", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0d77f27eb95c246d555904aaf08018eb", null ],
     [ "Critical", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0db8ee11884925c00b15b496254f59a9", null ],
     [ "Critical", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a52882f0bccc9efb57b1e52ea4d25fb65", null ],
@@ -26,10 +26,10 @@ var class_tobot_1_1_tooling_1_1_logging_1_1_logger =
     [ "Info", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a8d5abf51ca04fbd42fd4888d584aa3fb", null ],
     [ "log", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0bd7f06e61dc78649e06d3952c880d17", null ],
     [ "log", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ac6cfbcf88c1cccbe837bafdc4f5b4c8d", null ],
-    [ "operator=", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aaf19334937476d1921ee36e3ffa97b05", null ],
+    [ "operator=", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a7bdbda0132dfcfd936f942e69ed0782a", null ],
     [ "SetLogLevelColors", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aabf922b64afc7b1ce73dbadbd6dad368", null ],
     [ "setPriority", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a12d0957aebadcef5d52780071a464fe5", null ],
-    [ "SetTimeStampFormat", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a722041f1abb877d0f3485a76295738ce", null ],
+    [ "SetTimeStampFormat", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a1282dde0cffc71a6915493dab6c41d24", null ],
     [ "Trace", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a204cf5d0605248229672b9c6f9b8237d", null ],
     [ "Trace", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a38adae4901ee30930c190c1bcda9d212", null ],
     [ "Trace", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#aa2f38037154c33f624346df2d435a810", null ],
@@ -38,11 +38,11 @@ var class_tobot_1_1_tooling_1_1_logging_1_1_logger =
     [ "Warn", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a91a15ba8481d93d45d910a8609f09291", null ],
     [ "Warn", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ae9977724027275505e6a472d9793540d", null ],
     [ "Warn", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a9327c59493959f27da0780d7933d438f", null ],
-    [ "file", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a702945180aa732857b380a007a7e2a21", null ],
-    [ "filepath", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a32f61a27b051b9e0d077ebfba92c89e2", null ],
+    [ "file", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a8b560c8be6ae390021413338bf6cf0fe", null ],
+    [ "filepath", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ace71f09d3a34336a7485ab4f904bddd7", null ],
     [ "log_mutex", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a7aa000dbc5ce63e0803476366e35c7b7", null ],
-    [ "logLevelColors", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a0db00cd1b71e2032d0e57c12fd5ddf2e", null ],
-    [ "logLevelStrings", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#acc4b54e4583179af76c9066b8f2cf18d", null ],
-    [ "priority", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ae5bfb7fc7e7b4d7c62282e48249837fe", null ],
-    [ "timeStampFormat", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a35fe3ffa7ab472f2f1cf72533bc06283", null ]
+    [ "logLevelColors", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#ac412f7cfb9a3fc139f4e6f795986a35e", null ],
+    [ "logLevelStrings", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a868fcf045bd4e05181283dc512469a7c", null ],
+    [ "priority", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a88f15fb5b47e80e8fce877d606c1711f", null ],
+    [ "timeStampFormat", "class_tobot_1_1_tooling_1_1_logging_1_1_logger.html#a79b091141c2240f3baa4715794deac10", null ]
 ];

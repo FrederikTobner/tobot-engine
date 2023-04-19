@@ -9,12 +9,19 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(TOBOT_MATH_TESTS tobot-math_TESTS)
+set(TOBOT_MATH_TESTS tobot-math-tests)
 
 # Set all test files
 set(TEST_SOURCES
+"circle_test.cpp"
+"gradient_test.cpp"
 "main.cpp"
 "matrix_test.cpp"
+"plane_test.cpp"
+"point2d_test.cpp"
+"polygon_test.cpp"
+"rectangle_test.cpp"
+"triangle_test.cpp"
 "vector2d_test.cpp"
 "vector3d_test.cpp"
 "vector4d_test.cpp"

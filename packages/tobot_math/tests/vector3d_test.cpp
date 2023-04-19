@@ -2,28 +2,63 @@
 
 #include "vector/vector3d.h"
 
-/**
- * @brief Testing simple vector addition
- *
+using namespace Tobot::Math;
+
+/*
+ * Testing vector creation
+ */
+TEST(Vector3D, CanBeCreatedWithList) {
+    Vector3D<> vector = {1, 2, 3};
+}
+
+/*
+ * Testing copy constructor
+ */
+TEST(Vector3D, Copy) {
+    Vector3D<> firstVector(5, 3, 6);
+    Vector3D<> secondVector(firstVector);
+
+    firstVector = {4, 5, 6};
+
+    EXPECT_EQ(5, secondVector.x);
+    EXPECT_EQ(3, secondVector.y);
+    EXPECT_EQ(6, secondVector.z);
+}
+
+/*
+ * Testing move constructor
+ */
+TEST(Vector3D, Move) {
+    Vector3D<> firstVector(5, 3, 6);
+    Vector3D<> secondVector(std::move(firstVector));
+
+    firstVector = {4, 5, 6};
+
+    EXPECT_EQ(5, secondVector.x);
+    EXPECT_EQ(3, secondVector.y);
+    EXPECT_EQ(6, secondVector.z);
+}
+
+/*
+ * Testing simple vector addition
  */
 TEST(Vector3D, Addition) {
-    Tobot::Math::Vector3D<int> vector1(5, 3, 6);
-    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+    Vector3D<> vector1(5, 3, 6);
+    Vector3D<> vector2(4, 2, -2);
 
-    Tobot::Math::Vector3D<int> result = vector1 + vector2;
+    Vector3D<> result = vector1 + vector2;
 
     EXPECT_EQ(9, result.x);
     EXPECT_EQ(5, result.y);
     EXPECT_EQ(4, result.z);
 }
 
-/**
- * @brief Testing vector addition assignment
- *
+/*
+ * Testing vector addition assignment
  */
 TEST(Vector3D, AdditionAssignment) {
-    Tobot::Math::Vector3D<int> vector1(5, 3, 6);
-    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+    Vector3D<> vector1(5, 3, 6);
+    Vector3D<> vector2(4, 2, -2);
 
     vector1 += vector2;
 
@@ -32,28 +67,26 @@ TEST(Vector3D, AdditionAssignment) {
     EXPECT_EQ(4, vector1.z);
 }
 
-/**
- * @brief Testing simple vector subtraction
- *
+/*
+ * Testing simple vector subtraction
  */
 TEST(Vector3D, Subtraction) {
-    Tobot::Math::Vector3D<int> vector1(5, 4, 6);
-    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+    Vector3D<> vector1(5, 4, 6);
+    Vector3D<> vector2(4, 2, -2);
 
-    Tobot::Math::Vector3D<int> result = vector1 - vector2;
+    Vector3D<> result = vector1 - vector2;
 
     EXPECT_EQ(1, result.x);
     EXPECT_EQ(2, result.y);
     EXPECT_EQ(8, result.z);
 }
 
-/**
- * @brief Testing vector subtraction assignment
- *
+/*
+ * Testing vector subtraction assignment
  */
 TEST(Vector3D, SubtractionAssignment) {
-    Tobot::Math::Vector3D<int> vector1(5, 4, 6);
-    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+    Vector3D<> vector1(5, 4, 6);
+    Vector3D<> vector2(4, 2, -2);
 
     vector1 -= vector2;
 
@@ -62,26 +95,24 @@ TEST(Vector3D, SubtractionAssignment) {
     EXPECT_EQ(8, vector1.z);
 }
 
-/**
- * @brief Testing simple vector multiplication
- *
+/*
+ * Testing simple vector multiplication
  */
 TEST(Vector3D, Multiplication) {
-    Tobot::Math::Vector3D<int> vector1(5, 4, 1);
+    Vector3D<> vector1(5, 4, 1);
 
-    Tobot::Math::Vector3D<int> result = vector1 * 3;
+    Vector3D<> result = vector1 * 3;
 
     EXPECT_EQ(15, result.x);
     EXPECT_EQ(12, result.y);
     EXPECT_EQ(3, result.z);
 }
 
-/**
- * @brief Testing vector multiplication assignment
- *
+/*
+ * Testing vector multiplication assignment
  */
 TEST(Vector3D, MultiplicationAssignment) {
-    Tobot::Math::Vector3D<int> vector1(5, 4, 1);
+    Vector3D<> vector1(5, 4, 1);
 
     vector1 *= 3;
 
@@ -90,14 +121,13 @@ TEST(Vector3D, MultiplicationAssignment) {
     EXPECT_EQ(3, vector1.z);
 }
 
-/**
- * @brief Testing simple vector division
- *
+/*
+ * Testing simple vector division
  */
 TEST(Vector3D, Division) {
-    Tobot::Math::Vector3D<int> vector1(9, 6, 3);
+    Vector3D<> vector1(9, 6, 3);
 
-    Tobot::Math::Vector3D<int> result = vector1 / 3;
+    Vector3D<> result = vector1 / 3;
 
     EXPECT_EQ(3, result.x);
     EXPECT_EQ(2, result.y);
@@ -105,11 +135,10 @@ TEST(Vector3D, Division) {
 }
 
 /**
- * @brief Testing vector division assignment
- *
+ * Testing vector division assignment
  */
 TEST(Vector3D, DivisionAssignment) {
-    Tobot::Math::Vector3D<int> vector1(9, 6, 3);
+    Vector3D<> vector1(9, 6, 3);
 
     vector1 /= 3;
 
@@ -118,45 +147,63 @@ TEST(Vector3D, DivisionAssignment) {
     EXPECT_EQ(1, vector1.z);
 }
 
-/**
- * @brief Testing vector magnitude
- *
+/*
+ * Testing vector equality
+ */
+TEST(Vector3D, Equality) {
+    Vector3D<> vector1(9, 6, 3);
+    Vector3D<> vector2(9, 6, 3);
+    Vector3D<> vector3(9, 6, 4);
+    EXPECT_TRUE(vector1 == vector2);
+    EXPECT_FALSE(vector1 == vector3);
+}
+
+/*
+ * Testing vector inequality
+ */
+TEST(Vector3D, Inequality) {
+    Vector3D<> vector1(9, 6, 3);
+    Vector3D<> vector2(9, 6, 3);
+    Vector3D<> vector3(9, 6, 4);
+    EXPECT_FALSE(vector1 != vector2);
+    EXPECT_TRUE(vector1 != vector3);
+}
+
+/*
+ * Testing vector magnitude
  */
 TEST(Vector3D, Magnitude) {
-    Tobot::Math::Vector3D<int> leVector(4, 3, 0);
+    Vector3D<> leVector(4, 3, 0);
     EXPECT_EQ(5, leVector.Magnitude());
 }
 
-/**
- * @brief Testing vector normalization
- *
+/*
+ * Testing vector normalization
  */
 TEST(Vector3D, Normalize) {
-    Tobot::Math::Vector3D<float> leVector(4.0, 3.0, 2.5);
+    Vector3D<> leVector(4.0, 3.0, 2.5);
     leVector.Normalize();
     EXPECT_EQ(1, leVector.Magnitude());
 }
 
-/**
- * @brief Testing vector dot product
- *
+/*
+ * Testing vector dot product
  */
 TEST(Vector3D, DotProduct) {
-    Tobot::Math::Vector3D<int> vector1(5, 4, 1);
-    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+    Vector3D<> vector1(5, 4, 1);
+    Vector3D<> vector2(4, 2, -2);
 
     EXPECT_EQ(26, vector1.Dot(vector2));
 }
 
-/**
- * @brief Testing vector cross product
- *
+/*
+ * Testing vector cross product
  */
 TEST(Vector3D, CrossProduct) {
-    Tobot::Math::Vector3D<int> vector1(5, 4, 1);
-    Tobot::Math::Vector3D<int> vector2(4, 2, -2);
+    Vector3D<> vector1(5, 4, 1);
+    Vector3D<> vector2(4, 2, -2);
 
-    Tobot::Math::Vector3D<int> result = vector1.Cross(vector2);
+    Vector3D<> result = vector1.Cross(vector2);
 
     EXPECT_EQ(-10, result.x);
     EXPECT_EQ(14, result.y);
