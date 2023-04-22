@@ -14,3 +14,6 @@
 	path = deps/SDL_mixer
 	url = https://github.com/libsdl-org/SDL_mixer.git
 	branch = SDL2
+[submodule "deps/imgui/imgui_dir"]
+	path = deps/imgui/imgui_dir
+	url = https://github.com/ocornut/imgui

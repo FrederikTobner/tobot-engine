@@ -51,7 +51,10 @@ if(BUILD_SDL)
     add_subdirectory(deps/SDL_image)
     add_subdirectory(deps/SDL_ttf)
     add_subdirectory(deps/SDL_mixer)
+    add_subdirectory(deps/imgui)
 endif()
+
+add_subdirectory(editor)
 
 # Doesn't work if we build the lib as a dll for some reason
 if(NOT BUILD_CORE_SHARED)
