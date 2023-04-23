@@ -8,9 +8,11 @@ set(CMAKE_C_STANDARD 99)
 set(C_STANDARD_REQUIRED TRUE)
 
 option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
-option(BUILD_SDL "Building SDL" ON)
+option(INCLUDE_DEPS "Include external dependencies" ON)
 
 include(CheckIncludeFile)
+
+# Checking the dependencies of the project
 if(UNIX)
     # Check dependecies under unix-like systems   
     CHECK_INCLUDE_FILE("unistd.h" UNISTD_AVAILABLE)    
@@ -22,11 +24,10 @@ elseif(WIN32)
     CHECK_INCLUDE_FILE("windows.h" WINDOWS_AVAILABLE)
     CHECK_INCLUDE_FILE("psapi.h" PSAPI_AVAILABLE)
     if(NOT ${WINDOWS_AVAILABLE})
-        message(FATAL_ERROR "windows.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that"
-        )
+        message(FATAL_ERROR "windows.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
     endif() # windows.h
     if(NOT ${PSAPI_AVAILABLE})
-    message(FATAL_ERROR "psapi.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
+        message(FATAL_ERROR "psapi.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
     endif() # psapi.h
 endif()
 
@@ -45,7 +46,7 @@ enable_testing()
 # building packages
 add_subdirectory(packages)
 
-if(BUILD_SDL)
+if(INCLUDE_DEPS)
     # SDL2 deps and imgui
    add_subdirectory(deps)
 endif()

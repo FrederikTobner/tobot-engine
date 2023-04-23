@@ -174,7 +174,7 @@ int main(int argc, char ** argv) {
         if (show_tobot_help) {
             // Create a window called Tobot - Engine
             ImGui::Begin("Tobot-Engine", &show_tobot_help);
-            ImGui::Text("Authors: Julian Otto, Frederik Tobner\n Rendering implemented using SDL2 and ImGui");
+            ImGui::Text("Authors:\nJulian Otto, Frederik Tobner\nRendering implemented using SDL2 and ImGui");
             ImGui::End();
         }
 
