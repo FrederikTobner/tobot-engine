@@ -13,9 +13,13 @@ void GameEntity::setTexture(SDL_Surface * texture) {
     this->p_TextureSurface = texture;
 }
 
+/// @brief Initializes the texture of the entity from the surface.
+/// @param renderer The renderer that is used to create the texture.
 void GameEntity::initializeTexture(SDL_Renderer * renderer) {
-    this->p_Texture = SDL_CreateTextureFromSurface(renderer, this->p_TextureSurface);
-    SDL_FreeSurface(this->p_TextureSurface);
+    if (this->p_TextureSurface) {
+        this->p_Texture = SDL_CreateTextureFromSurface(renderer, this->p_TextureSurface);
+        SDL_FreeSurface(this->p_TextureSurface);
+    }
 }
 
 void GameEntity::prepareRects() {

@@ -4,17 +4,17 @@
 class Player : public Tobot::Core::GameEntity {
     public:
         Player() : GameEntity("player", 50, 50) {
-            this->setTexture(Tobot::Core::AssetManager::loadTexture("assets/inspirational_picture.png"));
+            this->setTexture(Tobot::Core::AssetManager::loadTextureScurface("assets/inspirational_picture.png"));
         }
 
         void update() override {
         }
 };
 
-class Background :  public Tobot::Core::GameEntity {
+class Background : public Tobot::Core::GameEntity {
     public:
         Background() : GameEntity("background", 0, 0) {
-            this->setTexture(Tobot::Core::AssetManager::loadTexture("assets/main_menu_background.png"));
+            this->setTexture(Tobot::Core::AssetManager::loadTextureScurface("assets/main_menu_background.png"));
         }
 
         void update() override {

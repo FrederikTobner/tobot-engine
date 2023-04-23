@@ -1,6 +1,15 @@
-add_executable("${PROJECT_NAME}-editor" main.cpp)
+set(TOBOT_EDITOR_SOURCE_FILES
+main.cpp
+menu_bar.cpp
+)
 
-target_link_libraries("${PROJECT_NAME}-editor" imgui SDL2::SDL2main SDL2::SDL2-static)
+set(TOBOT_EDITOR_HEADER_FILES
+menu_bar.h
+)
+
+add_executable("${PROJECT_NAME}-editor" ${TOBOT_EDITOR_SOURCE_FILES} ${TOBOT_EDITOR_HEADER_FILES})
+
+target_link_libraries("${PROJECT_NAME}-editor" imgui ${PROJECT_NAME})
 
 target_include_directories("${PROJECT_NAME}-editor" PUBLIC 
 ${PROJECT_SOURCE_DIR}/deps/imgui/imgui_dir 

@@ -6,6 +6,7 @@ set(TOBOT_CORE_SOURCES
 "game_entity.cpp"
 "render_object.cpp"
 "scene.cpp"
+"scene_manager.cpp"
 "sub_system_manager.cpp"
 "layer.cpp"
 "tobot_application.cpp"

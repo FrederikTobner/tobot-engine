@@ -46,12 +46,8 @@ enable_testing()
 add_subdirectory(packages)
 
 if(BUILD_SDL)
-    # SDL2 deps
-    add_subdirectory(deps/SDL)
-    add_subdirectory(deps/SDL_image)
-    add_subdirectory(deps/SDL_ttf)
-    add_subdirectory(deps/SDL_mixer)
-    add_subdirectory(deps/imgui)
+    # SDL2 deps and imgui
+   add_subdirectory(deps)
 endif()
 
 add_subdirectory(editor)

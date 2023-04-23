@@ -1,3 +1,4 @@
+# imgui doesn't have a CMakeLists.txt, so we have to create one ourselves
 set(IMGUI_SOURCES
 imgui_dir/imconfig.h 
 imgui_dir/imgui.h 

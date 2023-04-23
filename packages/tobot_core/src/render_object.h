@@ -7,11 +7,16 @@
 namespace Tobot::Core {
     class RenderObject {
         private:
+            /// @brief The id of the object
             const char * m_Id;
+            /// @brief The position of the object
             Tobot::Math::Vector2D<float> m_Position;
+            /// @brief Determines if the object should be rendered
             bool m_Visible;
 
         protected:
+            /// @brief Changes the visibility of the object
+            /// @param visible The new visibility
             void setVisible(bool visible);
 
             /// @brief Just for Testing purposes

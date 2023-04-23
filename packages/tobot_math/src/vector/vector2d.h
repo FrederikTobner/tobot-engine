@@ -217,8 +217,9 @@ namespace Tobot::Math {
     template <typename T>
         requires ArithmeticFloatingPoint<T>
     Vector2D<T> & Vector2D<T>::operator/=(T const scalar) {
-        this->x /= scalar;
-        this->y /= scalar;
+        T factor = 1.0 / scalar;
+        this->x *= factor;
+        this->y *= factor;
         return *this;
     }
 

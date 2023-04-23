@@ -5,10 +5,16 @@
 
 #include <stdio.h>
 
+#include "menu_bar.h"
+
 #if !SDL_VERSION_ATLEAST(2, 0, 17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
+/// @brief Handle events from SDL
+/// @param event The event to handle
+/// @param done The boolean to set to true if the user wants to quit
+/// @param window The window to handle events for
 void handleEvents(SDL_Event & event, bool & done, SDL_Window * window) {
     while (SDL_PollEvent(&event)) {
         ImGui_ImplSDL2_ProcessEvent(&event);
@@ -22,7 +28,10 @@ void handleEvents(SDL_Event & event, bool & done, SDL_Window * window) {
     }
 }
 
-// Main code
+/// @brief Main entry point
+/// @param argc The number of arguments
+/// @param argv The arguments
+/// @return 0 on success, -1 on failure
 int main(int argc, char ** argv) {
     // Seting up SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
@@ -36,9 +45,10 @@ int main(int argc, char ** argv) {
 #endif
 
     // Create window with SDL_Renderer graphics context
-    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    SDL_WindowFlags window_flags =
+        (SDL_WindowFlags)(SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_VULKAN | SDL_WINDOW_MAXIMIZED);
     SDL_Window * window =
-        SDL_CreateWindow("Tobot-Editor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
+        SDL_CreateWindow("Tobot-Editor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1800, 1000, window_flags);
     SDL_Surface * window_icon_scurface = SDL_LoadBMP("./assets/icon.bmp");
     if (!window_icon_scurface) {
         printf("Failed to load window icon %s\n", SDL_GetError());
@@ -70,7 +80,6 @@ int main(int argc, char ** argv) {
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
     ImGui_ImplSDLRenderer_Init(renderer);
-
     // Load Fonts
     // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use
     // ImGui::PushFont()/PopFont() to select them.
@@ -96,6 +105,7 @@ int main(int argc, char ** argv) {
     // Our state
     bool show_demo_window = true;
     bool show_another_window = false;
+    bool show_tobot_help = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // Main loop
@@ -116,7 +126,7 @@ int main(int argc, char ** argv) {
         ImGui_ImplSDLRenderer_NewFrame();
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
-
+        Tobot::Editor::createMenuBar(done, show_tobot_help);
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its
         // code to learn more about Dear ImGui!).
         if (show_demo_window) {
@@ -127,8 +137,8 @@ int main(int argc, char ** argv) {
         {
             static float f = 0.0f;
             static int counter = 0;
-
-            ImGui::Begin("Hello, world!"); // Create a window called "Hello, world!" and append into it.
+            // Create a window called "Hello, world!" and append into it.
+            ImGui::Begin("Hello, world!");
 
             ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
             ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
@@ -160,11 +170,20 @@ int main(int argc, char ** argv) {
             ImGui::End();
         }
 
+        // 4. Show the about tobot window
+        if (show_tobot_help) {
+            // Create a window called Tobot - Engine
+            ImGui::Begin("Tobot-Engine", &show_tobot_help);
+            ImGui::TextUnformatted(
+                "Authors: Julian Otto, Frederik Tobner\n Rendering implemented using SDL2 and ImGui\n");
+            ImGui::End();
+        }
+
         // Rendering
         ImGui::Render();
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-        SDL_SetRenderDrawColor(renderer, (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255),
-                               (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
+        SDL_SetRenderDrawColor(renderer, (uint8_t)(clear_color.x * 255), (uint8_t)(clear_color.y * 255),
+                               (uint8_t)(clear_color.z * 255), (uint8_t)(clear_color.w * 255));
         SDL_RenderClear(renderer);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
         SDL_RenderPresent(renderer);
