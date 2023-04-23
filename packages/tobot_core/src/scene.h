@@ -9,10 +9,30 @@
 #include "render_object.h"
 
 namespace Tobot::Core {
+
+    /// @brief A hash function for strings that can be used in unordered_map.
+    struct string_hash {
+            using hash_type = std::hash<std::string_view>;
+            using is_transparent = void;
+
+            std::size_t operator()(const char * str) const {
+                return hash_type{}(str);
+            }
+            std::size_t operator()(std::string_view str) const {
+                return hash_type{}(str);
+            }
+            std::size_t operator()(std::string const & str) const {
+                return hash_type{}(str);
+            }
+    };
+
+    /// @brief A scene is a collection of layers that are rendered on the screen.
+    ///@details These layers can contain game entities. The scene is responsible for the lifecycle of the game entities.
+    ///It is also responsible for the lifecycle of the layers.
     class Scene {
         private:
             char const * m_BaseLayerId = "baseLayer";
-            std::unordered_map<char const *, Layer *> m_Layers;
+            std::unordered_map<std::string, Layer *, string_hash, std::equal_to<>> m_Layers;
 
         protected:
             char const * m_Id;

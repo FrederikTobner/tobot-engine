@@ -1,6 +1,28 @@
 #include "tobot_engine.h"
 #include "tobot_tooling.h"
 
+class Soldier : public Tobot::Core::GameEntity {
+    public:
+        Soldier() : GameEntity("soldier", 10, 10) {
+            this->setTexture(Tobot::Core::AssetManager::loadTextureScurface("assets/Player_gold.png"));
+        }
+
+        void update() override {
+            this->incrementPosition();
+        }
+};
+
+class Weapon : public Tobot::Core::GameEntity {
+    public:
+        Weapon() : GameEntity("weapon", 10, 10) {
+            this->setTexture(Tobot::Core::AssetManager::loadTextureScurface("assets/Weapon_Parazoinium.png"));
+        }
+
+        void update() override {
+            this->incrementPosition();
+        }
+};
+
 class Player : public Tobot::Core::GameEntity {
     public:
         Player() : GameEntity("player", 50, 50) {
@@ -45,10 +67,14 @@ class IntroductionScene : public Tobot::Core::Scene {
             // Layers, Widgets, RenderObjects
             LOG_INFO("MainMenu::onCreate");
             Tobot::Core::Layer * layer = new Tobot::Core::Layer("foreground", 1);
+            Tobot::Core::Layer * playerLayer = new Tobot::Core::Layer("playerLayer", 2);
             this->addLayer(layer);
+            this->addLayer(playerLayer);
 
             this->add(new Background());
             this->add("foreground", new Player());
+            this->add("playerLayer", new Soldier());
+            this->add("playerLayer", new Weapon());
         }
 
         void onDestroy() override {

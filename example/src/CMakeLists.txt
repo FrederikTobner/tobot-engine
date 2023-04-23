@@ -11,3 +11,5 @@ target_include_directories("${PROJECT_NAME}_Example" PUBLIC "${SOURCE_PATH_CORE}
 # Copies assets to the build dir
 FILE(COPY ../assets/inspirational_picture.png DESTINATION "${CMAKE_BINARY_DIR}/example/src/assets")
 FILE(COPY ../assets/main_menu_background.png DESTINATION "${CMAKE_BINARY_DIR}/example/src/assets")
+FILE(COPY ../assets/Player_gold.png DESTINATION "${CMAKE_BINARY_DIR}/example/src/assets")
+FILE(COPY ../assets/Weapon_Parazoinium.png DESTINATION "${CMAKE_BINARY_DIR}/example/src/assets")

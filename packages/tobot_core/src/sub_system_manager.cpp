@@ -14,6 +14,15 @@
 using namespace Tobot::Core;
 using namespace Tobot::Tooling::Logging;
 
+typedef enum {
+    SDL_CORE = BIT(0),
+    SDL_IMAGE = BIT(1),
+    SDL_MIXER = BIT(2),
+    SDL_TTF = BIT(3)
+} InitialzedSubSystems;
+
+static uint8_t initialized_sub_systems = 0;
+
 int Tobot::Core::subSystemsInitialize(uint32_t flags) {
     uint32_t sdl_core_init_flags;
     if (flags & SDL_CORE_INIT_TIMER) {
@@ -40,9 +49,12 @@ int Tobot::Core::subSystemsInitialize(uint32_t flags) {
     if (flags & SDL_CORE_INIT_SENSOR) {
         sdl_core_init_flags |= SDL_INIT_SENSOR;
     }
-    if (SDL_Init(sdl_core_init_flags) < 0) {
-        LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        return -1;
+    if (sdl_core_init_flags) {
+        if (SDL_Init(sdl_core_init_flags) < 0) {
+            LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+            return -1;
+        }
+        initialized_sub_systems |= SDL_CORE;
     }
 
     uint32_t sdl_image_init_flags = 0;
@@ -64,10 +76,13 @@ int Tobot::Core::subSystemsInitialize(uint32_t flags) {
     if (flags & SDL_IMAGE_INIT_AVIF) {
         sdl_image_init_flags |= IMG_INIT_AVIF;
     }
-    if (IMG_Init(sdl_image_init_flags) < 0) {
-        LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        SDL_Quit();
-        return -1;
+    if (sdl_image_init_flags) {
+        initialized_sub_systems |= SDL_IMAGE;
+        if (IMG_Init(sdl_image_init_flags) < 0) {
+            LOG_CRITICAL("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+            SDL_Quit();
+            return -1;
+        }
     }
 
     if (flags & SDL_TTF_INIT) {
@@ -77,6 +92,7 @@ int Tobot::Core::subSystemsInitialize(uint32_t flags) {
             SDL_Quit();
             return -1;
         }
+        initialized_sub_systems |= SDL_TTF;
     }
 
     uint32_t sdl_mixxer_init_flags = 0;
@@ -101,21 +117,32 @@ int Tobot::Core::subSystemsInitialize(uint32_t flags) {
     if (flags & SDL_MIXER_INIT_WAVPACK) {
         sdl_mixxer_init_flags |= MIX_INIT_WAVPACK;
     }
-    if (!Mix_Init(sdl_mixxer_init_flags)) {
-        LOG_CRITICAL("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
-        if (flags & SDL_TTF_INIT) {
-            TTF_Quit();
+    if (sdl_mixxer_init_flags) {
+        if (!Mix_Init(sdl_mixxer_init_flags)) {
+            LOG_CRITICAL("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+            if (flags & SDL_TTF_INIT) {
+                TTF_Quit();
+            }
+            IMG_Quit();
+            SDL_Quit();
+            return -1;
         }
-        IMG_Quit();
-        SDL_Quit();
-        return -1;
+        initialized_sub_systems |= SDL_MIXER;
     }
     return 0;
 }
 
 void Tobot::Core::subSystemsQuit() {
-    IMG_Quit();
-    TTF_Quit();
-    Mix_Quit();
-    SDL_Quit();
+    if (initialized_sub_systems & SDL_MIXER) {
+        Mix_Quit();
+    }
+    if (initialized_sub_systems & SDL_TTF) {
+        TTF_Quit();
+    }
+    if (initialized_sub_systems & SDL_IMAGE) {
+        IMG_Quit();
+    }
+    if (initialized_sub_systems & SDL_CORE) {
+        SDL_Quit();
+    }
 }
