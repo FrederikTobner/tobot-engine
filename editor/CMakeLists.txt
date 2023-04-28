@@ -1,9 +1,11 @@
 set(TOBOT_EDITOR_SOURCE_FILES
+event_handler.cpp
 main.cpp
 menu_bar.cpp
 )
 
 set(TOBOT_EDITOR_HEADER_FILES
+event_handler.h
 menu_bar.h
 )
 

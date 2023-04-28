@@ -8,6 +8,7 @@
 // C standard library dependecies
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
 
 // C++ standard library dependecies
 #include <iostream>

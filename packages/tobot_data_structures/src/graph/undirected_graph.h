@@ -27,7 +27,6 @@ namespace Tobot::DataStructures {
                 os << "Edges: " << graph.edges << std::endl;
                 os << "Connected Components: " << graph.connected_components << std::endl;
                 os << "Cycles: " << graph.cycles << std::endl;
-                return os;
             }
 
             void addCycle(T vertex1, T vertex2);

@@ -1,9 +1,10 @@
 set(TOBOT_MATH_HEADER_FILES
 "concepts.h"
 "dimension.h"
+"gradient2D.h"
 "matrix.h"
 "plane.h"
-"point2D.h"
+"point2d.h"
 "include/tobot_math.h"
 "shape/circle.h"
 "shape/polygon.h"
@@ -21,7 +22,7 @@ set_target_properties(tobot-math PROPERTIES LINKER_LANGUAGE CXX)
 
 # Includes Libmath under unix-like systems
 if(UNIX)
-    target_link_libraries(tobot-math m)
+    target_link_libraries(tobot-math INTERFACE m)
 endif()
 
 # Precompiles dependencies to speed up compilation of the target

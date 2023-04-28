@@ -26,7 +26,6 @@ namespace Tobot::Math {
             /// @brief Appends the dimension to the ostream
             friend std::ostream operator<<(std::ostream & os, Dimension<T> const & dim) {
                 os << "(" << dim.width << ", " << dim.height << ")";
-                return os;
             }
             bool operator==(Dimension<T> const & dim) const;
             bool operator!=(Dimension<T> const & dim) const;

@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <iostream>
-
 namespace Tobot::Tooling::Test {
 #define TOBOT_TEST(testsuiteName, testName, ...)                                        \
     static_assert(sizeof(#testsuiteName) > 1, "The test suite name must not be empty"); \

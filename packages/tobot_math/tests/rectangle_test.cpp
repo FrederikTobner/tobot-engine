@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "point2D.h"
+#include "point2d.h"
 #include "shape/rectangle.h"
 
 using namespace Tobot::Math;

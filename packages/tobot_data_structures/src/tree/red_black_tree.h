@@ -49,6 +49,7 @@ namespace Tobot::DataStructures::Tree {
             friend std::ostream & operator<<(std::ostream & os, RedBlackTree<T> const & tree) {
                 TraverseInOrder(tree.root, [&os](T value) { os << value << ", "; });
             }
+            // We need to adapt our iterators to C++ 20 - https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/
             class iterator : public std::iterator<std::input_iterator_tag, T> {
                 public:
                     iterator(Node * node, Node * nil) {

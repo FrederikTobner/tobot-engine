@@ -5,10 +5,8 @@
 #include "scene_manager.h"
 #include "sub_system_manager.h"
 #include "tobot_tooling.h"
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <SDL_ttf.h>
+// SDL
+#include "SDL.h"
 
 using namespace Tobot::Core;
 using namespace Tobot::Tooling::Logging;
@@ -24,20 +22,21 @@ TobotApplication::~TobotApplication() {
 
 void TobotApplication::initialize() {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
-    LOG_INFO("\n  _______    _           _     ______             _            \n\
+    LOG_INFO("%s", "\n  _______    _           _     ______             _            \n\
  |__   __|  | |         | |   |  ____|           (_)           \n\
     | | ___ | |__   ___ | |_  | |__   _ __   __ _ _ _ __   ___ \n\
     | |/ _ \\| '_ \\ / _ \\| __| |  __| | '_ \\ / _` | | '_ \\ / _ \\\n\
     | | (_) | |_) | (_) | |_  | |____| | | | (_| | | | | |  __/\n\
     |_|\\___/|_.__/ \\___/ \\__| |______|_| |_|\\__, |_|_| |_|\\___|\n\
                                              __/ |             \n\
-                                            |___/              ");
-    // Initialize SDL subsystems
-    if (subSystemsInitialize(SDL_CORE_INIT_EVERYTHING | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
+                                            |___/");
+    // Initialize SDL subsystems - we need to adapt this so we initialize all the subsystems that are needed without any unnecassary subsystems
+    if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
         exit(ExitCode::SOFTWARE.getCode());
     }
     this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                       this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN);
+    // The framerate should be configurable - vsync should be an option not the default
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 

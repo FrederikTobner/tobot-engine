@@ -12,5 +12,12 @@
 // Has to come after windows.h dependency
 #include <psapi.h>
 #elif defined(OS_UNIX_LIKE)
+#include <dirent.h>
 #include <unistd.h>
+#endif
+
+// Linux specific dependencies
+#ifdef OS_LINUX
+#include <sys/types.h>
+#include <sys/stat.h>
 #endif

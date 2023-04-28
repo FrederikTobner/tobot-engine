@@ -6,27 +6,13 @@
 #include <stdio.h>
 
 #include "menu_bar.h"
+#include "event_handler.h"
 
 #if !SDL_VERSION_ATLEAST(2, 0, 17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
-/// @brief Handle events from SDL
-/// @param event The event to handle
-/// @param done The boolean to set to true if the user wants to quit
-/// @param window The window to handle events for
-void handleEvents(SDL_Event & event, bool & done, SDL_Window * window) {
-    while (SDL_PollEvent(&event)) {
-        ImGui_ImplSDL2_ProcessEvent(&event);
-        if (event.type == SDL_QUIT) {
-            done = true;
-        }
-        if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE &&
-            event.window.windowID == SDL_GetWindowID(window)) {
-            done = true;
-        }
-    }
-}
+
 
 /// @brief Main entry point
 /// @param argc The number of arguments
@@ -120,7 +106,7 @@ int main(int argc, char ** argv) {
         // clear/overwrite your copy of the keyboard data. Generally you may always pass all inputs to dear imgui,
         // and hide them from your application based on those two flags.
         SDL_Event event;
-        handleEvents(event, done, window);
+        Tobot::Editor::handleEvents(event, done, window);
 
         // Start the Dear ImGui frame
         ImGui_ImplSDLRenderer_NewFrame();

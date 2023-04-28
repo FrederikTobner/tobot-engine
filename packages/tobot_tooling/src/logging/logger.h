@@ -358,9 +358,11 @@ namespace Tobot::Tooling::Logging {
             template <typename... Args>
             void log(LogPriority log_priority, char const * format, Args... args) {
                 if (this->priority <= log_priority) {
+                    #ifdef COMPILER_MSVC
                     std::scoped_lock lock(log_mutex);
-                    std::time_t current_time = std::time(0);
-                    std::tm * timestamp = std::localtime(&current_time);
+                    #endif
+                    time_t current_time = time(0);
+                    tm * timestamp = localtime(&current_time);
                     char buffer[80];
                     strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
                     std::cout << buffer << " - [";
@@ -413,9 +415,11 @@ namespace Tobot::Tooling::Logging {
             void log(int line_number, char const * source_file, LogPriority log_priority, char const * format,
                      Args... args) {
                 if (this->priority <= log_priority) {
+                    #ifdef OS_WINDOWS
                     std::scoped_lock lock(log_mutex);
-                    std::time_t current_time = std::time(0);
-                    std::tm * timestamp = std::localtime(&current_time);
+                    #endif
+                    time_t current_time = time(0);
+                    tm * timestamp = localtime(&current_time);
                     char buffer[80];
                     strftime(buffer, 80, this->get_Instance().timeStampFormat, timestamp);
                     std::cout << buffer << " - [";

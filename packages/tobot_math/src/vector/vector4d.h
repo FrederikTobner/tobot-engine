@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pre_compiled_header.h"
+#include "../pre_compiled_header.h"
 
 #include "../concepts.h"
 #include "vector.h"
@@ -100,7 +100,6 @@ namespace Tobot::Math {
             /// @return std::ostream The output stream
             friend std::ostream operator<<(std::ostream & os, Vector4D<T> const & vec) {
                 os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ", " << vec.w << ")";
-                return os;
             }
 
             inline T Magnitude();
@@ -276,7 +275,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -306,7 +305,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -336,7 +335,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -366,7 +365,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 

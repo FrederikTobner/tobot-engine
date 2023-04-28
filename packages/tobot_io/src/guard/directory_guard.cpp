@@ -6,6 +6,7 @@ int Tobot::IO::Directory::ensure_directory_exists(char const * folderPath) {
 #ifdef OS_WINDOWS
     DWORD dataWordAttribute = GetFileAttributes(folderPath);
     if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {
+        // If the directory does not exists we need to create it
         CreateDirectory(LOGS_FOLDER_PATH, NULL);
         dataWordAttribute = GetFileAttributes(folderPath);
         if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {

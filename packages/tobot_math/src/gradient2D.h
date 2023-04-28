@@ -3,7 +3,7 @@
 #include "pre_compiled_header.h"
 
 #include "concepts.h"
-#include "point2D.h"
+#include "point2d.h"
 
 namespace Tobot::Math {
     /// @brief Models a linear slope or gradient in 2D space
@@ -37,7 +37,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param m_slope The slope of the gradient
     /// @param m_yIntercept The y-intercept of the gradient
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     Gradient2D<T>::Gradient2D(T m_slope, T m_yIntercept) {
         this->m_slope = m_slope;
@@ -47,7 +47,7 @@ namespace Tobot::Math {
     /// @brief Copy constructor
     /// @tparam T The type of the gradient
     /// @param gradient The gradient to copy
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     Gradient2D<T>::Gradient2D(Gradient2D<T> const & gradient) {
         this->m_slope = gradient.m_slope;
@@ -57,7 +57,7 @@ namespace Tobot::Math {
     /// @brief Move constructor
     /// @tparam T The type of the gradient
     /// @param gradient The gradient to move
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     Gradient2D<T>::Gradient2D(Gradient2D<T> && gradient) noexcept {
         this->m_slope = std::move(gradient.m_slope);
@@ -66,7 +66,7 @@ namespace Tobot::Math {
 
     /// @brief Destructor
     /// @tparam T The type of the gradient
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     Gradient2D<T>::~Gradient2D() {
     }
@@ -75,7 +75,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param x The x coordinate
     /// @return The y coordinate
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     T Gradient2D<T>::at(T x) const {
         return m_slope * x + m_yIntercept;
@@ -85,7 +85,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param gradient The gradient to compare to
     /// @return True if the gradients are equal, false otherwise
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     bool Gradient2D<T>::operator==(Gradient2D<T> const & gradient) const {
         return this->m_slope == gradient.m_slope && this->m_yIntercept == gradient.m_yIntercept;
@@ -95,7 +95,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param gradient The gradient to compare to
     /// @return True if the gradients are not equal, false otherwise
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     bool Gradient2D<T>::operator!=(Gradient2D<T> const & gradient) const {
         return !(*this == gradient);
@@ -104,7 +104,7 @@ namespace Tobot::Math {
     /// @brief Gets the slope of the gradient
     /// @tparam T The type of the gradient
     /// @return The slope of the gradient
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     T & Gradient2D<T>::getSlope() {
         return m_slope;
@@ -113,7 +113,7 @@ namespace Tobot::Math {
     /// @brief Gets the slope of the gradient
     /// @tparam T The type of the gradient
     /// @return The slope of the gradient
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     const T & Gradient2D<T>::getSlope() const {
         return m_slope;
@@ -122,7 +122,7 @@ namespace Tobot::Math {
     /// @brief Gets the y-intercept of the gradient
     /// @tparam T The type of the gradient
     /// @return The y-intercept of the gradient
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     T & Gradient2D<T>::getYIntercept() {
         return m_yIntercept;
@@ -131,7 +131,7 @@ namespace Tobot::Math {
     /// @brief Gets the y-intercept of the gradient
     /// @tparam T The type of the gradient
     /// @return The y-intercept of the gradient
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     const T & Gradient2D<T>::getYIntercept() const {
         return m_yIntercept;
@@ -141,7 +141,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param intersection The gradient to check for intersection
     /// @return true if the gradients intersect, false otherwise
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     bool Gradient2D<T>::intersects(Gradient2D<T> const & intersection) const {
         // If the slopes are equal, then the gradients are parallel and do not intersect
@@ -152,7 +152,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param intersection The point to check for intersection
     /// @return true if the gradient intersects the point, false otherwise
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     bool Gradient2D<T>::intersects(Point2D<T> & intersection) const {
         if (this->at(intersection.x) == intersection.y) {
@@ -165,7 +165,7 @@ namespace Tobot::Math {
     /// @tparam T The type of the gradient
     /// @param gradient The gradient to check for intersection
     /// @return The point of intersection between the gradients, or a nullpointer, if the gradients do not intersect
-    template <typename T = float>
+    template <typename T>
         requires ArithmeticFloatingPoint<T>
     Point2D<T> * Gradient2D<T>::intersection(Gradient2D<T> const & gradient) const {
         // If the gradients are parallel, then there is no intersection

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../concepts.h"
-#include "pre_compiled_header.h"
+#include "../pre_compiled_header.h"
 
 namespace Tobot::Math {
     template <typename T>
