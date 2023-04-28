@@ -26,7 +26,7 @@ FILE(COPY fonts/Roboto-Medium.ttf DESTINATION "${CMAKE_BINARY_DIR}/editor/fonts"
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Install destinations
-    install(TARGETS ${PROJECT_NAME} DESTINATION editor)
+    install(TARGETS "${PROJECT_NAME}-editor" DESTINATION editor)
     # Adding window icon
     install(FILES ${PROJECT_SOURCE_DIR}/assets/icon.bmp DESTINATION editor/assets)
     # Adding font

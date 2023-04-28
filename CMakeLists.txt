@@ -47,9 +47,11 @@ add_subdirectory(packages)
 if(INCLUDE_DEPS)
     # SDL2 deps and imgui
    add_subdirectory(deps)
+   # We can only build the editor if SDL and imgui have been built
+   add_subdirectory(editor)
 endif()
 
-add_subdirectory(editor)
+
 
 # Doesn't work if we build the lib as a dll for some reason
 if(NOT BUILD_CORE_SHARED)
