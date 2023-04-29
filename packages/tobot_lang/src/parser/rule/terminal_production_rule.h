@@ -13,6 +13,7 @@ namespace Tobot::Language {
             TerminalProductionRule(T2 type, T1 tokenType);
             ~TerminalProductionRule();
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
+            virtual T2 getType();
 
         private:
             T2 type;
@@ -39,4 +40,11 @@ namespace Tobot::Language {
         }
         return false;
     }
+
+    template <typename T1, typename T2>
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    T2 TerminalProductionRule<T1, T2>::getType() {
+        return this->type;
+    }
+
 } // namespace Tobot::Language

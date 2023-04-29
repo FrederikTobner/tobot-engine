@@ -1,11 +1,13 @@
 #include "tobot_application.h"
 
+// Tobot dependencies
 #include "exitcode.h"
 #include "project_config.h"
 #include "scene_manager.h"
 #include "sub_system_manager.h"
 #include "tobot_tooling.h"
-// SDL
+
+// SDL dependencies
 #include "SDL.h"
 
 using namespace Tobot::Core;
@@ -22,7 +24,7 @@ TobotApplication::~TobotApplication() {
 
 void TobotApplication::initialize() {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
-    LOG_INFO("%s", "\n  _______    _           _     ______             _            \n\
+    LOG_INFO("\n  _______    _           _     ______             _            \n\
  |__   __|  | |         | |   |  ____|           (_)           \n\
     | | ___ | |__   ___ | |_  | |__   _ __   __ _ _ _ __   ___ \n\
     | |/ _ \\| '_ \\ / _ \\| __| |  __| | '_ \\ / _` | | '_ \\ / _ \\\n\
@@ -30,17 +32,20 @@ void TobotApplication::initialize() {
     |_|\\___/|_.__/ \\___/ \\__| |______|_| |_|\\__, |_|_| |_|\\___|\n\
                                              __/ |             \n\
                                             |___/");
-    // Initialize SDL subsystems - we need to adapt this so we initialize all the subsystems that are needed without any unnecassary subsystems
+    // Initialize SDL subsystems - we need to adapt this so we initialize all the subsystems that are needed without any
+    // unnecassary subsystems
     if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
         exit(ExitCode::SOFTWARE.getCode());
     }
-    this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                      this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN);
+    // We use vulkan right now - we should make this configurable
+    this->p_Window =
+        SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                         this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN | SDL_WINDOW_VULKAN);
     // The framerate should be configurable - vsync should be an option not the default
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 
-    // TODO: Maybe call call this when onApplicationCreate will be a thing
+    // TODO: Maybe call this when onApplicationCreate will be a thing
     this->p_CurrentScene->onCreate();
     this->p_CurrentScene->prepareTextures(this->p_Renderer);
 }

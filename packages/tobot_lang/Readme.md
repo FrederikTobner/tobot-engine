@@ -21,4 +21,4 @@ What is still needed:
 
 * A rule to model a logical OR and AND connection between a group of sub-rules
 * A specification how we will implement backtracking if a parsing rule partially matches the input
-* A specification how the grammer definition will look like. Should it be a seperate file or should we do it c++ directly?
+* A specification how the grammer definition will look like. This should probably be done in a seperate file that is used to create a pasring tree.

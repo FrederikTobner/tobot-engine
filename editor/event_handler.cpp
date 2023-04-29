@@ -1,5 +1,7 @@
 #include "event_handler.h"
 
+#include "imgui_impl_sdl2.h"
+
 /// @brief Handle events from SDL
 /// @param event The event to handle
 /// @param done The boolean to set to true if the user wants to quit

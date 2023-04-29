@@ -15,6 +15,7 @@ namespace Tobot::Language {
             ProductionRule();
             virtual ~ProductionRule();
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current) = 0;
+            virtual T2 getType() = 0;
     };
 
     /// @brief Creates a new parsing rule

@@ -7,6 +7,7 @@
 
 // C standard library dependecies
 #include <stdio.h>
+#include <string.h>
 
 // C++ standard library dependecies
 #include <atomic>
@@ -14,6 +15,7 @@
 #include <mutex>
 #include <sstream>
 #include <string>
+
 // C++ standard library dependecies from the C library
 #include <ctime>
 

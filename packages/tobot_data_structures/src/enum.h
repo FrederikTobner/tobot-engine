@@ -39,7 +39,7 @@
             static Enum const * const values() {                                                             \
                 return s_values;                                                                             \
             }                                                                                                \
-            /* We need to adapt our iterators to C++ 20 - https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/ */ \
+            /* We need to adapt our iterators to C++ 17 - https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/ */ \
             class iterator : public std::iterator<std::input_iterator_tag, Enum, Enum, Enum const *, Enum> { \
                 private:                                                                                     \
                     Enum beginn = static_cast<Enum>(0);                                                      \

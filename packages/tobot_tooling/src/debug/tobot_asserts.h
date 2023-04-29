@@ -4,10 +4,11 @@
  */
 
 #pragma once
+
+#include "../pre_compiled_header.h"
+
 namespace Tobot::Tooling::Debug {
-// Asserts are only defined for debug builds
-#include <iostream>
-#include <string.h>
+    // Asserts are only defined for debug builds
 
 #if defined(COMPILER_MSVC)
 /* MSVC does not include the path by default */ /**Filename macro - filename without the path */ \

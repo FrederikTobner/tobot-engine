@@ -49,11 +49,11 @@ class BlankScene : public Tobot::Core::Scene {
         }
 
         void onCreate() override {
-            LOG_INFO("%s", "BlankScene::onCreate");
+            LOG_INFO("BlankScene::onCreate");
         }
 
         void onDestroy() override {
-            LOG_INFO("%s", "BlankScene::onDestroy");
+            LOG_INFO("BlankScene::onDestroy");
         }
 };
 
@@ -65,7 +65,7 @@ class IntroductionScene : public Tobot::Core::Scene {
 
         void onCreate() override {
             // Layers, Widgets, RenderObjects
-            LOG_INFO("%s", "MainMenu::onCreate");
+            LOG_INFO("MainMenu::onCreate");
             Tobot::Core::Layer * layer = new Tobot::Core::Layer("foreground", 1);
             Tobot::Core::Layer * playerLayer = new Tobot::Core::Layer("playerLayer", 2);
             this->addLayer(layer);

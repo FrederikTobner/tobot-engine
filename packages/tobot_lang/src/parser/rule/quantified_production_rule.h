@@ -23,6 +23,7 @@ namespace Tobot::Language {
             QuantifiedProductionRule(std::pair<ProductionRule<T1, T2>, RegexQuantifier> rule, T2 type);
             ~QuantifiedProductionRule();
             virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
+            virtual T2 getType();
 
         private:
             std::vector<std::pair<ProductionRule<T1, T2>, RegexQuantifier>> rule;
@@ -35,6 +36,7 @@ namespace Tobot::Language {
                               std::size_t count);
             bool applyBetween(std::vector<Token<T1>> tokens, std::size_t & current, ProductionRule<T1, T2> rule,
                               std::size_t min, std::size_t max);
+            T2 type;
     };
 
     /// @brief Creates a new quantified parsing rule
@@ -214,6 +216,12 @@ namespace Tobot::Language {
         }
         current = start;
         return false;
+    }
+
+    template <typename T1, typename T2>
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    T2 QuantifiedProductionRule<T1, T2>::getType() {
+        return type;
     }
 
 } // namespace Tobot::Language

@@ -49,9 +49,14 @@ namespace Tobot::Language {
     Tree<std::pair<T1, T2>> Parser<T1, T2>::parse(std::vector<Token<T1>> tokens) {
         start = current = 0;
         end = 0;
-        Tree<std::pair<T1, T2>> * tree = new Tree<std::pair<T1, T2>>();
-        // TODO: Implement parsing
-
+        Tree<std::pair<T1, T2>> * tree = nullptr;
+        // We need to create the tree with the tokens, so we propably need to pass in our tree and the tokens
+        if (this->grammer->getRoot()->getValue()->apply(tokens, current)) {
+            tree = new Tree(new TreeNode<std::pair<T1, T2>>(
+                std::make_pair(tokens[start].getType(), this->grammer->getRoot()->getValue()->getType())));
+        } else {
+            reportError("Could not parse token sequence", current, tokens);
+        }
         return *tree;
     }
 

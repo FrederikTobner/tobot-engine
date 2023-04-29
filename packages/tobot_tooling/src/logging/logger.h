@@ -7,20 +7,19 @@
 
 /// @brief The logging namespace
 namespace Tobot::Tooling::Logging {
-#define LOG_TRACE(format, ...)    (Tobot::Tooling::Logging::Logger::Trace(format, __VA_ARGS__))
-#define LOG_DEBUG(format, ...)    (Tobot::Tooling::Logging::Logger::Debug(format, __VA_ARGS__))
-#define LOG_INFO(format, ...)     (Tobot::Tooling::Logging::Logger::Info(format, __VA_ARGS__))
-#define LOG_WARN(format, ...)     (Tobot::Tooling::Logging::Logger::Warn(format, __VA_ARGS__))
-#define LOG_ERROR(format, ...)    (Tobot::Tooling::Logging::Logger::Error(format, __VA_ARGS__))
-#define LOG_CRITICAL(format, ...) (Tobot::Tooling::Logging::Logger::Critical(format, __VA_ARGS__))
+#define LOG_TRACE(...)       (Tobot::Tooling::Logging::Logger::Trace(__VA_ARGS__))
+#define LOG_DEBUG(...)       (Tobot::Tooling::Logging::Logger::Debug(__VA_ARGS__))
+#define LOG_INFO(...)        (Tobot::Tooling::Logging::Logger::Info(__VA_ARGS__))
+#define LOG_WARN(...)        (Tobot::Tooling::Logging::Logger::Warn(__VA_ARGS__))
+#define LOG_ERROR(...)       (Tobot::Tooling::Logging::Logger::Error(__VA_ARGS__))
+#define LOG_CRITICAL(...)    (Tobot::Tooling::Logging::Logger::Critical(__VA_ARGS__))
 
-#define LOG_TRACE_AT(format, ...) (Tobot::Tooling::Logging::Logger::Trace(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_DEBUG_AT(format, ...) (Tobot::Tooling::Logging::Logger::Debug(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_INFO_AT(format, ...)  (Tobot::Tooling::Logging::Logger::Info(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_WARN_AT(format, ...)  (Tobot::Tooling::Logging::Logger::Warn(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_ERROR_AT(format, ...) (Tobot::Tooling::Logging::Logger::Error(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_CRITICAL_AT(format, ...) \
-    (Tobot::Tooling::Logging::Logger::Critical(__LINE__, __FILE__, format, __VA_ARGS__))
+#define LOG_TRACE_AT(...)    (Tobot::Tooling::Logging::Logger::Trace(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_DEBUG_AT(...)    (Tobot::Tooling::Logging::Logger::Debug(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_INFO_AT(...)     (Tobot::Tooling::Logging::Logger::Info(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_WARN_AT(...)     (Tobot::Tooling::Logging::Logger::Warn(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_ERROR_AT(...)    (Tobot::Tooling::Logging::Logger::Error(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_CRITICAL_AT(...) (Tobot::Tooling::Logging::Logger::Critical(__LINE__, __FILE__, __VA_ARGS__))
 
     /// @brief The loglevel priorities that are avialable
     enum LogPriority {
@@ -358,9 +357,9 @@ namespace Tobot::Tooling::Logging {
             template <typename... Args>
             void log(LogPriority log_priority, char const * format, Args... args) {
                 if (this->priority <= log_priority) {
-                    #ifdef COMPILER_MSVC
+#ifdef COMPILER_MSVC
                     std::scoped_lock lock(log_mutex);
-                    #endif
+#endif
                     time_t current_time = time(0);
                     tm * timestamp = localtime(&current_time);
                     char buffer[80];
@@ -415,9 +414,9 @@ namespace Tobot::Tooling::Logging {
             void log(int line_number, char const * source_file, LogPriority log_priority, char const * format,
                      Args... args) {
                 if (this->priority <= log_priority) {
-                    #ifdef OS_WINDOWS
+#ifdef OS_WINDOWS
                     std::scoped_lock lock(log_mutex);
-                    #endif
+#endif
                     time_t current_time = time(0);
                     tm * timestamp = localtime(&current_time);
                     char buffer[80];
