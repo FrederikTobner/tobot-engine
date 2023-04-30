@@ -7,22 +7,22 @@ using namespace Tobot::Core;
     this->m_Layers[this->m_BaseLayerId] = baseLayer;
 }
 
-void Scene::add(GameEntity * gameEntity) {
+auto Scene::add(GameEntity * gameEntity) -> void {
     this->m_Layers.at(this->m_BaseLayerId)->entities[gameEntity->getId()] = gameEntity;
 }
 
-void Scene::add(char const * layerId, GameEntity * gameEntity) {
+auto Scene::add(char const * layerId, GameEntity * gameEntity) -> void {
     if (!this->m_Layers.contains(layerId)) {
         throw std::runtime_error("Layer not found");
     }
     this->m_Layers.at(layerId)->entities.insert(std::make_pair(gameEntity->getId(), gameEntity));
 }
 
-void Scene::addLayer(Layer * layer) {
+auto Scene::addLayer(Layer * layer) -> void {
     this->m_Layers[layer->id.c_str()] = layer;
 }
 
-void Scene::prepareTextures(SDL_Renderer * renderer) {
+auto Scene::prepareTextures(SDL_Renderer * renderer) -> void {
     for (auto [layerId, layer] : this->m_Layers) {
         for (auto [enitityId, entity] : layer->entities) {
             entity->initializeTexture(renderer);
@@ -30,7 +30,7 @@ void Scene::prepareTextures(SDL_Renderer * renderer) {
     }
 }
 
-void Scene::update() {
+auto Scene::update() -> void {
     // We should sort the layers by their order using a binary search tree instead of the unordered_map
     // Another option is to use a std::vector and use the order as the index.
     // Looking up layers by the name could be slow by iterating through the vector, because that is not a priority.
@@ -54,7 +54,7 @@ void Scene::update() {
     }
 }
 
-void Scene::render(SDL_Renderer * renderer) {
+auto Scene::render(SDL_Renderer * renderer) -> void {
     // We should sort the layers by their order using a binary search tree instead of the unordered_map
     // Another option is to use a std::vector and use the order as the index.
     // Looking up layers by the name could be slow by iterating through the vector, because that is not a priority.
@@ -79,7 +79,7 @@ void Scene::render(SDL_Renderer * renderer) {
     }
 }
 
-void Scene::destroy(char const * id) {
+auto Scene::destroy(char const * id) -> void {
     for (auto [layerId, layer] : this->m_Layers) {
         for (auto [enitityId, entity] : layer->entities) {
             if (enitityId == id) {
@@ -89,7 +89,7 @@ void Scene::destroy(char const * id) {
     }
 }
 
-void Scene::destroyAll() {
+auto Scene::destroyAll() -> void {
     for (auto [layerId, layer] : this->m_Layers) {
         for (auto [enitityId, entity] : layer->entities) {
             entity->dispose();

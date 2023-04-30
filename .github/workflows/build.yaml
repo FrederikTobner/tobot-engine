@@ -24,10 +24,34 @@ jobs:
 
     strategy:
       matrix:
-        operatingsystems: [windows-latest] 
+        operatingsystems: [windows-latest, ubuntu-latest] 
         buildtypes: [Release] 
 
     steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    
+    - name: Setup Linux dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install \
+          cmake \
+          file \
+          fonts-dejavu-core \
+          libfreetype-dev \
+          libharfbuzz-dev \
+          libflac-dev \
+          libfluidsynth-dev \
+          libgme-dev \
+          libmpg123-dev \
+          libopusfile-dev \
+          libvorbis-dev \
+          libxmp-dev \
+          libwavpack-dev \
+          pkg-config \
+          ${NULL+}
     - uses: actions/checkout@v3
       with:
         submodules: recursive
