@@ -17,3 +17,6 @@
 [submodule "deps/imgui/imgui_dir"]
 	path = deps/imgui/imgui_dir
 	url = https://github.com/ocornut/imgui
+[submodule "deps/SDL_net"]
+	path = deps/SDL_net
+	url = https://github.com/libsdl-org/SDL_net
