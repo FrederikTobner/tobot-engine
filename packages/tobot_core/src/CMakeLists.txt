@@ -38,9 +38,9 @@ endif()
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
-target_include_directories(tobot-core PUBLIC ./ ../../../deps/SDL/include ../../../deps/SDL_image/ ../../../deps/SDL_mixer/include ../../../deps/SDL_ttf/)
+target_include_directories(tobot-core PUBLIC ./ ../../../deps/SDL/include ../../../deps/SDL_image/ ../../../deps/SDL_mixer/include ../../../deps/SDL_ttf/ ../../../deps/SDL_net/)
 
-target_link_libraries(tobot-core SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math tobot-data-structures)
+target_link_libraries(tobot-core SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_net::SDL2_net-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math tobot-data-structures)
 
 # for including the project_config.h file
 target_include_directories(tobot-core PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_core/src ${SOURCE_PATH_TOOLING}/include ${SOURCE_PATH_MATH}/include ${SOURCE_PATH_DATA_STRUCTURES}/include)

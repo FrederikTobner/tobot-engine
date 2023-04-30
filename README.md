@@ -12,7 +12,7 @@ A simple game engine built on top of SDL2.
 
 ## Overview
 
-Tobot is a simple game engine that is built on top of SDL2. It is designed to be simple and easy to use. The engine is written in C++ and provides an editor that was implemented using imgui.
+Tobot is a simple game engine that is built on top of SDL. It is designed to be simple and easy to use. The engine is written in C++ and provides an editor that was implemented using imgui.
 
 ## Architecture
 
@@ -31,11 +31,12 @@ This project is licensed under the [GNU General Public License](LICENSE)
 
 The engine has the following external dependencies
 
-* SDL2
-* SDL2_Image
-* SDL2_Mixer
-* SDL2_ttf
-* Imgui
+* [SDL](https://github.com/libsdl-org/SDL)
+* [SDL_Image](https://github.com/libsdl-org/SDL_image)
+* [SDL_Mixer](https://github.com/libsdl-org/SDL_mixer)
+* [SDL_ttf](https://github.com/libsdl-org/SDL_ttf)
+* [SDL_net](https://github.com/libsdl-org/SDL_net)
+* [Imgui](https://github.com/ocornut/imgui)
 
 ## Building from source
 

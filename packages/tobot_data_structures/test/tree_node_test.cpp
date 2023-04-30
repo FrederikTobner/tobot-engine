@@ -27,7 +27,6 @@ TEST(TreeNode, CanBeCreatedWithValueAndChild) {
     TreeNode<int> * leChild = new TreeNode<int>(2);
     TreeNode<int> * leNode = new TreeNode<int>(1, {leChild});
     ASSERT_EQ(leNode->getChildren()[0]->getValue(), 2);
-    delete leChild;
     delete leNode;
 }
 

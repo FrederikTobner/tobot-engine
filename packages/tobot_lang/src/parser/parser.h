@@ -44,7 +44,7 @@ namespace Tobot::Language {
         std::size_t start, current, end;
         start = current = end = 0;
         Tree<std::pair<T1, T2>> * tree = nullptr;
-        // We need to create the tree with the tokens, so we propably need to pass in our tree and the tokens
+        // The tree should be made up by parsing contexts not by the type of the token and the type of the expression
         if (this->grammer->getRoot()->getValue()->apply(tokens, current)) {
             tree = new Tree(new TreeNode<std::pair<T1, T2>>(
                 std::make_pair(tokens[start].getType(), this->grammer->getRoot()->getValue()->getType())));
