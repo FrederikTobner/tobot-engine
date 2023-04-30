@@ -27,10 +27,7 @@ jobs:
         operatingsystems: [windows-latest, ubuntu-latest] 
         buildtypes: [Release] 
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
+    steps:    
     
     - name: Setup Linux dependencies
       if: runner.os == 'Linux'
@@ -50,14 +47,25 @@ jobs:
           libvorbis-dev \
           libxmp-dev \
           libwavpack-dev \
+          ninja-build \
           pkg-config \
           ${NULL+}
+    
     - uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    - name: Configure CMake
+    # Under Windows we are using Visual Studio as the Generator
+    - name: Configure CMake under Windows
+      if: runner.os == 'Windows'
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    - name: Building Core
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target tobot-core
+    # Under Linux we are using Ninja
+    - name: Configure CMake under Linux
+      if: runner.os == 'Linux'
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja
+
+    - name: Building Tobot
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    
