@@ -67,7 +67,7 @@ namespace Tobot::Math {
     /// @param rotation Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(T x, T y, T width, T height, T rotation)
+    [[nodiscard]] Rectangle2D<T>::Rectangle2D(T x, T y, T width, T height, T rotation)
         : center(x, y), width(width), height(height), rotation(rotation) {
     }
 
@@ -76,7 +76,7 @@ namespace Tobot::Math {
     /// @param list List of values to initialize the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(std::initializer_list<T> list) {
+    [[nodiscard]] Rectangle2D<T>::Rectangle2D(std::initializer_list<T> list) {
         if (list.size() != 5) {
             throw std::invalid_argument("Invalid number of arguments");
         }
@@ -96,7 +96,8 @@ namespace Tobot::Math {
     /// @param rotation Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(Point2D<T> const & center, T const & width, T const & height, T const & rotation)
+    [[nodiscard]] Rectangle2D<T>::Rectangle2D(Point2D<T> const & center, T const & width, T const & height,
+                                              T const & rotation)
         : center(center), width(width), height(height), rotation(rotation) {
     }
 
@@ -105,7 +106,7 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(Rectangle2D<T> const & rectangle)
+    [[nodiscard]] Rectangle2D<T>::Rectangle2D(Rectangle2D<T> const & rectangle)
         : center(rectangle.center), width(rectangle.width), height(rectangle.height), rotation(rectangle.rotation) {
     }
 
@@ -114,7 +115,7 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to move
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T>::Rectangle2D(Rectangle2D<T> && rectangle) noexcept
+    [[nodiscard]] Rectangle2D<T>::Rectangle2D(Rectangle2D<T> && rectangle) noexcept
         : center(std::move(rectangle.center)), width(std::move(rectangle.width)), height(std::move(rectangle.height)),
           rotation(std::move(rectangle.rotation)) {
     }
@@ -153,7 +154,7 @@ namespace Tobot::Math {
     /// @return True if the two rectangles are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const {
+    [[nodiscard]] bool Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const {
         return center == rectangle.center && width == rectangle.width && height == rectangle.height &&
                rotation == rectangle.rotation;
     }
@@ -164,7 +165,7 @@ namespace Tobot::Math {
     /// @return True if the two rectangles are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const {
+    [[nodiscard]] bool Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const {
         return center != rectangle.center || width != rectangle.width || height != rectangle.height ||
                rotation != rectangle.rotation;
     }
@@ -174,7 +175,7 @@ namespace Tobot::Math {
     /// @return Center of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> Rectangle2D<T>::getCenter() const {
+    [[nodiscard]] Point2D<T> Rectangle2D<T>::getCenter() const {
         return center;
     }
 
@@ -183,7 +184,7 @@ namespace Tobot::Math {
     /// @return Width of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Rectangle2D<T>::getWidth() const {
+    [[nodiscard]] T Rectangle2D<T>::getWidth() const {
         return width;
     }
 
@@ -192,7 +193,7 @@ namespace Tobot::Math {
     /// @return Height of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Rectangle2D<T>::getHeight() const {
+    [[nodiscard]] T Rectangle2D<T>::getHeight() const {
         return height;
     }
 
@@ -201,7 +202,7 @@ namespace Tobot::Math {
     /// @return Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Rectangle2D<T>::getRotation() const {
+    [[nodiscard]] T Rectangle2D<T>::getRotation() const {
         return rotation;
     }
 
@@ -210,7 +211,7 @@ namespace Tobot::Math {
     /// @return Area of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Rectangle2D<T>::getArea() const {
+    [[nodiscard]] T Rectangle2D<T>::getArea() const {
         return width * height;
     }
 
@@ -219,7 +220,7 @@ namespace Tobot::Math {
     /// @return Perimeter of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Rectangle2D<T>::getPerimeter() const {
+    [[nodiscard]] T Rectangle2D<T>::getPerimeter() const {
         return 2 * (width + height);
     }
 
@@ -229,7 +230,7 @@ namespace Tobot::Math {
     /// @return True if the point is inside the rectangle, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Rectangle2D<T>::contains(Point2D<T> const & point) const {
+    [[nodiscard]] bool Rectangle2D<T>::contains(Point2D<T> const & point) const {
         return rotation == 0.0
                    ? point.getX() >= center.getX() - width / 2 && point.getX() <= center.getX() + width / 2 &&
                          point.getY() >= center.getY() - height / 2 && point.getY() <= center.getY() + height / 2

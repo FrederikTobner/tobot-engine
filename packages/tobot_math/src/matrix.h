@@ -89,7 +89,7 @@ namespace Tobot::Math {
     /// @tparam n The number of coloumns in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n>::Matrix() : rowsCount(m), columnsCount(n) {
+    [[nodiscard]] Matrix<T, m, n>::Matrix() : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
     }
 
@@ -100,7 +100,7 @@ namespace Tobot::Math {
     /// @param mat The matrix to copy
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n>::Matrix(const Matrix<T, m, n> & mat) : rowsCount(m), columnsCount(n) {
+    [[nodiscard]] Matrix<T, m, n>::Matrix(const Matrix<T, m, n> & mat) : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
         m_matrix = mat.m_matrix;
     }
@@ -112,7 +112,7 @@ namespace Tobot::Math {
     /// @param mat The matrix to move
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n>::Matrix(Matrix<T, m, n> && mat) : rowsCount(m), columnsCount(n) {
+    [[nodiscard]] Matrix<T, m, n>::Matrix(Matrix<T, m, n> && mat) : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
         m_matrix = std::move(mat.m_matrix);
     }
@@ -127,7 +127,7 @@ namespace Tobot::Math {
      */
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
+    [[nodiscard]] Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
 
         // check that the matrix invariants are satisfied
         static_assert(m > 0 && n > 0);
@@ -154,7 +154,7 @@ namespace Tobot::Math {
     /// @param list The list of values to construct the matrix from
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n>::Matrix(std::initializer_list<T> list) : rowsCount(m), columnsCount(n) {
+    [[nodiscard]] Matrix<T, m, n>::Matrix(std::initializer_list<T> list) : rowsCount(m), columnsCount(n) {
 
         static_assert(m > 0 && n > 0);
         if (list.size() == 0) {
@@ -174,7 +174,7 @@ namespace Tobot::Math {
 
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n>::Matrix(std::array<std::array<T, n>, m> mat) : rowsCount(m), columnsCount(n) {
+    [[nodiscard]] Matrix<T, m, n>::Matrix(std::array<std::array<T, n>, m> mat) : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
         m_matrix = mat;
     }
@@ -193,7 +193,7 @@ namespace Tobot::Math {
     /// @return T& The value at the specified row and coloumn
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) {
+    [[nodiscard]] inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) {
         assert(i < m && j < n);
         return this->m_matrix[i][j];
     }
@@ -207,7 +207,7 @@ namespace Tobot::Math {
     /// @return T& The value at the specified row and coloumn
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
+    [[nodiscard]] inline T & Matrix<T, m, n>::operator()(std::size_t i, std::size_t j) const {
         assert(i < m && j < n);
         return this->m_matrix[i][j];
     }
@@ -219,7 +219,7 @@ namespace Tobot::Math {
     /// @param mat The matrix to copy
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator=(const Matrix<T, m, n> & mat) {
+    [[nodiscard]] Matrix<T, m, n> & Matrix<T, m, n>::operator=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] = mat[i][j];
@@ -236,7 +236,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator=(Matrix<T, m, n> && mat) {
+    [[nodiscard]] Matrix<T, m, n> & Matrix<T, m, n>::operator=(Matrix<T, m, n> && mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] = std::move(mat[i][j]);
@@ -247,7 +247,7 @@ namespace Tobot::Math {
 
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> Matrix<T, m, n>::operator+(const Matrix<T, m, n> & mat) const {
+    [[nodiscard]] Matrix<T, m, n> Matrix<T, m, n>::operator+(const Matrix<T, m, n> & mat) const {
         std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -259,7 +259,7 @@ namespace Tobot::Math {
 
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> Matrix<T, m, n>::operator-(const Matrix<T, m, n> & mat) const {
+    [[nodiscard]] Matrix<T, m, n> Matrix<T, m, n>::operator-(const Matrix<T, m, n> & mat) const {
         std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -277,7 +277,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The product of the matrix and the scalar
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> Matrix<T, m, n>::operator*(const T & scalar) const {
+    [[nodiscard]] Matrix<T, m, n> Matrix<T, m, n>::operator*(const T & scalar) const {
         std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -295,7 +295,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The quotient of the matrix and the scalar
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> Matrix<T, m, n>::operator/(const T & scalar) const {
+    [[nodiscard]] Matrix<T, m, n> Matrix<T, m, n>::operator/(const T & scalar) const {
         std::array<std::array<T, n>, m> result;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -313,7 +313,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator+=(const Matrix<T, m, n> & mat) {
+    [[nodiscard]] Matrix<T, m, n> & Matrix<T, m, n>::operator+=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 m_matrix[i][j] += mat(i, j);
@@ -330,7 +330,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator-=(const Matrix<T, m, n> & mat) {
+    [[nodiscard]] Matrix<T, m, n> & Matrix<T, m, n>::operator-=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] -= mat[i][j];
@@ -347,7 +347,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const T & scalar) {
+    [[nodiscard]] Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const T & scalar) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] *= scalar;
@@ -364,7 +364,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> & A reference to the moved matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const Matrix<T, m, n> & mat) {
+    [[nodiscard]] Matrix<T, m, n> & Matrix<T, m, n>::operator*=(const Matrix<T, m, n> & mat) {
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
                 this->m_matrix[i][j] *= mat[i][j];
@@ -382,7 +382,7 @@ namespace Tobot::Math {
     /// @return false If the matrices are not equal
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline bool Matrix<T, m, n>::operator==(const Matrix<T, m, n> & mat) const {
+    [[nodiscard]] inline bool Matrix<T, m, n>::operator==(const Matrix<T, m, n> & mat) const {
         for (std::size_t i = 0; i < columnsCount; i++) {
             for (std::size_t j = 0; j < rowsCount; j++) {
                 if (this->m_matrix[i][j] != mat.m_matrix[i][j]) {
@@ -395,7 +395,7 @@ namespace Tobot::Math {
 
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline Matrix<T, m, n> Matrix<T, m, n>::operator!() {
+    [[nodiscard]] inline Matrix<T, m, n> Matrix<T, m, n>::operator!() {
         return this->inverse();
     }
 
@@ -408,7 +408,7 @@ namespace Tobot::Math {
     /// @return false If the matrices are equal
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline bool Matrix<T, m, n>::operator!=(const Matrix<T, m, n> & mat) const {
+    [[nodiscard]] inline bool Matrix<T, m, n>::operator!=(const Matrix<T, m, n> & mat) const {
         return !(*this == mat);
     }
 
@@ -419,7 +419,7 @@ namespace Tobot::Math {
     /// @return std::size_t The number of rows in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline std::size_t & Matrix<T, m, n>::getRows() {
+    [[nodiscard]] inline std::size_t & Matrix<T, m, n>::getRows() {
         return this->rowsCount;
     }
 
@@ -430,7 +430,7 @@ namespace Tobot::Math {
     /// @return std::size_t The number of coloumns in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline std::size_t & Matrix<T, m, n>::getColoumns() {
+    [[nodiscard]] inline std::size_t & Matrix<T, m, n>::getColoumns() {
         return this->columnsCount;
     }
 
@@ -441,7 +441,7 @@ namespace Tobot::Math {
     /// @return T The determinant of the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline T Matrix<T, m, n>::determinant() const {
+    [[nodiscard]] inline T Matrix<T, m, n>::determinant() const {
         static_assert(m == n, "Matrix must be square");
         if constexpr (m == 1) {
             return this->m_matrix[0][0];
@@ -465,7 +465,7 @@ namespace Tobot::Math {
     /// @return T The cofactor of the matrix at the specified row and coloumn
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline T Matrix<T, m, n>::cofactor(std::size_t i, std::size_t j) const {
+    [[nodiscard]] inline T Matrix<T, m, n>::cofactor(std::size_t i, std::size_t j) const {
         static_assert(m == n, "Matrix must be square");
         assert(i < m && j < n);
         return std::pow(-1, i + j) * this->minor(i, j);
@@ -484,7 +484,7 @@ namespace Tobot::Math {
      */
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline T Matrix<T, m, n>::minor(std::size_t i, std::size_t j) const {
+    [[nodiscard]] inline T Matrix<T, m, n>::minor(std::size_t i, std::size_t j) const {
         static_assert(m == n, "Matrix must be square");
         assert(i < m && j < n);
         Matrix<T, m - 1, n - 1> minor;
@@ -512,7 +512,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The inverse of the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline Matrix<T, m, n> Matrix<T, m, n>::inverse() {
+    [[nodiscard]] inline Matrix<T, m, n> Matrix<T, m, n>::inverse() {
         static_assert(m == n, "Matrix must be square");
         std::array<std::array<T, n>, m> inverted;
         T det = this->determinant();
@@ -531,7 +531,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The transpose of the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline Matrix<T, m, n> Matrix<T, m, n>::transpose() const {
+    [[nodiscard]] inline Matrix<T, m, n> Matrix<T, m, n>::transpose() const {
         Matrix<T, m, n> transpose;
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {
@@ -548,7 +548,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The adjoint of the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    inline Matrix<T, m, n> Matrix<T, m, n>::adjoint() const {
+    [[nodiscard]] inline Matrix<T, m, n> Matrix<T, m, n>::adjoint() const {
         static_assert(m == n, "Matrix must be square");
         Matrix<T, m, n> adjoint;
         for (std::size_t i = 0; i < rowsCount; i++) {
@@ -566,7 +566,7 @@ namespace Tobot::Math {
     /// @return Matrix<T, m, n> The identity matrix of the same size as the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    Matrix<T, m, n> Matrix<T, m, n>::identity() const {
+    [[nodiscard]] Matrix<T, m, n> Matrix<T, m, n>::identity() const {
         Matrix<T, m, n> identity(*this->m_matrix);
         for (std::size_t i = 0; i < rowsCount; i++) {
             for (std::size_t j = 0; j < columnsCount; j++) {

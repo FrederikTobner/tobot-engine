@@ -12,8 +12,8 @@ namespace Tobot::Language {
         public:
             TerminalProductionRule(T2 type, T1 tokenType);
             ~TerminalProductionRule();
-            virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
-            virtual T2 getType();
+            virtual auto apply(std::vector<Token<T1>> tokens, std::size_t & current) -> bool;
+            virtual auto getType() -> T2;
 
         private:
             T2 type;
@@ -21,7 +21,7 @@ namespace Tobot::Language {
     };
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    TerminalProductionRule<T1, T2>::TerminalProductionRule(T2 type, T1 tokenType) {
+    [[nodiscard]] TerminalProductionRule<T1, T2>::TerminalProductionRule(T2 type, T1 tokenType) {
         this->type = type;
         this->tokenType = tokenType;
     }
@@ -33,7 +33,8 @@ namespace Tobot::Language {
 
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    bool TerminalProductionRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+    [[nodiscard]] auto TerminalProductionRule<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current)
+        -> bool {
         if (tokens[current].getType() == this->tokenType) {
             current++;
             return true;
@@ -43,7 +44,7 @@ namespace Tobot::Language {
 
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    T2 TerminalProductionRule<T1, T2>::getType() {
+    [[nodiscard]] auto TerminalProductionRule<T1, T2>::getType() -> T2 {
         return this->type;
     }
 

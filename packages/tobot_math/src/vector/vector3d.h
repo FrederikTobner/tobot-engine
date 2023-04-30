@@ -127,7 +127,7 @@ namespace Tobot::Math {
     /// @param z The z component of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
+    [[nodiscard]] Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
     }
 
     /// @brief Constructs a new Vector3D object
@@ -135,12 +135,12 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
+    [[nodiscard]] Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T>::Vector3D(Vector3D && vec) : x(vec.x), y(vec.y), z(vec.z) {
+    [[nodiscard]] Vector3D<T>::Vector3D(Vector3D && vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
     /// @brief Constructs a new Vector3D object
@@ -148,7 +148,7 @@ namespace Tobot::Math {
     /// @param list The list of components of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T>::Vector3D(std::initializer_list<T> list) {
+    [[nodiscard]] Vector3D<T>::Vector3D(std::initializer_list<T> list) {
         if (list.size() != 3) {
             throw std::invalid_argument("The list must have exactly 3 elements");
         }
@@ -241,7 +241,7 @@ namespace Tobot::Math {
     /// @return T& The component at the specified index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Vector3D<T>::operator()(std::size_t i) {
+    [[nodiscard]] T & Vector3D<T>::operator()(std::size_t i) {
         assert(i < 3);
         switch (i) {
         case 0:
@@ -269,7 +269,7 @@ namespace Tobot::Math {
     /// @return T The component at the specified index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector3D<T>::operator()(std::size_t i) const {
+    [[nodiscard]] T Vector3D<T>::operator()(std::size_t i) const {
         assert(i < 3);
         switch (i) {
         case 0:
@@ -297,7 +297,7 @@ namespace Tobot::Math {
     /// @return T& The component at the specified index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Vector3D<T>::operator[](std::size_t i) {
+    [[nodiscard]] T & Vector3D<T>::operator[](std::size_t i) {
         assert(i < 3);
         switch (i) {
         case 0:
@@ -325,7 +325,7 @@ namespace Tobot::Math {
     /// @return T The component at the specified index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector3D<T>::operator[](std::size_t i) const {
+    [[nodiscard]] T Vector3D<T>::operator[](std::size_t i) const {
         assert(i < 3);
         switch (i) {
         case 0:
@@ -353,7 +353,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Vector3D<T>::operator==(Vector3D<T> const & vec) const {
+    [[nodiscard]] bool Vector3D<T>::operator==(Vector3D<T> const & vec) const {
         return this->x == vec.x && this->y == vec.y && this->z == vec.z;
     }
 
@@ -363,7 +363,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Vector3D<T>::operator!=(Vector3D<T> const & vec) const {
+    [[nodiscard]] bool Vector3D<T>::operator!=(Vector3D<T> const & vec) const {
         return this->x != vec.x || this->y != vec.y || this->z != vec.z;
     }
 
@@ -372,7 +372,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline T Vector3D<T>::Magnitude() {
+    [[nodiscard]] inline T Vector3D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
     }
 
@@ -399,7 +399,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector3D<T>::Dot(Vector3D<T> const & vec) {
+    [[nodiscard]] T Vector3D<T>::Dot(Vector3D<T> const & vec) {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z;
     }
 
@@ -409,7 +409,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The cross product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> Vector3D<T>::Cross(Vector3D<T> const & vec) {
+    [[nodiscard]] Vector3D<T> Vector3D<T>::Cross(Vector3D<T> const & vec) {
         return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
                            this->x * vec.y - this->y * vec.x);
     }

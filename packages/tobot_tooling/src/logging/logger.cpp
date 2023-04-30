@@ -16,7 +16,7 @@ Logger::~Logger() {
     free_file();
 }
 
-void Logger::enable_file_out() {
+auto Logger::enable_file_out() -> void {
     if (Tobot::IO::Directory::ensure_directory_exists(LOGS_FOLDER_PATH)) {
         exit(70);
     }
@@ -32,7 +32,7 @@ void Logger::enable_file_out() {
     enable_file_out(filepath);
 }
 
-void Logger::enable_file_out(char const * filePath) {
+auto Logger::enable_file_out(char const * filePath) -> void {
     if (file) {
         fclose(file);
     }
@@ -42,7 +42,7 @@ void Logger::enable_file_out(char const * filePath) {
     }
 }
 
-void Logger::free_file() {
+auto Logger::free_file() -> void {
     if (file) {
         fclose(file);
         file = NULL;

@@ -111,14 +111,14 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T>::Circle(Point2D<T> const & center, T const & radius) {
+    [[nodiscard]] Circle<T>::Circle(Point2D<T> const & center, T const & radius) {
         m_center = center;
         m_radius = radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T>::Circle(std::initializer_list<T> list) {
+    [[nodiscard]] Circle<T>::Circle(std::initializer_list<T> list) {
         if (list.size() != 3) {
             throw std::invalid_argument("Circle initializer list must have 3 elements");
         }
@@ -130,14 +130,14 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T>::Circle(Circle<T> const & circle) {
+    [[nodiscard]] Circle<T>::Circle(Circle<T> const & circle) {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Circle<T>::Circle(Circle<T> && circle) noexcept {
+    [[nodiscard]] Circle<T>::Circle(Circle<T> && circle) noexcept {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }
@@ -160,49 +160,49 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Circle<T>::operator==(Circle<T> const & circle) const {
+    [[nodiscard]] bool Circle<T>::operator==(Circle<T> const & circle) const {
         return (m_center == circle.m_center) && (m_radius == circle.m_radius);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Circle<T>::operator!=(Circle<T> const & circle) const {
+    [[nodiscard]] bool Circle<T>::operator!=(Circle<T> const & circle) const {
         return (m_center != circle.m_center) || (m_radius != circle.m_radius);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Circle<T>::operator<(Circle<T> const & circle) const {
+    [[nodiscard]] bool Circle<T>::operator<(Circle<T> const & circle) const {
         return m_radius < circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Circle<T>::operator>(Circle<T> const & circle) const {
+    [[nodiscard]] bool Circle<T>::operator>(Circle<T> const & circle) const {
         return m_radius > circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Circle<T>::operator<=(Circle<T> const & circle) const {
+    [[nodiscard]] bool Circle<T>::operator<=(Circle<T> const & circle) const {
         return m_radius <= circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Circle<T>::operator>=(Circle<T> const & circle) const {
+    [[nodiscard]] bool Circle<T>::operator>=(Circle<T> const & circle) const {
         return m_radius >= circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> Circle<T>::center() const {
+    [[nodiscard]] Point2D<T> Circle<T>::center() const {
         return m_center;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Circle<T>::radius() const {
+    [[nodiscard]] T Circle<T>::radius() const {
         return m_radius;
     }
 
@@ -220,21 +220,21 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Circle<T>::getArea() const {
+    [[nodiscard]] T Circle<T>::getArea() const {
         // Area of a circle is pi * radius^2
         return MATH_PI * pow(m_radius, 2);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Circle<T>::getCircumference() const {
+    [[nodiscard]] T Circle<T>::getCircumference() const {
         // Circumference of a circle is 2 * pi * radius
         return 2 * MATH_PI * m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Circle<T>::getDistance(Point2D<T> const & point) const {
+    [[nodiscard]] T Circle<T>::getDistance(Point2D<T> const & point) const {
         // Distance between the points subtracted by the radius of the circle
         // will give the distance from the point to the circle
         return m_center.distance(point) - m_radius;

@@ -89,7 +89,7 @@ namespace Tobot::Math {
     /// @param c The third point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Triangle2D<T>::Triangle2D(Point2D<T> const & a, Point2D<T> const & b, Point2D<T> const & c)
+    [[nodiscard]] Triangle2D<T>::Triangle2D(Point2D<T> const & a, Point2D<T> const & b, Point2D<T> const & c)
         : m_a(a), m_b(b), m_c(c) {
     }
 
@@ -98,7 +98,7 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Triangle2D<T>::Triangle2D(Triangle2D<T> const & triangle)
+    [[nodiscard]] Triangle2D<T>::Triangle2D(Triangle2D<T> const & triangle)
         : m_a(triangle.m_a), m_b(triangle.m_b), m_c(triangle.m_c) {
     }
 
@@ -107,7 +107,7 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to move
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Triangle2D<T>::Triangle2D(Triangle2D<T> && triangle) noexcept
+    [[nodiscard]] Triangle2D<T>::Triangle2D(Triangle2D<T> && triangle) noexcept
         : m_a(std::move(triangle.m_a)), m_b(std::move(triangle.m_b)), m_c(std::move(triangle.m_c)) {
     }
 
@@ -143,7 +143,7 @@ namespace Tobot::Math {
     /// @return True if equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Triangle2D<T>::operator==(Triangle2D<T> const & triangle) const {
+    [[nodiscard]] bool Triangle2D<T>::operator==(Triangle2D<T> const & triangle) const {
         return m_a == triangle.m_a && m_b == triangle.m_b && m_c == triangle.m_c;
     }
 
@@ -153,7 +153,7 @@ namespace Tobot::Math {
     /// @return True if not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Triangle2D<T>::operator!=(Triangle2D<T> const & triangle) const {
+    [[nodiscard]] bool Triangle2D<T>::operator!=(Triangle2D<T> const & triangle) const {
         return !(*this == triangle);
     }
 
@@ -162,7 +162,7 @@ namespace Tobot::Math {
     /// @return First point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> Triangle2D<T>::getA() const {
+    [[nodiscard]] Point2D<T> Triangle2D<T>::getA() const {
         return m_a;
     }
 
@@ -171,7 +171,7 @@ namespace Tobot::Math {
     /// @return Second point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> Triangle2D<T>::getB() const {
+    [[nodiscard]] Point2D<T> Triangle2D<T>::getB() const {
         return m_b;
     }
 
@@ -180,7 +180,7 @@ namespace Tobot::Math {
     /// @return Third point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> Triangle2D<T>::getC() const {
+    [[nodiscard]] Point2D<T> Triangle2D<T>::getC() const {
         return m_c;
     }
 
@@ -189,7 +189,7 @@ namespace Tobot::Math {
     /// @return Area of the triangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Triangle2D<T>::getArea() const {
+    [[nodiscard]] T Triangle2D<T>::getArea() const {
         return 0.5 * m_a.distance(m_b) * m_a.distance(m_c) * std::sin(getAngleA());
     }
 
@@ -198,7 +198,7 @@ namespace Tobot::Math {
     /// @return Perimeter of the triangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Triangle2D<T>::getPerimeter() const {
+    [[nodiscard]] T Triangle2D<T>::getPerimeter() const {
         return m_a.distance(m_b) + m_b.distance(m_c) + m_c.distance(m_a);
     }
 
@@ -207,7 +207,7 @@ namespace Tobot::Math {
     /// @return Angle A of the triangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Triangle2D<T>::getAngleA() const {
+    [[nodiscard]] T Triangle2D<T>::getAngleA() const {
         T a = m_b.distance(m_c);
         T b = m_c.distance(m_a);
         T c = m_a.distance(m_b);
@@ -219,7 +219,7 @@ namespace Tobot::Math {
     /// @return Angle B of the triangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Triangle2D<T>::getAngleB() const {
+    [[nodiscard]] T Triangle2D<T>::getAngleB() const {
         T a = m_b.distance(m_c);
         T b = m_c.distance(m_a);
         T c = m_a.distance(m_b);
@@ -231,7 +231,7 @@ namespace Tobot::Math {
     /// @return Angle C of the triangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Triangle2D<T>::getAngleC() const {
+    [[nodiscard]] T Triangle2D<T>::getAngleC() const {
         T a = m_b.distance(m_c);
         T b = m_c.distance(m_a);
         T c = m_a.distance(m_b);

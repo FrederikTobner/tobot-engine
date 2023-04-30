@@ -18,11 +18,11 @@ SimpleTestRunner::SimpleTestRunner(TestReportProcessor & processor) : processor(
 SimpleTestRunner::~SimpleTestRunner() {
 }
 
-void SimpleTestRunner::addFixture(TestFixture fixture) {
+auto SimpleTestRunner::addFixture(TestFixture fixture) -> void {
     this->fixtureQueue.push(fixture);
 }
 
-void SimpleTestRunner::runAll() {
+auto SimpleTestRunner::runAll() -> void {
     size_t testCount = this->fixtureQueue.size();
     while (!this->fixtureQueue.empty()) {
         this->fixtureQueue.front().runTestCases(this->processor);
@@ -30,7 +30,7 @@ void SimpleTestRunner::runAll() {
     }
 }
 
-SimpleTestRunner & SimpleTestRunner::operator=(SimpleTestRunner const & rhs) {
+auto SimpleTestRunner::operator=(SimpleTestRunner const & rhs) -> SimpleTestRunner & {
     this->fixtureQueue = rhs.fixtureQueue;
     this->processor = rhs.processor;
     return *this;

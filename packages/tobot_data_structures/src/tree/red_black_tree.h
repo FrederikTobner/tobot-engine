@@ -405,7 +405,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value of the node to delete
     /// @return The node with the given value
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::search(T value) {
+    [[nodiscard]] typename RedBlackTree<T>::Node * RedBlackTree<T>::search(T value) {
         Node * x = this->root;
         while (x != this->nil && x->value != value) {
             if (value < x->value) {
@@ -441,7 +441,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the successor of
     /// @return The successor of the given node
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::successor(Node * node) {
+    [[nodiscard]] typename RedBlackTree<T>::Node * RedBlackTree<T>::successor(Node * node) {
         if (node->right != this->nil) {
             return Tobot::DataStructures::Tree::getMinimum(node->right, this->nil);
         }
@@ -458,7 +458,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the predecessor of
     /// @return The predecessor of the given node
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::predecessor(Node * node) {
+    [[nodiscard]] typename RedBlackTree<T>::Node * RedBlackTree<T>::predecessor(Node * node) {
         if (node->left != this->nil) {
             return Tobot::DataStructures::Tree::getMaximum(node->left, this->nil);
         }
@@ -538,7 +538,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @return The amount of nodes in the tree
     template <typename T>
-    std::size_t RedBlackTree<T>::getSize() {
+    [[nodiscard]] std::size_t RedBlackTree<T>::getSize() {
         std::size_t size = 0;
         traverseInOrder([&size](T value) { size++; });
         return size;

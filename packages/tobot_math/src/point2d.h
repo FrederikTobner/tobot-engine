@@ -103,36 +103,28 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T>::Point2D(T const & x, T const & y) {
+    [[nodiscard]] Point2D<T>::Point2D(T const & x, T const & y) {
         m_x = x;
         m_y = y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T>::Point2D(Point2D<T> const & point) {
+    [[nodiscard]] Point2D<T>::Point2D(Point2D<T> const & point) {
         m_x = point.m_x;
         m_y = point.m_y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T>::Point2D(Point2D<T> && point) noexcept {
+    [[nodiscard]] Point2D<T>::Point2D(Point2D<T> && point) noexcept {
         m_x = point.m_x;
         m_y = point.m_y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> & Point2D<T>::operator=(Point2D<T> const & point) {
-        m_x = point.m_x;
-        m_y = point.m_y;
-        return *this;
-    }
-
-    template <typename T>
-        requires ArithmeticFloatingPoint<T>
-    Point2D<T> & Point2D<T>::operator=(Point2D<T> && point) noexcept {
+    [[nodiscard]] Point2D<T> & Point2D<T>::operator=(Point2D<T> const & point) {
         m_x = point.m_x;
         m_y = point.m_y;
         return *this;
@@ -140,25 +132,33 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Point2D<T>::operator==(Point2D<T> const & point) const {
+    [[nodiscard]] Point2D<T> & Point2D<T>::operator=(Point2D<T> && point) noexcept {
+        m_x = point.m_x;
+        m_y = point.m_y;
+        return *this;
+    }
+
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] bool Point2D<T>::operator==(Point2D<T> const & point) const {
         return (m_x == point.m_x) && (m_y == point.m_y);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Point2D<T>::operator!=(Point2D<T> const & point) const {
+    [[nodiscard]] bool Point2D<T>::operator!=(Point2D<T> const & point) const {
         return (m_x != point.m_x) || (m_y != point.m_y);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::getX() const {
+    [[nodiscard]] T Point2D<T>::getX() const {
         return m_x;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::getY() const {
+    [[nodiscard]] T Point2D<T>::getY() const {
         return m_y;
     }
 
@@ -176,25 +176,25 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distance(Point2D<T> const & point) const {
+    [[nodiscard]] T Point2D<T>::distance(Point2D<T> const & point) const {
         return sqrt(pow(m_x - point.m_x, 2) + pow(m_y - point.m_y, 2));
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distance(T const & x, T const & y) const {
+    [[nodiscard]] T Point2D<T>::distance(T const & x, T const & y) const {
         return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distanceSquared(Point2D<T> const & point) const {
+    [[nodiscard]] T Point2D<T>::distanceSquared(Point2D<T> const & point) const {
         return pow(m_x - point.m_x, 2) + pow(m_y - point.m_y, 2);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distanceSquared(T const & x, T const & y) const {
+    [[nodiscard]] T Point2D<T>::distanceSquared(T const & x, T const & y) const {
         return pow(m_x - x, 2) + pow(m_y - y, 2);
     }
 } // namespace Tobot::Math

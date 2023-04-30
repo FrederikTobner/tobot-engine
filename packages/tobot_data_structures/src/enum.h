@@ -39,7 +39,8 @@
             static Enum const * const values() {                                                             \
                 return s_values;                                                                             \
             }                                                                                                \
-            /* We need to adapt our iterators to C++ 17 - https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/ */ \
+            /* We need to adapt our iterators to C++ 17 -                                                    \
+             * https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/ */                              \
             class iterator : public std::iterator<std::input_iterator_tag, Enum, Enum, Enum const *, Enum> { \
                 private:                                                                                     \
                     Enum beginn = static_cast<Enum>(0);                                                      \
@@ -78,24 +79,24 @@
             static inline Enum const s_values[] = {__VA_ARGS__};                                             \
     };                                                                                                       \
     static_assert(name::COUNT > 0, "The enumeration must have at least one value");                          \
-    name::name(name::Enum value) : m_value(value) {                                                          \
+    [[nodiscard]] name::name(name::Enum value) : m_value(value) {                                            \
     }                                                                                                        \
-    name::name(name const & other) : m_value(other.m_value) {                                                \
+    [[nodiscard]] name::name(name const & other) : m_value(other.m_value) {                                  \
     }                                                                                                        \
-    name::name(name && other) noexcept : m_value(std::move(other.m_value)) {                                 \
+    [[nodiscard]] name::name(name && other) noexcept : m_value(std::move(other.m_value)) {                   \
     }                                                                                                        \
-    name const & name::operator=(name const & other) noexcept {                                              \
+    [[nodiscard]] name const & name::operator=(name const & other) noexcept {                                \
         m_value = other.m_value;                                                                             \
         return *this;                                                                                        \
     }                                                                                                        \
-    name const & name::operator=(name && other) noexcept {                                                   \
+    [[nodiscard]] name const & name::operator=(name && other) noexcept {                                     \
         m_value = std::move(other.m_value);                                                                  \
         return *this;                                                                                        \
     }                                                                                                        \
-    bool name::operator==(name const & other) const {                                                        \
+    [[nodiscard]] bool name::operator==(name const & other) const {                                          \
         return m_value == other.m_value;                                                                     \
     }                                                                                                        \
-    bool name::operator!=(name const & other) const {                                                        \
+    [[nodiscard]] bool name::operator!=(name const & other) const {                                          \
         return m_value != other.m_value;                                                                     \
     }                                                                                                        \
     [[nodiscard]] name::Enum name::get() const {                                                             \

@@ -56,8 +56,8 @@ namespace Tobot::Core {
     /// @brief Initializes the sub systems of the engine.
     /// @param flags The flags that specify which sub systems to initialize.
     /// @return 0 if the initialization was successful, -1 otherwise.
-    int subSystemsInitialize(uint32_t flags);
+    auto subSystemsInitialize(uint32_t flags) -> int;
 
     /// @brief Quits the sub systems of the engine.
-    void subSystemsQuit();
+    auto subSystemsQuit() -> void;
 } // namespace Tobot::Core

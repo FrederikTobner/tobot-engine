@@ -24,7 +24,7 @@ namespace Tobot::Language {
 
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ComplexParsingContext<T1, T2>::ComplexParsingContext(T2 type, std::vector<T1> contexts)
+    [[nodiscard]] ComplexParsingContext<T1, T2>::ComplexParsingContext(T2 type, std::vector<T1> contexts)
         : ParsingContext<T1, T2>(type) {
         this->type = type;
         this->contexts = contexts;

@@ -12,14 +12,15 @@ namespace Tobot::Language {
         public:
             Lexer(std::vector<TokenizationRule<T>> rules);
             ~Lexer();
-            std::vector<Token<T>> tokenize(std::string source);
+            auto tokenize(std::string source) -> std::vector<Token<T>>;
 
         private:
             /// @brief Rules for tokenizing
             std::vector<TokenizationRule<T>> rules;
-            void skipWhitespace(std::string source, std::size_t & start, std::size_t & line, std::size_t & column);
-            void reportError(std::string message, std::size_t & line, std::size_t & column);
-            bool isAtEnd(std::string source, std::size_t start);
+            auto skipWhitespace(std::string source, std::size_t & start, std::size_t & line, std::size_t & column)
+                -> void;
+            auto reportError(std::string message, std::size_t & line, std::size_t & column) -> void;
+            auto isAtEnd(std::string source, std::size_t start) -> bool;
     };
 
     /// @brief Creates a new lexer
@@ -28,7 +29,7 @@ namespace Tobot::Language {
     /// @param rules Rules for tokenizing
     template <typename T>
         requires std::is_enum_v<T>
-    Lexer<T>::Lexer(std::vector<TokenizationRule<T>> rules) {
+    [[nodiscard]] Lexer<T>::Lexer(std::vector<TokenizationRule<T>> rules) {
         this->rules = rules;
     }
 
@@ -44,7 +45,7 @@ namespace Tobot::Language {
     /// @return A vector of tokens
     template <typename T>
         requires std::is_enum_v<T>
-    std::vector<Token<T>> Lexer<T>::tokenize(std::string source) {
+    [[nodiscard]] auto Lexer<T>::tokenize(std::string source) -> std::vector<Token<T>> {
         std::size_t line = 1;
         std::size_t column = 1;
         std::size_t start = 0;
@@ -84,7 +85,8 @@ namespace Tobot::Language {
     /// @tparam T The type of the token type enum
     template <typename T>
         requires std::is_enum_v<T>
-    void Lexer<T>::skipWhitespace(std::string source, std::size_t & start, std::size_t & line, std::size_t & column) {
+    auto Lexer<T>::skipWhitespace(std::string source, std::size_t & start, std::size_t & line, std::size_t & column)
+        -> void {
         while (!this->isAtEnd(source, start)) {
             if (source[start] == '\n' || source[start] == '\r') {
                 // Increment line and reset column
@@ -109,7 +111,7 @@ namespace Tobot::Language {
     /// @param message The error message
     template <typename T>
         requires std::is_enum_v<T>
-    void Lexer<T>::reportError(std::string message, std::size_t & line, std::size_t & column) {
+    auto Lexer<T>::reportError(std::string message, std::size_t & line, std::size_t & column) -> void {
         std::cout << "Error: " << message << "at line " << line << ", column " << column << std::endl;
     }
 
@@ -118,7 +120,7 @@ namespace Tobot::Language {
     /// @return true if the lexer is at the end of the source code, false otherwise
     template <typename T>
         requires std::is_enum_v<T>
-    bool Lexer<T>::isAtEnd(std::string source, std::size_t start) {
+    [[nodiscard]] auto Lexer<T>::isAtEnd(std::string source, std::size_t start) -> bool {
         return start >= source.length();
     }
 } // namespace Tobot::Language

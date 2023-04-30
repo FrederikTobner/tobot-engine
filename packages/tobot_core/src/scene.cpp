@@ -2,7 +2,7 @@
 
 using namespace Tobot::Core;
 
-Scene::Scene(char const * id) : m_Id(id) {
+[[nodiscard]] Scene::Scene(char const * id) : m_Id(id) {
     Layer * baseLayer = new Layer(this->m_BaseLayerId, 0);
     this->m_Layers[this->m_BaseLayerId] = baseLayer;
 }

@@ -49,21 +49,21 @@ namespace Tobot::Math {
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane() {
+    [[nodiscard]] Plane<T>::Plane() {
     }
 
     /// @brief Constructor
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(T a, T b, T c, T d) : a(a), b(b), c(c), d(d) {
+    [[nodiscard]] Plane<T>::Plane(T a, T b, T c, T d) : a(a), b(b), c(c), d(d) {
     }
 
     /// @brief Constructor
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(Vector3D<T> const & normal, T d) : a(normal(0)), b(normal(1)), c(normal(2)), d(d) {
+    [[nodiscard]] Plane<T>::Plane(Vector3D<T> const & normal, T d) : a(normal(0)), b(normal(1)), c(normal(2)), d(d) {
     }
 
     /// @brief Constructor
@@ -72,7 +72,7 @@ namespace Tobot::Math {
     /// @param point A point on the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(Vector3D<T> const & normal, Vector3D<T> const & point)
+    [[nodiscard]] Plane<T>::Plane(Vector3D<T> const & normal, Vector3D<T> const & point)
         : a(normal(0)), b(normal(1)), c(normal(2)), d(-normal.Dot(point)) {
     }
 
@@ -83,7 +83,7 @@ namespace Tobot::Math {
     /// @param point3 The third point on the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(Vector3D<T> const & point1, Vector3D<T> const & point2, Vector3D<T> const & point3) {
+    [[nodiscard]] Plane<T>::Plane(Vector3D<T> const & point1, Vector3D<T> const & point2, Vector3D<T> const & point3) {
         Vector<T> normal = (point2 - point1).Cross(point3 - point1);
         normal.Normalize();
         a = normal(0);
@@ -92,29 +92,29 @@ namespace Tobot::Math {
         d = -normal.Dot(point1);
     }
 
-    /// @brief Get the distance between the plane and a point
+    /// @brief Copy constructor
     /// @tparam T The type of the plane
     /// @param plane The plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(Plane<T> const & plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
+    [[nodiscard]] Plane<T>::Plane(Plane<T> const & plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
     }
 
-    /// @brief Get the distance between the plane and a point
+    /// @brief Move constructor
     /// @tparam T The type of the plane
     /// @param plane The plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T>::Plane(Plane<T> && plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
+    [[nodiscard]] Plane<T>::Plane(Plane<T> && plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
     }
 
-    /// @brief Get the distance between the plane and a point
+    /// @brief Copy assignment operator
     /// @tparam T The type of the plane
     /// @param plane The plane
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T> & Plane<T>::operator=(Plane<T> const & plane) {
+    [[nodiscard]] Plane<T> & Plane<T>::operator=(Plane<T> const & plane) {
         a = plane.a;
         b = plane.b;
         c = plane.c;
@@ -122,13 +122,13 @@ namespace Tobot::Math {
         return *this;
     }
 
-    /// @brief Get the distance between the plane and a point
+    /// @brief GMove assignment operator
     /// @tparam T The type of the plane
     /// @param plane The plane
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Plane<T> & Plane<T>::operator=(Plane<T> && plane) {
+    [[nodiscard]] Plane<T> & Plane<T>::operator=(Plane<T> && plane) {
         a = plane.a;
         b = plane.b;
         c = plane.c;
@@ -149,7 +149,7 @@ namespace Tobot::Math {
     /// @return The component of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Plane<T>::operator()(std::size_t i) {
+    [[nodiscard]] T & Plane<T>::operator()(std::size_t i) {
         switch (i) {
         case 0:
             return a;
@@ -170,7 +170,7 @@ namespace Tobot::Math {
     /// @return The component of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::operator()(std::size_t i) const {
+    [[nodiscard]] T Plane<T>::operator()(std::size_t i) const {
         switch (i) {
         case 0:
             return a;
@@ -191,7 +191,7 @@ namespace Tobot::Math {
     /// @return The component of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Plane<T>::operator[](std::size_t i) {
+    [[nodiscard]] T & Plane<T>::operator[](std::size_t i) {
         switch (i) {
         case 0:
             return a;
@@ -212,7 +212,7 @@ namespace Tobot::Math {
     /// @return The component of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::operator[](std::size_t i) const {
+    [[nodiscard]] T Plane<T>::operator[](std::size_t i) const {
         switch (i) {
         case 0:
             return a;
@@ -233,7 +233,7 @@ namespace Tobot::Math {
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::distance(Vector3D<T> const & point) const {
+    [[nodiscard]] T Plane<T>::distance(Vector3D<T> const & point) const {
         return a * point(0) + b * point(1) + c * point(2) + d;
     }
 
@@ -242,7 +242,7 @@ namespace Tobot::Math {
     /// @return The normal of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector3D<T> Plane<T>::getNormal() const {
+    [[nodiscard]] Vector3D<T> Plane<T>::getNormal() const {
         return Vector3D<T>(a, b, c);
     }
 
@@ -252,7 +252,7 @@ namespace Tobot::Math {
     /// @return true if the plane is equal to another plane, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Plane<T>::operator==(Plane<T> const & plane) const {
+    [[nodiscard]] bool Plane<T>::operator==(Plane<T> const & plane) const {
         return a == plane.a && b == plane.b && c == plane.c && d == plane.d;
     }
 
@@ -262,31 +262,31 @@ namespace Tobot::Math {
     /// @return true if the plane is not equal to another plane, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Plane<T>::operator!=(Plane<T> const & plane) const {
+    [[nodiscard]] bool Plane<T>::operator!=(Plane<T> const & plane) const {
         return a != plane.a || b != plane.b || c != plane.c || d != plane.d;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::getA() const {
+    [[nodiscard]] T Plane<T>::getA() const {
         return a;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::getB() const {
+    [[nodiscard]] T Plane<T>::getB() const {
         return b;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::getC() const {
+    [[nodiscard]] T Plane<T>::getC() const {
         return c;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Plane<T>::getD() const {
+    [[nodiscard]] T Plane<T>::getD() const {
         return d;
     }
 

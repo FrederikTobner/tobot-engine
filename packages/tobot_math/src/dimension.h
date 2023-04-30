@@ -33,28 +33,28 @@ namespace Tobot::Math {
 
     template <typename T>
         requires Arithmetic<T>
-    Dimension<T>::Dimension() {
+    [[nodiscard]] Dimension<T>::Dimension() {
         width = T();
         height = T();
     }
 
     template <typename T>
         requires Arithmetic<T>
-    Dimension<T>::Dimension(T width, T height) {
+    [[nodiscard]] Dimension<T>::Dimension(T width, T height) {
         this->width = width;
         this->height = height;
     }
 
     template <typename T>
         requires Arithmetic<T>
-    Dimension<T>::Dimension(Dimension<T> const & dim) {
+    [[nodiscard]] Dimension<T>::Dimension(Dimension<T> const & dim) {
         width = dim.width;
         height = dim.height;
     }
 
     template <typename T>
         requires Arithmetic<T>
-    Dimension<T>::Dimension(std::initializer_list<T> list) {
+    [[nodiscard]] Dimension<T>::Dimension(std::initializer_list<T> list) {
         if (list.size() != 2) {
             throw std::invalid_argument("The initializer list must have a size of 2");
         }
@@ -68,7 +68,7 @@ namespace Tobot::Math {
     /// @return true If the dimensions are equal
     template <typename T>
         requires Arithmetic<T>
-    bool Dimension<T>::operator==(Dimension<T> const & dim) const {
+    [[nodiscard]] bool Dimension<T>::operator==(Dimension<T> const & dim) const {
         return width == dim.width && height == dim.height;
     }
 
@@ -78,7 +78,7 @@ namespace Tobot::Math {
     /// @return true If the dimensions are not equal
     template <typename T>
         requires Arithmetic<T>
-    bool Dimension<T>::operator!=(Dimension<T> const & dim) const {
+    [[nodiscard]] bool Dimension<T>::operator!=(Dimension<T> const & dim) const {
         return !(*this == dim);
     }
 } // namespace Tobot::Math

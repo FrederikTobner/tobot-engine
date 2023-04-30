@@ -2,26 +2,26 @@
 
 using namespace Tobot::Core;
 
-void Tobot::Core::RenderObject::setVisible(bool visible) {
+auto Tobot::Core::RenderObject::setVisible(bool visible) -> void {
     this->m_Visible = visible;
 }
 
-void Tobot::Core::RenderObject::incrementPosition() {
+auto Tobot::Core::RenderObject::incrementPosition() -> void {
     this->m_Position += Tobot::Math::Vector2D<float>(1.0, 1.0);
 }
 
-RenderObject::RenderObject(char const * id, int x, int y) : m_Id(id), m_Position(x, y) {
+[[nodiscard]] RenderObject::RenderObject(char const * id, int x, int y) : m_Id(id), m_Position(x, y) {
 }
 
-const char * RenderObject::getId() {
+[[nodiscard]] auto RenderObject::getId() -> const char * {
     return this->m_Id;
 }
 
-Tobot::Math::Vector2D<float> RenderObject::getPosition() {
+auto RenderObject::getPosition() -> Tobot::Math::Vector2D<float> {
     return this->m_Position;
 }
 
-bool Tobot::Core::RenderObject::isVisible() {
+[[nodiscard]] auto Tobot::Core::RenderObject::isVisible() -> bool {
     return this->m_Visible;
 }
 

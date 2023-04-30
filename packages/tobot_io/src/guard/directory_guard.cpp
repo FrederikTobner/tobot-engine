@@ -2,7 +2,7 @@
 
 #include "../pre_compiled_header.h"
 
-int Tobot::IO::Directory::ensure_directory_exists(char const * folderPath) {
+[[nodiscard]] int Tobot::IO::Directory::ensure_directory_exists(char const * folderPath) {
 #ifdef OS_WINDOWS
     DWORD dataWordAttribute = GetFileAttributes(folderPath);
     if (dataWordAttribute == INVALID_FILE_ATTRIBUTES) {

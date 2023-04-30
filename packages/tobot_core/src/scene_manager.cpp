@@ -4,7 +4,7 @@ using namespace Tobot::Core;
 
 template <typename T, typename... TArgs>
     requires BaseOf<T, Tobot::Core::Scene>
-void SceneManager::navigateTo(TArgs &&... args) {
+auto SceneManager::navigateTo(TArgs &&... args) -> void {
     T * scene(new T(std::forward<TArgs>(args)...));
     SceneManager::sp_SceneStack.push(scene);
 }

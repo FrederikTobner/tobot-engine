@@ -20,6 +20,6 @@ namespace Tobot::Core {
             /// @param ...args Constructor arguments of the scene implementation
             template <typename T, typename... TArgs>
                 requires BaseOf<T, Tobot::Core::Scene>
-            static void navigateTo(TArgs &&... args);
+            static auto navigateTo(TArgs &&... args) -> void;
     };
 } // namespace Tobot::Core

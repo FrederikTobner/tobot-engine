@@ -14,7 +14,7 @@ using namespace Tobot::Core;
 using namespace Tobot::Tooling::Logging;
 
 // virtual constructor
-TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
+[[nodiscard]] TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
 }
 
 // virtual destructor
@@ -22,7 +22,7 @@ TobotApplication::~TobotApplication() {
     this->quit();
 }
 
-void TobotApplication::initialize() {
+auto TobotApplication::initialize() -> void {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     LOG_INFO("\n  _______    _           _     ______             _            \n\
  |__   __|  | |         | |   |  ____|           (_)           \n\
@@ -50,7 +50,7 @@ void TobotApplication::initialize() {
     this->p_CurrentScene->prepareTextures(this->p_Renderer);
 }
 
-void TobotApplication::run() {
+auto TobotApplication::run() -> void {
     while (this->m_Running) {
         this->handleEvents();
         this->update();
@@ -58,7 +58,7 @@ void TobotApplication::run() {
     }
 }
 
-void TobotApplication::handleEvents() {
+auto TobotApplication::handleEvents() -> void {
 
     /// If a scene was loaded by the user prepare it for rendering
     if (!Tobot::Core::SceneManager::sp_SceneStack.empty()) {
@@ -94,15 +94,15 @@ void TobotApplication::handleEvents() {
     }
 }
 
-void TobotApplication::update() {
+auto TobotApplication::update() -> void {
     this->p_CurrentScene->update();
 }
 
-void Tobot::Core::TobotApplication::setInitialScene(Scene * scene) {
+auto Tobot::Core::TobotApplication::setInitialScene(Scene * scene) -> void {
     this->p_CurrentScene = scene;
 }
 
-void TobotApplication::render() {
+auto TobotApplication::render() -> void {
     /// TODO: Scene specific background color with enums, reusable in logger maybe?
     SDL_SetRenderDrawColor(this->p_Renderer, 0, 0, 0, 0);
     SDL_RenderClear(this->p_Renderer);
@@ -112,7 +112,7 @@ void TobotApplication::render() {
     SDL_RenderPresent(this->p_Renderer);
 }
 
-void TobotApplication::quit() {
+auto TobotApplication::quit() -> void {
 
     this->p_CurrentScene->onDestroy();
 

@@ -9,10 +9,10 @@ namespace Tobot::Language {
         public:
             Token(T type, std::string lexeme, std::size_t line, std::size_t column);
             ~Token();
-            T const getType();
-            std::string const getLexeme();
-            std::size_t const getLine();
-            std::size_t const getColumn();
+            auto getType() -> T const;
+            auto getLexeme() -> std::string const;
+            auto getLine() -> std::size_t const;
+            auto getColumn() -> std::size_t const;
 
         private:
             T type;
@@ -23,7 +23,7 @@ namespace Tobot::Language {
 
     template <typename T>
         requires std::is_enum_v<T>
-    Token<T>::Token(T type, std::string lexeme, std::size_t line, std::size_t column) {
+    [[nodiscard]] Token<T>::Token(T type, std::string lexeme, std::size_t line, std::size_t column) {
         this->type = type;
         this->lexeme = lexeme;
         this->line = line;
@@ -37,25 +37,25 @@ namespace Tobot::Language {
 
     template <typename T>
         requires std::is_enum_v<T>
-    T const Token<T>::getType() {
+    [[nodiscard]] auto Token<T>::getType() -> T const {
         return this->type;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::string const Token<T>::getLexeme() {
+    [[nodiscard]] auto Token<T>::getLexeme() -> std::string const {
         return this->lexeme;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::size_t const Token<T>::getLine() {
+    [[nodiscard]] auto Token<T>::getLine() -> std::size_t const {
         return this->line;
     }
 
     template <typename T>
         requires std::is_enum_v<T>
-    std::size_t const Token<T>::getColumn() {
+    [[nodiscard]] auto Token<T>::getColumn() -> std::size_t const {
         return this->column;
     }
 } // namespace Tobot::Language

@@ -23,7 +23,7 @@ typedef enum {
 
 static uint8_t initialized_sub_systems = 0;
 
-int Tobot::Core::subSystemsInitialize(uint32_t flags) {
+[[nodiscard]] auto Tobot::Core::subSystemsInitialize(uint32_t flags) -> int {
     uint32_t sdl_core_init_flags;
     if (flags & SDL_CORE_INIT_TIMER) {
         sdl_core_init_flags |= SDL_INIT_TIMER;
@@ -132,7 +132,7 @@ int Tobot::Core::subSystemsInitialize(uint32_t flags) {
     return 0;
 }
 
-void Tobot::Core::subSystemsQuit() {
+auto Tobot::Core::subSystemsQuit() -> void {
     if (initialized_sub_systems & SDL_MIXER) {
         Mix_Quit();
     }

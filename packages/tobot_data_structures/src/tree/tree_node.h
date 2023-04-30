@@ -90,12 +90,12 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    std::vector<TreeNode<T> *> & TreeNode<T>::getChildren() {
+    [[nodiscard]] std::vector<TreeNode<T> *> & TreeNode<T>::getChildren() {
         return this->children;
     }
 
     template <typename T>
-    std::vector<TreeNode<T> *> const & TreeNode<T>::getChildren() const {
+    [[nodiscard]] std::vector<TreeNode<T> *> const & TreeNode<T>::getChildren() const {
         return this->children;
     }
 

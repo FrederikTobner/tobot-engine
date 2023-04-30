@@ -117,7 +117,7 @@ namespace Tobot::Math {
     /// @param y The y component of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
+    [[nodiscard]] Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -125,7 +125,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T>::Vector2D(Vector2D & vec) : x(vec.x), y(vec.y) {
+    [[nodiscard]] Vector2D<T>::Vector2D(Vector2D & vec) : x(vec.x), y(vec.y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -133,7 +133,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T>::Vector2D(Vector2D && vec) : x(vec.x), y(vec.y) {
+    [[nodiscard]] Vector2D<T>::Vector2D(Vector2D && vec) : x(vec.x), y(vec.y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -141,7 +141,7 @@ namespace Tobot::Math {
     /// @param list The list of values to initialize the vector with
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T>::Vector2D(std::initializer_list<T> list) {
+    [[nodiscard]] Vector2D<T>::Vector2D(std::initializer_list<T> list) {
         if (list.size() != 2) {
             throw std::invalid_argument("Vector2D initializer list must have 2 elements");
         }
@@ -155,7 +155,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The copied vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> const & vec) {
+    [[nodiscard]] Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> const & vec) {
         this->x = vec.x;
         this->y = vec.y;
         return *this;
@@ -167,7 +167,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The copied vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> && vec) {
+    [[nodiscard]] Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> && vec) {
         this->x = vec.x;
         this->y = vec.y;
         return *this;
@@ -228,7 +228,7 @@ namespace Tobot::Math {
     /// @return T& The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Vector2D<T>::operator()(std::size_t i) {
+    [[nodiscard]] T & Vector2D<T>::operator()(std::size_t i) {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -254,7 +254,7 @@ namespace Tobot::Math {
     /// @return T The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector2D<T>::operator()(std::size_t i) const {
+    [[nodiscard]] T Vector2D<T>::operator()(std::size_t i) const {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -280,7 +280,7 @@ namespace Tobot::Math {
     /// @return T& The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Vector2D<T>::operator[](std::size_t i) {
+    [[nodiscard]] T & Vector2D<T>::operator[](std::size_t i) {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -306,7 +306,7 @@ namespace Tobot::Math {
     /// @return T The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector2D<T>::operator[](std::size_t i) const {
+    [[nodiscard]] T Vector2D<T>::operator[](std::size_t i) const {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -332,7 +332,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Vector2D<T>::operator==(Vector2D<T> const & vec) const {
+    [[nodiscard]] bool Vector2D<T>::operator==(Vector2D<T> const & vec) const {
         return this->x == vec.x && this->y == vec.y;
     }
 
@@ -342,7 +342,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Vector2D<T>::operator!=(Vector2D<T> const & vec) const {
+    [[nodiscard]] bool Vector2D<T>::operator!=(Vector2D<T> const & vec) const {
         return this->x != vec.x || this->y != vec.y;
     }
 
@@ -352,7 +352,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector2D<T>::Dot(Vector2D<T> const & vec) {
+    [[nodiscard]] T Vector2D<T>::Dot(Vector2D<T> const & vec) {
         return this->x * vec.x + this->y * vec.y;
     }
 
@@ -362,7 +362,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The cross product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> Vector2D<T>::Cross(Vector2D<T> const & vec) {
+    [[nodiscard]] Vector2D<T> Vector2D<T>::Cross(Vector2D<T> const & vec) {
         return Vector2D(0, this->x * vec.y - this->y * vec.x);
     }
 
@@ -371,7 +371,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline T Vector2D<T>::Magnitude() {
+    [[nodiscard]] inline T Vector2D<T>::Magnitude() {
         return sqrt(this->x * this->x + this->y * this->y);
     }
 
@@ -379,7 +379,7 @@ namespace Tobot::Math {
     /// @tparam T The type stored in the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline void Vector2D<T>::Normalize() {
+    [[nodiscard]] inline void Vector2D<T>::Normalize() {
         *this /= this->Magnitude();
     }
 
@@ -388,7 +388,7 @@ namespace Tobot::Math {
     /// @return std::size_t The size of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline std::size_t Vector2D<T>::GetSize() {
+    [[nodiscard]] inline std::size_t Vector2D<T>::GetSize() {
         return 2;
     }
 } // namespace Tobot::Math

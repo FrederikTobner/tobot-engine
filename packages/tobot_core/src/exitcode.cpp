@@ -2,11 +2,11 @@
 
 using namespace Tobot::Core;
 
-int ExitCode::getCode() const {
+[[nodiscard]] auto ExitCode::getCode() const -> int {
     return this->code;
 }
 
-char const * ExitCode::getDescription() const {
+[[nodiscard]] auto ExitCode::getDescription() const -> char const * {
     return this->description;
 }
 

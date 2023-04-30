@@ -14,14 +14,14 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the values stored in the tree
     template <typename T>
     struct BinarySearchTree {
-            virtual void insert(T value) = 0;
-            virtual void remove(T value) = 0;
-            virtual bool contains(T value) = 0;
-            virtual void print() = 0;
-            virtual void traverseInOrder(std::function<void(T)> callback) const = 0;
-            virtual void traversePreOrder(std::function<void(T)> callback) const = 0;
-            virtual void traversePostOrder(std::function<void(T)> callback) const = 0;
-            virtual void clear() = 0;
-            virtual std::size_t getSize() = 0;
+            virtual auto insert(T value) -> void = 0;
+            virtual auto remove(T value) -> void = 0;
+            virtual auto contains(T value) -> bool = 0;
+            virtual auto print() -> void = 0;
+            virtual auto traverseInOrder(std::function<void(T)> callback) const -> void = 0;
+            virtual auto traversePreOrder(std::function<void(T)> callback) const -> void = 0;
+            virtual auto traversePostOrder(std::function<void(T)> callback) const -> void = 0;
+            virtual auto clear() -> void = 0;
+            virtual auto getSize() -> std::size_t = 0;
     }; // class BinarySearchTree
 } // namespace Tobot::DataStructures::Tree

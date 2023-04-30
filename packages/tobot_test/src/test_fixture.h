@@ -30,14 +30,14 @@ namespace Tobot::Tooling::Test {
 
             /// @brief Adds a new Testcase to the testfixture
             /// @param test The test that is added to the fixture
-            void addTestCase(TestCase test);
+            auto addTestCase(TestCase test) -> void;
 
             /// @brief Adds multiple testcases to the testfixture
             /// @param cases The cases that are added to the fixture
-            void addTestCases(std::vector<TestCase> const & cases);
+            auto addTestCases(std::vector<TestCase> const & cases) -> void;
 
             /// @brief Executes all the tests in the fixture
             /// @param processor The TestReportProcessor that handles all the testreports of the executed testcases
-            void runTestCases(TestReportProcessor & processor);
+            auto runTestCases(TestReportProcessor & processor) -> void;
     };
 } // namespace Tobot::Tooling::Test

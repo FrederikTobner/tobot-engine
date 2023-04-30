@@ -28,14 +28,14 @@ namespace Tobot::Tooling::Test {
             /// @param report The report that is handled
             /// @param totalNumberOfTests The amount of tests that will be executed (REFACTOR!)
             /// @param fixtureName The name of the fixture the testcase belongs to
-            virtual void handleTestReport(TestReport report, size_t totalNumberOfTests,
-                                          std::string const & fixtureName) override;
+            virtual auto handleTestReport(TestReport report, size_t totalNumberOfTests, std::string const & fixtureName)
+                -> void override;
             /// @brief Prehandles an incoming TestReport from a TestCase
             /// @param test The underlying TestCase
             /// @param totalNumberOfTests The amount of tests that will be executed (REFACTOR!)
             /// @param fixtureName The name of the fixture the testcase belongs to
-            virtual void preHandleTestReport(TestCase test, size_t totalNumberOfTests,
-                                             std::string const & fixtureName) override;
+            virtual auto preHandleTestReport(TestCase test, size_t totalNumberOfTests, std::string const & fixtureName)
+                -> void override;
     };
 
 } // namespace Tobot::Tooling::Test

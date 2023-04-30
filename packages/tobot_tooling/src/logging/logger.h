@@ -461,14 +461,14 @@ namespace Tobot::Tooling::Logging {
 
             /// @brief Enables fiile output for the logger
             /// @warning If the logs folder can not be created the program exits
-            void enable_file_out();
+            auto enable_file_out() -> void;
 
             /// @brief Enables fiile output for the logger
             /// @warning If the logs folder can not be created the program exits
             /// @param fileName The name of the output file
-            void enable_file_out(char const * fileName);
+            auto enable_file_out(char const * fileName) -> void;
 
             /// @brief Releseases the file that is currently used by the logger
-            void free_file();
+            auto free_file() -> void;
     };
 } // namespace Tobot::Tooling::Logging

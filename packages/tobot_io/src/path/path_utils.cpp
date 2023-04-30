@@ -9,7 +9,7 @@
 #define FILE_SEPERATOR ('/')
 #endif
 
-int Tobot::IO::Path::getExecutablePath(char * buffer, size_t bufferSize) {
+[[nodiscard]] int Tobot::IO::Path::getExecutablePath(char * buffer, size_t bufferSize) {
 #if defined(OS_WINDOWS)
     return !GetModuleFileName(NULL, buffer, bufferSize);
 #elif defined(OS_UNIX_LIKE)

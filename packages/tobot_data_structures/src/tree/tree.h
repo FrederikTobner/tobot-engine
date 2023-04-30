@@ -73,7 +73,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @return std::size_t The size of the tree
     template <typename T>
-    std::size_t Tree<T>::getSize() const {
+    [[nodiscard]] std::size_t Tree<T>::getSize() const {
         return getSize(this->root);
     }
 
@@ -81,7 +81,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @return std::size_t The depth of the tree
     template <typename T>
-    std::size_t Tree<T>::getDepth() const {
+    [[nodiscard]] std::size_t Tree<T>::getDepth() const {
         return getDepth(this->root);
     }
 
@@ -107,7 +107,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the depth of
     /// @return std::size_t The depth of the tree
     template <typename T>
-    std::size_t Tree<T>::getDepth(TreeNode<T> * node) const {
+    [[nodiscard]] std::size_t Tree<T>::getDepth(TreeNode<T> * node) const {
         if (!node) {
             return 0;
         } else {
@@ -126,7 +126,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @return TreeNode<T> * The root node of the tree
     template <typename T>
-    TreeNode<T> * Tree<T>::getRoot() {
+    [[nodiscard]] TreeNode<T> * Tree<T>::getRoot() {
         return this->root;
     }
 

@@ -70,11 +70,11 @@ namespace Tobot::Core {
         public:
             /// @brief Gets the code of the exit code
             /// @return The code of the exit code
-            int getCode() const;
+            auto getCode() const -> int;
 
             /// @brief Gets the description of the exit code
             /// @return The description of the exit code
-            char const * getDescription() const;
+            auto getDescription() const -> char const *;
     };
 
 } // namespace Tobot::Core

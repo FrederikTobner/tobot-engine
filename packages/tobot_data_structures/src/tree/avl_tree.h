@@ -71,7 +71,7 @@ namespace Tobot::DataStructures::Tree {
     /// @brief AVLTree constructor
     /// @tparam T The type of the value stored in the tree
     template <typename T>
-    AVLTree<T>::AVLTree() {
+    [[nodiscard]] AVLTree<T>::AVLTree() {
         root = nullptr;
     }
 
@@ -79,7 +79,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param tree The tree to copy
     template <typename T>
-    AVLTree<T>::AVLTree(AVLTree & tree) {
+    [[nodiscard]] AVLTree<T>::AVLTree(AVLTree & tree) {
         root = nullptr;
         tree.traverseInOrder([&](T value) { this->insert(value); });
     }
@@ -88,7 +88,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param list The list of values to insert in the tree
     template <typename T>
-    AVLTree<T>::AVLTree(std::initializer_list<T> list) {
+    [[nodiscard]] AVLTree<T>::AVLTree(std::initializer_list<T> list) {
         root = nullptr;
         for (T value : list) {
             insert(value);
@@ -122,7 +122,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to check if it is in the tree
     /// @return True if the tree contains the value, false otherwise
     template <typename T>
-    bool AVLTree<T>::contains(T value) {
+    [[nodiscard]] bool AVLTree<T>::contains(T value) {
         return Tobot::DataStructures::Tree::containsWithNullCheck(this->root, (Node *)nullptr, value);
     }
 
@@ -131,7 +131,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to search for in the tree
     /// @return A pointer to the node containing the value, nullptr if the value is not in the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::search(T value) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::search(T value) {
         return search(root, value);
     }
 
@@ -141,7 +141,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to insert in the tree
     /// @return A pointer to the node containing the value
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::insert(Node * node, T value) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::insert(Node * node, T value) {
         if (node == nullptr) {
             return createNode(value);
         }
@@ -177,7 +177,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to delete from the tree
     /// @return A pointer to the node containing the value
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::remove(Node * node, T value) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::remove(Node * node, T value) {
         if (node == nullptr) {
             return node;
         }
@@ -232,7 +232,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to search for in the tree
     /// @return A pointer to the node containing the value, nullptr if the value is not in the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::search(Node * node, T value) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::search(Node * node, T value) {
         if (node == nullptr || node->value == value) {
             return node;
         }
@@ -247,7 +247,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::rotateLeft(Node * node) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateLeft(Node * node) {
         Node * right = node->right;
         Node * right_left = right->left;
         right->left = node;
@@ -266,7 +266,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::rotateRight(Node * node) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateRight(Node * node) {
         Node * left = node->left;
         Node * left_right = left->right;
         left->right = node;
@@ -285,7 +285,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::rotateLeftRight(Node * node) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateLeftRight(Node * node) {
         node->left = rotateLeft(node->left);
         return rotateRight(node);
     }
@@ -295,7 +295,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::rotateRightLeft(Node * node) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateRightLeft(Node * node) {
         node->right = rotateRight(node->right);
         return rotateLeft(node);
     }
@@ -305,7 +305,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the minimum value from
     /// @return The minimum value in the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::getMinimum() {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::getMinimum() {
         Tobot::DataStructures::Tree::getMinimum(root, (Node *)nullptr);
     }
 
@@ -314,7 +314,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the maximum value from
     /// @return The maximum value in the tree
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::getMaximum() {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::getMaximum() {
         Tobot::DataStructures::Tree::getMaximum(root, (Node *)nullptr);
     }
 
@@ -323,7 +323,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the height of
     /// @return The height of the node
     template <typename T>
-    int AVLTree<T>::getHeight(Node * node) {
+    [[nodiscard]] int AVLTree<T>::getHeight(Node * node) {
         if (node == nullptr) {
             return 0;
         }
@@ -335,7 +335,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the balance of
     /// @return The balance of the node
     template <typename T>
-    int AVLTree<T>::getBalance(Node * node) {
+    [[nodiscard]] int AVLTree<T>::getBalance(Node * node) {
         if (node == nullptr) {
             return 0;
         }
@@ -347,7 +347,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to store in the node
     /// @return A pointer to the new node
     template <typename T>
-    typename AVLTree<T>::Node * AVLTree<T>::createNode(T value) {
+    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::createNode(T value) {
         Node * node = new Node();
         node->value = value;
         node->left = nullptr;
@@ -424,7 +424,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @return The number of nodes in the tree
     template <typename T>
-    std::size_t AVLTree<T>::getSize() {
+    [[nodiscard]] std::size_t AVLTree<T>::getSize() {
         std::size_t size = 0;
         traverseInOrder([&size](T value) { size++; });
         return size;

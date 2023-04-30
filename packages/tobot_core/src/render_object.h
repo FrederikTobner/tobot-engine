@@ -17,21 +17,21 @@ namespace Tobot::Core {
         protected:
             /// @brief Changes the visibility of the object
             /// @param visible The new visibility
-            void setVisible(bool visible);
+            auto setVisible(bool visible) -> void;
 
             /// @brief Just for Testing purposes
-            void incrementPosition();
+            auto incrementPosition() -> void;
 
         public:
             RenderObject(char const * id, int x, int y);
             virtual ~RenderObject() = 0;
 
-            virtual void update() = 0;
-            virtual void render(SDL_Renderer * renderer) = 0;
-            virtual void dispose() = 0;
+            virtual auto update() -> void = 0;
+            virtual auto render(SDL_Renderer * renderer) -> void = 0;
+            virtual auto dispose() -> void = 0;
 
-            const char * getId();
-            Tobot::Math::Vector2D<float> getPosition();
-            bool isVisible();
+            auto getId() -> const char *;
+            auto getPosition() -> Tobot::Math::Vector2D<float>;
+            auto isVisible() -> bool;
     };
 } // namespace Tobot::Core

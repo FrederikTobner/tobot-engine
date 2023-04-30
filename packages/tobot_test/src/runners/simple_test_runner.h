@@ -27,11 +27,11 @@ namespace Tobot::Tooling::Test {
             ~SimpleTestRunner();
             /// @brief Adds a new TestFixture to the the runner
             /// @param fixture The fixture that is added
-            virtual void addFixture(TestFixture fixture);
+            virtual auto addFixture(TestFixture fixture) -> void;
             /// @brief Executes all the TestCase's that are stored in the TestFixture's that this TestRunner will
             /// execute
-            virtual void runAll();
-            SimpleTestRunner & operator=(SimpleTestRunner const & rhs);
+            virtual auto runAll() -> void;
+            auto operator=(SimpleTestRunner const & rhs) -> SimpleTestRunner &;
     };
 
 } // namespace Tobot::Tooling::Test

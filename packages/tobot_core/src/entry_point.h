@@ -8,7 +8,7 @@ extern Tobot::Core::TobotApplication * Tobot::Core::CreateApplication();
 /// @param argc The number of arguments.
 /// @param argv The arguments.
 /// @return 0 on success, -1 on failure.
-int main(int argc, char ** argv) {
+auto main(int argc, char ** argv) -> int {
     Tobot::Core::TobotApplication * application = Tobot::Core::CreateApplication();
     application->initialize();
     application->run();

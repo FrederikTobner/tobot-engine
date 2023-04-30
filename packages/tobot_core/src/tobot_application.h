@@ -26,19 +26,19 @@ namespace Tobot::Core {
             Tobot::Math::Dimension<int> m_DisplaySize = Tobot::Math::Dimension<int>(800, 600);
             char const * m_ApplicationName = "app";
 
-            void setInitialScene(Scene * scene);
+            auto setInitialScene(Scene * scene) -> void;
 
         public:
             TobotApplication(char const * name);
             virtual ~TobotApplication();
-            void initialize();
-            void run();
+            auto initialize() -> void;
+            auto run() -> void;
 
         private:
-            void handleEvents();
-            void update();
-            void render();
-            void quit();
+            auto handleEvents() -> void;
+            auto update() -> void;
+            auto render() -> void;
+            auto quit() -> void;
     };
-    TobotApplication * CreateApplication();
+    auto CreateApplication() -> TobotApplication *;
 } // namespace Tobot::Core

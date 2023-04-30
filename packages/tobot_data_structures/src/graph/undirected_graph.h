@@ -96,7 +96,7 @@ namespace Tobot::DataStructures {
     /// @brief Default constructor for the Graph class.
     /// @tparam T The type of the vertices in the graph.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph() {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph() {
         vertices = std::vector<T>();
         edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
@@ -107,7 +107,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param graph The graph to copy.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T> const & graph) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T> const & graph) {
         vertices = std::vector<T>(graph.vertices);         // deep copy of the vertices
         edges = std::vector<std::pair<T, T>>(graph.edges); // deep copy of the edges
         connected_components = graph.connected_components; // shallow copy of the connected_components
@@ -118,7 +118,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param graph The graph to move.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T> && graph) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T> && graph) {
         vertices = std::move(graph.vertices);
         edges = std::move(graph.edges);
         connected_components = std::move(graph.connected_components);
@@ -129,7 +129,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param vertices The vertices in the graph.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph(std::vector<T> vertices) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(std::vector<T> vertices) {
         this->vertices = vertices;
         this->edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
@@ -141,7 +141,7 @@ namespace Tobot::DataStructures {
     /// @param vertices The vertices in the graph.
     /// @param edges The edges in the graph.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph(std::vector<T> vertices, std::vector<std::pair<T, T>> edges) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(std::vector<T> vertices, std::vector<std::pair<T, T>> edges) {
         this->vertices = vertices;
         this->edges = edges;
         connected_components = std::vector<std::vector<T>>();
@@ -152,7 +152,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param vertices The vertices in the graph.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph(std::initializer_list<T> vertices) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(std::initializer_list<T> vertices) {
         this->vertices = std::vector<T>(vertices);
         this->edges = std::vector<std::pair<T, T>>();
         connected_components = std::vector<std::vector<T>>();
@@ -164,8 +164,8 @@ namespace Tobot::DataStructures {
     /// @param vertices The vertices in the graph.
     /// @param edges The edges in the graph.
     template <typename T>
-    UndirectedGraph<T>::UndirectedGraph(std::initializer_list<T> vertices,
-                                        std::initializer_list<std::pair<T, T>> edges) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(std::initializer_list<T> vertices,
+                                                      std::initializer_list<std::pair<T, T>> edges) {
         this->vertices = std::vector<T>(vertices);
         this->edges = std::vector<std::pair<T, T>>(edges);
         connected_components = std::vector<std::vector<T>>();
@@ -187,7 +187,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to copy.
     /// @return A reference to the graph.
     template <typename T>
-    UndirectedGraph<T> & UndirectedGraph<T>::operator=(UndirectedGraph<T> const & graph) {
+    [[nodiscard]] UndirectedGraph<T> & UndirectedGraph<T>::operator=(UndirectedGraph<T> const & graph) {
         vertices = graph.vertices;
         edges = graph.edges;
         connected_components = graph.connected_components;
@@ -200,7 +200,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to move.
     /// @return A reference to the graph.
     template <typename T>
-    UndirectedGraph<T> & UndirectedGraph<T>::operator=(UndirectedGraph<T> && graph) {
+    [[nodiscard]] UndirectedGraph<T> & UndirectedGraph<T>::operator=(UndirectedGraph<T> && graph) {
         vertices = std::move(graph.vertices);
         edges = std::move(graph.edges);
         connected_components = std::move(graph.connected_components);
@@ -213,7 +213,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to compare to.
     /// @return True if the graphs are equal, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::operator==(UndirectedGraph<T> const & graph) const {
+    [[nodiscard]] bool UndirectedGraph<T>::operator==(UndirectedGraph<T> const & graph) const {
         return vertices == graph.vertices && edges == graph.edges;
     }
 
@@ -222,7 +222,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to compare to.
     /// @return True if the graphs are not equal, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::operator!=(UndirectedGraph<T> const & graph) const {
+    [[nodiscard]] bool UndirectedGraph<T>::operator!=(UndirectedGraph<T> const & graph) const {
         return !(*this == graph);
     }
 
@@ -448,7 +448,7 @@ namespace Tobot::DataStructures {
     /// @param vertex The vertex to get the neighbors of.
     /// @return The neighbors of the vertex.
     template <typename T>
-    bool UndirectedGraph<T>::containsVertex(T vertex) const {
+    [[nodiscard]] bool UndirectedGraph<T>::containsVertex(T vertex) const {
         return std::find(vertices.begin(), vertices.end(), vertex) != vertices.end();
     }
 
@@ -458,7 +458,7 @@ namespace Tobot::DataStructures {
     /// @param vertex2 The second vertex of the edge to get.
     /// @return True if the edge exists, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::containsEdge(T vertex1, T vertex2) const {
+    [[nodiscard]] bool UndirectedGraph<T>::containsEdge(T vertex1, T vertex2) const {
         return std::find(edges.begin(), edges.end(), std::pair<T, T>(vertex1, vertex2)) != edges.end();
     }
 
@@ -467,7 +467,7 @@ namespace Tobot::DataStructures {
     /// @param cycle The cycle to check for.
     /// @return True if the cycle exists, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::containsCycle(std::vector<T> cycle) const {
+    [[nodiscard]] bool UndirectedGraph<T>::containsCycle(std::vector<T> cycle) const {
         return std::find(cycles.begin(), cycles.end(), cycle) != cycles.end();
     }
 
@@ -476,7 +476,7 @@ namespace Tobot::DataStructures {
     /// @param connected_component The connected component to check for.
     /// @return True if the connected component exists, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::containsConnectedComponent(std::vector<T> connected_component) const {
+    [[nodiscard]] bool UndirectedGraph<T>::containsConnectedComponent(std::vector<T> connected_component) const {
         return std::find(connected_components.begin(), connected_components.end(), connected_component) !=
                connected_components.end();
     }
@@ -485,7 +485,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The vertices of the graph.
     template <typename T>
-    bool UndirectedGraph<T>::isConnected() const {
+    [[nodiscard]] bool UndirectedGraph<T>::isConnected() const {
         return connected_components.size() == 1;
     }
 
@@ -493,7 +493,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return True if the graph is cyclic, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::isCyclic() const {
+    [[nodiscard]] bool UndirectedGraph<T>::isCyclic() const {
         return cycles.size() > 0;
     }
 
@@ -501,7 +501,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return True if the graph is acyclic, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::isAcyclic() const {
+    [[nodiscard]] bool UndirectedGraph<T>::isAcyclic() const {
         return !isCyclic();
     }
 
@@ -509,7 +509,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return True if the graph is empty, false otherwise.
     template <typename T>
-    bool UndirectedGraph<T>::isEmpty() const {
+    [[nodiscard]] bool UndirectedGraph<T>::isEmpty() const {
         return vertices.size() == 0;
     }
 
@@ -517,7 +517,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return True if the graph is not empty, false otherwise.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getVertices() const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getVertices() const {
         return vertices;
     }
 
@@ -525,7 +525,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The edges of the graph.
     template <typename T>
-    std::vector<std::pair<T, T>> UndirectedGraph<T>::getEdges() const {
+    [[nodiscard]] std::vector<std::pair<T, T>> UndirectedGraph<T>::getEdges() const {
         return edges;
     }
 
@@ -533,7 +533,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<std::vector<T>> UndirectedGraph<T>::getComponents() const {
+    [[nodiscard]] std::vector<std::vector<T>> UndirectedGraph<T>::getComponents() const {
         return connected_components;
     }
 
@@ -541,7 +541,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The cycles of the graph.
     template <typename T>
-    std::vector<std::vector<T>> UndirectedGraph<T>::getCycles() const {
+    [[nodiscard]] std::vector<std::vector<T>> UndirectedGraph<T>::getCycles() const {
         return cycles;
     }
 
@@ -550,7 +550,7 @@ namespace Tobot::DataStructures {
     /// @param vertex The vertex to get the connected component of.
     /// @return The connected component of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getConnectedComponent(T vertex) {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getConnectedComponent(T vertex) {
         for (std::vector<T> component : connected_components) {
             if (std::find(component.begin(), component.end(), vertex) != component.end()) {
                 return component;
@@ -631,7 +631,7 @@ namespace Tobot::DataStructures {
     /// @param vertex The vertex to get the neighbors of.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex) const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex) const {
         std::vector<T> neighbors;
         for (auto [firstVertex, secondVertex] : edges) {
             if (firstVertex == vertex) {
@@ -649,7 +649,7 @@ namespace Tobot::DataStructures {
     /// @param edges The edges to consider.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<std::pair<T, T>> edges) const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<std::pair<T, T>> edges) const {
         std::vector<T> neighbors;
         for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex) {
@@ -667,7 +667,7 @@ namespace Tobot::DataStructures {
     /// @param vertices The vertices to consider.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices) const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices) const {
         std::vector<T> neighbors;
         for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
@@ -688,8 +688,8 @@ namespace Tobot::DataStructures {
     /// @param edges The edges to consider.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices,
-                                                    std::vector<std::pair<T, T>> edges) const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices,
+                                                                  std::vector<std::pair<T, T>> edges) const {
         std::vector<T> neighbors;
         for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
@@ -710,8 +710,8 @@ namespace Tobot::DataStructures {
     /// @param visited_vertices The vertices that have been visited.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices,
-                                                    std::vector<T> visited_vertices) const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices,
+                                                                  std::vector<T> visited_vertices) const {
         std::vector<T> neighbors;
         for (std::pair<T, T> edge : edges) {
             if (edge.GetFirst() == vertex &&
@@ -737,8 +737,9 @@ namespace Tobot::DataStructures {
     /// @param edges The edges to consider.
     /// @return The neighbors of the vertex.
     template <typename T>
-    std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices, std::vector<T> visited_vertices,
-                                                    std::vector<std::pair<T, T>> edges) const {
+    [[nodiscard]] std::vector<T> UndirectedGraph<T>::getNeighbors(T vertex, std::vector<T> vertices,
+                                                                  std::vector<T> visited_vertices,
+                                                                  std::vector<std::pair<T, T>> edges) const {
         // Create an empty vector to store the neighbors of the input vertex.
         std::vector<T> neighbors;
         // loop through all edges to find the neighbors of the input vertex.
@@ -768,7 +769,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The amount of vertices in the graph.
     template <typename T>
-    std::size_t UndirectedGraph<T>::getVertexCount() const {
+    [[nodiscard]] std::size_t UndirectedGraph<T>::getVertexCount() const {
         return vertices.size();
     }
 
@@ -776,7 +777,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The amount of edges in the graph.
     template <typename T>
-    std::size_t UndirectedGraph<T>::getEdgeCount() const {
+    [[nodiscard]] std::size_t UndirectedGraph<T>::getEdgeCount() const {
         return edges.size();
     }
 
@@ -784,7 +785,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The amount of connected components in the graph.
     template <typename T>
-    std::size_t UndirectedGraph<T>::getConnectedComponentCount() const {
+    [[nodiscard]] std::size_t UndirectedGraph<T>::getConnectedComponentCount() const {
         return connected_components.size();
     }
 
@@ -792,7 +793,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @return The amount of cycles in the graph.
     template <typename T>
-    std::size_t UndirectedGraph<T>::getCycleCount() const {
+    [[nodiscard]] std::size_t UndirectedGraph<T>::getCycleCount() const {
         return cycles.size();
     }
 

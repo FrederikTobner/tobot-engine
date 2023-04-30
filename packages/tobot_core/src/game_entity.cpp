@@ -2,7 +2,7 @@
 
 using namespace Tobot::Core;
 
-GameEntity::GameEntity(char const * id, int x, int y, SDL_Texture * texture) : RenderObject(id, x, y) {
+[[nodiscard]] GameEntity::GameEntity(char const * id, int x, int y, SDL_Texture * texture) : RenderObject(id, x, y) {
     this->p_Texture = texture;
 }
 
