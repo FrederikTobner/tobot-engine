@@ -36,46 +36,46 @@ namespace Tobot::Math {
             /// @brief Copy assignment operator
             /// @param polygon Polygon to copy
             /// @return Reference to this
-            Polygon2D<T> & operator=(Polygon2D<T> const &);
+            auto operator=(Polygon2D<T> const &) -> Polygon2D<T> &;
 
             /// @brief Move assignment operator
             /// @param polygon Polygon to move
             /// @return Reference to this
-            Polygon2D<T> & operator=(Polygon2D<T> &&) noexcept;
+            auto operator=(Polygon2D<T> &&) noexcept -> Polygon2D<T> &;
 
             /// @brief Equality operator
             /// @param polygon Polygon to compare
             /// @return True if equal, false otherwise
-            bool operator==(Polygon2D<T> const &) const;
+            auto operator==(Polygon2D<T> const &) const -> bool;
 
             /// @brief Inequality operator
             /// @param polygon Polygon to compare
             /// @return True if not equal, false otherwise
-            bool operator!=(Polygon2D<T> const &) const;
+            auto operator!=(Polygon2D<T> const &) const -> bool;
 
             /// @brief Get the points of the polygon
             /// @return Points of the polygon
-            std::vector<Point2D<T>> getPoints() const;
+            auto getPoints() const -> std::vector<Point2D<T>>;
 
             /// @brief Get the number of points of the polygon
             /// @return Number of points of the polygon
-            size_t getNumberOfPoints() const;
+            auto getNumberOfPoints() const -> std::size_t;
 
             /// @brief Get the area of the polygon
             /// @return Area of the polygon
-            T getArea() const;
+            auto getArea() const -> T;
 
             /// @brief Get the perimeter of the polygon
             /// @return Perimeter of the polygon
-            T getPerimeter() const;
+            auto getPerimeter() const -> T;
 
             /// @brief Get the centroid of the polygon
             /// @return Centroid of the polygon
-            Point2D<T> getCentroid() const;
+            auto getCentroid() const -> Point2D<T>;
 
-            bool isConvex() const;
+            auto isConvex() const -> bool;
 
-            friend std::ostream & operator<<(std::ostream & os, Polygon2D<T> const & polygon) {
+            friend auto operator<<(std::ostream & os, Polygon2D<T> const & polygon) -> std::ostream & {
                 os << "Polygon2D(";
                 for (const auto & point : polygon.points) {
                     os << point << ", ";
@@ -121,7 +121,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Polygon2D<T> & Polygon2D<T>::operator=(Polygon2D<T> const & polygon) {
+    auto Polygon2D<T>::operator=(Polygon2D<T> const & polygon) -> Polygon2D<T> & {
         points = polygon.points;
         return *this;
     }
@@ -131,7 +131,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Polygon2D<T> & Polygon2D<T>::operator=(Polygon2D<T> && polygon) noexcept {
+    auto Polygon2D<T>::operator=(Polygon2D<T> && polygon) noexcept -> Polygon2D<T> & {
         points = std::move(polygon.points);
         return *this;
     }
@@ -141,7 +141,7 @@ namespace Tobot::Math {
     /// @return True if equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Polygon2D<T>::operator==(Polygon2D<T> const & polygon) const {
+    [[nodiscard]] auto Polygon2D<T>::operator==(Polygon2D<T> const & polygon) const -> bool {
         return points == polygon.points;
     }
 
@@ -150,7 +150,7 @@ namespace Tobot::Math {
     /// @return True if not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Polygon2D<T>::operator!=(Polygon2D<T> const & polygon) const {
+    [[nodiscard]] auto Polygon2D<T>::operator!=(Polygon2D<T> const & polygon) const -> bool {
         return points != polygon.points;
     }
 
@@ -158,7 +158,7 @@ namespace Tobot::Math {
     /// @return Points of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] std::vector<Point2D<T>> Polygon2D<T>::getPoints() const {
+    [[nodiscard]] auto Polygon2D<T>::getPoints() const -> std::vector<Point2D<T>> {
         return points;
     }
 
@@ -166,7 +166,7 @@ namespace Tobot::Math {
     /// @return Number of points of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] size_t Polygon2D<T>::getNumberOfPoints() const {
+    [[nodiscard]] auto Polygon2D<T>::getNumberOfPoints() const -> std::size_t {
         return points.size();
     }
 
@@ -174,7 +174,7 @@ namespace Tobot::Math {
     /// @return Area of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Polygon2D<T>::getArea() const {
+    [[nodiscard]] auto Polygon2D<T>::getArea() const -> T {
         T area = 0;
         for (size_t i = 0; i < points.size(); i++) {
             size_t j = (i + 1) % points.size();
@@ -187,7 +187,7 @@ namespace Tobot::Math {
     /// @return Perimeter of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Polygon2D<T>::getPerimeter() const {
+    [[nodiscard]] auto Polygon2D<T>::getPerimeter() const -> T {
         T perimeter = 0;
         for (size_t i = 0; i < points.size(); i++) {
             size_t j = (i + 1) % points.size();
@@ -201,7 +201,7 @@ namespace Tobot::Math {
     /// @return Centroid of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Point2D<T> Polygon2D<T>::getCentroid() const {
+    [[nodiscard]] auto Polygon2D<T>::getCentroid() const -> Point2D<T> {
         T area = getArea();
         T x = 0;
         T y = 0;
@@ -219,7 +219,7 @@ namespace Tobot::Math {
     /// @return True if the polygon is convex, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Polygon2D<T>::isConvex() const {
+    [[nodiscard]] auto Polygon2D<T>::isConvex() const -> bool {
         if (points.size() <= 3) {
             return true;
         }

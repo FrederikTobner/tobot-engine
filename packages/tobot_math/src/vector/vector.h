@@ -10,19 +10,19 @@ namespace Tobot::Math {
 
         public:
             Vector();
-            virtual T & operator()(std::size_t i) = 0;
+            virtual auto operator()(std::size_t i) const -> T = 0;
 
-            virtual T operator()(std::size_t i) const = 0;
+            virtual auto operator()(std::size_t i) -> T & = 0;
 
-            virtual T & operator[](std::size_t i) = 0;
+            virtual auto operator[](std::size_t i) const -> T = 0;
 
-            virtual T operator[](std::size_t i) const = 0;
+            virtual auto operator[](std::size_t i) -> T & = 0;
 
-            virtual T Magnitude() = 0;
+            virtual auto Magnitude() -> T = 0;
 
-            virtual void Normalize() = 0;
+            virtual auto Normalize() -> void = 0;
 
-            virtual std::size_t GetSize() = 0;
+            virtual auto GetSize() -> std::size_t = 0;
     };
 
     template <typename T>

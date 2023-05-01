@@ -48,7 +48,6 @@ jobs:
           libxmp-dev \
           libwavpack-dev \
           ninja-build \
-          pkg-config \
           ${NULL+}
     
     - uses: actions/checkout@v3

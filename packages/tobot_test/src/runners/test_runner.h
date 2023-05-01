@@ -13,9 +13,9 @@ namespace Tobot::Tooling::Test {
             virtual ~TestRunner();
             /// @brief Adds a new TestFixture to the the runner
             /// @param fixture The fixture that is added
-            virtual void addFixture(TestFixture fixture) = 0;
+            virtual auto addFixture(TestFixture fixture) -> void = 0;
             /// @brief Executes all the TestCase's that are stored in the TestFixture's that this TestRunner will
             /// execute
-            virtual void runAll() = 0;
+            virtual auto runAll() -> void = 0;
     };
 } // namespace Tobot::Tooling::Test

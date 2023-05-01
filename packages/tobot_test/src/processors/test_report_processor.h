@@ -18,13 +18,13 @@ namespace Tobot::Tooling::Test {
             virtual ~TestReportProcessor();
             /// @brief Handles an incoming TestReport from a TestCase
             /// @param report The report that is handled
-            /// @param totalNumberOfTests The amount of tests that will be executed (REFACTOR!)
+            /// @param totalNumberOfTests The amount of tests that will be executed (TODO: REFACTOR!)
             /// @param fixtureName The name of the fixture the testcase belongs to
             virtual auto handleTestReport(TestReport report, size_t totalNumberOfTests, std::string const & fixtureName)
                 -> void = 0;
             /// @brief Prehandles an incoming TestReport from a TestCase
             /// @param test The underlying TestCase
-            /// @param totalNumberOfTests The amount of tests that will be executed (REFACTOR!)
+            /// @param totalNumberOfTests The amount of tests that will be executed (TODO: REFACTOR!)
             /// @param fixtureName The name of the fixture the testcase belongs to
             virtual auto preHandleTestReport(TestCase test, size_t totalNumberOfTests, std::string const & fixtureName)
                 -> void = 0;

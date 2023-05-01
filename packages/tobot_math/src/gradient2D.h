@@ -15,16 +15,16 @@ namespace Tobot::Math {
             Gradient2D(Gradient2D<T> const & gradient);
             Gradient2D(Gradient2D<T> && gradient) noexcept;
             ~Gradient2D();
-            bool operator==(Gradient2D<T> const & gradient) const;
-            bool operator!=(Gradient2D<T> const & gradient) const;
-            T at(T x) const;
-            T & getSlope();
-            const T & getSlope() const;
-            T & getYIntercept();
-            const T & getYIntercept() const;
-            bool intersects(Gradient2D<T> const & intersection) const;
-            bool intersects(Point2D<T> & intersection) const;
-            Point2D<T> * intersection(Gradient2D<T> const & gradient) const;
+            auto operator==(Gradient2D<T> const & gradient) const -> bool;
+            auto operator!=(Gradient2D<T> const & gradient) const -> bool;
+            auto at(T x) const -> T;
+            auto getSlope() -> T &;
+            auto getSlope() const -> const T &;
+            auto getYIntercept() -> T &;
+            auto getYIntercept() const -> const T &;
+            auto intersects(Gradient2D<T> const & intersection) const -> bool;
+            auto intersects(Point2D<T> & intersection) const -> bool;
+            auto intersection(Gradient2D<T> const & gradient) const -> Point2D<T> *;
 
         private:
             // The slope of the gradient
@@ -87,7 +87,7 @@ namespace Tobot::Math {
     /// @return True if the gradients are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Gradient2D<T>::operator==(Gradient2D<T> const & gradient) const {
+    [[nodiscard]] auto Gradient2D<T>::operator==(Gradient2D<T> const & gradient) const -> bool {
         return this->m_slope == gradient.m_slope && this->m_yIntercept == gradient.m_yIntercept;
     }
 
@@ -97,7 +97,7 @@ namespace Tobot::Math {
     /// @return True if the gradients are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Gradient2D<T>::operator!=(Gradient2D<T> const & gradient) const {
+    [[nodiscard]] auto Gradient2D<T>::operator!=(Gradient2D<T> const & gradient) const -> bool {
         return !(*this == gradient);
     }
 
@@ -106,7 +106,7 @@ namespace Tobot::Math {
     /// @return The slope of the gradient
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T & Gradient2D<T>::getSlope() {
+    [[nodiscard]] auto Gradient2D<T>::getSlope() -> T & {
         return m_slope;
     }
 
@@ -115,7 +115,7 @@ namespace Tobot::Math {
     /// @return The slope of the gradient
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] const T & Gradient2D<T>::getSlope() const {
+    [[nodiscard]] auto Gradient2D<T>::getSlope() const -> const T & {
         return m_slope;
     }
 
@@ -124,7 +124,7 @@ namespace Tobot::Math {
     /// @return The y-intercept of the gradient
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T & Gradient2D<T>::getYIntercept() {
+    [[nodiscard]] auto Gradient2D<T>::getYIntercept() -> T & {
         return m_yIntercept;
     }
 
@@ -133,7 +133,7 @@ namespace Tobot::Math {
     /// @return The y-intercept of the gradient
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] const T & Gradient2D<T>::getYIntercept() const {
+    [[nodiscard]] auto Gradient2D<T>::getYIntercept() const -> const T & {
         return m_yIntercept;
     }
 
@@ -143,7 +143,7 @@ namespace Tobot::Math {
     /// @return true if the gradients intersect, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Gradient2D<T>::intersects(Gradient2D<T> const & intersection) const {
+    [[nodiscard]] auto Gradient2D<T>::intersects(Gradient2D<T> const & intersection) const -> bool {
         // If the slopes are equal, then the gradients are parallel and do not intersect
         return this->m_slope != intersection.m_slope;
     }
@@ -154,7 +154,7 @@ namespace Tobot::Math {
     /// @return true if the gradient intersects the point, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Gradient2D<T>::intersects(Point2D<T> & intersection) const {
+    [[nodiscard]] auto Gradient2D<T>::intersects(Point2D<T> & intersection) const -> bool {
         if (this->at(intersection.x) == intersection.y) {
             return true;
         }
@@ -167,7 +167,7 @@ namespace Tobot::Math {
     /// @return The point of intersection between the gradients, or a nullpointer, if the gradients do not intersect
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Point2D<T> * Gradient2D<T>::intersection(Gradient2D<T> const & gradient) const {
+    [[nodiscard]] auto Gradient2D<T>::intersection(Gradient2D<T> const & gradient) const -> Point2D<T> * {
         // If the gradients are parallel, then there is no intersection
         if (!this->intersects(gradient)) {
             return nullptr;

@@ -23,29 +23,29 @@ namespace Tobot::Math {
 
             ~Rectangle2D() = default;
 
-            Rectangle2D<T> & operator=(Rectangle2D<T> const &);
+            auto operator=(Rectangle2D<T> const &) -> Rectangle2D<T> &;
 
-            Rectangle2D<T> & operator=(Rectangle2D<T> &&) noexcept;
+            auto operator=(Rectangle2D<T> &&) noexcept -> Rectangle2D<T> &;
 
-            bool operator==(Rectangle2D<T> const &) const;
+            auto operator==(Rectangle2D<T> const &) const -> bool;
 
-            bool operator!=(Rectangle2D<T> const &) const;
+            auto operator!=(Rectangle2D<T> const &) const -> bool;
 
-            Point2D<T> getCenter() const;
+            auto getCenter() const -> Point2D<T>;
 
-            T getWidth() const;
+            auto getWidth() const -> T;
 
-            T getHeight() const;
+            auto getHeight() const -> T;
 
-            T getRotation() const;
+            auto getRotation() const -> T;
 
-            T getArea() const;
+            auto getArea() const -> T;
 
-            T getPerimeter() const;
+            auto getPerimeter() const -> T;
 
-            bool contains(Point2D<T> const &) const;
+            auto contains(Point2D<T> const &) const -> bool;
 
-            friend std::ostream & operator<<(std::ostream & os, Rectangle2D<T> const & rectangle) {
+            friend auto operator<<(std::ostream & os, Rectangle2D<T> const & rectangle) -> std::ostream & {
                 os << "Rectangle2D(" << rectangle.center << ", " << rectangle.width << ", " << rectangle.height << ", "
                    << rectangle.rotation << ")";
                 return os;
@@ -126,7 +126,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T> & Rectangle2D<T>::operator=(Rectangle2D<T> const & rectangle) {
+    auto Rectangle2D<T>::operator=(Rectangle2D<T> const & rectangle) -> Rectangle2D<T> & {
         center = rectangle.center;
         width = rectangle.width;
         height = rectangle.height;
@@ -140,7 +140,7 @@ namespace Tobot::Math {
     /// @return Reference to this
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Rectangle2D<T> & Rectangle2D<T>::operator=(Rectangle2D<T> && rectangle) noexcept {
+    auto Rectangle2D<T>::operator=(Rectangle2D<T> && rectangle) noexcept -> Rectangle2D<T> & {
         center = std::move(rectangle.center);
         width = std::move(rectangle.width);
         height = std::move(rectangle.height);
@@ -154,7 +154,7 @@ namespace Tobot::Math {
     /// @return True if the two rectangles are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const {
+    [[nodiscard]] auto Rectangle2D<T>::operator==(Rectangle2D<T> const & rectangle) const -> bool {
         return center == rectangle.center && width == rectangle.width && height == rectangle.height &&
                rotation == rectangle.rotation;
     }
@@ -165,7 +165,7 @@ namespace Tobot::Math {
     /// @return True if the two rectangles are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const {
+    [[nodiscard]] auto Rectangle2D<T>::operator!=(Rectangle2D<T> const & rectangle) const -> bool {
         return center != rectangle.center || width != rectangle.width || height != rectangle.height ||
                rotation != rectangle.rotation;
     }
@@ -175,7 +175,7 @@ namespace Tobot::Math {
     /// @return Center of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Point2D<T> Rectangle2D<T>::getCenter() const {
+    [[nodiscard]] auto Rectangle2D<T>::getCenter() const -> Point2D<T> {
         return center;
     }
 
@@ -184,7 +184,7 @@ namespace Tobot::Math {
     /// @return Width of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Rectangle2D<T>::getWidth() const {
+    [[nodiscard]] auto Rectangle2D<T>::getWidth() const -> T {
         return width;
     }
 
@@ -193,7 +193,7 @@ namespace Tobot::Math {
     /// @return Height of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Rectangle2D<T>::getHeight() const {
+    [[nodiscard]] auto Rectangle2D<T>::getHeight() const -> T {
         return height;
     }
 
@@ -202,7 +202,7 @@ namespace Tobot::Math {
     /// @return Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Rectangle2D<T>::getRotation() const {
+    [[nodiscard]] auto Rectangle2D<T>::getRotation() const -> T {
         return rotation;
     }
 
@@ -211,7 +211,7 @@ namespace Tobot::Math {
     /// @return Area of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Rectangle2D<T>::getArea() const {
+    [[nodiscard]] auto Rectangle2D<T>::getArea() const -> T {
         return width * height;
     }
 
@@ -220,7 +220,7 @@ namespace Tobot::Math {
     /// @return Perimeter of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] T Rectangle2D<T>::getPerimeter() const {
+    [[nodiscard]] auto Rectangle2D<T>::getPerimeter() const -> T {
         return 2 * (width + height);
     }
 
@@ -230,7 +230,7 @@ namespace Tobot::Math {
     /// @return True if the point is inside the rectangle, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] bool Rectangle2D<T>::contains(Point2D<T> const & point) const {
+    [[nodiscard]] auto Rectangle2D<T>::contains(Point2D<T> const & point) const -> bool {
         return rotation == 0.0
                    ? point.getX() >= center.getX() - width / 2 && point.getX() <= center.getX() + width / 2 &&
                          point.getY() >= center.getY() - height / 2 && point.getY() <= center.getY() + height / 2

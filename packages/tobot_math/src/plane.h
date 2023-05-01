@@ -114,7 +114,7 @@ namespace Tobot::Math {
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T> & Plane<T>::operator=(Plane<T> const & plane) {
+    Plane<T> & Plane<T>::operator=(Plane<T> const & plane) {
         a = plane.a;
         b = plane.b;
         c = plane.c;
@@ -128,7 +128,7 @@ namespace Tobot::Math {
     /// @return The distance between the plane and a point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T> & Plane<T>::operator=(Plane<T> && plane) {
+    Plane<T> & Plane<T>::operator=(Plane<T> && plane) {
         a = plane.a;
         b = plane.b;
         c = plane.c;

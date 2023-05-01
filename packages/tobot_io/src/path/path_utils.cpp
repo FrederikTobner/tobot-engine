@@ -9,7 +9,7 @@
 #define FILE_SEPERATOR ('/')
 #endif
 
-[[nodiscard]] int Tobot::IO::Path::getExecutablePath(char * buffer, size_t bufferSize) {
+[[nodiscard]] auto Tobot::IO::Path::getExecutablePath(char * buffer, size_t bufferSize) -> int {
 #if defined(OS_WINDOWS)
     return !GetModuleFileName(NULL, buffer, bufferSize);
 #elif defined(OS_UNIX_LIKE)
@@ -17,7 +17,7 @@
 #endif
 }
 
-void Tobot::IO::Path::removeFileLayer(char * buffer, size_t depth) {
+auto Tobot::IO::Path::removeFileLayer(char * buffer, size_t depth) -> void {
     if (!depth) {
         return;
     }
