@@ -32,17 +32,17 @@ namespace Tobot::DataStructures::Tree {
             ~AVLTree();
             AVLTree(std::initializer_list<T> list);
 
-            void insert(T value);
-            void remove(T value);
-            bool contains(T value);
-            Node * search(T value);
-            void traverseInOrder(std::function<void(T)> callback) const;
-            void traversePreOrder(std::function<void(T)> callback) const;
-            void traversePostOrder(std::function<void(T)> callback) const;
-            void print();
-            void clear();
-            Node * getMaximum();
-            Node * getMinimum();
+            auto insert(T value) -> void;
+            auto remove(T value) -> void;
+            auto contains(T value) -> bool;
+            auto search(T value) -> Node *;
+            auto traverseInOrder(std::function<void(T)> callback) const -> void;
+            auto traversePreOrder(std::function<void(T)> callback) const -> void;
+            auto traversePostOrder(std::function<void(T)> callback) const -> void;
+            auto print() -> void;
+            auto clear() -> void;
+            auto getMaximum() -> Node *;
+            auto getMinimum() -> Node *;
             std::size_t getSize();
             friend std::ostream & operator<<(std::ostream & os, AVLTree<T> const & tree) {
                 TraverseInOrder([&](T value) { os << value << ", "; });
@@ -51,27 +51,27 @@ namespace Tobot::DataStructures::Tree {
         private:
             Node * root;
 
-            Node * insert(Node * node, T value);
-            Node * remove(Node * node, T value);
-            Node * search(Node * node, T value);
+            auto insert(Node * node, T value) -> Node *;
+            auto remove(Node * node, T value) -> Node *;
+            auto search(Node * node, T value) -> Node *;
 
-            Node * rotateLeft(Node * node);
-            Node * rotateRight(Node * node);
-            Node * rotateLeftRight(Node * node);
-            Node * rotateRightLeft(Node * node);
+            auto rotateLeft(Node * node) -> Node *;
+            auto rotateRight(Node * node) -> Node *;
+            auto rotateLeftRight(Node * node) -> Node *;
+            auto rotateRightLeft(Node * node) -> Node *;
 
-            int getHeight(Node * node);
-            int getBalance(Node * node);
+            auto getHeight(Node * node) -> int;
+            auto getBalance(Node * node) -> int;
 
-            Node * createNode(T value);
-            void deleteNode(Node * node);
-            void print(Node * node, int level);
+            auto createNode(T value) -> Node *;
+            auto deleteNode(Node * node) -> void;
+            auto print(Node * node, int level) -> void;
     };
 
     /// @brief AVLTree constructor
     /// @tparam T The type of the value stored in the tree
     template <typename T>
-    [[nodiscard]] AVLTree<T>::AVLTree() {
+    AVLTree<T>::AVLTree() {
         root = nullptr;
     }
 
@@ -79,7 +79,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param tree The tree to copy
     template <typename T>
-    [[nodiscard]] AVLTree<T>::AVLTree(AVLTree & tree) {
+    AVLTree<T>::AVLTree(AVLTree & tree) {
         root = nullptr;
         tree.traverseInOrder([&](T value) { this->insert(value); });
     }
@@ -88,7 +88,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param list The list of values to insert in the tree
     template <typename T>
-    [[nodiscard]] AVLTree<T>::AVLTree(std::initializer_list<T> list) {
+    AVLTree<T>::AVLTree(std::initializer_list<T> list) {
         root = nullptr;
         for (T value : list) {
             insert(value);
@@ -105,7 +105,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param value The value to insert in the tree
     template <typename T>
-    void AVLTree<T>::insert(T value) {
+    auto AVLTree<T>::insert(T value) -> void {
         root = insert(root, value);
     }
 
@@ -113,7 +113,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param value The value to delete from the tree
     template <typename T>
-    void AVLTree<T>::remove(T value) {
+    auto AVLTree<T>::remove(T value) -> void {
         root = remove(root, value);
     }
 
@@ -122,7 +122,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to check if it is in the tree
     /// @return True if the tree contains the value, false otherwise
     template <typename T>
-    [[nodiscard]] bool AVLTree<T>::contains(T value) {
+    [[nodiscard]] auto AVLTree<T>::contains(T value) -> bool {
         return Tobot::DataStructures::Tree::containsWithNullCheck(this->root, (Node *)nullptr, value);
     }
 
@@ -131,7 +131,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to search for in the tree
     /// @return A pointer to the node containing the value, nullptr if the value is not in the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::search(T value) {
+    [[nodiscard]] auto AVLTree<T>::search(T value) -> typename AVLTree<T>::Node * {
         return search(root, value);
     }
 
@@ -141,7 +141,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to insert in the tree
     /// @return A pointer to the node containing the value
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::insert(Node * node, T value) {
+    [[nodiscard]] auto AVLTree<T>::insert(Node * node, T value) -> typename AVLTree<T>::Node * {
         if (node == nullptr) {
             return createNode(value);
         }
@@ -177,7 +177,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to delete from the tree
     /// @return A pointer to the node containing the value
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::remove(Node * node, T value) {
+    [[nodiscard]] auto AVLTree<T>::remove(Node * node, T value) -> typename AVLTree<T>::Node * {
         if (node == nullptr) {
             return node;
         }
@@ -232,7 +232,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to search for in the tree
     /// @return A pointer to the node containing the value, nullptr if the value is not in the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::search(Node * node, T value) {
+    [[nodiscard]] auto AVLTree<T>::search(Node * node, T value) -> typename AVLTree<T>::Node * {
         if (node == nullptr || node->value == value) {
             return node;
         }
@@ -247,7 +247,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateLeft(Node * node) {
+    [[nodiscard]] auto AVLTree<T>::rotateLeft(Node * node) -> typename AVLTree<T>::Node * {
         Node * right = node->right;
         Node * right_left = right->left;
         right->left = node;
@@ -266,7 +266,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateRight(Node * node) {
+    [[nodiscard]] auto AVLTree<T>::rotateRight(Node * node) -> typename AVLTree<T>::Node * {
         Node * left = node->left;
         Node * left_right = left->right;
         left->right = node;
@@ -285,7 +285,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateLeftRight(Node * node) {
+    [[nodiscard]] auto AVLTree<T>::rotateLeftRight(Node * node) -> typename AVLTree<T>::Node * {
         node->left = rotateLeft(node->left);
         return rotateRight(node);
     }
@@ -295,7 +295,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to rotate the tree around
     /// @return A pointer to the new root of the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::rotateRightLeft(Node * node) {
+    [[nodiscard]] auto AVLTree<T>::rotateRightLeft(Node * node) -> typename AVLTree<T>::Node * {
         node->right = rotateRight(node->right);
         return rotateLeft(node);
     }
@@ -305,7 +305,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the minimum value from
     /// @return The minimum value in the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::getMinimum() {
+    [[nodiscard]] auto AVLTree<T>::getMinimum() -> typename AVLTree<T>::Node * {
         Tobot::DataStructures::Tree::getMinimum(root, (Node *)nullptr);
     }
 
@@ -314,7 +314,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the maximum value from
     /// @return The maximum value in the tree
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::getMaximum() {
+    [[nodiscard]] auto AVLTree<T>::getMaximum() -> typename AVLTree<T>::Node * {
         Tobot::DataStructures::Tree::getMaximum(root, (Node *)nullptr);
     }
 
@@ -323,7 +323,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the height of
     /// @return The height of the node
     template <typename T>
-    [[nodiscard]] int AVLTree<T>::getHeight(Node * node) {
+    [[nodiscard]] auto AVLTree<T>::getHeight(Node * node) -> int {
         if (node == nullptr) {
             return 0;
         }
@@ -335,7 +335,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the balance of
     /// @return The balance of the node
     template <typename T>
-    [[nodiscard]] int AVLTree<T>::getBalance(Node * node) {
+    [[nodiscard]] auto AVLTree<T>::getBalance(Node * node) -> int {
         if (node == nullptr) {
             return 0;
         }
@@ -347,7 +347,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to store in the node
     /// @return A pointer to the new node
     template <typename T>
-    [[nodiscard]] typename AVLTree<T>::Node * AVLTree<T>::createNode(T value) {
+    [[nodiscard]] auto AVLTree<T>::createNode(T value) -> typename AVLTree<T>::Node * {
         Node * node = new Node();
         node->value = value;
         node->left = nullptr;
@@ -360,7 +360,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to delete
     template <typename T>
-    void AVLTree<T>::deleteNode(Node * node) {
+    auto AVLTree<T>::deleteNode(Node * node) -> void {
         delete node;
     }
 
@@ -368,7 +368,7 @@ namespace Tobot::DataStructures::Tree {
     ///  @tparam T The type of the value stored in the tree
     ///  @param callback The callback to call for each node
     template <typename T>
-    void AVLTree<T>::traverseInOrder(std::function<void(T)> callback) const {
+    auto AVLTree<T>::traverseInOrder(std::function<void(T)> callback) const -> void {
         Tobot::DataStructures::Tree::traverseInOrder(root, callback, (Node *)nullptr);
     }
 
@@ -376,7 +376,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The callback to call for each node
     template <typename T>
-    void AVLTree<T>::traversePreOrder(std::function<void(T)> callback) const {
+    auto AVLTree<T>::traversePreOrder(std::function<void(T)> callback) const -> void {
         Tobot::DataStructures::Tree::traversePreOrder(root, callback, (Node *)nullptr);
     }
 
@@ -384,7 +384,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The callback to call for each node
     template <typename T>
-    void AVLTree<T>::traversePostOrder(std::function<void(T)> callback) const {
+    auto AVLTree<T>::traversePostOrder(std::function<void(T)> callback) const -> void {
         Tobot::DataStructures::Tree::traversePostOrder(root, callback, (Node *)nullptr);
     }
 
@@ -393,7 +393,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to start the traversal from
     /// @param indent The current indentation level
     template <typename T>
-    void AVLTree<T>::print(Node * node, int indent) {
+    auto AVLTree<T>::print(Node * node, int indent) -> void {
         if (node == nullptr) {
             return;
         }
@@ -415,7 +415,7 @@ namespace Tobot::DataStructures::Tree {
     /// Clears the tree
     /// @tparam T The type of the value stored in the tree
     template <typename T>
-    void AVLTree<T>::clear() {
+    auto AVLTree<T>::clear() -> void {
         traversePostOrder([this](T value) { deleteNode(search(value)); });
         root = nullptr;
     }
@@ -424,7 +424,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @return The number of nodes in the tree
     template <typename T>
-    [[nodiscard]] std::size_t AVLTree<T>::getSize() {
+    [[nodiscard]] auto AVLTree<T>::getSize() -> std::size_t {
         std::size_t size = 0;
         traverseInOrder([&size](T value) { size++; });
         return size;

@@ -49,21 +49,21 @@ namespace Tobot::Math {
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane() {
+    Plane<T>::Plane() {
     }
 
     /// @brief Constructor
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane(T a, T b, T c, T d) : a(a), b(b), c(c), d(d) {
+    Plane<T>::Plane(T a, T b, T c, T d) : a(a), b(b), c(c), d(d) {
     }
 
     /// @brief Constructor
     /// @tparam T The type of the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane(Vector3D<T> const & normal, T d) : a(normal(0)), b(normal(1)), c(normal(2)), d(d) {
+    Plane<T>::Plane(Vector3D<T> const & normal, T d) : a(normal(0)), b(normal(1)), c(normal(2)), d(d) {
     }
 
     /// @brief Constructor
@@ -72,7 +72,7 @@ namespace Tobot::Math {
     /// @param point A point on the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane(Vector3D<T> const & normal, Vector3D<T> const & point)
+    Plane<T>::Plane(Vector3D<T> const & normal, Vector3D<T> const & point)
         : a(normal(0)), b(normal(1)), c(normal(2)), d(-normal.Dot(point)) {
     }
 
@@ -83,7 +83,7 @@ namespace Tobot::Math {
     /// @param point3 The third point on the plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane(Vector3D<T> const & point1, Vector3D<T> const & point2, Vector3D<T> const & point3) {
+    Plane<T>::Plane(Vector3D<T> const & point1, Vector3D<T> const & point2, Vector3D<T> const & point3) {
         Vector<T> normal = (point2 - point1).Cross(point3 - point1);
         normal.Normalize();
         a = normal(0);
@@ -97,7 +97,7 @@ namespace Tobot::Math {
     /// @param plane The plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane(Plane<T> const & plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
+    Plane<T>::Plane(Plane<T> const & plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
     }
 
     /// @brief Move constructor
@@ -105,7 +105,7 @@ namespace Tobot::Math {
     /// @param plane The plane
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Plane<T>::Plane(Plane<T> && plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
+    Plane<T>::Plane(Plane<T> && plane) : a(plane.a), b(plane.b), c(plane.c), d(plane.d) {
     }
 
     /// @brief Copy assignment operator

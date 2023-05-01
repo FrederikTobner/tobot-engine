@@ -117,7 +117,7 @@ namespace Tobot::Math {
     /// @param y The y component of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
+    Vector2D<T>::Vector2D(T x, T y) : x(x), y(y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -125,7 +125,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector2D<T>::Vector2D(Vector2D & vec) : x(vec.x), y(vec.y) {
+    Vector2D<T>::Vector2D(Vector2D & vec) : x(vec.x), y(vec.y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -133,7 +133,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector2D<T>::Vector2D(Vector2D && vec) : x(vec.x), y(vec.y) {
+    Vector2D<T>::Vector2D(Vector2D && vec) : x(vec.x), y(vec.y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -141,7 +141,7 @@ namespace Tobot::Math {
     /// @param list The list of values to initialize the vector with
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector2D<T>::Vector2D(std::initializer_list<T> list) {
+    Vector2D<T>::Vector2D(std::initializer_list<T> list) {
         if (list.size() != 2) {
             throw std::invalid_argument("Vector2D initializer list must have 2 elements");
         }

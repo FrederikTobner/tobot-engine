@@ -67,7 +67,7 @@ namespace Tobot::Math {
     /// @param rotation Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Rectangle2D<T>::Rectangle2D(T x, T y, T width, T height, T rotation)
+    Rectangle2D<T>::Rectangle2D(T x, T y, T width, T height, T rotation)
         : center(x, y), width(width), height(height), rotation(rotation) {
     }
 
@@ -76,7 +76,7 @@ namespace Tobot::Math {
     /// @param list List of values to initialize the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Rectangle2D<T>::Rectangle2D(std::initializer_list<T> list) {
+    Rectangle2D<T>::Rectangle2D(std::initializer_list<T> list) {
         if (list.size() != 5) {
             throw std::invalid_argument("Invalid number of arguments");
         }
@@ -96,8 +96,7 @@ namespace Tobot::Math {
     /// @param rotation Rotation of the rectangle
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Rectangle2D<T>::Rectangle2D(Point2D<T> const & center, T const & width, T const & height,
-                                              T const & rotation)
+    Rectangle2D<T>::Rectangle2D(Point2D<T> const & center, T const & width, T const & height, T const & rotation)
         : center(center), width(width), height(height), rotation(rotation) {
     }
 
@@ -106,7 +105,7 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Rectangle2D<T>::Rectangle2D(Rectangle2D<T> const & rectangle)
+    Rectangle2D<T>::Rectangle2D(Rectangle2D<T> const & rectangle)
         : center(rectangle.center), width(rectangle.width), height(rectangle.height), rotation(rectangle.rotation) {
     }
 
@@ -115,7 +114,7 @@ namespace Tobot::Math {
     /// @param rectangle Rectangle to move
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Rectangle2D<T>::Rectangle2D(Rectangle2D<T> && rectangle) noexcept
+    Rectangle2D<T>::Rectangle2D(Rectangle2D<T> && rectangle) noexcept
         : center(std::move(rectangle.center)), width(std::move(rectangle.width)), height(std::move(rectangle.height)),
           rotation(std::move(rectangle.rotation)) {
     }

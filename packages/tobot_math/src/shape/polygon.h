@@ -92,28 +92,28 @@ namespace Tobot::Math {
     /// @param points Points of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Polygon2D<T>::Polygon2D(std::vector<Point2D<T>> const & points) : points(points) {
+    Polygon2D<T>::Polygon2D(std::vector<Point2D<T>> const & points) : points(points) {
     }
 
     /// @brief Constructor
     /// @param points Points of the polygon
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Polygon2D<T>::Polygon2D(std::initializer_list<Point2D<T>> const & points) : points(points) {
+    Polygon2D<T>::Polygon2D(std::initializer_list<Point2D<T>> const & points) : points(points) {
     }
 
     /// @brief Copy constructor
     /// @param polygon Polygon to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Polygon2D<T>::Polygon2D(Polygon2D<T> const & polygon) : points(polygon.points) {
+    Polygon2D<T>::Polygon2D(Polygon2D<T> const & polygon) : points(polygon.points) {
     }
 
     /// @brief Move constructor
     /// @param polygon Polygon to move
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Polygon2D<T>::Polygon2D(Polygon2D<T> &&) noexcept : points(std::move(points)) {
+    Polygon2D<T>::Polygon2D(Polygon2D<T> &&) noexcept : points(std::move(points)) {
     }
 
     /// @brief Copy assignment operator

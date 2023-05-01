@@ -5,24 +5,28 @@
 
 #include <stdio.h>
 
-#include "menu_bar.h"
+// Tobot core dependencies
+#include "exitcode.h"
+#include "sub_system_manager.h"
+
+// Internal dependencies
 #include "event_handler.h"
+#include "menu_bar.h"
 
 #if !SDL_VERSION_ATLEAST(2, 0, 17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
-
-
 /// @brief Main entry point
 /// @param argc The number of arguments
 /// @param argv The arguments
 /// @return 0 on success, -1 on failure
-int main(int argc, char ** argv) {
-    // Seting up SDL
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
+auto main(int argc, char ** argv) -> int {
+    // Seting up SDL using the Tobot core
+    if (Tobot::Core::subSystemsInitialize(Tobot::Core::SDL_CORE_INIT_VIDEO | Tobot::Core::SDL_CORE_INIT_TIMER |
+                                          Tobot::Core::SDL_CORE_INIT_GAMECONTROLLER) != 0) {
         printf("Error: %s\n", SDL_GetError());
-        return -1;
+        return Tobot::Core::ExitCode::SOFTWARE.getCode();
     }
 
     // From 2.0.18: Enable native IME.
@@ -38,7 +42,7 @@ int main(int argc, char ** argv) {
     SDL_Surface * window_icon_scurface = SDL_LoadBMP("./assets/icon.bmp");
     if (!window_icon_scurface) {
         printf("Failed to load window icon %s\n", SDL_GetError());
-        return -1;
+        return Tobot::Core::ExitCode::SOFTWARE.getCode();
     }
     // Setting the icon of the window
     SDL_SetWindowIcon(window, window_icon_scurface);
@@ -46,7 +50,7 @@ int main(int argc, char ** argv) {
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     if (renderer == nullptr) {
         SDL_Log("Error creating SDL_Renderer!");
-        return 0;
+        return Tobot::Core::ExitCode::OK.getCode();
     }
     // SDL_RendererInfo info;
     // SDL_GetRendererInfo(renderer, &info);
@@ -183,5 +187,5 @@ int main(int argc, char ** argv) {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return 0;
+    return Tobot::Core::ExitCode::OK.getCode();
 }

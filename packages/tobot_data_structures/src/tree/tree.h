@@ -17,23 +17,23 @@ namespace Tobot::DataStructures::Tree {
             Tree(T data);
             Tree(TreeNode<T> * root);
             ~Tree();
-            std::size_t getSize() const;
-            std::size_t getDepth() const;
-            TreeNode<T> * getRoot();
-            void visitParentsFirst(std::function<void(TreeNode<T> *)> callback);
-            void visitChildrenFirst(std::function<void(TreeNode<T> *)> callback);
-            void insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width);
-            void insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width, std::size_t index);
-            std::vector<TreeNode<T> *> getNodesAtDepth(std::size_t depth);
+            auto getSize() const -> std::size_t;
+            auto getDepth() const -> std::size_t;
+            auto getRoot() -> TreeNode<T> *;
+            auto visitParentsFirst(std::function<void(TreeNode<T> *)> callback) -> void;
+            auto visitChildrenFirst(std::function<void(TreeNode<T> *)> callback) -> void;
+            auto insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width) -> void;
+            auto insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width, std::size_t index) -> void;
+            auto getNodesAtDepth(std::size_t depth) -> std::vector<TreeNode<T> *>;
 
         private:
             // The root node of the tree
             TreeNode<T> * root;
-            std::size_t getSize(TreeNode<T> * node) const;
-            std::size_t getDepth(TreeNode<T> * node) const;
-            void visitParentsFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback);
-            void visitChildrenFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback);
-            void getNodesAtDepth(TreeNode<T> * node, std::size_t depth, std::vector<TreeNode<T> *> & nodes);
+            auto getSize(TreeNode<T> * node) const -> std::size_t;
+            auto getDepth(TreeNode<T> * node) const -> std::size_t;
+            auto visitParentsFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback) -> void;
+            auto visitChildrenFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback) -> void;
+            auto getNodesAtDepth(TreeNode<T> * node, std::size_t depth, std::vector<TreeNode<T> *> & nodes) -> void;
     };
 
     /// @brief Construct a new Tree object
@@ -73,7 +73,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @return std::size_t The size of the tree
     template <typename T>
-    [[nodiscard]] std::size_t Tree<T>::getSize() const {
+    [[nodiscard]] auto Tree<T>::getSize() const -> std::size_t {
         return getSize(this->root);
     }
 
@@ -81,7 +81,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @return std::size_t The depth of the tree
     template <typename T>
-    [[nodiscard]] std::size_t Tree<T>::getDepth() const {
+    [[nodiscard]] auto Tree<T>::getDepth() const -> std::size_t {
         return getDepth(this->root);
     }
 
@@ -90,7 +90,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to visit
     /// @return std::size_t The depth of the tree
     template <typename T>
-    std::size_t Tree<T>::getSize(TreeNode<T> * node) const {
+    [[nodiscard]] auto Tree<T>::getSize(TreeNode<T> * node) const -> std::size_t {
         if (!node) {
             return 0;
         } else {
@@ -107,7 +107,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the depth of
     /// @return std::size_t The depth of the tree
     template <typename T>
-    [[nodiscard]] std::size_t Tree<T>::getDepth(TreeNode<T> * node) const {
+    [[nodiscard]] auto Tree<T>::getDepth(TreeNode<T> * node) const -> std::size_t {
         if (!node) {
             return 0;
         } else {
@@ -126,7 +126,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @return TreeNode<T> * The root node of the tree
     template <typename T>
-    [[nodiscard]] TreeNode<T> * Tree<T>::getRoot() {
+    [[nodiscard]] auto Tree<T>::getRoot() -> TreeNode<T> * {
         return this->root;
     }
 
@@ -134,7 +134,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @param callback The callback function to call on each node
     template <typename T>
-    void Tree<T>::visitParentsFirst(std::function<void(TreeNode<T> *)> callback) {
+    auto Tree<T>::visitParentsFirst(std::function<void(TreeNode<T> *)> callback) -> void {
         if (this->root) {
             this->visitParentsFirst(this->root, callback);
         }
@@ -144,7 +144,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the data stored in the tree
     /// @param callback The callback function to call on each node
     template <typename T>
-    void Tree<T>::visitChildrenFirst(std::function<void(TreeNode<T> *)> callback) {
+    auto Tree<T>::visitChildrenFirst(std::function<void(TreeNode<T> *)> callback) -> void {
         if (this->root) {
             this->visitChildrenFirst(this->root, callback);
         }
@@ -155,7 +155,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to visit
     /// @param callback The callback function to call on each node
     template <typename T>
-    void Tree<T>::visitParentsFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback) {
+    auto Tree<T>::visitParentsFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback) -> void {
         if (node) {
             callback(node);
             for (std::size_t i = 0; i < node->getChildren().size(); i++) {
@@ -169,7 +169,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to visit
     /// @param callback The callback function to call on each node
     template <typename T>
-    void Tree<T>::visitChildrenFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback) {
+    auto Tree<T>::visitChildrenFirst(TreeNode<T> * node, std::function<void(TreeNode<T> *)> callback) -> void {
         if (node) {
             for (std::size_t i = 0; i < node->children.size(); i++) {
                 visitChildrenFirst(node->children[i], callback);
@@ -179,7 +179,7 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    std::vector<TreeNode<T> *> Tree<T>::getNodesAtDepth(std::size_t depth) {
+    auto Tree<T>::getNodesAtDepth(std::size_t depth) -> std::vector<TreeNode<T> *> {
         std::vector<TreeNode<T> *> nodes;
         if (this->root) {
             this->getNodesAtDepth(this->root, depth, nodes);
@@ -188,7 +188,7 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    void Tree<T>::getNodesAtDepth(TreeNode<T> * node, std::size_t depth, std::vector<TreeNode<T> *> & nodes) {
+    auto Tree<T>::getNodesAtDepth(TreeNode<T> * node, std::size_t depth, std::vector<TreeNode<T> *> & nodes) -> void {
         if (depth == 0) {
             nodes.push_back(node);
         } else {
@@ -204,7 +204,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param depth The depth to insert the node at
     /// @param width The width to insert the node at
     template <typename T>
-    void Tree<T>::insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width) {
+    auto Tree<T>::insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width) -> void {
         if (depth == 0) {
             if (width == 0) {
                 this->root.insertChild(node);
@@ -223,7 +223,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param depth The depth to insert the node at
     /// @param width The width to insert the node at
     template <typename T>
-    void Tree<T>::insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width, std::size_t index) {
+    auto Tree<T>::insertAt(TreeNode<T> * node, std::size_t depth, std::size_t width, std::size_t index) -> void {
         if (depth == 0) {
             if (width == 0) {
                 this->root.insertChildAt(node, index);

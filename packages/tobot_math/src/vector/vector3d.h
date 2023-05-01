@@ -127,7 +127,7 @@ namespace Tobot::Math {
     /// @param z The z component of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
+    Vector3D<T>::Vector3D(T x, T y, T z) : x(x), y(y), z(z) {
     }
 
     /// @brief Constructs a new Vector3D object
@@ -135,12 +135,12 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
+    Vector3D<T>::Vector3D(Vector3D<T> & vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector3D<T>::Vector3D(Vector3D && vec) : x(vec.x), y(vec.y), z(vec.z) {
+    Vector3D<T>::Vector3D(Vector3D && vec) : x(vec.x), y(vec.y), z(vec.z) {
     }
 
     /// @brief Constructs a new Vector3D object
@@ -148,7 +148,7 @@ namespace Tobot::Math {
     /// @param list The list of components of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector3D<T>::Vector3D(std::initializer_list<T> list) {
+    Vector3D<T>::Vector3D(std::initializer_list<T> list) {
         if (list.size() != 3) {
             throw std::invalid_argument("The list must have exactly 3 elements");
         }

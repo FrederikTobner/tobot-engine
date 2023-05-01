@@ -111,14 +111,14 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Circle<T>::Circle(Point2D<T> const & center, T const & radius) {
+    Circle<T>::Circle(Point2D<T> const & center, T const & radius) {
         m_center = center;
         m_radius = radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Circle<T>::Circle(std::initializer_list<T> list) {
+    Circle<T>::Circle(std::initializer_list<T> list) {
         if (list.size() != 3) {
             throw std::invalid_argument("Circle initializer list must have 3 elements");
         }
@@ -130,14 +130,14 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Circle<T>::Circle(Circle<T> const & circle) {
+    Circle<T>::Circle(Circle<T> const & circle) {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Circle<T>::Circle(Circle<T> && circle) noexcept {
+    Circle<T>::Circle(Circle<T> && circle) noexcept {
         m_center = circle.m_center;
         m_radius = circle.m_radius;
     }

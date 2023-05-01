@@ -5,7 +5,7 @@
 
 using namespace Tobot::Core;
 
-[[nodiscard]] SDL_Surface * Tobot::Core::AssetManager::loadTextureScurface(char const * path) {
+[[nodiscard]] auto Tobot::Core::AssetManager::loadTextureScurface(char const * path) -> SDL_Surface * {
     SDL_Surface * surface = IMG_Load(path);
     if (!surface) {
         LOG_CRITICAL("Failed to load Texture %s\n", IMG_GetError());
@@ -15,7 +15,7 @@ using namespace Tobot::Core;
     return surface;
 }
 
-[[nodiscard]] SDL_Texture * Tobot::Core::AssetManager::loadTexture(char const * path, SDL_Renderer * renderer) {
+[[nodiscard]] auto Tobot::Core::AssetManager::loadTexture(char const * path, SDL_Renderer * renderer) -> SDL_Texture * {
     SDL_Surface * surface = IMG_Load(path);
     if (!surface) {
         LOG_CRITICAL("Failed to load Texture %s\n", IMG_GetError());

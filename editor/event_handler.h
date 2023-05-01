@@ -4,6 +4,6 @@
 
 namespace Tobot::Editor {
 
-    void handleEvents(SDL_Event & event, bool & done, SDL_Window * window);
+    auto handleEvents(SDL_Event & event, bool & done, SDL_Window * window) -> void;
 
 } // namespace Tobot::Editor

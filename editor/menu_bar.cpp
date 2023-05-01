@@ -5,7 +5,7 @@
 
 #include "imgui.h"
 
-void Tobot::Editor::createMenuBar(bool & done, bool & show_tobot_help) {
+auto Tobot::Editor::createMenuBar(bool & done, bool & show_tobot_help) -> void {
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New Project")) {

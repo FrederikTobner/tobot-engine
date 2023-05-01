@@ -15,12 +15,11 @@ namespace Tobot::Core {
 
     class TobotApplication {
         private:
-            SDL_Window * p_Window;
-            SDL_Renderer * p_Renderer;
-
-            Tobot::Core::Scene * p_CurrentScene;
-
-            bool m_Running;
+        public:
+            TobotApplication(char const * name);
+            virtual ~TobotApplication();
+            auto initialize() -> void;
+            auto run() -> void;
 
         protected:
             Tobot::Math::Dimension<int> m_DisplaySize = Tobot::Math::Dimension<int>(800, 600);
@@ -28,13 +27,12 @@ namespace Tobot::Core {
 
             auto setInitialScene(Scene * scene) -> void;
 
-        public:
-            TobotApplication(char const * name);
-            virtual ~TobotApplication();
-            auto initialize() -> void;
-            auto run() -> void;
-
         private:
+            SDL_Window * p_Window;
+            SDL_Renderer * p_Renderer;
+            Tobot::Core::Scene * p_CurrentScene;
+            bool m_Running;
+
             auto handleEvents() -> void;
             auto update() -> void;
             auto render() -> void;

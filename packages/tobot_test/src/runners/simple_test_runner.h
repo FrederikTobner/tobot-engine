@@ -25,13 +25,16 @@ namespace Tobot::Tooling::Test {
             SimpleTestRunner(TestReportProcessor & processor);
             /// Destructor of the TestRunner class
             ~SimpleTestRunner();
+            /// @brief Copy assignment operator
+            /// @param rhs The TestRunner that is copied
+            /// @return A reference to the TestRunner that is copied
+            auto operator=(SimpleTestRunner const & rhs) -> SimpleTestRunner &;
             /// @brief Adds a new TestFixture to the the runner
             /// @param fixture The fixture that is added
             virtual auto addFixture(TestFixture fixture) -> void;
             /// @brief Executes all the TestCase's that are stored in the TestFixture's that this TestRunner will
             /// execute
             virtual auto runAll() -> void;
-            auto operator=(SimpleTestRunner const & rhs) -> SimpleTestRunner &;
     };
 
 } // namespace Tobot::Tooling::Test

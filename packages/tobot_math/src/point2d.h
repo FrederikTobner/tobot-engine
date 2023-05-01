@@ -103,21 +103,21 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Point2D<T>::Point2D(T const & x, T const & y) {
+    Point2D<T>::Point2D(T const & x, T const & y) {
         m_x = x;
         m_y = y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Point2D<T>::Point2D(Point2D<T> const & point) {
+    Point2D<T>::Point2D(Point2D<T> const & point) {
         m_x = point.m_x;
         m_y = point.m_y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Point2D<T>::Point2D(Point2D<T> && point) noexcept {
+    Point2D<T>::Point2D(Point2D<T> && point) noexcept {
         m_x = point.m_x;
         m_y = point.m_y;
     }

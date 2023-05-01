@@ -27,6 +27,6 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector<T>::Vector() {
+    Vector<T>::Vector() {
     }
 } // namespace Tobot::Math

@@ -6,7 +6,7 @@
 /// @param event The event to handle
 /// @param done The boolean to set to true if the user wants to quit
 /// @param window The window to handle events for
-void Tobot::Editor::handleEvents(SDL_Event & event, bool & done, SDL_Window * window) {
+auto Tobot::Editor::handleEvents(SDL_Event & event, bool & done, SDL_Window * window) -> void {
     while (SDL_PollEvent(&event)) {
         ImGui_ImplSDL2_ProcessEvent(&event);
         if (event.type == SDL_QUIT) {

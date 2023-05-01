@@ -12,15 +12,15 @@ namespace Tobot::DataStructures::Tree {
             TreeNode(T data);
             TreeNode(T data, std::vector<TreeNode *> children);
             ~TreeNode();
-            void addChild(TreeNode<T> * child);
-            void addChildAt(TreeNode<T> * child, std::size_t index);
-            T & getValue();
-            T const & getValue() const;
-            void setValue(T data);
-            void removeChild(TreeNode<T> * child);
-            void removeChildByIndex(std::size_t index);
-            std::vector<TreeNode<T> *> & getChildren();
-            std::vector<TreeNode<T> *> const & getChildren() const;
+            auto addChild(TreeNode<T> * child) -> void;
+            auto addChildAt(TreeNode<T> * child, std::size_t index) -> void;
+            auto getValue() -> T &;
+            auto getValue() const -> T const &;
+            auto setValue(T data) -> void;
+            auto removeChild(TreeNode<T> * child) -> void;
+            auto removeChildByIndex(std::size_t index) -> void;
+            auto getChildren() -> std::vector<TreeNode<T> *> &;
+            auto getChildren() const -> std::vector<TreeNode<T> *> const &;
 
         private:
             T data;
@@ -46,34 +46,34 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    void TreeNode<T>::addChild(TreeNode<T> * child) {
+    auto TreeNode<T>::addChild(TreeNode<T> * child) -> void {
         this->children.push_back(child);
     }
 
     template <typename T>
-    void TreeNode<T>::addChildAt(TreeNode<T> * child, std::size_t index) {
+    auto TreeNode<T>::addChildAt(TreeNode<T> * child, std::size_t index) -> void {
         if (index < children.size()) {
             children.insert(children.begin() + index, child);
         }
     }
 
     template <typename T>
-    T & TreeNode<T>::getValue() {
+    auto TreeNode<T>::getValue() -> T & {
         return this->data;
     }
 
     template <typename T>
-    T const & TreeNode<T>::getValue() const {
+    auto TreeNode<T>::getValue() const -> T const & {
         return this->data;
     }
 
     template <typename T>
-    void TreeNode<T>::setValue(T data) {
+    auto TreeNode<T>::setValue(T data) -> void {
         this->data = data;
     }
 
     template <typename T>
-    void TreeNode<T>::removeChild(TreeNode<T> * child) {
+    auto TreeNode<T>::removeChild(TreeNode<T> * child) -> void {
         for (int i = 0; i < children.size(); i++) {
             if (children[i] == child) {
                 children.erase(children.begin() + i);
@@ -83,19 +83,19 @@ namespace Tobot::DataStructures::Tree {
     }
 
     template <typename T>
-    void TreeNode<T>::removeChildByIndex(std::size_t index) {
+    auto TreeNode<T>::removeChildByIndex(std::size_t index) -> void {
         if (index < children.size()) {
             children.erase(children.begin() + index);
         }
     }
 
     template <typename T>
-    [[nodiscard]] std::vector<TreeNode<T> *> & TreeNode<T>::getChildren() {
+    [[nodiscard]] auto TreeNode<T>::getChildren() -> std::vector<TreeNode<T> *> & {
         return this->children;
     }
 
     template <typename T>
-    [[nodiscard]] std::vector<TreeNode<T> *> const & TreeNode<T>::getChildren() const {
+    [[nodiscard]] auto TreeNode<T>::getChildren() const -> std::vector<TreeNode<T> *> const & {
         return this->children;
     }
 

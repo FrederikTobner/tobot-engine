@@ -89,7 +89,7 @@ namespace Tobot::Math {
     /// @tparam n The number of coloumns in the matrix
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Matrix<T, m, n>::Matrix() : rowsCount(m), columnsCount(n) {
+    Matrix<T, m, n>::Matrix() : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
     }
 
@@ -100,7 +100,7 @@ namespace Tobot::Math {
     /// @param mat The matrix to copy
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Matrix<T, m, n>::Matrix(const Matrix<T, m, n> & mat) : rowsCount(m), columnsCount(n) {
+    Matrix<T, m, n>::Matrix(const Matrix<T, m, n> & mat) : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
         m_matrix = mat.m_matrix;
     }
@@ -112,7 +112,7 @@ namespace Tobot::Math {
     /// @param mat The matrix to move
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Matrix<T, m, n>::Matrix(Matrix<T, m, n> && mat) : rowsCount(m), columnsCount(n) {
+    Matrix<T, m, n>::Matrix(Matrix<T, m, n> && mat) : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
         m_matrix = std::move(mat.m_matrix);
     }
@@ -127,7 +127,7 @@ namespace Tobot::Math {
      */
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
+    Matrix<T, m, n>::Matrix(const std::vector<T> values) : rowsCount(m), columnsCount(n) {
 
         // check that the matrix invariants are satisfied
         static_assert(m > 0 && n > 0);
@@ -154,7 +154,7 @@ namespace Tobot::Math {
     /// @param list The list of values to construct the matrix from
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Matrix<T, m, n>::Matrix(std::initializer_list<T> list) : rowsCount(m), columnsCount(n) {
+    Matrix<T, m, n>::Matrix(std::initializer_list<T> list) : rowsCount(m), columnsCount(n) {
 
         static_assert(m > 0 && n > 0);
         if (list.size() == 0) {
@@ -174,7 +174,7 @@ namespace Tobot::Math {
 
     template <typename T, std::size_t m, std::size_t n>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Matrix<T, m, n>::Matrix(std::array<std::array<T, n>, m> mat) : rowsCount(m), columnsCount(n) {
+    Matrix<T, m, n>::Matrix(std::array<std::array<T, n>, m> mat) : rowsCount(m), columnsCount(n) {
         static_assert(m > 0 && n > 0);
         m_matrix = mat;
     }

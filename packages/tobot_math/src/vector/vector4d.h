@@ -119,7 +119,7 @@ namespace Tobot::Math {
     /// @param w The w component of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector4D<T>::Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {
+    Vector4D<T>::Vector4D(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {
     }
 
     /// @brief Creates a new Vector4D object
@@ -127,7 +127,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector4D<T>::Vector4D(Vector4D<T> & vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
+    Vector4D<T>::Vector4D(Vector4D<T> & vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
     }
 
     /// @brief Creates a new Vector4D object
@@ -135,7 +135,7 @@ namespace Tobot::Math {
     /// @param list The list of components for the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector4D<T>::Vector4D(std::initializer_list<T> list) {
+    Vector4D<T>::Vector4D(std::initializer_list<T> list) {
         assert(list.size() == 4);
         std::size_t i = 0;
         for (auto it = list.begin(); it != list.end(); ++it) {
@@ -162,7 +162,7 @@ namespace Tobot::Math {
     /// @param vec The vector to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Vector4D<T>::Vector4D(Vector4D<T> const && vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
+    Vector4D<T>::Vector4D(Vector4D<T> const && vec) : x(vec.x), y(vec.y), z(vec.z), w(vec.w) {
     }
 
     /// @brief Creates a new Vector4D object

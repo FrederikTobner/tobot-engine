@@ -89,7 +89,7 @@ namespace Tobot::Math {
     /// @param c The third point
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Triangle2D<T>::Triangle2D(Point2D<T> const & a, Point2D<T> const & b, Point2D<T> const & c)
+    Triangle2D<T>::Triangle2D(Point2D<T> const & a, Point2D<T> const & b, Point2D<T> const & c)
         : m_a(a), m_b(b), m_c(c) {
     }
 
@@ -98,7 +98,7 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Triangle2D<T>::Triangle2D(Triangle2D<T> const & triangle)
+    Triangle2D<T>::Triangle2D(Triangle2D<T> const & triangle)
         : m_a(triangle.m_a), m_b(triangle.m_b), m_c(triangle.m_c) {
     }
 
@@ -107,7 +107,7 @@ namespace Tobot::Math {
     /// @param triangle Triangle2D to move
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Triangle2D<T>::Triangle2D(Triangle2D<T> && triangle) noexcept
+    Triangle2D<T>::Triangle2D(Triangle2D<T> && triangle) noexcept
         : m_a(std::move(triangle.m_a)), m_b(std::move(triangle.m_b)), m_c(std::move(triangle.m_c)) {
     }
 

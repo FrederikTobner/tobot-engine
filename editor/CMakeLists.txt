@@ -16,7 +16,8 @@ target_link_libraries("${PROJECT_NAME}-editor" imgui ${PROJECT_NAME})
 target_include_directories("${PROJECT_NAME}-editor" PUBLIC 
 ${PROJECT_SOURCE_DIR}/deps/imgui/imgui_dir 
 ${PROJECT_SOURCE_DIR}/deps/imgui/imgui_dir/backends 
-${PROJECT_SOURCE_DIR}/deps/SDL/include)
+${PROJECT_SOURCE_DIR}/deps/SDL/include
+${PROJECT_SOURCE_DIR}/packages/tobot_core/src)
 
 # Copies window icon into the build folder
 FILE(COPY assets/icon.bmp DESTINATION "${CMAKE_BINARY_DIR}/editor/assets")

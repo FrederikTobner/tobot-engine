@@ -14,6 +14,15 @@ There is a build script provided written in lua. It is located in the scripts di
 
 If you are not using msvc you need to install at least the freetype library.
 
+If you are using mysys2 you can install the dependencies with pacman.
+
+```mysis2
+
+pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-ucrt-x86_64-libxmp mingw-w64-ucrt-x86_64-fluidsynth mingw-w64-ucrt-x86_64-wavpac mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
+
+
+```
+
 ### Under linux
 
 Can be installed with apt. We haven't determined the names of these dependencies using other package managers yet.

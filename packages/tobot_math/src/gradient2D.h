@@ -39,7 +39,7 @@ namespace Tobot::Math {
     /// @param m_yIntercept The y-intercept of the gradient
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Gradient2D<T>::Gradient2D(T m_slope, T m_yIntercept) {
+    Gradient2D<T>::Gradient2D(T m_slope, T m_yIntercept) {
         this->m_slope = m_slope;
         this->m_yIntercept = m_yIntercept;
     }
@@ -49,7 +49,7 @@ namespace Tobot::Math {
     /// @param gradient The gradient to copy
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Gradient2D<T>::Gradient2D(Gradient2D<T> const & gradient) {
+    Gradient2D<T>::Gradient2D(Gradient2D<T> const & gradient) {
         this->m_slope = gradient.m_slope;
         this->m_yIntercept = gradient.m_yIntercept;
     }
@@ -59,7 +59,7 @@ namespace Tobot::Math {
     /// @param gradient The gradient to move
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] Gradient2D<T>::Gradient2D(Gradient2D<T> && gradient) noexcept {
+    Gradient2D<T>::Gradient2D(Gradient2D<T> && gradient) noexcept {
         this->m_slope = std::move(gradient.m_slope);
         this->m_yIntercept = std::move(gradient.m_yIntercept);
     }
