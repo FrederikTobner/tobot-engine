@@ -17,16 +17,17 @@
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
+using namespace Tobot::Core;
+
 /// @brief Main entry point
 /// @param argc The number of arguments
 /// @param argv The arguments
 /// @return 0 on success, -1 on failure
 auto main(int argc, char ** argv) -> int {
     // Seting up SDL using the Tobot core
-    if (Tobot::Core::subSystemsInitialize(Tobot::Core::SDL_CORE_INIT_VIDEO | Tobot::Core::SDL_CORE_INIT_TIMER |
-                                          Tobot::Core::SDL_CORE_INIT_GAMECONTROLLER) != 0) {
+    if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_CORE_INIT_TIMER | SDL_CORE_INIT_GAMECONTROLLER) != 0) {
         printf("Error: %s\n", SDL_GetError());
-        return Tobot::Core::ExitCode::SOFTWARE.getCode();
+        return ExitCode::SOFTWARE.getCode();
     }
 
     // From 2.0.18: Enable native IME.
@@ -36,12 +37,12 @@ auto main(int argc, char ** argv) -> int {
 
     // Create window with SDL_Renderer graphics context
     SDL_WindowFlags window_flags =
-        (SDL_WindowFlags)(SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_VULKAN | SDL_WINDOW_MAXIMIZED);
+        (SDL_WindowFlags)(SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_VULKAN | SDL_WINDOW_MAXIMIZED | SDL_WINDOW_RESIZABLE);
     SDL_Window * window =
         SDL_CreateWindow("Tobot-Editor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1800, 1000, window_flags);
-    SDL_Surface * window_icon_scurface = SDL_LoadBMP("./assets/icon.bmp");
+    SDL_Surface * window_icon_scurface = SDL_LoadBMP(IMAGE_LOCATION);
     if (!window_icon_scurface) {
-        printf("Failed to load window icon %s\n", SDL_GetError());
+        printf("Failed to load window icon %s from %s\n", SDL_GetError(), IMAGE_LOCATION);
         return Tobot::Core::ExitCode::SOFTWARE.getCode();
     }
     // Setting the icon of the window
@@ -60,12 +61,13 @@ auto main(int argc, char ** argv) -> int {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO & io = ImGui::GetIO();
-    (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // Enable Docking
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // Enable Multi-Viewport / Platform Windows
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsLight();
+    ImGui::StyleColorsDark();
 
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
@@ -84,10 +86,11 @@ auto main(int argc, char ** argv) -> int {
     // - Read 'docs/FONTS.md' for more instructions and details.
     // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double
     // backslash \\ !
-    // io.Fonts->AddFontDefault();
     // io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
     // io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
-    io.Fonts->AddFontFromFileTTF("./fonts/Roboto-Medium.ttf", 16.0f);
+    io.Fonts->AddFontFromFileTTF(FONT_LOCATION, 16.0f);
+    // Adding the default font so we have a comparison
+    io.Fonts->AddFontDefault();
     // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     // ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr,
     // io.Fonts->GetGlyphRangesJapanese()); IM_ASSERT(font != nullptr);
@@ -187,5 +190,5 @@ auto main(int argc, char ** argv) -> int {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return Tobot::Core::ExitCode::OK.getCode();
+    return ExitCode::OK.getCode();
 }

@@ -25,6 +25,9 @@ FILE(COPY assets/icon.bmp DESTINATION "${CMAKE_BINARY_DIR}/editor/assets")
 # Copies font into the build folder
 FILE(COPY fonts/Roboto-Medium.ttf DESTINATION "${CMAKE_BINARY_DIR}/editor/fonts")
 
+# Works only if we use the absolute path for some reason on the docking branch of imgui
+add_compile_definitions(IMAGE_LOCATION="${CMAKE_BINARY_DIR}/editor/assets/icon.bmp" FONT_LOCATION="${CMAKE_BINARY_DIR}/editor/fonts/Roboto-Medium.ttf")
+
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Install destinations
     install(TARGETS "${PROJECT_NAME}-editor" DESTINATION editor)

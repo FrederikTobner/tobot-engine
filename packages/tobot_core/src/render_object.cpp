@@ -7,10 +7,12 @@ auto Tobot::Core::RenderObject::setVisible(bool visible) -> void {
 }
 
 auto Tobot::Core::RenderObject::incrementPosition() -> void {
-    this->m_Position += Tobot::Math::Vector2D<float>(1.0, 1.0);
+    this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
 }
 
-[[nodiscard]] RenderObject::RenderObject(char const * id, int x, int y) : m_Id(id), m_Position(x, y) {
+// The scaling and rotation is not implemented yet
+RenderObject::RenderObject(char const * id, float x, float y)
+    : m_Id(id), m_transform(Tobot::Math::Vector2D<float>(x, y), 0.0, Tobot::Math::Vector2D<float>(0.0f, 0.0f)) {
 }
 
 [[nodiscard]] auto RenderObject::getId() -> const char * {
@@ -18,7 +20,7 @@ auto Tobot::Core::RenderObject::incrementPosition() -> void {
 }
 
 auto RenderObject::getPosition() -> Tobot::Math::Vector2D<float> {
-    return this->m_Position;
+    return this->m_transform.getPosition();
 }
 
 [[nodiscard]] auto Tobot::Core::RenderObject::isVisible() -> bool {

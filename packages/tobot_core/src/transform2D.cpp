@@ -9,14 +9,21 @@ Transform2D::Transform2D(const Math::Vector2D<float> & position, float rotation,
     : m_Position(position), m_Rotation(rotation), m_Scale(scale) {
 }
 
-Tobot::Math::Vector2D<float> Transform2D::getPosition() const {
+Transform2D::~Transform2D() {
+}
+
+auto Transform2D::translate(const Math::Vector2D<float> & translate) -> void {
+    m_Position += translate;
+}
+
+auto Transform2D::getPosition() const -> Math::Vector2D<float> {
     return m_Position;
 }
 
-float Transform2D::getRotation() const {
+auto Transform2D::getRotation() const -> float {
     return m_Rotation;
 }
 
-Tobot::Math::Vector2D<float> Transform2D::getScale() const {
+auto Transform2D::getScale() const -> Math::Vector2D<float> {
     return m_Scale;
 }

@@ -2,11 +2,15 @@
 
 using namespace Tobot::Core;
 
-[[nodiscard]] GameEntity::GameEntity(char const * id, int x, int y, SDL_Texture * texture) : RenderObject(id, x, y) {
+[[nodiscard]] GameEntity::GameEntity(char const * id, float x, float y, SDL_Texture * texture)
+    : RenderObject(id, x, y) {
     this->p_Texture = texture;
 }
 
-GameEntity::GameEntity(char const * id, int x, int y) : RenderObject(id, x, y) {
+GameEntity::GameEntity(char const * id, float x, float y) : RenderObject(id, x, y) {
+}
+
+GameEntity::~GameEntity() {
 }
 
 auto GameEntity::setTexture(SDL_Surface * texture) -> void {
@@ -27,6 +31,7 @@ auto GameEntity::prepareRects() -> void {
     m_SrcRect.x = 0;
     m_SrcRect.y = 0;
 
+    // TODO: We should use the internal coordinate system of the game engine - instead of the SDL coordinate system
     m_DstRect.x = this->getPosition().getX();
     m_DstRect.y = this->getPosition().getY();
     m_DstRect.w = m_SrcRect.w;
@@ -40,7 +45,4 @@ auto GameEntity::render(SDL_Renderer * renderer) -> void {
 
 auto GameEntity::dispose() -> void {
     SDL_DestroyTexture(this->p_Texture);
-}
-
-GameEntity::~GameEntity() {
 }

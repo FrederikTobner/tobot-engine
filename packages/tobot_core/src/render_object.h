@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tobot_math.h"
+#include "transform2D.h"
 
 #include "SDL.h"
 
@@ -8,9 +8,11 @@ namespace Tobot::Core {
     class RenderObject {
         private:
             /// @brief The id of the object
-            const char * m_Id;
-            /// @brief The position of the object
-            Tobot::Math::Vector2D<float> m_Position;
+            char const * m_Id;
+
+            /// @brief The transform component of the object
+            Transform2D m_transform;
+
             /// @brief Determines if the object should be rendered
             bool m_Visible;
 
@@ -23,7 +25,7 @@ namespace Tobot::Core {
             auto incrementPosition() -> void;
 
         public:
-            RenderObject(char const * id, int x, int y);
+            RenderObject(char const * id, float x, float y);
             virtual ~RenderObject() = 0;
 
             virtual auto update() -> void = 0;
