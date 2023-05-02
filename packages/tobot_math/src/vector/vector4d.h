@@ -14,17 +14,16 @@ namespace Tobot::Math {
     class Vector4D : Vector<T> {
 
         public:
-            T x;
-            T y;
-            T z;
-            T w;
-
             Vector4D(T x, T y, T z, T w);
             Vector4D(Vector4D & vec);
             Vector4D(std::initializer_list<T> list);
             Vector4D(Vector4D const && vec);
             Vector4D<T> & operator=(Vector4D<T> const & vec);
             Vector4D<T> & operator=(Vector4D<T> const && vec);
+            auto getX() const -> T;
+            auto getY() const -> T;
+            auto getZ() const -> T;
+            auto getW() const -> T;
 
             /// @brief Adds two vectors together
             /// @param lVec The left vector
@@ -109,6 +108,12 @@ namespace Tobot::Math {
             inline auto getSize() -> std::size_t;
 
             auto dot(Vector4D<T> const & vec) -> T;
+
+        private:
+            T x;
+            T y;
+            T z;
+            T w;
     };
 
     /// @brief Creates a new Vector4D object
@@ -423,6 +428,42 @@ namespace Tobot::Math {
         requires ArithmeticFloatingPoint<T>
     [[nodiscard]] auto Vector4D<T>::dot(Vector4D<T> const & vec) -> T {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z + this->w * vec.w;
+    }
+
+    /// @brief Gets the x component of the vector
+    /// @tparam T The underlying type of the vector
+    /// @return T The x component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector4D<T>::getX() const -> T {
+        return this->x;
+    }
+
+    /// @brief Gets the y component of the vector
+    /// @tparam T The underlying type of the vector
+    /// @return T The y component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector4D<T>::getY() const -> T {
+        return this->y;
+    }
+
+    /// @brief Gets the z component of the vector
+    /// @tparam T The underlying type of the vector
+    /// @return T The z component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector4D<T>::getZ() const -> T {
+        return this->z;
+    }
+
+    /// @brief Gets the w component of the vector
+    /// @tparam T The underlying type of the vector
+    /// @return T The w component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector4D<T>::getW() const -> T {
+        return this->w;
     }
 
 } // namespace Tobot::Math

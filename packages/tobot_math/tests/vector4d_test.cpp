@@ -20,10 +20,10 @@ TEST(Vector4D, Copy) {
 
     firstVector = {4, 5, 6, 1};
 
-    EXPECT_EQ(5, secondVector.x);
-    EXPECT_EQ(3, secondVector.y);
-    EXPECT_EQ(6, secondVector.z);
-    EXPECT_EQ(1, secondVector.w);
+    EXPECT_EQ(5, secondVector.getX());
+    EXPECT_EQ(3, secondVector.getY());
+    EXPECT_EQ(6, secondVector.getZ());
+    EXPECT_EQ(1, secondVector.getW());
 }
 
 /*
@@ -36,10 +36,10 @@ TEST(Vector4D, Move) {
 
     firstVector = {4, 5, 6, 1};
 
-    EXPECT_EQ(5, secondVector.x);
-    EXPECT_EQ(3, secondVector.y);
-    EXPECT_EQ(6, secondVector.z);
-    EXPECT_EQ(1, secondVector.w);
+    EXPECT_EQ(5, secondVector.getX());
+    EXPECT_EQ(3, secondVector.getY());
+    EXPECT_EQ(6, secondVector.getZ());
+    EXPECT_EQ(1, secondVector.getW());
 }
 
 /*
@@ -51,10 +51,10 @@ TEST(Vector4D, Addition) {
 
     Vector4D<> result = vector1 + vector2;
 
-    EXPECT_EQ(9, result.x);
-    EXPECT_EQ(5, result.y);
-    EXPECT_EQ(4, result.z);
-    EXPECT_EQ(0, result.w);
+    EXPECT_EQ(9, result.getX());
+    EXPECT_EQ(5, result.getY());
+    EXPECT_EQ(4, result.getZ());
+    EXPECT_EQ(0, result.getW());
 }
 
 /*
@@ -66,10 +66,10 @@ TEST(Vector4D, AdditionAssignment) {
 
     vector1 += vector2;
 
-    EXPECT_EQ(9, vector1.x);
-    EXPECT_EQ(5, vector1.y);
-    EXPECT_EQ(4, vector1.z);
-    EXPECT_EQ(0, vector1.w);
+    EXPECT_EQ(9, vector1.getX());
+    EXPECT_EQ(5, vector1.getY());
+    EXPECT_EQ(4, vector1.getZ());
+    EXPECT_EQ(0, vector1.getW());
 }
 
 /*
@@ -81,10 +81,10 @@ TEST(Vector4D, Subtraction) {
 
     Vector4D<> result = vector1 - vector2;
 
-    EXPECT_EQ(1, result.x);
-    EXPECT_EQ(2, result.y);
-    EXPECT_EQ(8, result.z);
-    EXPECT_EQ(2, result.w);
+    EXPECT_EQ(1, result.getX());
+    EXPECT_EQ(2, result.getY());
+    EXPECT_EQ(8, result.getZ());
+    EXPECT_EQ(2, result.getW());
 }
 
 /*
@@ -96,10 +96,10 @@ TEST(Vector4D, SubtractionAssignment) {
 
     vector1 -= vector2;
 
-    EXPECT_EQ(1, vector1.x);
-    EXPECT_EQ(2, vector1.y);
-    EXPECT_EQ(8, vector1.z);
-    EXPECT_EQ(2, vector1.w);
+    EXPECT_EQ(1, vector1.getX());
+    EXPECT_EQ(2, vector1.getY());
+    EXPECT_EQ(8, vector1.getZ());
+    EXPECT_EQ(2, vector1.getW());
 }
 
 /*
@@ -110,10 +110,10 @@ TEST(Vector4D, Multiplication) {
 
     Vector4D<> result = vector1 * 3;
 
-    EXPECT_EQ(15, result.x);
-    EXPECT_EQ(12, result.y);
-    EXPECT_EQ(3, result.z);
-    EXPECT_EQ(6, result.w);
+    EXPECT_EQ(15, result.getX());
+    EXPECT_EQ(12, result.getY());
+    EXPECT_EQ(3, result.getZ());
+    EXPECT_EQ(6, result.getW());
 }
 
 /*
@@ -124,10 +124,10 @@ TEST(Vector4D, MultiplicationAssignment) {
 
     vector1 *= 3;
 
-    EXPECT_EQ(15, vector1.x);
-    EXPECT_EQ(12, vector1.y);
-    EXPECT_EQ(3, vector1.z);
-    EXPECT_EQ(6, vector1.w);
+    EXPECT_EQ(15, vector1.getX());
+    EXPECT_EQ(12, vector1.getY());
+    EXPECT_EQ(3, vector1.getZ());
+    EXPECT_EQ(6, vector1.getW());
 }
 
 /*
@@ -138,10 +138,10 @@ TEST(Vector4D, Division) {
 
     Vector4D<> result = vector1 / 3;
 
-    EXPECT_EQ(3, result.x);
-    EXPECT_EQ(2, result.y);
-    EXPECT_EQ(1, result.z);
-    EXPECT_EQ(4, result.w);
+    EXPECT_EQ(3, result.getX());
+    EXPECT_EQ(2, result.getY());
+    EXPECT_EQ(1, result.getZ());
+    EXPECT_EQ(4, result.getW());
 }
 
 /*
@@ -152,10 +152,10 @@ TEST(Vector4D, DivisionAssignment) {
 
     vector1 /= 3;
 
-    EXPECT_EQ(3, vector1.x);
-    EXPECT_EQ(2, vector1.y);
-    EXPECT_EQ(1, vector1.z);
-    EXPECT_EQ(4, vector1.w);
+    EXPECT_EQ(3, vector1.getX());
+    EXPECT_EQ(2, vector1.getY());
+    EXPECT_EQ(1, vector1.getZ());
+    EXPECT_EQ(4, vector1.getW());
 }
 
 /*
@@ -185,7 +185,7 @@ TEST(Vector4D, Inequality) {
  */
 TEST(Vector4D, Magnitude) {
     Vector4D<> leVector(4, 3, 0, 0);
-    EXPECT_EQ(5, leVector.Magnitude());
+    EXPECT_EQ(5, leVector.magnitude());
 }
 
 /*
@@ -193,8 +193,8 @@ TEST(Vector4D, Magnitude) {
  */
 TEST(Vector4D, Normalize) {
     Vector4D<> leVector(4.0, 3.0, 2.5, 1.5);
-    leVector.Normalize();
-    EXPECT_EQ(1, leVector.Magnitude());
+    leVector.normalize();
+    EXPECT_EQ(1, leVector.magnitude());
 }
 
 /*
@@ -204,5 +204,5 @@ TEST(Vector4D, DotProduct) {
     Vector4D<> vector1(4, 3, 2, 1);
     Vector4D<> vector2(1, 2, 3, 4);
 
-    EXPECT_EQ(20, vector1.Dot(vector2));
+    EXPECT_EQ(20, vector1.dot(vector2));
 }

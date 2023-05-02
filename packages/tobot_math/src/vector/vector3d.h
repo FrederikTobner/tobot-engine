@@ -14,16 +14,15 @@ namespace Tobot::Math {
     class Vector3D : Vector<T> {
 
         public:
-            T x;
-            T y;
-            T z;
-
             Vector3D(T x, T y, T z);
             Vector3D(Vector3D & vec);
             Vector3D(Vector3D && vec);
             Vector3D(std::initializer_list<T> list);
             auto operator=(Vector3D<T> const & vec) -> Vector3D<T> &;
             auto operator=(Vector3D<T> && vec) -> Vector3D<T> &;
+            auto getX() const -> T;
+            auto getY() const -> T;
+            auto getZ() const -> T;
 
             /// @brief Calculates the sum of two vectors
             /// @param lVec The left vector
@@ -118,6 +117,11 @@ namespace Tobot::Math {
             auto dot(Vector3D<T> const & vec) -> T;
 
             auto cross(Vector3D<T> const & vec) -> Vector3D<T>;
+
+        private:
+            T x;
+            T y;
+            T z;
     };
 
     /// @brief Constructs a new Vector3D object
@@ -413,4 +417,32 @@ namespace Tobot::Math {
         return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
                            this->x * vec.y - this->y * vec.x);
     }
+
+    /// @brief Gets the x component of the vector
+    /// @tparam T The type of the vector
+    /// @return The x component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector3D<T>::getX() const -> T {
+        return this->x;
+    }
+
+    /// @brief Gets the y component of the vector
+    /// @tparam T The type of the vector
+    /// @return The y component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector3D<T>::getY() const -> T {
+        return this->y;
+    }
+
+    /// @brief Gets the z component of the vector
+    /// @tparam T The type of the vector
+    /// @return The z component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] auto Vector3D<T>::getZ() const -> T {
+        return this->z;
+    }
+
 } // namespace Tobot::Math
