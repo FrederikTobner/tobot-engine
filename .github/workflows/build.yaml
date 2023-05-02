@@ -36,7 +36,6 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install \
           cmake \
-          file \
           fonts-dejavu-core \
           libfreetype-dev \
           libharfbuzz-dev \
@@ -56,17 +55,11 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew install \
-          flac \
-          freetype \
           fluidsynth \
           game-music-emu \
-          harfbuzz \
-          libtool \
-          libvorbis \
           libxmp \
           mpg123 \
           ninja \
-          opusfile \
           wavpack \
           ${NULL+}      
     
@@ -77,15 +70,15 @@ jobs:
     # Under Windows we are using Visual Studio as the Generator for now
     - name: Configure CMake under Windows
       if: runner.os == 'Windows'
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TESTS=OFF
 
     # Under Unix based systems we are using Ninja
-    - name: Configure CMake under Linux
+    - name: Configure CMake under unixbased systems
       if: runner.os != 'Windows'
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja -DBUILD_TESTS=OFF
 
     # We are not building our tests in the build workflow because that is already done in the test workflow
     - name: Building Tobot
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -DBUILD_TESTS=OFF
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     
