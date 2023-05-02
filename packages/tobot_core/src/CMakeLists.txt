@@ -4,26 +4,28 @@ set(TOBOT_CORE_SOURCES
 "asset_manager.cpp"
 "exitcode.cpp"
 "game_entity.cpp"
+"layer.cpp"
 "render_object.cpp"
 "scene.cpp"
 "scene_manager.cpp"
 "sub_system_manager.cpp"
-"layer.cpp"
 "tobot_application.cpp"
+"transform2D.cpp"
 )
 
 set(TOBOT_CORE_HEADERS
 "asset_manager.h"
+"concepts.h"
 "entry_point.h"
 "exitcode.h"
 "layer.h"
 "game_entity.h"
 "render_object.h"
 "scene.h"
-"sub_system_manager.h"
 "scene_manager.h"
+"sub_system_manager.h"
 "tobot_application.h"
-"concepts.h"
+"transform2D.h"
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")

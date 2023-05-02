@@ -18,11 +18,11 @@ namespace Tobot::Math {
 
             virtual auto operator[](std::size_t i) -> T & = 0;
 
-            virtual auto Magnitude() -> T = 0;
+            virtual auto magnitude() -> T = 0;
 
-            virtual auto Normalize() -> void = 0;
+            virtual auto normalize() -> void = 0;
 
-            virtual auto GetSize() -> std::size_t = 0;
+            virtual auto getSize() -> std::size_t = 0;
     };
 
     template <typename T>

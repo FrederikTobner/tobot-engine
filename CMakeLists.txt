@@ -8,6 +8,7 @@ set(CMAKE_C_STANDARD 99)
 set(C_STANDARD_REQUIRED TRUE)
 option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
 option(INCLUDE_DEPS "Include external dependencies" ON)
+option(BUILD_TESTS "Build the unit tests" ON)
 include(CheckIncludeFile)
 
 # Checking the dependencies of the project - we should do this for every library instead to make them a seperate entity

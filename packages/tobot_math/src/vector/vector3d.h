@@ -109,15 +109,15 @@ namespace Tobot::Math {
                 os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
             }
 
-            inline auto Magnitude() -> T;
+            inline auto magnitude() -> T;
 
-            inline auto Normalize() -> void;
+            inline auto normalize() -> void;
 
-            inline auto GetSize() -> std::size_t;
+            inline auto getSize() -> std::size_t;
 
-            auto Dot(Vector3D<T> const & vec) -> T;
+            auto dot(Vector3D<T> const & vec) -> T;
 
-            auto Cross(Vector3D<T> const & vec) -> Vector3D<T>;
+            auto cross(Vector3D<T> const & vec) -> Vector3D<T>;
     };
 
     /// @brief Constructs a new Vector3D object
@@ -372,7 +372,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] inline auto Vector3D<T>::Magnitude() -> T {
+    [[nodiscard]] inline auto Vector3D<T>::magnitude() -> T {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
     }
 
@@ -380,8 +380,8 @@ namespace Tobot::Math {
     /// @tparam T The type of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline auto Vector3D<T>::Normalize() -> void {
-        *this /= this->Magnitude();
+    inline auto Vector3D<T>::normalize() -> void {
+        *this /= this->magnitude();
     }
 
     /// @brief Gets the size of the vector
@@ -389,7 +389,7 @@ namespace Tobot::Math {
     /// @return std::size_t The size of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline auto Vector3D<T>::GetSize() -> std::size_t {
+    inline auto Vector3D<T>::getSize() -> std::size_t {
         return 3;
     }
 
@@ -399,7 +399,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] auto Vector3D<T>::Dot(Vector3D<T> const & vec) -> T {
+    [[nodiscard]] auto Vector3D<T>::dot(Vector3D<T> const & vec) -> T {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z;
     }
 
@@ -409,7 +409,7 @@ namespace Tobot::Math {
     /// @return Vector3D<T> The cross product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] auto Vector3D<T>::Cross(Vector3D<T> const & vec) -> Vector3D<T> {
+    [[nodiscard]] auto Vector3D<T>::cross(Vector3D<T> const & vec) -> Vector3D<T> {
         return Vector3D<T>(this->y * vec.z - this->z * vec.y, this->z * vec.x - this->x * vec.z,
                            this->x * vec.y - this->y * vec.x);
     }

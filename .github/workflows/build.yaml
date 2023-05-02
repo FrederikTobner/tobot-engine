@@ -24,11 +24,12 @@ jobs:
 
     strategy:
       matrix:
-        operatingsystems: [windows-latest, ubuntu-latest] 
+        operatingsystems: [windows-latest, ubuntu-latest, macos-latest] 
         buildtypes: [Release] 
 
     steps:    
     
+    # Schlinux dependencies
     - name: Setup Linux dependencies
       if: runner.os == 'Linux'
       run: |
@@ -49,22 +50,42 @@ jobs:
           libwavpack-dev \
           ninja-build \
           ${NULL+}
+
+    # SchmockOS dependencies
+    - name: Setup Macos dependencies
+      if: runner.os == 'macOS'
+      run: |
+        brew install \
+          flac \
+          freetype \
+          fluidsynth \
+          game-music-emu \
+          harfbuzz \
+          libtool \
+          libvorbis \
+          libxmp \
+          mpg123 \
+          ninja \
+          opusfile \
+          wavpack \
+          ${NULL+}      
     
     - uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    # Under Windows we are using Visual Studio as the Generator
+    # Under Windows we are using Visual Studio as the Generator for now
     - name: Configure CMake under Windows
       if: runner.os == 'Windows'
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    # Under Linux we are using Ninja
+    # Under Unix based systems we are using Ninja
     - name: Configure CMake under Linux
-      if: runner.os == 'Linux'
+      if: runner.os != 'Windows'
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja
 
+    # We are not building our tests in the build workflow because that is already done in the test workflow
     - name: Building Tobot
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -DBUILD_TESTS=OFF
 
     

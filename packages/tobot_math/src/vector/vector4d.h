@@ -102,13 +102,13 @@ namespace Tobot::Math {
                 os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ", " << vec.w << ")";
             }
 
-            auto Magnitude() -> T;
+            auto magnitude() -> T;
 
-            inline auto Normalize() -> void;
+            inline auto normalize() -> void;
 
-            inline auto GetSize() -> std::size_t;
+            inline auto getSize() -> std::size_t;
 
-            auto Dot(Vector4D<T> const & vec) -> T;
+            auto dot(Vector4D<T> const & vec) -> T;
     };
 
     /// @brief Creates a new Vector4D object
@@ -394,7 +394,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] auto Vector4D<T>::Magnitude() -> T {
+    [[nodiscard]] auto Vector4D<T>::magnitude() -> T {
         return sqrt(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
     }
 
@@ -402,8 +402,8 @@ namespace Tobot::Math {
     /// @tparam T The underlying type of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline auto Vector4D<T>::Normalize() -> void {
-        *this /= this->Magnitude();
+    inline auto Vector4D<T>::normalize() -> void {
+        *this /= this->magnitude();
     }
 
     /// @brief Gets the size of the vector
@@ -411,7 +411,7 @@ namespace Tobot::Math {
     /// @return std::size_t The size of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] inline std::size_t Vector4D<T>::GetSize() {
+    [[nodiscard]] inline std::size_t Vector4D<T>::getSize() {
         return 4;
     }
 
@@ -421,7 +421,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] auto Vector4D<T>::Dot(Vector4D<T> const & vec) -> T {
+    [[nodiscard]] auto Vector4D<T>::dot(Vector4D<T> const & vec) -> T {
         return this->x * vec.x + this->y * vec.y + this->z * vec.z + this->w * vec.w;
     }
 

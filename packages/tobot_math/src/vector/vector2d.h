@@ -14,12 +14,11 @@ namespace Tobot::Math {
     class Vector2D : Vector<T> {
 
         public:
-            T x;
-            T y;
-
             Vector2D(T x, T y);
             Vector2D(Vector2D & vec);
             Vector2D(Vector2D && vec);
+            Vector2D(Vector2D const & vec);
+            Vector2D(Vector2D const && vec);
             Vector2D(std::initializer_list<T> list);
             auto operator=(Vector2D<T> const & vec) -> Vector2D<T> &;
             auto operator=(Vector2D<T> && vec) -> Vector2D<T> &;
@@ -100,15 +99,27 @@ namespace Tobot::Math {
                 os << "(" << vec.x << ", " << vec.y << ")";
             }
 
-            inline auto Magnitude() -> T;
+            inline auto magnitude() -> T;
 
-            inline auto Normalize() -> void;
+            inline auto normalize() -> void;
 
-            inline auto GetSize() -> std::size_t;
+            inline auto getSize() -> std::size_t;
 
-            inline auto Dot(Vector2D<T> const & vec) -> T;
+            inline auto dot(Vector2D<T> const & vec) -> T;
 
-            auto Cross(Vector2D<T> const & vec) -> Vector2D<T>;
+            auto cross(Vector2D<T> const & vec) -> Vector2D<T>;
+
+            auto setX(T x) -> void;
+
+            auto setY(T y) -> void;
+
+            auto getX() const -> T;
+
+            auto getY() const -> T;
+
+        private:
+            T x;
+            T y;
     };
 
     /// @brief Constructor for the Vector2D class
@@ -134,6 +145,22 @@ namespace Tobot::Math {
     template <typename T>
         requires ArithmeticFloatingPoint<T>
     Vector2D<T>::Vector2D(Vector2D && vec) : x(vec.x), y(vec.y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T>::Vector2D(Vector2D const && vec) : x(vec.x), y(vec.y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T>::Vector2D(Vector2D const & vec) : x(vec.x), y(vec.y) {
     }
 
     /// @brief Constructor for the Vector2D class
@@ -352,7 +379,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] auto Vector2D<T>::Dot(Vector2D<T> const & vec) -> T {
+    [[nodiscard]] auto Vector2D<T>::dot(Vector2D<T> const & vec) -> T {
         return this->x * vec.x + this->y * vec.y;
     }
 
@@ -362,7 +389,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The cross product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] auto Vector2D<T>::Cross(Vector2D<T> const & vec) -> Vector2D<T> {
+    [[nodiscard]] auto Vector2D<T>::cross(Vector2D<T> const & vec) -> Vector2D<T> {
         return Vector2D(0, this->x * vec.y - this->y * vec.x);
     }
 
@@ -371,7 +398,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] inline auto Vector2D<T>::Magnitude() -> T {
+    [[nodiscard]] inline auto Vector2D<T>::magnitude() -> T {
         return sqrt(this->x * this->x + this->y * this->y);
     }
 
@@ -379,8 +406,8 @@ namespace Tobot::Math {
     /// @tparam T The type stored in the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] inline auto Vector2D<T>::Normalize() -> void {
-        *this /= this->Magnitude();
+    inline auto Vector2D<T>::normalize() -> void {
+        *this /= this->magnitude();
     }
 
     /// @brief Gets the size of the vector
@@ -388,7 +415,43 @@ namespace Tobot::Math {
     /// @return std::size_t The size of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    [[nodiscard]] inline auto Vector2D<T>::GetSize() -> std::size_t {
+    [[nodiscard]] inline auto Vector2D<T>::getSize() -> std::size_t {
         return 2;
+    }
+
+    /// @brief Gets the x component of the vector
+    /// @tparam T The type stored in the vector
+    /// @return T The x component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] inline auto Vector2D<T>::getX() const -> T {
+        return this->x;
+    }
+
+    /// @brief Gets the y component of the vector
+    /// @tparam T The type stored in the vector
+    /// @return T The y component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] inline auto Vector2D<T>::getY() const -> T {
+        return this->y;
+    }
+
+    /// @brief Sets the x component of the vector
+    /// @tparam T The type stored in the vector
+    /// @param x The new x component
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    inline auto Vector2D<T>::setX(T x) -> void {
+        this->x = x;
+    }
+
+    /// @brief Sets the y component of the vector
+    /// @tparam T The type stored in the vector
+    /// @param y The new y component
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    inline auto Vector2D<T>::setY(T y) -> void {
+        this->y = y;
     }
 } // namespace Tobot::Math

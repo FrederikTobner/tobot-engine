@@ -27,8 +27,8 @@ auto GameEntity::prepareRects() -> void {
     m_SrcRect.x = 0;
     m_SrcRect.y = 0;
 
-    m_DstRect.x = this->getPosition().x;
-    m_DstRect.y = this->getPosition().y;
+    m_DstRect.x = this->getPosition().getX();
+    m_DstRect.y = this->getPosition().getY();
     m_DstRect.w = m_SrcRect.w;
     m_DstRect.h = m_SrcRect.h;
 }
