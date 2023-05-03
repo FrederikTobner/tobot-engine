@@ -1,7 +1,10 @@
 #pragma once
 
 // C standard library dependecies
+#include <stdint.h>
+#include <stdio.h>
 #include <string.h>
+
 
 // C++ standard library dependecies
 #include <iostream>
@@ -18,6 +21,7 @@
 
 // Linux specific dependencies
 #ifdef OS_LINUX
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+
 #endif

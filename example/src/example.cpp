@@ -96,7 +96,7 @@ class Example : public Tobot::Core::TobotApplication {
 };
 
 Tobot::Core::TobotApplication * Tobot::Core::CreateApplication() {
-    Tobot::Tooling::Logging::Logger::EnableFileOutput();
+    Tobot::Tooling::Logging::Logger::enableFileOutput();
     LOG_INFO("Hello from Example %i", 123);
     return new Example();
 }
