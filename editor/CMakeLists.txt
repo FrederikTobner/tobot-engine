@@ -1,12 +1,16 @@
 set(TOBOT_EDITOR_SOURCE_FILES
+dockspace.cpp
 event_handler.cpp
 main.cpp
 menu_bar.cpp
+toolbar.cpp
 )
 
 set(TOBOT_EDITOR_HEADER_FILES
+dockspace.h
 event_handler.h
 menu_bar.h
+toolbar.h
 )
 
 add_executable("${PROJECT_NAME}-editor" ${TOBOT_EDITOR_SOURCE_FILES} ${TOBOT_EDITOR_HEADER_FILES})
