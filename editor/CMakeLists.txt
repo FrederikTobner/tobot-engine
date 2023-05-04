@@ -3,6 +3,7 @@ dockspace.cpp
 event_handler.cpp
 main.cpp
 menu_bar.cpp
+scene_renderer.cpp
 toolbar.cpp
 )
 
@@ -10,6 +11,7 @@ set(TOBOT_EDITOR_HEADER_FILES
 dockspace.h
 event_handler.h
 menu_bar.h
+scene_renderer.h
 toolbar.h
 )
 

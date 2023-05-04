@@ -13,6 +13,7 @@
 #include "dockspace.h"
 #include "event_handler.h"
 #include "menu_bar.h"
+#include "scene_renderer.h"
 #include "toolbar.h"
 
 #if !SDL_VERSION_ATLEAST(2, 0, 17)
@@ -118,13 +119,7 @@ auto main(int argc, char ** argv) -> int {
         SDL_RenderClear(renderer);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 
-        // Drawing a texture in the scene window for testing - This texture should be the whole scene later
-        SDL_Surface * window_icon_scurface = SDL_LoadBMP(IMAGE_LOCATION);
-        SDL_Texture * texture1 = SDL_CreateTextureFromSurface(renderer, window_icon_scurface);
-        SDL_FreeSurface(window_icon_scurface);
-        // To place the texture in the center of the screen we need to know the position of the size of the scene window
-        SDL_Rect rect = {(int)scenePosition.x, (int)scenePosition.y, (int)sceneWindowSize.x, (int)sceneWindowSize.y};
-        SDL_RenderCopy(renderer, texture1, NULL, &rect);
+        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize);
 
         SDL_RenderPresent(renderer);
     }
