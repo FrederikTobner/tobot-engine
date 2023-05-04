@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "gradient2d.h"
+#include "gradient2D.h"
 
 using namespace Tobot::Math;
 

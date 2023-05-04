@@ -14,7 +14,8 @@ namespace Tobot::Language {
         public:
             ProductionRule();
             virtual ~ProductionRule();
-            virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current) = 0;
+            virtual auto apply(std::vector<Token<T1>> tokens, std::size_t & current) -> bool = 0;
+            virtual auto getType() -> T2 = 0;
     };
 
     /// @brief Creates a new parsing rule
@@ -22,7 +23,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ProductionRule<T1, T2>::ProductionRule() {
+    [[nodiscard]] ProductionRule<T1, T2>::ProductionRule() {
     }
 
     /// @brief Destroys a parsing rule

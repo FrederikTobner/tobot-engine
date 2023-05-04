@@ -15,7 +15,7 @@ TEST(ENUM, CanBeCreated) {
  * Tests whether we can get all the values of the enum
  */
 TEST(ENUM, CanReturnAllValues) {
-    Number::Enum const * const values = Number::values();
+    Number::Enum const * values = Number::values();
     ASSERT_EQ(values[0], Number::ONE);
     ASSERT_EQ(values[1], Number::TWO);
     ASSERT_EQ(values[2], Number::THREE);

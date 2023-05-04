@@ -36,26 +36,27 @@ namespace Tobot::DataStructures::Tree {
             RedBlackTree(RedBlackTree<T> & tree);
             RedBlackTree(std::initializer_list<T> list);
             ~RedBlackTree();
-            void insert(T value);
-            void remove(T value);
-            bool contains(T value);
-            Node * search(T value);
-            void print();
-            void traverseInOrder(std::function<void(T)> callback) const;
-            void traversePreOrder(std::function<void(T)> callback) const;
-            void traversePostOrder(std::function<void(T)> callback) const;
-            void clear();
-            std::size_t getSize();
-            friend std::ostream & operator<<(std::ostream & os, RedBlackTree<T> const & tree) {
+            auto insert(T value) -> void;
+            auto remove(T value) -> void;
+            auto contains(T value) -> bool;
+            auto search(T value) -> Node *;
+            auto print() -> void;
+            auto traverseInOrder(std::function<void(T)> callback) const -> void;
+            auto traversePreOrder(std::function<void(T)> callback) const -> void;
+            auto traversePostOrder(std::function<void(T)> callback) const -> void;
+            auto clear() -> void;
+            auto getSize() -> std::size_t;
+            friend auto operator<<(std::ostream & os, RedBlackTree<T> const & tree) -> std::ostream & {
                 TraverseInOrder(tree.root, [&os](T value) { os << value << ", "; });
             }
+            // We need to adapt our iterators to C++ 20 - https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/
             class iterator : public std::iterator<std::input_iterator_tag, T> {
                 public:
                     iterator(Node * node, Node * nil) {
                         this->node = node;
                         this->nil = nil;
                     }
-                    iterator & operator++() {
+                    auto operator++() -> iterator & {
                         if (this->node->right != this->nil) {
                             this->node = this->node->right;
                             while (this->node->left != this->nil) {
@@ -73,21 +74,21 @@ namespace Tobot::DataStructures::Tree {
                         }
                         return *this;
                     }
-                    iterator operator++(int) {
+                    auto operator++(int) -> iterator {
                         iterator tmp(*this);
                         operator++();
                         return tmp;
                     }
-                    bool operator==(const iterator & rhs) {
+                    auto operator==(const iterator & rhs) -> bool {
                         return this->node == rhs.node;
                     }
-                    bool operator!=(const iterator & rhs) {
+                    auto operator!=(const iterator & rhs) -> bool {
                         return this->node != rhs.node;
                     }
-                    T & operator*() {
+                    auto operator*() -> T & {
                         return this->node->value;
                     }
-                    T * operator->() {
+                    auto operator->() -> T * {
                         return &this->node->value;
                     }
 
@@ -105,15 +106,15 @@ namespace Tobot::DataStructures::Tree {
         private:
             Node * root;
             Node * nil;
-            void leftRotate(Node * node);
-            void rightRotate(Node * node);
-            void insertFixup(Node * node);
-            void deleteFixup(Node * node);
-            void transplant(Node * u, Node * v);
-            Node * successor(Node * node);
-            Node * predecessor(Node * node);
-            void print(Node * node);
-            void clear(Node * node);
+            auto leftRotate(Node * node) -> void;
+            auto rightRotate(Node * node) -> void;
+            auto insertFixup(Node * node) -> void;
+            auto deleteFixup(Node * node) -> void;
+            auto transplant(Node * u, Node * v) -> void;
+            auto successor(Node * node) -> Node *;
+            auto predecessor(Node * node) -> Node *;
+            auto print(Node * node) -> void;
+            auto clear(Node * node) -> void;
     };
 
     /// @brief Constructor for the RedBlackTree class
@@ -169,7 +170,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to rotate the tree at
     template <typename T>
-    void RedBlackTree<T>::leftRotate(Node * node) {
+    auto RedBlackTree<T>::leftRotate(Node * node) -> void {
         Node * y = node->right;
         node->right = y->left;
         if (y->left != this->nil) {
@@ -191,7 +192,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T  The type of the value stored in the tree
     /// @param node  The node to rotate the tree at
     template <typename T>
-    void RedBlackTree<T>::rightRotate(Node * node) {
+    auto RedBlackTree<T>::rightRotate(Node * node) -> void {
         Node * y = node->left;
         node->left = y->right;
         if (y->right != this->nil) {
@@ -213,7 +214,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to insert into the tree
     template <typename T>
-    void RedBlackTree<T>::insertFixup(Node * node) {
+    auto RedBlackTree<T>::insertFixup(Node * node) -> void {
         while (node->parent->isRed) {
             if (node->parent == node->parent->parent->left) {
                 Node * y = node->parent->parent->right;
@@ -256,7 +257,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param value The value of the node to delete
     template <typename T>
-    void RedBlackTree<T>::insert(T value) {
+    auto RedBlackTree<T>::insert(T value) -> void {
         Node * z = new Node;
         z->value = value;
         z->left = this->nil;
@@ -288,7 +289,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param value The value of the node to delete
     template <typename T>
-    void RedBlackTree<T>::remove(T value) {
+    auto RedBlackTree<T>::remove(T value) -> void {
         Node * z = this->root;
         while (z != this->nil && z->value != value) {
             if (value < z->value) {
@@ -336,7 +337,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value to check for
     /// @return True if the tree contains a node with the given value, false otherwise
     template <typename T>
-    bool RedBlackTree<T>::contains(T value) {
+    auto RedBlackTree<T>::contains(T value) -> bool {
         return Tobot::DataStructures::Tree::containsWithoutNullCheck(this->root, this->nil, value);
     }
 
@@ -344,7 +345,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to start fixing the tree at
     template <typename T>
-    void RedBlackTree<T>::deleteFixup(Node * node) {
+    auto RedBlackTree<T>::deleteFixup(Node * node) -> void {
         while (node != this->root && !node->isRed) {
             if (node == node->parent->left) {
                 Node * w = node->parent->right;
@@ -404,7 +405,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param value The value of the node to delete
     /// @return The node with the given value
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::search(T value) {
+    [[nodiscard]] auto RedBlackTree<T>::search(T value) -> typename RedBlackTree<T>::Node * {
         Node * x = this->root;
         while (x != this->nil && x->value != value) {
             if (value < x->value) {
@@ -424,7 +425,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param u The node to transplant
     /// @param v The node to transplant with
     template <typename T>
-    void RedBlackTree<T>::transplant(Node * u, Node * v) {
+    auto RedBlackTree<T>::transplant(Node * u, Node * v) -> void {
         if (u->parent == this->nil) {
             this->root = v;
         } else if (u == u->parent->left) {
@@ -440,7 +441,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the successor of
     /// @return The successor of the given node
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::successor(Node * node) {
+    [[nodiscard]] auto RedBlackTree<T>::successor(Node * node) -> typename RedBlackTree<T>::Node * {
         if (node->right != this->nil) {
             return Tobot::DataStructures::Tree::getMinimum(node->right, this->nil);
         }
@@ -457,7 +458,7 @@ namespace Tobot::DataStructures::Tree {
     /// @param node The node to get the predecessor of
     /// @return The predecessor of the given node
     template <typename T>
-    typename RedBlackTree<T>::Node * RedBlackTree<T>::predecessor(Node * node) {
+    [[nodiscard]] auto RedBlackTree<T>::predecessor(Node * node) -> typename RedBlackTree<T>::Node * {
         if (node->left != this->nil) {
             return Tobot::DataStructures::Tree::getMaximum(node->left, this->nil);
         }
@@ -472,7 +473,7 @@ namespace Tobot::DataStructures::Tree {
     /// @brief Print the tree to the console
     /// @tparam T The type of the value stored in the tree
     template <typename T>
-    void RedBlackTree<T>::print() {
+    auto RedBlackTree<T>::print() -> void {
         this->print(this->root);
         std::cout << std::endl;
     }
@@ -481,7 +482,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param node The node to start printing from
     template <typename T>
-    void RedBlackTree<T>::print(Node * node) {
+    auto RedBlackTree<T>::print(Node * node) -> void {
         if (node != this->nil) {
             this->print(node->left);
             std::cout << node->value << " ";
@@ -493,7 +494,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::traverseInOrder(std::function<void(T)> callback) const {
+    auto RedBlackTree<T>::traverseInOrder(std::function<void(T)> callback) const -> void {
         Tobot::DataStructures::Tree::traverseInOrder(this->root, callback, this->nil);
     }
 
@@ -501,7 +502,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::traversePreOrder(std::function<void(T)> callback) const {
+    auto RedBlackTree<T>::traversePreOrder(std::function<void(T)> callback) const -> void {
         Tobot::DataStructures::Tree::traversePreOrder(this->root, callback, this->nil);
     }
 
@@ -509,14 +510,14 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @param callback The function to call on each node
     template <typename T>
-    void RedBlackTree<T>::traversePostOrder(std::function<void(T)> callback) const {
+    auto RedBlackTree<T>::traversePostOrder(std::function<void(T)> callback) const -> void {
         Tobot::DataStructures::Tree::traversePostOrder(this->root, callback, this->nil);
     }
 
     /// Clears the tree
     ///  @tparam T The type of the value stored in the tree
     template <typename T>
-    void RedBlackTree<T>::clear() {
+    auto RedBlackTree<T>::clear() -> void {
         this->clear(this->root);
         this->root = this->nil;
     }
@@ -525,7 +526,7 @@ namespace Tobot::DataStructures::Tree {
     ///  @tparam T The type of the value stored in the tree
     ///  @param node The node to start clearing from
     template <typename T>
-    void RedBlackTree<T>::clear(Node * node) {
+    auto RedBlackTree<T>::clear(Node * node) -> void {
         if (node != this->nil) {
             this->clear(node->left);
             this->clear(node->right);
@@ -537,7 +538,7 @@ namespace Tobot::DataStructures::Tree {
     /// @tparam T The type of the value stored in the tree
     /// @return The amount of nodes in the tree
     template <typename T>
-    std::size_t RedBlackTree<T>::getSize() {
+    [[nodiscard]] auto RedBlackTree<T>::getSize() -> std::size_t {
         std::size_t size = 0;
         traverseInOrder([&size](T value) { size++; });
         return size;

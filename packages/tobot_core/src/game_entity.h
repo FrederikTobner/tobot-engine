@@ -8,7 +8,7 @@ namespace Tobot::Core {
     class GameEntity : public Tobot::Core::RenderObject {
 
         protected:
-            void setTexture(SDL_Surface * texture);
+            auto setTexture(SDL_Surface * texture) -> void;
 
             SDL_Surface * p_TextureSurface;
             SDL_Texture * p_Texture;
@@ -16,18 +16,18 @@ namespace Tobot::Core {
         private:
             SDL_Rect m_SrcRect, m_DstRect;
 
-            void prepareRects();
+            auto prepareRects() -> void;
 
         public:
-            GameEntity(char const * id, int x, int y, SDL_Texture * texture);
-            GameEntity(char const * id, int x, int y);
+            GameEntity(char const * id, float x, float y, SDL_Texture * texture);
+            GameEntity(char const * id, float x, float y);
 
             virtual ~GameEntity() = 0;
 
-            void initializeTexture(SDL_Renderer * renderer);
+            auto initializeTexture(SDL_Renderer * renderer) -> void;
 
-            virtual void update() override = 0;
-            void render(SDL_Renderer * renderer) override;
-            void dispose() override;
+            virtual auto update() -> void override = 0;
+            auto render(SDL_Renderer * renderer) -> void override;
+            auto dispose() -> void override;
     };
 } // namespace Tobot::Core

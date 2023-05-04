@@ -16,7 +16,8 @@ namespace Tobot::Language {
             ProductionRuleSequence(T2 type, std::vector<ProductionRule<T1, T2> *> rules);
             ~ProductionRuleSequence();
 
-            virtual bool apply(std::vector<Token<T1>> tokens, std::size_t & current);
+            virtual auto apply(std::vector<Token<T1>> tokens, std::size_t & current) -> bool;
+            virtual auto getType() -> T2;
 
         private:
             T2 type;
@@ -28,7 +29,8 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    ProductionRuleSequence<T1, T2>::ProductionRuleSequence(T2 type, std::vector<ProductionRule<T1, T2> *> rules) {
+    [[nodiscard]] ProductionRuleSequence<T1, T2>::ProductionRuleSequence(T2 type,
+                                                                         std::vector<ProductionRule<T1, T2> *> rules) {
         this->type = type;
         this->rules = rules;
     }
@@ -49,7 +51,8 @@ namespace Tobot::Language {
     /// @return True if the rule was applied successfully, false otherwise
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    bool ProductionRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current) {
+    [[nodiscard]] auto ProductionRuleSequence<T1, T2>::apply(std::vector<Token<T1>> tokens, std::size_t & current)
+        -> bool {
         std::size_t start = current;
         for (auto rule : this->rules) {
             if (!rule->apply(tokens, current)) {
@@ -59,6 +62,12 @@ namespace Tobot::Language {
             }
         }
         return true;
+    }
+
+    template <typename T1, typename T2>
+        requires std::is_enum_v<T1> && std::is_enum_v<T2>
+    [[nodiscard]] auto ProductionRuleSequence<T1, T2>::getType() -> T2 {
+        return this->type;
     }
 
 } // namespace Tobot::Language

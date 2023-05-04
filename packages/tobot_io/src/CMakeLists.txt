@@ -1,9 +1,11 @@
 set(TOBOT_IO_SOURCE_FILES
+"console/console_style.cpp"
 "guard/directory_guard.cpp"
 "path/path_utils.cpp"
 )
 
 set(TOBOT_IO_HEADER_FILES
+"console/console_style.h"
 "guard/directory_guard.h"
 "include/tobot_io.h"
 "path/path_utils.h"

@@ -1,8 +1,6 @@
 #pragma once
-#include <unordered_map>
 
-#include <iostream>
-#include <string>
+#include "pre_compiled_header.h"
 
 #include "game_entity.h"
 

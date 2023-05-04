@@ -5,22 +5,25 @@
 
 #pragma once
 
-/// @brief The logging namespace
-namespace Tobot::Tooling::Logging {
-#define LOG_TRACE(format, ...)    (Tobot::Tooling::Logging::Logger::Trace(format, __VA_ARGS__))
-#define LOG_DEBUG(format, ...)    (Tobot::Tooling::Logging::Logger::Debug(format, __VA_ARGS__))
-#define LOG_INFO(format, ...)     (Tobot::Tooling::Logging::Logger::Info(format, __VA_ARGS__))
-#define LOG_WARN(format, ...)     (Tobot::Tooling::Logging::Logger::Warn(format, __VA_ARGS__))
-#define LOG_ERROR(format, ...)    (Tobot::Tooling::Logging::Logger::Error(format, __VA_ARGS__))
-#define LOG_CRITICAL(format, ...) (Tobot::Tooling::Logging::Logger::Critical(format, __VA_ARGS__))
+#include "../pre_compiled_header.h"
 
-#define LOG_TRACE_AT(format, ...) (Tobot::Tooling::Logging::Logger::Trace(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_DEBUG_AT(format, ...) (Tobot::Tooling::Logging::Logger::Debug(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_INFO_AT(format, ...)  (Tobot::Tooling::Logging::Logger::Info(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_WARN_AT(format, ...)  (Tobot::Tooling::Logging::Logger::Warn(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_ERROR_AT(format, ...) (Tobot::Tooling::Logging::Logger::Error(__LINE__, __FILE__, format, __VA_ARGS__))
-#define LOG_CRITICAL_AT(format, ...) \
-    (Tobot::Tooling::Logging::Logger::Critical(__LINE__, __FILE__, format, __VA_ARGS__))
+#include "tobot_io.h"
+
+/// @brief The logging namespace
+namespace Tobot::Tooling {
+#define LOG_TRACE(...)       (Tobot::Tooling::Logger::Trace(__VA_ARGS__))
+#define LOG_DEBUG(...)       (Tobot::Tooling::Logger::Debug(__VA_ARGS__))
+#define LOG_INFO(...)        (Tobot::Tooling::Logger::Info(__VA_ARGS__))
+#define LOG_WARN(...)        (Tobot::Tooling::Logger::Warn(__VA_ARGS__))
+#define LOG_ERROR(...)       (Tobot::Tooling::Logger::Error(__VA_ARGS__))
+#define LOG_CRITICAL(...)    (Tobot::Tooling::Logger::Critical(__VA_ARGS__))
+
+#define LOG_TRACE_AT(...)    (Tobot::Tooling::Logger::Trace(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_DEBUG_AT(...)    (Tobot::Tooling::Logger::Debug(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_INFO_AT(...)     (Tobot::Tooling::Logger::Info(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_WARN_AT(...)     (Tobot::Tooling::Logger::Warn(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_ERROR_AT(...)    (Tobot::Tooling::Logger::Error(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_CRITICAL_AT(...) (Tobot::Tooling::Logger::Critical(__LINE__, __FILE__, __VA_ARGS__))
 
     /// @brief The loglevel priorities that are avialable
     enum LogPriority {
@@ -38,26 +41,24 @@ namespace Tobot::Tooling::Logging {
             /// @brief Changes the priority of the logger insance
             /// @param new_priority The new priority that is set
             static void setPriority(LogPriority new_priority) {
-                get_Instance().priority = new_priority;
+                get_Instance().set_priority(new_priority);
             }
 
             /// @brief Enables writing the logs to afile
-            static void EnableFileOutput() {
+            static void enableFileOutput() {
                 get_Instance().enable_file_out();
             }
 
             /// @brief Changes the time-format of the logger insance
             /// @param new_format The new time-format that is set
-            static void SetTimeStampFormat(char const * new_format) {
-                get_Instance().timeStampFormat = new_format;
+            static void setTimeStampFormat(char const * new_format) {
+                get_Instance().set_time_stamp_format(new_format);
             }
 
             /// @brief  Changes the log level colors of the logger insance
             /// @param logLevelColors The new log level colors that are set
-            static void SetLogLevelColors(uint8_t logLevelColors[6]) {
-                for (size_t i; i < 6; i++) {
-                    get_Instance().logLevelColors[i] = logLevelColors[i];
-                }
+            static void setLogLevelColors(uint32_t logLevelColors[6]) {
+                get_Instance().set_log_level_colors(logLevelColors);
             }
 
             /// @brief Logs the arguments with the specified format at the trace logging level
@@ -314,15 +315,16 @@ namespace Tobot::Tooling::Logging {
 
         private:
             /// @brief The current log priority of the logger
-            std::atomic<LogPriority> priority = LogPriority::INFO_PRIORITY;
-            /// @brief The logLevel colors of the logger
-            std::atomic<uint8_t> logLevelColors[6] = {7, 2, 3, 6, 4, 4};
+            LogPriority priority = LogPriority::INFO_PRIORITY;
+            /// @brief The logLevel colors of the logger - 0x00RRGGBB (green, limette, deepskyblue, orange, orangered,
+            /// red)
+            uint32_t logLevelColors[6] = {0x00008000, 0x0000ff00, 0x0000bfff, 0x00ffa500, 0x00ff4500, 0x00ff0000};
             /// @brief The path of the file the logger writes to, if logging to a file is enabled
-            std::atomic<char const *> filepath;
+            char const * filepath;
             /// @brief The timestamp format of the logger
-            std::atomic<char const *> timeStampFormat = "%d.%m.%Y - %H:%M:%S";
+            char const * timeStampFormat = "%d.%m.%Y - %H:%M:%S";
             /// @brief Pointer to the output file the logger writes to, if logging to a file is enabled
-            std::atomic<FILE *> file;
+            FILE * file;
             /// @brief for thread safety
             std::mutex log_mutex;
             /// @brief The names of the loglevels the logger provides
@@ -350,6 +352,30 @@ namespace Tobot::Tooling::Logging {
                 return logger;
             }
 
+            /// @brief Enables fiile output for the logger
+            /// @warning If the logs folder can not be created the program exits
+            auto enable_file_out() -> void;
+
+            /// @brief Enables fiile output for the logger
+            /// @warning If the logs folder can not be created the program exits
+            /// @param fileName The name of the output file
+            auto enable_file_out(char const * fileName) -> void;
+
+            /// @brief Releseases the file that is currently used by the logger
+            auto free_file() -> void;
+
+            /// @brief Sets the logging priority of the logger
+            /// @param priority The logging priority
+            auto set_priority(LogPriority priority) -> void;
+
+            /// @brief Sets the time stamp format of the logger
+            /// @param format The time stamp format
+            auto set_time_stamp_format(char const * format) -> void;
+
+            /// @brief Sets the logging colors of the logger
+            /// @param colors The logging colors
+            auto set_log_level_colors(uint32_t colors[6]) -> void;
+
             /// @brief   Logs the arguments with the specified format at the specified logging level
             /// @tparam ...Args Template for the argumens
             /// @param log_priority The logging priority of the message
@@ -358,38 +384,41 @@ namespace Tobot::Tooling::Logging {
             template <typename... Args>
             void log(LogPriority log_priority, char const * format, Args... args) {
                 if (this->priority <= log_priority) {
-                    std::scoped_lock lock(log_mutex);
-                    std::time_t current_time = std::time(0);
-                    std::tm * timestamp = std::localtime(&current_time);
+                    const std::lock_guard<std::mutex> lock(log_mutex);
+                    time_t current_time = time(0);
+                    tm * timestamp = localtime(&current_time);
                     char buffer[80];
                     strftime(buffer, 80, get_Instance().timeStampFormat, timestamp);
                     std::cout << buffer << " - [";
-#ifdef OS_WINDOWS
-                    HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-                    SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[log_priority]);
-#endif
+
+                    // Changing the color of the output to the color of the log priority
+                    Tobot::IO::setConsoleColor((logLevelColors[log_priority] >> 16) & 0xFF,
+                                               (logLevelColors[log_priority] >> 8) & 0xFF,
+                                               logLevelColors[log_priority] & 0xFF);
+
                     std::cout << logLevelStrings[log_priority];
-#ifdef OS_WINDOWS
-                    SetConsoleTextAttribute(console_color, 7);
-#endif
+
+                    // Resetting the color of the output to white
+                    Tobot::IO::resetConsoleColor();
+
                     if (log_priority == LogPriority::CRITICAL_PRIORITY) {
                         std::cout << "]\t";
                     } else {
                         std::cout << "]\t\t";
                     }
-#ifdef OS_WINDOWS
+                    // Changing the color of the output to red if the log priority is critical
                     if (log_priority == CRITICAL_PRIORITY) {
-                        SetConsoleTextAttribute(console_color, 4);
+                        Tobot::IO::setConsoleColor(0xFF, 0x00, 0x00);
                     }
-#endif
+
                     printf(format, args...);
                     std::cout << "\n";
 
-#ifdef OS_WINDOWS
+                    // Resetting the color of the output to white if the log priority is critical
                     if (log_priority == CRITICAL_PRIORITY) {
-                        SetConsoleTextAttribute(console_color, 7);
+                        Tobot::IO::resetConsoleColor();
                     }
-#endif
+
                     if (this->file) {
                         fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[log_priority]);
                         if (log_priority == LogPriority::CRITICAL_PRIORITY) {
@@ -413,36 +442,35 @@ namespace Tobot::Tooling::Logging {
             void log(int line_number, char const * source_file, LogPriority log_priority, char const * format,
                      Args... args) {
                 if (this->priority <= log_priority) {
-                    std::scoped_lock lock(log_mutex);
-                    std::time_t current_time = std::time(0);
-                    std::tm * timestamp = std::localtime(&current_time);
+                    const std::lock_guard<std::mutex> lock(log_mutex);
+                    time_t current_time = time(0);
+                    tm * timestamp = localtime(&current_time);
                     char buffer[80];
                     strftime(buffer, 80, this->get_Instance().timeStampFormat, timestamp);
                     std::cout << buffer << " - [";
-#ifdef OS_WINDOWS
-                    HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-                    SetConsoleTextAttribute(console_color, get_Instance().logLevelColors[log_priority]);
-#endif
+                    Tobot::IO::setConsoleColor((logLevelColors[log_priority] >> 16) & 0xFF,
+                                               (logLevelColors[log_priority] >> 8) & 0xFF,
+                                               logLevelColors[log_priority] & 0xFF);
                     std::cout << logLevelStrings[log_priority];
-#ifdef OS_WINDOWS
-                    SetConsoleTextAttribute(console_color, 7);
-#endif
+                    Tobot::IO::resetConsoleColor();
                     if (log_priority == LogPriority::CRITICAL_PRIORITY) {
                         std::cout << "]\t";
                     } else {
                         std::cout << "]\t\t";
                     }
-#ifdef OS_WINDOWS
+
+                    // Changing the color of the output to red if the log priority is critical
                     if (log_priority == CRITICAL_PRIORITY) {
-                        SetConsoleTextAttribute(console_color, 4);
+                        Tobot::IO::setConsoleColor(0xFF, 0x00, 0x00);
                     }
-#endif
+
                     printf(format, args...);
-#ifdef OS_WINDOWS
+
+                    // Resetting the color of the output to white if the log priority is critical
                     if (log_priority == CRITICAL_PRIORITY) {
-                        SetConsoleTextAttribute(console_color, 7);
+                        Tobot::IO::resetConsoleColor();
                     }
-#endif
+
                     std::cout << " (on line " << line_number << " in " << source_file << ")\n";
                     if (this->file) {
                         fprintf(this->file, "%s - [%s]\t", buffer, logLevelStrings[log_priority]);
@@ -455,17 +483,5 @@ namespace Tobot::Tooling::Logging {
                     }
                 }
             }
-
-            /// @brief Enables fiile output for the logger
-            /// @warning If the logs folder can not be created the program exits
-            void enable_file_out();
-
-            /// @brief Enables fiile output for the logger
-            /// @warning If the logs folder can not be created the program exits
-            /// @param fileName The name of the output file
-            void enable_file_out(char const * fileName);
-
-            /// @brief Releseases the file that is currently used by the logger
-            void free_file();
     };
-} // namespace Tobot::Tooling::Logging
+} // namespace Tobot::Tooling

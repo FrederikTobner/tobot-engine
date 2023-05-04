@@ -33,62 +33,62 @@ namespace Tobot::Math {
             /// @brief Copy assignment operator
             /// @param point Point to copy
             /// @return Reference to this
-            Point2D<T> & operator=(Point2D<T> const &);
+            auto operator=(Point2D<T> const &) -> Point2D<T> &;
 
             /// @brief Move assignment operator
             /// @param point Point to move
             /// @return Reference to this
-            Point2D<T> & operator=(Point2D<T> &&) noexcept;
+            auto operator=(Point2D<T> &&) noexcept -> Point2D<T> &;
 
             /// @brief Equality operator
             /// @param point Point to compare
             /// @return True if equal, false otherwise
-            bool operator==(Point2D<T> const &) const;
+            auto operator==(Point2D<T> const &) const -> bool;
 
             /// @brief Inequality operator
             /// @param point Point to compare
             /// @return True if not equal, false otherwise
-            bool operator!=(Point2D<T> const &) const;
+            auto operator!=(Point2D<T> const &) const -> bool;
 
             /// @brief Less than operator
             /// @param point Point to compare
             /// @return True if less than, false otherwise
-            T distance(Point2D<T> const &) const;
+            auto distance(Point2D<T> const &) const -> T;
 
             /// @brief Less than or equal operator
             /// @param point Point to compare
             /// @param epsilon Epsilon value
             /// @return True if less than or equal, false otherwise
-            T distance(T const &, T const &) const;
+            auto distance(T const &, T const &) const -> T;
 
             /// @brief Greater than operator
             /// @param point Point to compare
             /// @return True if greater than, false otherwise
-            T distanceSquared(Point2D<T> const &) const;
+            auto distanceSquared(Point2D<T> const &) const -> T;
 
             /// @brief Greater than or equal operator
             /// @param point Point to compare
             /// @param epsilon Epsilon value
             /// @return True if greater than or equal, false otherwise
-            T distanceSquared(T const &, T const &) const;
+            auto distanceSquared(T const &, T const &) const -> T;
 
             /// @brief Cross product
             /// @return Cross product
-            T getX() const;
+            auto getX() const -> T;
 
             /// @brief Cross product
             /// @return Cross product
-            T getY() const;
+            auto getY() const -> T;
 
             /// @brief Set X coordinate
             /// @param x X coordinate
-            void setX(T const &);
+            auto setX(T const &) -> void;
 
             /// @brief Set Y coordinate
             /// @param y Y coordinate
-            void setY(T const &);
+            auto setY(T const &) -> void;
 
-            friend std::ostream & operator<<(std::ostream & os, Point2D<T> const & point) {
+            friend auto operator<<(std::ostream & os, Point2D<T> const & point) -> std::ostream & {
                 os << "Point2D(" << point.m_x << ", " << point.m_y << ")";
                 return os;
             }
@@ -124,7 +124,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> & Point2D<T>::operator=(Point2D<T> const & point) {
+    auto Point2D<T>::operator=(Point2D<T> const & point) -> Point2D<T> & {
         m_x = point.m_x;
         m_y = point.m_y;
         return *this;
@@ -132,7 +132,7 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Point2D<T> & Point2D<T>::operator=(Point2D<T> && point) noexcept {
+    auto Point2D<T>::operator=(Point2D<T> && point) noexcept -> Point2D<T> & {
         m_x = point.m_x;
         m_y = point.m_y;
         return *this;
@@ -140,61 +140,61 @@ namespace Tobot::Math {
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Point2D<T>::operator==(Point2D<T> const & point) const {
+    [[nodiscard]] auto Point2D<T>::operator==(Point2D<T> const & point) const -> bool {
         return (m_x == point.m_x) && (m_y == point.m_y);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Point2D<T>::operator!=(Point2D<T> const & point) const {
+    [[nodiscard]] auto Point2D<T>::operator!=(Point2D<T> const & point) const -> bool {
         return (m_x != point.m_x) || (m_y != point.m_y);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::getX() const {
+    [[nodiscard]] auto Point2D<T>::getX() const -> T {
         return m_x;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::getY() const {
+    [[nodiscard]] auto Point2D<T>::getY() const -> T {
         return m_y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    void Point2D<T>::setX(T const & x) {
+    auto Point2D<T>::setX(T const & x) -> void {
         m_x = x;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    void Point2D<T>::setY(T const & y) {
+    auto Point2D<T>::setY(T const & y) -> void {
         m_y = y;
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distance(Point2D<T> const & point) const {
+    [[nodiscard]] auto Point2D<T>::distance(Point2D<T> const & point) const -> T {
         return sqrt(pow(m_x - point.m_x, 2) + pow(m_y - point.m_y, 2));
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distance(T const & x, T const & y) const {
+    [[nodiscard]] auto Point2D<T>::distance(T const & x, T const & y) const -> T {
         return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distanceSquared(Point2D<T> const & point) const {
+    [[nodiscard]] auto Point2D<T>::distanceSquared(Point2D<T> const & point) const -> T {
         return pow(m_x - point.m_x, 2) + pow(m_y - point.m_y, 2);
     }
 
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Point2D<T>::distanceSquared(T const & x, T const & y) const {
+    [[nodiscard]] auto Point2D<T>::distanceSquared(T const & x, T const & y) const -> T {
         return pow(m_x - x, 2) + pow(m_y - y, 2);
     }
 } // namespace Tobot::Math

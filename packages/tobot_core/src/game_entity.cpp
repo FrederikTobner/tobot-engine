@@ -2,41 +2,47 @@
 
 using namespace Tobot::Core;
 
-GameEntity::GameEntity(char const * id, int x, int y, SDL_Texture * texture) : RenderObject(id, x, y) {
+[[nodiscard]] GameEntity::GameEntity(char const * id, float x, float y, SDL_Texture * texture)
+    : RenderObject(id, x, y) {
     this->p_Texture = texture;
 }
 
-GameEntity::GameEntity(char const * id, int x, int y) : RenderObject(id, x, y) {
+GameEntity::GameEntity(char const * id, float x, float y) : RenderObject(id, x, y) {
 }
 
-void GameEntity::setTexture(SDL_Surface * texture) {
+GameEntity::~GameEntity() {
+}
+
+auto GameEntity::setTexture(SDL_Surface * texture) -> void {
     this->p_TextureSurface = texture;
 }
 
-void GameEntity::initializeTexture(SDL_Renderer * renderer) {
-    this->p_Texture = SDL_CreateTextureFromSurface(renderer, this->p_TextureSurface);
-    SDL_FreeSurface(this->p_TextureSurface);
+/// @brief Initializes the texture of the entity from the surface.
+/// @param renderer The renderer that is used to create the texture.
+auto GameEntity::initializeTexture(SDL_Renderer * renderer) -> void {
+    if (this->p_TextureSurface) {
+        this->p_Texture = SDL_CreateTextureFromSurface(renderer, this->p_TextureSurface);
+        SDL_FreeSurface(this->p_TextureSurface);
+    }
 }
 
-void GameEntity::prepareRects() {
+auto GameEntity::prepareRects() -> void {
     SDL_QueryTexture(this->p_Texture, NULL, NULL, &this->m_SrcRect.w, &this->m_SrcRect.h);
     m_SrcRect.x = 0;
     m_SrcRect.y = 0;
 
-    m_DstRect.x = this->getPosition().x;
-    m_DstRect.y = this->getPosition().y;
+    // TODO: We should use the internal coordinate system of the game engine - instead of the SDL coordinate system
+    m_DstRect.x = this->getPosition().getX();
+    m_DstRect.y = this->getPosition().getY();
     m_DstRect.w = m_SrcRect.w;
     m_DstRect.h = m_SrcRect.h;
 }
 
-void GameEntity::render(SDL_Renderer * renderer) {
+auto GameEntity::render(SDL_Renderer * renderer) -> void {
     this->prepareRects();
     SDL_RenderCopy(renderer, this->p_Texture, &this->m_SrcRect, &this->m_DstRect);
 }
 
-void GameEntity::dispose() {
+auto GameEntity::dispose() -> void {
     SDL_DestroyTexture(this->p_Texture);
-}
-
-GameEntity::~GameEntity() {
 }

@@ -5,6 +5,7 @@
 #define TOBOT_ENUM(name, ...)                                                                                \
     /* Making sure the name is not empty*/                                                                   \
     static_assert(sizeof(#name) > 1, "A name for the generated enum class construct has to be specified");   \
+    static_assert(sizeof(#__VA_ARGS__) > 1, "The enum needs at least a single enum constant");               \
     class name {                                                                                             \
         public:                                                                                              \
             enum Enum {                                                                                      \
@@ -14,31 +15,33 @@
             name(Enum value);                                                                                \
             name(name const & other);                                                                        \
             name(name && other) noexcept;                                                                    \
-            name const & operator=(name const & other) noexcept;                                             \
-            name const & operator=(name && other) noexcept;                                                  \
-            bool operator==(name const & other) const;                                                       \
-            bool operator!=(name const & other) const;                                                       \
+            auto operator=(name const & other) noexcept -> name const &;                                     \
+            auto operator=(name && other) noexcept -> name const &;                                          \
+            auto operator==(name const & other) const -> bool;                                               \
+            auto operator!=(name const & other) const -> bool;                                               \
             [[nodiscard]] Enum get() const;                                                                  \
-            std::size_t ordinal() const {                                                                    \
+            auto ordinal() const -> std::size_t {                                                            \
                 return static_cast<std::size_t>(m_value);                                                    \
             }                                                                                                \
             /* Can be evaluated at compile time*/                                                            \
-            static consteval std::size_t size() {                                                            \
+            static consteval auto size() -> std::size_t {                                                    \
                 return static_cast<std::size_t>(Enum::COUNT);                                                \
             }                                                                                                \
-            static Enum get(std::size_t index) {                                                             \
+            static auto get(std::size_t index) -> Enum {                                                     \
                 if (index >= size()) {                                                                       \
                     throw std::invalid_argument("Index out of bounds");                                      \
                 }                                                                                            \
                 return static_cast<Enum>(index);                                                             \
             }                                                                                                \
-            static std::string toString() {                                                                  \
+            static auto toString() -> std::string {                                                          \
                 return #name;                                                                                \
             }                                                                                                \
             /* Retrieving all the values in the enum*/                                                       \
-            static Enum const * const values() {                                                             \
+            static auto values() -> Enum const * const {                                                     \
                 return s_values;                                                                             \
             }                                                                                                \
+            /* We need to adapt our iterators to C++ 17 -                                                    \
+             * https://www.fluentcpp.com/2018/05/08/std-iterator-deprecated/ */                              \
             class iterator : public std::iterator<std::input_iterator_tag, Enum, Enum, Enum const *, Enum> { \
                 private:                                                                                     \
                     Enum beginn = static_cast<Enum>(0);                                                      \
@@ -46,22 +49,22 @@
                 public:                                                                                      \
                     explicit iterator(Enum beginn = static_cast<Enum>(0)) : beginn(beginn) {                 \
                     }                                                                                        \
-                    iterator & operator++() {                                                                \
+                    auto operator++() -> iterator & {                                                        \
                         beginn = static_cast<Enum>(static_cast<std::size_t>(beginn) + 1);                    \
                         return *this;                                                                        \
                     }                                                                                        \
-                    iterator operator++(int) {                                                               \
+                    auto operator++(int) -> iterator {                                                       \
                         iterator tmp = *this;                                                                \
                         operator++();                                                                        \
                         return tmp;                                                                          \
                     }                                                                                        \
-                    bool operator==(iterator const & other) const {                                          \
+                    auto operator==(iterator const & other) const -> bool {                                  \
                         return beginn == other.beginn;                                                       \
                     }                                                                                        \
-                    bool operator!=(iterator const & other) const {                                          \
+                    auto operator!=(iterator const & other) const -> bool {                                  \
                         return beginn != other.beginn;                                                       \
                     }                                                                                        \
-                    Enum operator*() const {                                                                 \
+                    auto operator*() const -> Enum {                                                         \
                         return beginn;                                                                       \
                     }                                                                                        \
             };                                                                                               \
@@ -76,27 +79,26 @@
             Enum m_value;                                                                                    \
             static inline Enum const s_values[] = {__VA_ARGS__};                                             \
     };                                                                                                       \
-    static_assert(name::COUNT > 0, "The enumeration must have at least one value");                          \
-    name::name(name::Enum value) : m_value(value) {                                                          \
+    [[nodiscard]] name::name(name::Enum value) : m_value(value) {                                            \
     }                                                                                                        \
-    name::name(name const & other) : m_value(other.m_value) {                                                \
+    [[nodiscard]] name::name(name const & other) : m_value(other.m_value) {                                  \
     }                                                                                                        \
-    name::name(name && other) noexcept : m_value(std::move(other.m_value)) {                                 \
+    [[nodiscard]] name::name(name && other) noexcept : m_value(std::move(other.m_value)) {                   \
     }                                                                                                        \
-    name const & name::operator=(name const & other) noexcept {                                              \
+    [[nodiscard]] auto name::operator=(name const & other) noexcept -> name const & {                        \
         m_value = other.m_value;                                                                             \
         return *this;                                                                                        \
     }                                                                                                        \
-    name const & name::operator=(name && other) noexcept {                                                   \
+    [[nodiscard]] auto name::operator=(name && other) noexcept -> name const & {                             \
         m_value = std::move(other.m_value);                                                                  \
         return *this;                                                                                        \
     }                                                                                                        \
-    bool name::operator==(name const & other) const {                                                        \
+    [[nodiscard]] auto name::operator==(name const & other) const->bool {                                    \
         return m_value == other.m_value;                                                                     \
     }                                                                                                        \
-    bool name::operator!=(name const & other) const {                                                        \
+    [[nodiscard]] auto name::operator!=(name const & other) const->bool {                                    \
         return m_value != other.m_value;                                                                     \
     }                                                                                                        \
-    [[nodiscard]] name::Enum name::get() const {                                                             \
+    [[nodiscard]] auto name::get() const->name::Enum {                                                       \
         return m_value;                                                                                      \
     }

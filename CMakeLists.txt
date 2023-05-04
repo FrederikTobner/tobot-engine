@@ -6,11 +6,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_C_STANDARD 99)
 set(C_STANDARD_REQUIRED TRUE)
-
 option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
-option(BUILD_SDL "Building SDL" ON)
-
+option(INCLUDE_DEPS "Include external dependencies" ON)
+option(BUILD_TESTS "Build the unit tests" ON)
 include(CheckIncludeFile)
+
+# Checking the dependencies of the project - we should do this for every library instead to make them a seperate entity
 if(UNIX)
     # Check dependecies under unix-like systems   
     CHECK_INCLUDE_FILE("unistd.h" UNISTD_AVAILABLE)    
@@ -22,11 +23,10 @@ elseif(WIN32)
     CHECK_INCLUDE_FILE("windows.h" WINDOWS_AVAILABLE)
     CHECK_INCLUDE_FILE("psapi.h" PSAPI_AVAILABLE)
     if(NOT ${WINDOWS_AVAILABLE})
-        message(FATAL_ERROR "windows.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that"
-        )
+        message(FATAL_ERROR "windows.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
     endif() # windows.h
     if(NOT ${PSAPI_AVAILABLE})
-    message(FATAL_ERROR "psapi.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
+        message(FATAL_ERROR "psapi.h is required to build the project under windows. Please make sure it is available to the compiler and try again after that")
     endif() # psapi.h
 endif()
 
@@ -45,13 +45,14 @@ enable_testing()
 # building packages
 add_subdirectory(packages)
 
-if(BUILD_SDL)
-    # SDL2 deps
-    add_subdirectory(deps/SDL)
-    add_subdirectory(deps/SDL_image)
-    add_subdirectory(deps/SDL_ttf)
-    add_subdirectory(deps/SDL_mixer)
+if(INCLUDE_DEPS)
+    # SDL2 deps and imgui
+   add_subdirectory(deps)
+   # We can only build the editor if SDL and imgui have been built
+   add_subdirectory(editor)
 endif()
+
+
 
 # Doesn't work if we build the lib as a dll for some reason
 if(NOT BUILD_CORE_SHARED)

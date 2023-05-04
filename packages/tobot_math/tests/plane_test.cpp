@@ -86,7 +86,7 @@ TEST(Plane, Normal) {
     Plane<> plane(5, 3, 2, 1);
     Vector3D<> normal = plane.getNormal();
 
-    EXPECT_EQ(5, normal.x);
-    EXPECT_EQ(3, normal.y);
-    EXPECT_EQ(2, normal.z);
+    EXPECT_EQ(5, normal.getX());
+    EXPECT_EQ(3, normal.getY());
+    EXPECT_EQ(2, normal.getZ());
 }

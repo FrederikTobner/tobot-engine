@@ -4,25 +4,28 @@ set(TOBOT_CORE_SOURCES
 "asset_manager.cpp"
 "exitcode.cpp"
 "game_entity.cpp"
+"layer.cpp"
 "render_object.cpp"
 "scene.cpp"
+"scene_manager.cpp"
 "sub_system_manager.cpp"
-"layer.cpp"
 "tobot_application.cpp"
+"transform2D.cpp"
 )
 
 set(TOBOT_CORE_HEADERS
 "asset_manager.h"
+"concepts.h"
 "entry_point.h"
 "exitcode.h"
 "layer.h"
 "game_entity.h"
 "render_object.h"
 "scene.h"
-"sub_system_manager.h"
 "scene_manager.h"
+"sub_system_manager.h"
 "tobot_application.h"
-"concepts.h"
+"transform2D.h"
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
@@ -37,9 +40,9 @@ endif()
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
-target_include_directories(tobot-core PUBLIC ./)
+target_include_directories(tobot-core PUBLIC ./ ../../../deps/SDL/include ../../../deps/SDL_image/ ../../../deps/SDL_mixer/include ../../../deps/SDL_ttf/ ../../../deps/SDL_net/)
 
-target_link_libraries(tobot-core SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math tobot-data-structures)
+target_link_libraries(tobot-core SDL2::SDL2main SDL2::SDL2-static SDL2_image::SDL2_image-static SDL2_ttf::SDL2_ttf-static SDL2_net::SDL2_net-static SDL2_mixer::SDL2_mixer-static tobot-tooling tobot-math tobot-data-structures)
 
 # for including the project_config.h file
 target_include_directories(tobot-core PUBLIC ${PROJECT_BINARY_DIR}/packages/tobot_core/src ${SOURCE_PATH_TOOLING}/include ${SOURCE_PATH_MATH}/include ${SOURCE_PATH_DATA_STRUCTURES}/include)

@@ -67,7 +67,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return The node with the minimum value
     template <typename T1>
         requires IsBinarySearchTreeNode<T1>
-    auto getMinimum(T1 * node, T1 const * const nil) -> T1 * {
+    [[nodiscard]] auto getMinimum(T1 * node, T1 const * const nil) -> T1 * {
         while (node->left != nil) {
             node = node->left;
         }
@@ -81,7 +81,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return The node with the maximum value
     template <typename T1>
         requires IsBinarySearchTreeNode<T1>
-    auto getMaximum(T1 * node, T1 const * const nil) -> T1 * {
+    [[nodiscard]] auto getMaximum(T1 * node, T1 const * const nil) -> T1 * {
         while (node->right != nil) {
             node = node->right;
         }
@@ -97,7 +97,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return true if the value is contained in the tree, false otherwise
     template <typename T1, typename T2>
         requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
-    auto containsWithNullCheck(T1 * root, T1 const * const nil, T2 value) -> bool {
+    [[nodiscard]] auto containsWithNullCheck(T1 * root, T1 const * const nil, T2 value) -> bool {
         T1 * x = root;
         while (x != nil && x->value != value) {
             if (value < x->value) {
@@ -121,7 +121,7 @@ namespace Tobot::DataStructures::Tree {
     /// @return true if the value is contained in the tree, false otherwise
     template <typename T1, typename T2>
         requires IsBinarySearchTreeNode<T1> && IsValueInBinarySearchTreeNode<T1, T2>
-    auto containsWithoutNullCheck(T1 * root, T1 const * const nil, T2 value) -> bool {
+    [[nodiscard]] auto containsWithoutNullCheck(T1 * root, T1 const * const nil, T2 value) -> bool {
         T1 * x = root;
         while (x != nil && x->value != value) {
             if (value < x->value) {

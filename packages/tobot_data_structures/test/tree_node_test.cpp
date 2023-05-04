@@ -27,6 +27,7 @@ TEST(TreeNode, CanBeCreatedWithValueAndChild) {
     TreeNode<int> * leChild = new TreeNode<int>(2);
     TreeNode<int> * leNode = new TreeNode<int>(1, {leChild});
     ASSERT_EQ(leNode->getChildren()[0]->getValue(), 2);
+    delete leNode;
 }
 
 /*
@@ -37,6 +38,8 @@ TEST(TreeNode, CanBeDeleted) {
     TreeNode<int> * leNode = new TreeNode<int>(1, {leChild});
     leNode->removeChild(leChild);
     ASSERT_EQ(leNode->getChildren().size(), 0);
+    delete leChild;
+    delete leNode;
 }
 
 /*
@@ -47,4 +50,6 @@ TEST(TreeNode, CanBeDeletedByIndex) {
     TreeNode<int> * leNode = new TreeNode<int>(1, {leChild});
     leNode->removeChildByIndex(0);
     ASSERT_EQ(leNode->getChildren().size(), 0);
+    delete leChild;
+    delete leNode;
 }

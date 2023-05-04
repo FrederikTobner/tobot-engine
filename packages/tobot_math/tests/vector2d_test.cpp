@@ -20,8 +20,8 @@ TEST(Vector2D, Copy) {
 
     firstVector = {4.0, 5.0};
 
-    EXPECT_EQ(5, secondVector.x);
-    EXPECT_EQ(3, secondVector.y);
+    EXPECT_EQ(5, secondVector.getX());
+    EXPECT_EQ(3, secondVector.getY());
 }
 
 /*
@@ -33,8 +33,8 @@ TEST(Vector2D, Move) {
 
     firstVector = {4.0, 5.0};
 
-    EXPECT_EQ(5, secondVector.x);
-    EXPECT_EQ(3, secondVector.y);
+    EXPECT_EQ(5, secondVector.getX());
+    EXPECT_EQ(3, secondVector.getY());
 }
 
 /*
@@ -46,8 +46,8 @@ TEST(Vector2D, Addition) {
 
     Vector2D<> result = vector1 + vector2;
 
-    EXPECT_EQ(9, result.x);
-    EXPECT_EQ(5, result.y);
+    EXPECT_EQ(9, result.getX());
+    EXPECT_EQ(5, result.getY());
 }
 
 /*
@@ -59,8 +59,8 @@ TEST(Vector2D, AdditionAssignment) {
 
     vector1 += vector2;
 
-    EXPECT_EQ(9, vector1.x);
-    EXPECT_EQ(5, vector1.y);
+    EXPECT_EQ(9, vector1.getX());
+    EXPECT_EQ(5, vector1.getY());
 }
 
 /*
@@ -72,8 +72,8 @@ TEST(Vector2D, Subtraction) {
 
     Vector2D<> result = vector1 - vector2;
 
-    EXPECT_EQ(1, result.x);
-    EXPECT_EQ(2, result.y);
+    EXPECT_EQ(1, result.getX());
+    EXPECT_EQ(2, result.getY());
 }
 
 /*
@@ -85,8 +85,8 @@ TEST(Vector2D, SubtractionAssignment) {
 
     vector1 -= vector2;
 
-    EXPECT_EQ(1, vector1.x);
-    EXPECT_EQ(2, vector1.y);
+    EXPECT_EQ(1, vector1.getX());
+    EXPECT_EQ(2, vector1.getY());
 }
 
 /*
@@ -97,8 +97,8 @@ TEST(Vector2D, Multiplication) {
 
     Vector2D<> result = vector1 * 3.0;
 
-    EXPECT_EQ(15, result.x);
-    EXPECT_EQ(12, result.y);
+    EXPECT_EQ(15, result.getX());
+    EXPECT_EQ(12, result.getY());
 }
 
 /*
@@ -109,8 +109,8 @@ TEST(Vector2D, MultiplicationAssignment) {
 
     vector1 *= 3.0;
 
-    EXPECT_EQ(15.0, vector1.x);
-    EXPECT_EQ(12.0, vector1.y);
+    EXPECT_EQ(15.0, vector1.getX());
+    EXPECT_EQ(12.0, vector1.getY());
 }
 
 /*
@@ -121,8 +121,8 @@ TEST(Vector2D, Division) {
 
     Vector2D<> result = vector1 / 3.0;
 
-    EXPECT_EQ(3.0, result.x);
-    EXPECT_EQ(2.0, result.y);
+    EXPECT_EQ(3.0, result.getX());
+    EXPECT_EQ(2.0, result.getY());
 }
 
 /*
@@ -133,8 +133,8 @@ TEST(Vector2D, DivisionAssignment) {
 
     vector1 /= 3.0;
 
-    EXPECT_EQ(3.0, vector1.x);
-    EXPECT_EQ(2.0, vector1.y);
+    EXPECT_EQ(3.0, vector1.getX());
+    EXPECT_EQ(2.0, vector1.getY());
 }
 
 /*
@@ -164,7 +164,7 @@ TEST(Vector2D, Inequality) {
  */
 TEST(Vector2D, Magnitude) {
     Vector2D<> leVector(4.0, 3.0);
-    EXPECT_EQ(5, leVector.Magnitude());
+    EXPECT_EQ(5, leVector.magnitude());
 }
 
 /*
@@ -172,8 +172,8 @@ TEST(Vector2D, Magnitude) {
  */
 TEST(Vector2D, Normalize) {
     Vector2D<> leVector(4.0, 3.0);
-    leVector.Normalize();
-    EXPECT_EQ(1.0, leVector.Magnitude());
+    leVector.normalize();
+    EXPECT_EQ(1.0, leVector.magnitude());
 }
 
 /*
@@ -183,7 +183,7 @@ TEST(Vector2D, DotProduct) {
     Vector2D<> vector1(5.0, 4.0);
     Vector2D<> vector2(4.0, 2.0);
 
-    EXPECT_EQ(28, vector1.Dot(vector2));
+    EXPECT_EQ(28, vector1.dot(vector2));
 }
 
 /**
@@ -193,8 +193,8 @@ TEST(Vector2D, CrossProduct) {
     Vector2D<> vector1(5.0, 4.0);
     Vector2D<> vector2(4.0, 2.0);
 
-    Vector2D<> result = vector1.Cross(vector2);
+    Vector2D<> result = vector1.cross(vector2);
 
-    EXPECT_EQ(0.0, result.x);
-    EXPECT_EQ(-6.0, result.y);
+    EXPECT_EQ(0.0, result.getX());
+    EXPECT_EQ(-6.0, result.getY());
 }

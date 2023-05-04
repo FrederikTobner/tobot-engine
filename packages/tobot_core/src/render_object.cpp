@@ -2,26 +2,28 @@
 
 using namespace Tobot::Core;
 
-void Tobot::Core::RenderObject::setVisible(bool visible) {
+auto Tobot::Core::RenderObject::setVisible(bool visible) -> void {
     this->m_Visible = visible;
 }
 
-void Tobot::Core::RenderObject::incrementPosition() {
-    this->m_Position += Tobot::Math::Vector2D<float>(1.0, 1.0);
+auto Tobot::Core::RenderObject::incrementPosition() -> void {
+    this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
 }
 
-RenderObject::RenderObject(char const * id, int x, int y) : m_Id(id), m_Position(x, y) {
+// The scaling and rotation is not implemented yet
+RenderObject::RenderObject(char const * id, float x, float y)
+    : m_Id(id), m_transform(Tobot::Math::Vector2D<float>(x, y), 0.0, Tobot::Math::Vector2D<float>(0.0f, 0.0f)) {
 }
 
-const char * RenderObject::getId() {
+[[nodiscard]] auto RenderObject::getId() -> const char * {
     return this->m_Id;
 }
 
-Tobot::Math::Vector2D<float> RenderObject::getPosition() {
-    return this->m_Position;
+auto RenderObject::getPosition() -> Tobot::Math::Vector2D<float> {
+    return this->m_transform.getPosition();
 }
 
-bool Tobot::Core::RenderObject::isVisible() {
+[[nodiscard]] auto Tobot::Core::RenderObject::isVisible() -> bool {
     return this->m_Visible;
 }
 

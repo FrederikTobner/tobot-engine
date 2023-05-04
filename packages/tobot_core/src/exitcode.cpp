@@ -2,12 +2,14 @@
 
 using namespace Tobot::Core;
 
-int ExitCode::getCode() const {
+[[nodiscard]] auto ExitCode::getCode() const -> int {
     return this->code;
 }
-char const * ExitCode::getDescription() const {
+
+[[nodiscard]] auto ExitCode::getDescription() const -> char const * {
     return this->description;
 }
+
 ExitCode const ExitCode::OK = ExitCode(0, "Everything went well");
 ExitCode const ExitCode::USAGE = ExitCode(64, "Layer 8 Error");
 ExitCode const ExitCode::DATAERR = ExitCode(65, "Data Format Error");

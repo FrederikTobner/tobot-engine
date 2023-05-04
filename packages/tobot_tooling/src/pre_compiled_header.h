@@ -7,13 +7,17 @@
 
 // C standard library dependecies
 #include <stdio.h>
+#include <string.h>
 
 // C++ standard library dependecies
-#include <ctime>
+#include <atomic>
 #include <iostream>
 #include <mutex>
 #include <sstream>
 #include <string>
+
+// C++ standard library dependecies from the C library
+#include <ctime>
 
 // OS specific dependecies
 #ifdef OS_WINDOWS

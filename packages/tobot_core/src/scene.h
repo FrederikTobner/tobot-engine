@@ -9,10 +9,30 @@
 #include "render_object.h"
 
 namespace Tobot::Core {
+
+    /// @brief A hash function for strings and char pointers that can be used in unordered_map.
+    struct string_hash {
+            using hash_type = std::hash<std::string_view>;
+            using is_transparent = void;
+
+            auto operator()(const char * str) const -> std::size_t {
+                return hash_type{}(str);
+            }
+            auto operator()(std::string_view str) const -> std::size_t {
+                return hash_type{}(str);
+            }
+            auto operator()(std::string const & str) const -> std::size_t {
+                return hash_type{}(str);
+            }
+    };
+
+    /// @brief A scene is a collection of layers that are rendered on the screen.
+    ///@details These layers can contain game entities. The scene is responsible for the lifecycle of the game entities.
+    /// It is also responsible for the lifecycle of the layers.
     class Scene {
         private:
             char const * m_BaseLayerId = "baseLayer";
-            std::unordered_map<char const *, Layer *> m_Layers;
+            std::unordered_map<std::string, Layer *, string_hash, std::equal_to<>> m_Layers;
 
         protected:
             char const * m_Id;
@@ -22,30 +42,30 @@ namespace Tobot::Core {
              *
              * @param gameEntity
              */
-            void add(Tobot::Core::GameEntity * gameEntity);
+            auto add(Tobot::Core::GameEntity * gameEntity) -> void;
 
             /**
              * @brief Adds a new GameEntity to a specified layer. The layer must be created before.
              *
              * @param layerId
              */
-            void add(char const * layerId, GameEntity *);
+            auto add(char const * layerId, GameEntity *) -> void;
 
-            void addLayer(Layer * layer);
+            auto addLayer(Layer * layer) -> void;
 
-            void destroy(char const * id);
-            void destroyAll();
+            auto destroy(char const * id) -> void;
+            auto destroyAll() -> void;
 
         public:
             Scene(char const * id);
             virtual ~Scene() = 0;
 
-            void prepareTextures(SDL_Renderer * renderer);
+            auto prepareTextures(SDL_Renderer * renderer) -> void;
 
-            void update();
-            void render(SDL_Renderer * renderer);
+            auto update() -> void;
+            auto render(SDL_Renderer * renderer) -> void;
 
-            virtual void onCreate() = 0;
-            virtual void onDestroy() = 0;
+            virtual auto onCreate() -> void = 0;
+            virtual auto onDestroy() -> void = 0;
     };
 } // namespace Tobot::Core

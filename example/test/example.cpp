@@ -18,6 +18,7 @@ int main(int argc, char const ** argv) {
     ConsoleTestReportProcessor processor;
     SimpleTestRunner runner(processor);
     TestFixture exampleFixture("example");
+    // To discover tests automatically we could use ctags or cscope
     TestCase firstTest(tobot_example_first_test, "first");
     TestCase secondTest(tobot_example_second_test, "second");
     exampleFixture.addTestCases({firstTest, secondTest});

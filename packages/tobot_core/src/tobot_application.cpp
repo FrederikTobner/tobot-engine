@@ -1,20 +1,20 @@
 #include "tobot_application.h"
 
+// Tobot dependencies
 #include "exitcode.h"
 #include "project_config.h"
 #include "scene_manager.h"
 #include "sub_system_manager.h"
 #include "tobot_tooling.h"
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
-#include <SDL_ttf.h>
+
+// SDL dependencies
+#include "SDL.h"
 
 using namespace Tobot::Core;
-using namespace Tobot::Tooling::Logging;
+using namespace Tobot::Tooling;
 
 // virtual constructor
-TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
+[[nodiscard]] TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
 }
 
 // virtual destructor
@@ -22,7 +22,7 @@ TobotApplication::~TobotApplication() {
     this->quit();
 }
 
-void TobotApplication::initialize() {
+auto TobotApplication::initialize() -> void {
     LOG_INFO("%s version %s.%s.%s", PROJECT_NAME, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR, PROJECT_VERSION_PATCH);
     LOG_INFO("\n  _______    _           _     ______             _            \n\
  |__   __|  | |         | |   |  ____|           (_)           \n\
@@ -31,22 +31,26 @@ void TobotApplication::initialize() {
     | | (_) | |_) | (_) | |_  | |____| | | | (_| | | | | |  __/\n\
     |_|\\___/|_.__/ \\___/ \\__| |______|_| |_|\\__, |_|_| |_|\\___|\n\
                                              __/ |             \n\
-                                            |___/              ");
-    // Initialize SDL subsystems
-    if (subSystemsInitialize(SDL_CORE_INIT_EVERYTHING | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
+                                            |___/");
+    // Initialize SDL subsystems - we need to adapt this so we initialize all the subsystems that are needed without any
+    // unnecassary subsystems
+    if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
         exit(ExitCode::SOFTWARE.getCode());
     }
-    this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                      this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN);
+    // We use vulkan right now - we should make this configurable
+    this->p_Window =
+        SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                         this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN | SDL_WINDOW_VULKAN);
+    // The framerate should be configurable - vsync should be an option not the default
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 
-    // TODO: Maybe call call this when onApplicationCreate will be a thing
+    // TODO: Maybe call this when onApplicationCreate will be a thing
     this->p_CurrentScene->onCreate();
     this->p_CurrentScene->prepareTextures(this->p_Renderer);
 }
 
-void TobotApplication::run() {
+auto TobotApplication::run() -> void {
     while (this->m_Running) {
         this->handleEvents();
         this->update();
@@ -54,7 +58,7 @@ void TobotApplication::run() {
     }
 }
 
-void TobotApplication::handleEvents() {
+auto TobotApplication::handleEvents() -> void {
 
     /// If a scene was loaded by the user prepare it for rendering
     if (!Tobot::Core::SceneManager::sp_SceneStack.empty()) {
@@ -90,15 +94,15 @@ void TobotApplication::handleEvents() {
     }
 }
 
-void TobotApplication::update() {
+auto TobotApplication::update() -> void {
     this->p_CurrentScene->update();
 }
 
-void Tobot::Core::TobotApplication::setInitialScene(Scene * scene) {
+auto Tobot::Core::TobotApplication::setInitialScene(Scene * scene) -> void {
     this->p_CurrentScene = scene;
 }
 
-void TobotApplication::render() {
+auto TobotApplication::render() -> void {
     /// TODO: Scene specific background color with enums, reusable in logger maybe?
     SDL_SetRenderDrawColor(this->p_Renderer, 0, 0, 0, 0);
     SDL_RenderClear(this->p_Renderer);
@@ -108,7 +112,7 @@ void TobotApplication::render() {
     SDL_RenderPresent(this->p_Renderer);
 }
 
-void TobotApplication::quit() {
+auto TobotApplication::quit() -> void {
 
     this->p_CurrentScene->onDestroy();
 

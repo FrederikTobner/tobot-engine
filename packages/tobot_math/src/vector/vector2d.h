@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pre_compiled_header.h"
+#include "../pre_compiled_header.h"
 
 #include "../concepts.h"
 #include "vector.h"
@@ -14,21 +14,20 @@ namespace Tobot::Math {
     class Vector2D : Vector<T> {
 
         public:
-            T x;
-            T y;
-
             Vector2D(T x, T y);
             Vector2D(Vector2D & vec);
             Vector2D(Vector2D && vec);
+            Vector2D(Vector2D const & vec);
+            Vector2D(Vector2D const && vec);
             Vector2D(std::initializer_list<T> list);
-            Vector2D<T> & operator=(Vector2D<T> const & vec);
-            Vector2D<T> & operator=(Vector2D<T> && vec);
+            auto operator=(Vector2D<T> const & vec) -> Vector2D<T> &;
+            auto operator=(Vector2D<T> && vec) -> Vector2D<T> &;
 
             /// @brief Addition operator for two vectors
             /// @param lVec The left vector
             /// @param rVec The right vector
             /// @return Vector2D<T> The sum of the two vectors
-            friend inline Vector2D<T> operator+(Vector2D<T> lVec, Vector2D<T> const & rVec) {
+            friend inline auto operator+(Vector2D<T> lVec, Vector2D<T> const & rVec) -> Vector2D<T> {
                 return Vector2D(lVec.x + rVec.x, lVec.y + rVec.y);
             }
 
@@ -36,7 +35,7 @@ namespace Tobot::Math {
             /// @param lVec The left vector
             /// @param rVec The right vector
             /// @return Vector2D<T> The difference of the two vectors
-            friend inline Vector2D<T> operator-(Vector2D<T> lVec, Vector2D<T> const & rVec) {
+            friend inline auto operator-(Vector2D<T> lVec, Vector2D<T> const & rVec) -> Vector2D<T> {
                 return Vector2D(lVec.x - rVec.x, lVec.y - rVec.y);
             }
 
@@ -44,7 +43,7 @@ namespace Tobot::Math {
             /// @param scalar The scalar to multiply the vector by
             /// @param vec The vector to multiply the scalar by
             /// @return Vector2D<T> The product of the vector and the scalar
-            friend inline Vector2D<T> operator*(T const scalar, Vector2D<T> vec) {
+            friend inline auto operator*(T const scalar, Vector2D<T> vec) -> Vector2D<T> {
                 return Vector2D(vec.x * scalar, vec.y * scalar);
             }
 
@@ -52,7 +51,7 @@ namespace Tobot::Math {
             /// @param vec The vector to multiply the scalar by
             /// @param scalar The scalar to multiply the vector by
             /// @return Vector2D<T> The product of the vector and the scalar
-            friend inline Vector2D<T> operator*(Vector2D<T> vec, T const scalar) {
+            friend inline auto operator*(Vector2D<T> vec, T const scalar) -> Vector2D<T> {
                 return Vector2D(vec.x * scalar, vec.y * scalar);
             }
 
@@ -60,7 +59,7 @@ namespace Tobot::Math {
             /// @param scalar The scalar to divide the vector by
             /// @param vec The vector to divide the scalar by
             /// @return Vector2D<T> The quotient of the vector and the scalar
-            friend inline Vector2D<T> operator/(T const scalar, Vector2D<T> vec) {
+            friend inline auto operator/(T const scalar, Vector2D<T> vec) -> Vector2D<T> {
                 return Vector2D(vec.x / scalar, vec.y / scalar);
             }
 
@@ -68,48 +67,59 @@ namespace Tobot::Math {
             /// @param vec The vector to divide the scalar by
             /// @param scalar The scalar to divide the vector by
             /// @return Vector2D<T> The quotient of the vector and the scalar
-            friend inline Vector2D<T> operator/(Vector2D<T> vec, T const scalar) {
+            friend inline auto operator/(Vector2D<T> vec, T const scalar) -> Vector2D<T> {
                 return Vector2D(vec.x / scalar, vec.y / scalar);
             }
-            Vector2D<T> & operator+=(Vector2D<T> const & vec);
 
-            Vector2D<T> & operator-=(Vector2D<T> const & vec);
+            auto operator+=(Vector2D<T> const & vec) -> Vector2D<T> &;
 
-            Vector2D<T> & operator*=(T const scalar);
+            auto operator-=(Vector2D<T> const & vec) -> Vector2D<T> &;
 
-            Vector2D<T> & operator/=(T const scalar);
+            auto operator*=(T const scalar) -> Vector2D<T> &;
 
-            T & operator()(std::size_t i);
+            auto operator/=(T const scalar) -> Vector2D<T> &;
 
-            T operator()(std::size_t i) const;
+            auto operator()(std::size_t i) -> T &;
 
-            T & operator[](std::size_t i);
+            auto operator()(std::size_t i) const -> T;
 
-            T operator[](std::size_t i) const;
+            auto operator[](std::size_t i) -> T &;
 
-            bool operator==(Vector2D<T> const & vec) const;
+            auto operator[](std::size_t i) const -> T;
 
-            bool operator!=(Vector2D<T> const & vec) const;
+            auto operator==(Vector2D<T> const & vec) const -> bool;
+
+            auto operator!=(Vector2D<T> const & vec) const -> bool;
 
             /// @brief Appends the vector to the output stream
             /// @param os The output stream to append to
             /// @param vec The vector to append
             /// @return std::ostream The output stream with the vector appended
-            friend std::ostream operator<<(std::ostream & os, Vector2D<T> const & vec) {
+            friend auto operator<<(std::ostream & os, Vector2D<T> const & vec) -> std::ostream {
                 os << "(" << vec.x << ", " << vec.y << ")";
-                return os;
             }
 
-            inline T Magnitude();
+            inline auto magnitude() -> T;
 
-            inline void Normalize();
+            inline auto normalize() -> void;
 
-            inline std::size_t GetSize();
+            inline auto getSize() -> std::size_t;
 
-            inline T Dot(Vector2D<T> const & vec);
+            inline auto dot(Vector2D<T> const & vec) -> T;
 
-            Vector2D<T> Cross(Vector2D<T> const & vec);
-            ;
+            auto cross(Vector2D<T> const & vec) -> Vector2D<T>;
+
+            auto setX(T x) -> void;
+
+            auto setY(T y) -> void;
+
+            auto getX() const -> T;
+
+            auto getY() const -> T;
+
+        private:
+            T x;
+            T y;
     };
 
     /// @brief Constructor for the Vector2D class
@@ -139,6 +149,22 @@ namespace Tobot::Math {
 
     /// @brief Constructor for the Vector2D class
     /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T>::Vector2D(Vector2D const && vec) : x(vec.x), y(vec.y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
+    /// @param vec The vector to copy
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    Vector2D<T>::Vector2D(Vector2D const & vec) : x(vec.x), y(vec.y) {
+    }
+
+    /// @brief Constructor for the Vector2D class
+    /// @tparam T The type stored in the vector
     /// @param list The list of values to initialize the vector with
     template <typename T>
         requires ArithmeticFloatingPoint<T>
@@ -156,7 +182,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The copied vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> const & vec) {
+    auto Vector2D<T>::operator=(Vector2D<T> const & vec) -> Vector2D<T> & {
         this->x = vec.x;
         this->y = vec.y;
         return *this;
@@ -168,7 +194,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The copied vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator=(Vector2D<T> && vec) {
+    auto Vector2D<T>::operator=(Vector2D<T> && vec) -> Vector2D<T> & {
         this->x = vec.x;
         this->y = vec.y;
         return *this;
@@ -180,7 +206,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator+=(Vector2D<T> const & vec) {
+    auto Vector2D<T>::operator+=(Vector2D<T> const & vec) -> Vector2D<T> & {
         this->x += vec.x;
         this->y += vec.y;
         return *this;
@@ -192,7 +218,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The difference of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator-=(Vector2D<T> const & vec) {
+    auto Vector2D<T>::operator-=(Vector2D<T> const & vec) -> Vector2D<T> & {
         this->x -= vec.x;
         this->y -= vec.y;
         return *this;
@@ -204,7 +230,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The product of the vector and the scalar
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator*=(T const scalar) {
+    auto Vector2D<T>::operator*=(T const scalar) -> Vector2D<T> & {
         this->x *= scalar;
         this->y *= scalar;
         return *this;
@@ -216,9 +242,10 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The quotient of the vector and the scalar
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> & Vector2D<T>::operator/=(T const scalar) {
-        this->x /= scalar;
-        this->y /= scalar;
+    auto Vector2D<T>::operator/=(T const scalar) -> Vector2D<T> & {
+        T factor = 1.0 / scalar;
+        this->x *= factor;
+        this->y *= factor;
         return *this;
     }
 
@@ -228,7 +255,7 @@ namespace Tobot::Math {
     /// @return T& The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Vector2D<T>::operator()(std::size_t i) {
+    [[nodiscard]] auto Vector2D<T>::operator()(std::size_t i) -> T & {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -244,7 +271,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -254,7 +281,7 @@ namespace Tobot::Math {
     /// @return T The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector2D<T>::operator()(std::size_t i) const {
+    [[nodiscard]] auto Vector2D<T>::operator()(std::size_t i) const -> T {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -270,7 +297,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -280,7 +307,7 @@ namespace Tobot::Math {
     /// @return T& The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T & Vector2D<T>::operator[](std::size_t i) {
+    [[nodiscard]] auto Vector2D<T>::operator[](std::size_t i) -> T & {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -296,7 +323,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -306,7 +333,7 @@ namespace Tobot::Math {
     /// @return T The component at the index
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector2D<T>::operator[](std::size_t i) const {
+    [[nodiscard]] auto Vector2D<T>::operator[](std::size_t i) const -> T {
         assert(i < 2);
         switch (i) {
         case 0:
@@ -322,7 +349,7 @@ namespace Tobot::Math {
             __builtin_unreachable();
 #else // Compiler is Intel or unknown
             exit(70);
-#endif;
+#endif
         }
     }
 
@@ -332,7 +359,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Vector2D<T>::operator==(Vector2D<T> const & vec) const {
+    [[nodiscard]] auto Vector2D<T>::operator==(Vector2D<T> const & vec) const -> bool {
         return this->x == vec.x && this->y == vec.y;
     }
 
@@ -342,7 +369,7 @@ namespace Tobot::Math {
     /// @return bool True if the vectors are not equal, false otherwise
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    bool Vector2D<T>::operator!=(Vector2D<T> const & vec) const {
+    [[nodiscard]] auto Vector2D<T>::operator!=(Vector2D<T> const & vec) const -> bool {
         return this->x != vec.x || this->y != vec.y;
     }
 
@@ -352,7 +379,7 @@ namespace Tobot::Math {
     /// @return T The dot product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    T Vector2D<T>::Dot(Vector2D<T> const & vec) {
+    [[nodiscard]] auto Vector2D<T>::dot(Vector2D<T> const & vec) -> T {
         return this->x * vec.x + this->y * vec.y;
     }
 
@@ -362,7 +389,7 @@ namespace Tobot::Math {
     /// @return Vector2D<T> The cross product of the two vectors
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    Vector2D<T> Vector2D<T>::Cross(Vector2D<T> const & vec) {
+    [[nodiscard]] auto Vector2D<T>::cross(Vector2D<T> const & vec) -> Vector2D<T> {
         return Vector2D(0, this->x * vec.y - this->y * vec.x);
     }
 
@@ -371,7 +398,7 @@ namespace Tobot::Math {
     /// @return T The magnitude of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline T Vector2D<T>::Magnitude() {
+    [[nodiscard]] inline auto Vector2D<T>::magnitude() -> T {
         return sqrt(this->x * this->x + this->y * this->y);
     }
 
@@ -379,8 +406,8 @@ namespace Tobot::Math {
     /// @tparam T The type stored in the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline void Vector2D<T>::Normalize() {
-        *this /= this->Magnitude();
+    inline auto Vector2D<T>::normalize() -> void {
+        *this /= this->magnitude();
     }
 
     /// @brief Gets the size of the vector
@@ -388,7 +415,43 @@ namespace Tobot::Math {
     /// @return std::size_t The size of the vector
     template <typename T>
         requires ArithmeticFloatingPoint<T>
-    inline std::size_t Vector2D<T>::GetSize() {
+    [[nodiscard]] inline auto Vector2D<T>::getSize() -> std::size_t {
         return 2;
+    }
+
+    /// @brief Gets the x component of the vector
+    /// @tparam T The type stored in the vector
+    /// @return T The x component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] inline auto Vector2D<T>::getX() const -> T {
+        return this->x;
+    }
+
+    /// @brief Gets the y component of the vector
+    /// @tparam T The type stored in the vector
+    /// @return T The y component of the vector
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    [[nodiscard]] inline auto Vector2D<T>::getY() const -> T {
+        return this->y;
+    }
+
+    /// @brief Sets the x component of the vector
+    /// @tparam T The type stored in the vector
+    /// @param x The new x component
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    inline auto Vector2D<T>::setX(T x) -> void {
+        this->x = x;
+    }
+
+    /// @brief Sets the y component of the vector
+    /// @tparam T The type stored in the vector
+    /// @param y The new y component
+    template <typename T>
+        requires ArithmeticFloatingPoint<T>
+    inline auto Vector2D<T>::setY(T y) -> void {
+        this->y = y;
     }
 } // namespace Tobot::Math

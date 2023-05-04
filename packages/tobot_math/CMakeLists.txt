@@ -1,4 +1,5 @@
 add_subdirectory(src)
 
-# googletest tests
-add_subdirectory(tests)
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()

@@ -16,8 +16,8 @@ ConsoleTestReportProcessor::~ConsoleTestReportProcessor() {
            this->executedTestCounter - this->passedTestCounter, this->executedTestCounter);
 }
 
-void ConsoleTestReportProcessor::handleTestReport(TestReport report, size_t totalNumberOfTests,
-                                                  std::string const & fixtureName) {
+auto ConsoleTestReportProcessor::handleTestReport(TestReport report, size_t totalNumberOfTests,
+                                                  std::string const & fixtureName) -> void {
     std::scoped_lock lock(m_mutex);
     this->executedTestCounter++;
     if (report.state->passed) {
@@ -30,8 +30,8 @@ void ConsoleTestReportProcessor::handleTestReport(TestReport report, size_t tota
     }
 }
 
-void ConsoleTestReportProcessor::preHandleTestReport(TestCase test, size_t totalNumberOfTests,
-                                                     std::string const & fixtureName) {
+auto ConsoleTestReportProcessor::preHandleTestReport(TestCase test, size_t totalNumberOfTests,
+                                                     std::string const & fixtureName) -> void {
     std::scoped_lock lock(m_mutex);
     printf("Start %zu: %s.%s\n", this->executedTestCounter + 1, fixtureName.c_str(), test.testName.c_str());
 }

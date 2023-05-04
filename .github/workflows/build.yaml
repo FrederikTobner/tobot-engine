@@ -24,16 +24,61 @@ jobs:
 
     strategy:
       matrix:
-        operatingsystems: [windows-latest] 
+        operatingsystems: [windows-latest, ubuntu-latest, macos-latest] 
         buildtypes: [Release] 
 
-    steps:
+    steps:    
+    
+    # Schlinux dependencies
+    - name: Setup Linux dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install \
+          cmake \
+          fonts-dejavu-core \
+          libfreetype-dev \
+          libharfbuzz-dev \
+          libflac-dev \
+          libfluidsynth-dev \
+          libgme-dev \
+          libmpg123-dev \
+          libopusfile-dev \
+          libvorbis-dev \
+          libxmp-dev \
+          libwavpack-dev \
+          ninja-build \
+          ${NULL+}
+
+    # SchmockOS dependencies
+    - name: Setup Macos dependencies
+      if: runner.os == 'macOS'
+      run: |
+        brew install \
+          fluidsynth \
+          game-music-emu \
+          libxmp \
+          mpg123 \
+          ninja \
+          wavpack \
+          ${NULL+}      
+    
     - uses: actions/checkout@v3
       with:
         submodules: recursive
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    # Under Windows we are using Visual Studio as the Generator for now
+    - name: Configure CMake under Windows
+      if: runner.os == 'Windows'
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_TESTS=OFF
 
-    - name: Building Core
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target tobot-core
+    # Under Unix based systems we are using Ninja
+    - name: Configure CMake under unixbased systems
+      if: runner.os != 'Windows'
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja -DBUILD_TESTS=OFF
+
+    # We are not building our tests in the build workflow because that is already done in the test workflow
+    - name: Building Tobot
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    

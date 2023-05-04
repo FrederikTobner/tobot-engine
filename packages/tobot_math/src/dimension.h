@@ -13,23 +13,14 @@ namespace Tobot::Math {
             Dimension(T width, T height);
             Dimension(Dimension<T> const & dim);
             Dimension(std::initializer_list<T> list);
-            Dimension<T> & operator=(Dimension<T> const & dim) {
-                width = dim.width;
-                height = dim.height;
-                return *this;
-            }
-            Dimension<T> & operator=(Dimension<T> const && dim) {
-                width = dim.width;
-                height = dim.height;
-                return *this;
-            }
+            auto operator=(Dimension<T> const & dim) -> Dimension<T> &;
+            auto operator=(Dimension<T> const && dim) -> Dimension<T> &;
             /// @brief Appends the dimension to the ostream
-            friend std::ostream operator<<(std::ostream & os, Dimension<T> const & dim) {
+            friend auto operator<<(std::ostream & os, Dimension<T> const & dim) -> std::ostream {
                 os << "(" << dim.width << ", " << dim.height << ")";
-                return os;
             }
-            bool operator==(Dimension<T> const & dim) const;
-            bool operator!=(Dimension<T> const & dim) const;
+            auto operator==(Dimension<T> const & dim) const -> bool;
+            auto operator!=(Dimension<T> const & dim) const -> bool;
     };
 
     template <typename T>
@@ -63,13 +54,37 @@ namespace Tobot::Math {
         height = list[1];
     }
 
+    /// @brief Assigns the values of the dimension to the current dimension
+    /// @tparam T The type of the dimensions
+    /// @param dim The dimension to assign
+    /// @return The current dimension
+    template <typename T>
+        requires Arithmetic<T>
+    auto Dimension<T>::operator=(Dimension<T> const & dim) -> Dimension<T> & {
+        width = dim.width;
+        height = dim.height;
+        return *this;
+    }
+
+    /// @brief Assigns the values of the dimension to the current dimension
+    /// @tparam T The type of the dimensions
+    /// @param dim The dimension to assign
+    /// @return The current dimension
+    template <typename T>
+        requires Arithmetic<T>
+    auto Dimension<T>::operator=(Dimension<T> const && dim) -> Dimension<T> & {
+        width = dim.width;
+        height = dim.height;
+        return *this;
+    }
+
     /// @brief Compares two dimensions for equality
     /// @tparam T The type of the dimensions
     /// @param dim The dimension to compare to
     /// @return true If the dimensions are equal
     template <typename T>
         requires Arithmetic<T>
-    bool Dimension<T>::operator==(Dimension<T> const & dim) const {
+    [[nodiscard]] auto Dimension<T>::operator==(Dimension<T> const & dim) const -> bool {
         return width == dim.width && height == dim.height;
     }
 
@@ -79,7 +94,7 @@ namespace Tobot::Math {
     /// @return true If the dimensions are not equal
     template <typename T>
         requires Arithmetic<T>
-    bool Dimension<T>::operator!=(Dimension<T> const & dim) const {
+    [[nodiscard]] auto Dimension<T>::operator!=(Dimension<T> const & dim) const -> bool {
         return !(*this == dim);
     }
 } // namespace Tobot::Math

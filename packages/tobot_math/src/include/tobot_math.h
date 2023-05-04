@@ -4,7 +4,7 @@
 #include "../gradient2D.h"
 #include "../matrix.h"
 #include "../plane.h"
-#include "../point2D.h"
+#include "../point2d.h"
 #include "../shape/circle.h"
 #include "../shape/polygon.h"
 #include "../shape/rectangle.h"
