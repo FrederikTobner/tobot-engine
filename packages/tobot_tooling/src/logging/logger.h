@@ -10,20 +10,20 @@
 #include "tobot_io.h"
 
 /// @brief The logging namespace
-namespace Tobot::Tooling::Logging {
-#define LOG_TRACE(...)       (Tobot::Tooling::Logging::Logger::Trace(__VA_ARGS__))
-#define LOG_DEBUG(...)       (Tobot::Tooling::Logging::Logger::Debug(__VA_ARGS__))
-#define LOG_INFO(...)        (Tobot::Tooling::Logging::Logger::Info(__VA_ARGS__))
-#define LOG_WARN(...)        (Tobot::Tooling::Logging::Logger::Warn(__VA_ARGS__))
-#define LOG_ERROR(...)       (Tobot::Tooling::Logging::Logger::Error(__VA_ARGS__))
-#define LOG_CRITICAL(...)    (Tobot::Tooling::Logging::Logger::Critical(__VA_ARGS__))
+namespace Tobot::Tooling {
+#define LOG_TRACE(...)       (Tobot::Tooling::Logger::Trace(__VA_ARGS__))
+#define LOG_DEBUG(...)       (Tobot::Tooling::Logger::Debug(__VA_ARGS__))
+#define LOG_INFO(...)        (Tobot::Tooling::Logger::Info(__VA_ARGS__))
+#define LOG_WARN(...)        (Tobot::Tooling::Logger::Warn(__VA_ARGS__))
+#define LOG_ERROR(...)       (Tobot::Tooling::Logger::Error(__VA_ARGS__))
+#define LOG_CRITICAL(...)    (Tobot::Tooling::Logger::Critical(__VA_ARGS__))
 
-#define LOG_TRACE_AT(...)    (Tobot::Tooling::Logging::Logger::Trace(__LINE__, __FILE__, __VA_ARGS__))
-#define LOG_DEBUG_AT(...)    (Tobot::Tooling::Logging::Logger::Debug(__LINE__, __FILE__, __VA_ARGS__))
-#define LOG_INFO_AT(...)     (Tobot::Tooling::Logging::Logger::Info(__LINE__, __FILE__, __VA_ARGS__))
-#define LOG_WARN_AT(...)     (Tobot::Tooling::Logging::Logger::Warn(__LINE__, __FILE__, __VA_ARGS__))
-#define LOG_ERROR_AT(...)    (Tobot::Tooling::Logging::Logger::Error(__LINE__, __FILE__, __VA_ARGS__))
-#define LOG_CRITICAL_AT(...) (Tobot::Tooling::Logging::Logger::Critical(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_TRACE_AT(...)    (Tobot::Tooling::Logger::Trace(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_DEBUG_AT(...)    (Tobot::Tooling::Logger::Debug(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_INFO_AT(...)     (Tobot::Tooling::Logger::Info(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_WARN_AT(...)     (Tobot::Tooling::Logger::Warn(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_ERROR_AT(...)    (Tobot::Tooling::Logger::Error(__LINE__, __FILE__, __VA_ARGS__))
+#define LOG_CRITICAL_AT(...) (Tobot::Tooling::Logger::Critical(__LINE__, __FILE__, __VA_ARGS__))
 
     /// @brief The loglevel priorities that are avialable
     enum LogPriority {
@@ -484,4 +484,4 @@ namespace Tobot::Tooling::Logging {
                 }
             }
     };
-} // namespace Tobot::Tooling::Logging
+} // namespace Tobot::Tooling

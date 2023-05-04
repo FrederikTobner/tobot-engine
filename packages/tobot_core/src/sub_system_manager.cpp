@@ -12,7 +12,7 @@
 #include "tobot_tooling.h"
 
 using namespace Tobot::Core;
-using namespace Tobot::Tooling::Logging;
+using namespace Tobot::Tooling;
 
 typedef enum {
     SDL_CORE = BIT(0),

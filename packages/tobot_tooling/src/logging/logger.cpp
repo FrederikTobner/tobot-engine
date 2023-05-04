@@ -5,7 +5,7 @@
 
 #include "logger.h"
 
-using namespace Tobot::Tooling::Logging;
+using namespace Tobot::Tooling;
 
 Logger::Logger() {
 }

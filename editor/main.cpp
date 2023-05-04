@@ -26,7 +26,7 @@ using namespace Tobot::Core;
 auto main(int argc, char ** argv) -> int {
     // Seting up SDL using the Tobot core
     if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_CORE_INIT_TIMER | SDL_CORE_INIT_GAMECONTROLLER) != 0) {
-        printf("Error: %s\n", SDL_GetError());
+        std::cout << "Error: " << SDL_GetError() << "\n";
         return ExitCode::SOFTWARE.getCode();
     }
 
@@ -42,7 +42,7 @@ auto main(int argc, char ** argv) -> int {
         SDL_CreateWindow("Tobot-Editor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1800, 1000, window_flags);
     SDL_Surface * window_icon_scurface = SDL_LoadBMP(IMAGE_LOCATION);
     if (!window_icon_scurface) {
-        printf("Failed to load window icon %s from %s\n", SDL_GetError(), IMAGE_LOCATION);
+        std::cout << "Failed to load window icon " << SDL_GetError() << " from " << IMAGE_LOCATION << "\n";
         return Tobot::Core::ExitCode::SOFTWARE.getCode();
     }
     // Setting the icon of the window
@@ -64,7 +64,6 @@ auto main(int argc, char ** argv) -> int {
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // Enable Docking
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // Enable Multi-Viewport / Platform Windows
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -100,6 +99,7 @@ auto main(int argc, char ** argv) -> int {
     bool show_another_window = false;
     bool show_tobot_help = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    ImVec2 scenePosition, sceneWindowSize;
 
     // Main loop
     bool done = false;
@@ -151,6 +151,15 @@ auto main(int argc, char ** argv) -> int {
             ImGui::End();
         }
 
+        // 3. Our Game Window
+        {
+            ImGui::Begin("Game Window");
+            // Draw a rectangle just for testing
+            scenePosition = ImGui::GetWindowPos();
+            sceneWindowSize = ImGui::GetWindowSize();
+            ImGui::End();
+        }
+
         // 3. Show another simple window.
         if (show_another_window) {
             ImGui::Begin("Another Window",
@@ -176,8 +185,24 @@ auto main(int argc, char ** argv) -> int {
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
         SDL_SetRenderDrawColor(renderer, (uint8_t)(clear_color.x * 255), (uint8_t)(clear_color.y * 255),
                                (uint8_t)(clear_color.z * 255), (uint8_t)(clear_color.w * 255));
+
         SDL_RenderClear(renderer);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+
+        // Draw a rectangle just for testing
+        // SDL_Rect rectToDraw = {100, 100, 100, 100};
+        // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        // SDL_RenderFillRect(renderer, &rectToDraw);
+
+        // Here we should draw the scene
+        SDL_Surface * window_icon_scurface = SDL_LoadBMP(IMAGE_LOCATION);
+        SDL_Texture * texture1 = SDL_CreateTextureFromSurface(renderer, window_icon_scurface);
+        SDL_FreeSurface(window_icon_scurface);
+        // To place the texture in the center of the screen we need to know the position of the size of the scene window
+        // TODO: Fix the rendering on top of the top bar
+        SDL_Rect rect = {(int)scenePosition.x, (int)scenePosition.y, (int)sceneWindowSize.x, (int)sceneWindowSize.y};
+        SDL_RenderCopy(renderer, texture1, NULL, &rect);
+
         SDL_RenderPresent(renderer);
     }
 
