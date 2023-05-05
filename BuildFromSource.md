@@ -34,6 +34,24 @@ pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-uc
 ```
 
 If you are using MSVC there is no need to install any dependencies. They are included in the repository as submodules and will be detected properly.
+=======
+If you are not using msvc you need to install at least the freetype library.
+
+If you are using mysys2 you can install the dependencies with pacman.
+
+```mysis2-mingw
+
+pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-ucrt-x86_64-libxmp mingw-w64-ucrt-x86_64-fluidsynth mingw-w64-ucrt-x86_64-wavpac mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
+
+
+```
+
+```mysis2-ucrt
+
+pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-ucrt-x86_64-libxmp mingw-w64-ucrt-x86_64-fluidsynth mingw-w64-ucrt-x86_64-wavpac mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
+
+
+```
 
 ### Under linux
 
@@ -58,3 +76,5 @@ sudo apt-get install file fonts-dejavu-core libfreetype-dev libharfbuzz-dev libf
 ```
 
 If you run into problems regarding an undefined indentifier 'choke' during compilation you need to install gFortran and Octave. We haven't figured out why yet.
+=======
+* gFortran / Octave (If you run into problems regarding an undefined indentifier 'choke')
