@@ -125,22 +125,6 @@ auto main(int argc, char ** argv) -> int {
         Tobot::Editor::dockSpaceMain(show_demo_window, show_tobot_help, show_another_window, io, scenePosition,
                                      sceneWindowSize);
 
-        // Rendering the imgui windows
-        ImGui::Render();
-        SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-
-        ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
-
-        // Rendering the scene on top of the scene window
-        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize, sceneTexture);
-        { Tobot::Editor::toolBarMain(); }
-
-        // 2. DockSpace
-        {
-            Tobot::Editor::dockSpaceMain(show_demo_window, show_tobot_help, show_another_window, clear_color, io,
-                                         scenePosition, sceneWindowSize);
-        }
-
         // Rendering
         ImGui::Render();
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
@@ -150,7 +134,7 @@ auto main(int argc, char ** argv) -> int {
         SDL_RenderClear(renderer);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 
-        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize);
+        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize, sceneTexture);
 
         SDL_RenderPresent(renderer);
     }
