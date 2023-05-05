@@ -115,7 +115,7 @@ TEST(Lexer, CanHandleLineBreaks) {
  */
 TEST(Lexer, CanHandleMultipleLineBreaks) {
     Lexer<Token_Type::Enum> lexer(rules);
-    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("1\n\n2");
+    std::vector<Token<Token_Type::Enum>> tokens = lexer.tokenize("1\n2\n3");
     ASSERT_EQ(tokens.size(), 2);
     ASSERT_EQ(tokens[0].getType(), Token_Type::NUMBER);
     ASSERT_EQ(tokens[0].getLexeme(), "1");
@@ -123,6 +123,9 @@ TEST(Lexer, CanHandleMultipleLineBreaks) {
     ASSERT_EQ(tokens[0].getColumn(), 1);
     ASSERT_EQ(tokens[1].getType(), Token_Type::NUMBER);
     ASSERT_EQ(tokens[1].getLexeme(), "2");
-    ASSERT_EQ(tokens[1].getLine(), 3);
+    ASSERT_EQ(tokens[1].getLine(), 2);
+    ASSERT_EQ(tokens[1].getColumn(), 1);
+    ASSERT_EQ(tokens[1].getLexeme(), "3");
+    ASSERT_EQ(tokens[1].getLine(), 2);
     ASSERT_EQ(tokens[1].getColumn(), 1);
 }

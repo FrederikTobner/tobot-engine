@@ -12,6 +12,7 @@
 // Internal dependencies
 #include "dockspace.h"
 #include "event_handler.h"
+#include "icons_material_design.h"
 #include "menu_bar.h"
 #include "scene_renderer.h"
 #include "toolbar.h"
@@ -56,6 +57,10 @@ auto main(int argc, char ** argv) -> int {
         SDL_Log("Error creating SDL_Renderer!");
         return Tobot::Core::ExitCode::OK.getCode();
     }
+    // Loading the scene texture - This should be the whole scene later
+    SDL_Surface * sceneSurface = SDL_LoadBMP(IMAGE_LOCATION);
+    SDL_Texture * sceneTexture = SDL_CreateTextureFromSurface(renderer, sceneSurface);
+    SDL_FreeSurface(sceneSurface);
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -72,13 +77,21 @@ auto main(int argc, char ** argv) -> int {
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
     ImGui_ImplSDLRenderer_Init(renderer);
-    io.Fonts->AddFontFromFileTTF(FONT_LOCATION, 16.0f);
+
+    // Adding the roboto font as the default font
+    io.Fonts->AddFontFromFileTTF(ROBOTO_FONT_LOCATION, 16.0f);
+
+    // Adding the material icons font and merging it with the current font (Roboto)
+    ImFontConfig config;
+    config.MergeMode = true;
+    config.GlyphMinAdvanceX = 13.0f; // Use if you want to make the icon monospaced
+    const ImWchar icon_ranges[] = {(ImWchar)ICON_MIN_MD, (ImWchar)ICON_MAX_MD, (ImWchar)0};
+    io.Fonts->AddFontFromFileTTF(MATERIAL_ICONS_FONT_LOCATION, 20.0f, &config, icon_ranges);
 
     // Our state
     bool show_demo_window = true;
     bool show_another_window = false;
     bool show_tobot_help = false;
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     ImVec2 scenePosition, sceneWindowSize;
 
     // Main loop
@@ -102,24 +115,20 @@ auto main(int argc, char ** argv) -> int {
         Tobot::Editor::menuBarMain(done, show_tobot_help);
 
         // 1. Toolbar
-        { Tobot::Editor::toolBarMain(); }
+        Tobot::Editor::toolBarMain();
 
         // 2. DockSpace
-        {
-            Tobot::Editor::dockSpaceMain(show_demo_window, show_tobot_help, show_another_window, clear_color, io,
-                                         scenePosition, sceneWindowSize);
-        }
+        Tobot::Editor::dockSpaceMain(show_demo_window, show_tobot_help, show_another_window, io, scenePosition,
+                                     sceneWindowSize);
 
-        // Rendering
+        // Rendering the imgui windows
         ImGui::Render();
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-        SDL_SetRenderDrawColor(renderer, (uint8_t)(clear_color.x * 255), (uint8_t)(clear_color.y * 255),
-                               (uint8_t)(clear_color.z * 255), (uint8_t)(clear_color.w * 255));
 
-        SDL_RenderClear(renderer);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 
-        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize);
+        // Rendering the scene on top of the scene window
+        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize, sceneTexture);
 
         SDL_RenderPresent(renderer);
     }
@@ -128,7 +137,9 @@ auto main(int argc, char ** argv) -> int {
     ImGui_ImplSDLRenderer_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
-
+    // Destroying the scene texture - we should probably create a ressource pool later so we don't have to do this
+    // manually for every texture
+    SDL_DestroyTexture(sceneTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

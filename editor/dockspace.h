@@ -13,7 +13,7 @@ namespace Tobot::Editor {
     /// @param scenePosition The position of the scene
     /// @param sceneWindowSize The size of the scene window
     /// @return void
-    auto dockSpaceMain(bool & show_demo_window, bool & show_tobot_help, bool & show_another_window,
-                       ImVec4 & clear_color, ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize) -> void;
+    auto dockSpaceMain(bool & show_demo_window, bool & show_tobot_help, bool & show_another_window, ImGuiIO & io,
+                       ImVec2 & scenePosition, ImVec2 & sceneWindowSize) -> void;
 
 } // namespace Tobot::Editor

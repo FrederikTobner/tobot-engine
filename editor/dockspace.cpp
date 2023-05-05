@@ -1,11 +1,10 @@
 #include "dockspace.h"
 
 auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window,
-                                  ImVec4 & clear_color, ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize)
-    -> void {
+                                  ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize) -> void {
     ImGuiViewport * viewport = ImGui::GetMainViewport();
-    ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 50));
-    ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - 50));
+    ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 30));
+    ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - 30));
     ImGui::SetNextWindowViewport(viewport->ID);
     ImGuiWindowFlags window_flags = 0 | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking |
                                     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
@@ -38,8 +37,7 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
         ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
         ImGui::Checkbox("Another Window", &show_another_window);
 
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);             // Edit 1 float using a slider from 0.0f to 1.0f
-        ImGui::ColorEdit3("clear color", (float *)&clear_color); // Edit 3 floats representing a color
+        ImGui::SliderFloat("float", &f, 0.0f, 1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
 
         if (ImGui::Button("Button")) { // Buttons return true when clicked (most widgets return true when
                                        // edited/activated)

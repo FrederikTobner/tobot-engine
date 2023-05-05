@@ -8,6 +8,7 @@ toolbar.cpp
 )
 
 set(TOBOT_EDITOR_HEADER_FILES
+icons_material_design.h
 dockspace.h
 event_handler.h
 menu_bar.h
@@ -30,9 +31,10 @@ FILE(COPY assets/icon.bmp DESTINATION "${CMAKE_BINARY_DIR}/editor/assets")
 
 # Copies font into the build folder
 FILE(COPY fonts/Roboto-Medium.ttf DESTINATION "${CMAKE_BINARY_DIR}/editor/fonts")
+FILE(COPY fonts/MaterialIcons-Regular.ttf DESTINATION "${CMAKE_BINARY_DIR}/editor/fonts")
 
 # Works only if we use the absolute path for some reason on the docking branch of imgui
-add_compile_definitions(IMAGE_LOCATION="${CMAKE_BINARY_DIR}/editor/assets/icon.bmp" FONT_LOCATION="${CMAKE_BINARY_DIR}/editor/fonts/Roboto-Medium.ttf")
+add_compile_definitions(IMAGE_LOCATION="${CMAKE_BINARY_DIR}/editor/assets/icon.bmp" ROBOTO_FONT_LOCATION="${CMAKE_BINARY_DIR}/editor/fonts/Roboto-Medium.ttf" MATERIAL_ICONS_FONT_LOCATION="${CMAKE_BINARY_DIR}/editor/fonts/MaterialIcons-Regular.ttf")
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
     # Install destinations
