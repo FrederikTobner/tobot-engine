@@ -1,0 +1,21 @@
+/** 
+* \mainpage Main Page
+* \section intro_sec Introduction
+* Welcome to the technical documentation of the tobot-engine. <br>
+* \section building_sec Building
+* To build the engine a C++-Compiler, that supports the C++20 standard, and CMake (Version >= 3.16) are required. <br>
+* Additionaly the engine has the following dependecies <br>
+* * [SDL2](https://github.com/libsdl-org/SDL/tree/SDL2)
+* * [SDL_Image](https://github.com/libsdl-org/SDL_image) 
+* * [SDL_mixer](https://github.com/libsdl-org/SDL_mixer)
+* * [SDL_net](https://github.com/libsdl-org/SDL_net)
+* * [SDL_ttf](https://github.com/libsdl-org/SDL_ttf)
+* * [imgui](https://github.com/ocornut/imgui)
+* ```
+* \section license_sec License
+* Copyright &copy; 2023 by Julian Otto and <a href="mailto:f.tobner@gmail.com">Frederik Tobner</a>. <br>
+* Permission to use, copy, modify, and distribute this software and its documentation under the terms of the GNU General Public License is hereby granted. <br>
+* No representations are made about the suitability of this software for any purpose. <br>
+* It is provided "as is" without express or implied warranty. <br>
+* See the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a> for more details.
+*/

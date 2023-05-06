@@ -1,17 +1,40 @@
 # Building from source
 
-There is a build script provided written in lua. It is located in the scripts directory. The script does not download the dependencies for you. But there iis an additional script that does that for you. It is located in the scripts directory as well. The script is called `install.lua`. It is recommended to run the install script first and then the build script if you are using linux. If you are using windows you can run the build script directly, if you have setup cmake, ninja and you have setup msvc. MinGW is not supported at the moment.
+There is a build script provided written in lua. It is located in the scripts directory. The script is called `install.lua`.
+
+Usage:
+
+```bash
+lua scripts/build.lua <BuildType> <Target> <Generator>
+```
+
+The default values are `Release`, `all` and `Ninja` respectively. Under Windows we use MSVC by default. We have not fully tested the build with other compilers, like clang and MSVC under windows yet.
+
+The script does not download the dependencies for you. But there iis an additional script that does that for you. It is located in the scripts directory as well. The script is called `install.lua`.
+
+Usage:
+
+```bash
+lua scripts/install.lua
+```
 
 ## Build Requirements
 
 ### General
 
-* Ninja
 * CMake
 * And a C++ compiler, obviously - that supports the C++20-standard.
 
 ### Windows
 
+If you are using mysys2 you can install the dependencies with pacman.
+
+```mysis2-ucrt
+pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-ucrt-x86_64-libxmp mingw-w64-ucrt-x86_64-fluidsynth mingw-w64-ucrt-x86_64-wavpac mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
+```
+
+If you are using MSVC there is no need to install any dependencies. They are included in the repository as submodules and will be detected properly.
+=======
 If you are not using msvc you need to install at least the freetype library.
 
 If you are using mysys2 you can install the dependencies with pacman.
@@ -48,4 +71,10 @@ Can be installed with apt. We haven't determined the names of these dependencies
 * libwavpack-dev
 * pkg-config
 
+```bash
+sudo apt-get install file fonts-dejavu-core libfreetype-dev libharfbuzz-dev libflac-dev libfluidsynth-dev libgme-dev libmpg123-dev libopusfile-dev libvorbis-dev libxmp-dev libwavpack-dev pkg-config
+```
+
+If you run into problems regarding an undefined indentifier 'choke' during compilation you need to install gFortran and Octave. We haven't figured out why yet.
+=======
 * gFortran / Octave (If you run into problems regarding an undefined indentifier 'choke')

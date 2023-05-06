@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['visitchildrenfirst_0',['visitChildrenFirst',['../class_tobot_1_1_data_structures_1_1_tree_1_1_tree.html#ad0c4562e6fdaa2d3da5c61d9690ee774',1,'Tobot::DataStructures::Tree::Tree::visitChildrenFirst(std::function&lt; void(TreeNode&lt; T &gt; *)&gt; callback)'],['../class_tobot_1_1_data_structures_1_1_tree_1_1_tree.html#ad001318146ed07ce1f086dafb03ec069',1,'Tobot::DataStructures::Tree::Tree::visitChildrenFirst(TreeNode&lt; T &gt; *node, std::function&lt; void(TreeNode&lt; T &gt; *)&gt; callback)']]],
-  ['visitparentsfirst_1',['visitParentsFirst',['../class_tobot_1_1_data_structures_1_1_tree_1_1_tree.html#a1197f0f860678d32644b5df494f4ad20',1,'Tobot::DataStructures::Tree::Tree::visitParentsFirst(std::function&lt; void(TreeNode&lt; T &gt; *)&gt; callback)'],['../class_tobot_1_1_data_structures_1_1_tree_1_1_tree.html#a4c50c7f039424192a3240dea940e425d',1,'Tobot::DataStructures::Tree::Tree::visitParentsFirst(TreeNode&lt; T &gt; *node, std::function&lt; void(TreeNode&lt; T &gt; *)&gt; callback)']]]
-];

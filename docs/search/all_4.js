@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['d_79',['d',['../classTobot_1_1Math_1_1Plane.html#a6b27b78b9d187dd926ec53a122ad2772',1,'Tobot::Math::Plane']]],
+  ['data_80',['data',['../classTobot_1_1DataStructures_1_1Tree_1_1TreeNode.html#aa3ff051a47d9e18487e7b819852521c5',1,'Tobot::DataStructures::Tree::TreeNode']]],
+  ['dataerr_81',['DATAERR',['../classTobot_1_1Core_1_1ExitCode.html#addf8949cfbd76d98cb6906fb73d16fe2',1,'Tobot::Core::ExitCode']]],
+  ['debug_82',['Debug',['../classTobot_1_1Tooling_1_1Logger.html#a49f426fcec098880ac0ceccc169cbb45',1,'Tobot::Tooling::Logger::Debug(char const *format, Args... args)'],['../classTobot_1_1Tooling_1_1Logger.html#a77d87c9065927da3c7fded33979d7b32',1,'Tobot::Tooling::Logger::Debug(std::string format, Args... args)'],['../classTobot_1_1Tooling_1_1Logger.html#a2d6376cbebff5b8fb5588fb6de302404',1,'Tobot::Tooling::Logger::Debug(int line, char const *source_file, char const *format, Args... args)'],['../classTobot_1_1Tooling_1_1Logger.html#a6a9fecece151a633e7a5a41f8d376201',1,'Tobot::Tooling::Logger::Debug(int line, char const *source_file, std::string format, Args... args)']]],
+  ['debug_5fpriority_83',['DEBUG_PRIORITY',['../namespaceTobot_1_1Tooling.html#aa8b1c6568df4ee385e4d1d12f7153f02a3057f818a9b18553ed2a246739c53fc6',1,'Tobot::Tooling']]],
+  ['deletefixup_84',['deleteFixup',['../classTobot_1_1DataStructures_1_1Tree_1_1RedBlackTree.html#ae4de50b2619fea01f54d017eabe80729',1,'Tobot::DataStructures::Tree::RedBlackTree']]],
+  ['deletenode_85',['deleteNode',['../classTobot_1_1DataStructures_1_1Tree_1_1AVLTree.html#a1b0e7807962767a04c3eb501eda28c32',1,'Tobot::DataStructures::Tree::AVLTree']]],
+  ['description_86',['description',['../classTobot_1_1Core_1_1ExitCode.html#a68344fa88cf4e86b5079fd69a5c22d57',1,'Tobot::Core::ExitCode']]],
+  ['destroy_87',['destroy',['../classTobot_1_1Core_1_1Scene.html#a8e30f1374fddd8e115fd92d4657f511a',1,'Tobot::Core::Scene']]],
+  ['destroyall_88',['destroyAll',['../classTobot_1_1Core_1_1Scene.html#a66136f8719981635d530f3920cede1b9',1,'Tobot::Core::Scene']]],
+  ['determinant_89',['determinant',['../classTobot_1_1Math_1_1Matrix.html#aad537476bf97daa170f94cbbcc914176',1,'Tobot::Math::Matrix']]],
+  ['dimension_90',['Dimension',['../classTobot_1_1Math_1_1Dimension.html',1,'Dimension&lt; T &gt;'],['../classTobot_1_1Math_1_1Dimension.html#a41c9ff081434372a62d65e17910b3be7',1,'Tobot::Math::Dimension::Dimension()'],['../classTobot_1_1Math_1_1Dimension.html#a02563d8eb2422408b5b05d58c1dde45a',1,'Tobot::Math::Dimension::Dimension(T width, T height)'],['../classTobot_1_1Math_1_1Dimension.html#aba7f7bc5edbcd6f50f5e4cd47846dfe1',1,'Tobot::Math::Dimension::Dimension(Dimension&lt; T &gt; const &amp;dim)'],['../classTobot_1_1Math_1_1Dimension.html#ac3e5bdd048197cc86a8c401a7de94dcb',1,'Tobot::Math::Dimension::Dimension(std::initializer_list&lt; T &gt; list)']]],
+  ['dimension_2eh_91',['dimension.h',['../dimension_8h.html',1,'']]],
+  ['dimension_3c_20int_20_3e_92',['Dimension&lt; int &gt;',['../classTobot_1_1Math_1_1Dimension.html',1,'Tobot::Math']]],
+  ['directory_5fguard_2ecpp_93',['directory_guard.cpp',['../directory__guard_8cpp.html',1,'']]],
+  ['directory_5fguard_2eh_94',['directory_guard.h',['../directory__guard_8h.html',1,'']]],
+  ['dispose_95',['dispose',['../classTobot_1_1Core_1_1GameEntity.html#a7b655eff33533a7a5eeb852ec8d1e13a',1,'Tobot::Core::GameEntity::dispose()'],['../classTobot_1_1Core_1_1RenderObject.html#a5c8ed1c01d1958552c7279c331aecdaa',1,'Tobot::Core::RenderObject::dispose()']]],
+  ['distance_96',['distance',['../classTobot_1_1Math_1_1Plane.html#a85dee63881b8b6ce62ba889dd7dad7b2',1,'Tobot::Math::Plane::distance()'],['../classTobot_1_1Math_1_1Point2D.html#ac1aa76d871bc521b38a4c1a546e7feca',1,'Tobot::Math::Point2D::distance(Point2D&lt; T &gt; const &amp;) const -&gt; T'],['../classTobot_1_1Math_1_1Point2D.html#ada330ebfa54c16bde2f265b03801a022',1,'Tobot::Math::Point2D::distance(T const &amp;, T const &amp;) const -&gt; T']]],
+  ['distancesquared_97',['distanceSquared',['../classTobot_1_1Math_1_1Point2D.html#a4a20dd87577935ac5cfc9d72d0e31f4a',1,'Tobot::Math::Point2D::distanceSquared(Point2D&lt; T &gt; const &amp;) const -&gt; T'],['../classTobot_1_1Math_1_1Point2D.html#a5a0e0c35591694fdeab59d4182fc8078',1,'Tobot::Math::Point2D::distanceSquared(T const &amp;, T const &amp;) const -&gt; T']]],
+  ['dockspace_2ecpp_98',['dockspace.cpp',['../dockspace_8cpp.html',1,'']]],
+  ['dockspace_2eh_99',['dockspace.h',['../dockspace_8h.html',1,'']]],
+  ['dockspacemain_100',['dockSpaceMain',['../namespaceTobot_1_1Editor.html#a1fe47f1114dc6bcaa6e4cea7d530b20d',1,'Tobot::Editor']]],
+  ['dot_101',['dot',['../classTobot_1_1Math_1_1Vector2D.html#aed43fb914169d20a155e8bf63bc77698',1,'Tobot::Math::Vector2D::dot()'],['../classTobot_1_1Math_1_1Vector3D.html#a742c980fedaa5ede0a00095ee27f459c',1,'Tobot::Math::Vector3D::dot()'],['../classTobot_1_1Math_1_1Vector4D.html#a04dca520bb5be10d407bc34e824c73de',1,'Tobot::Math::Vector4D::dot()']]]
+];
