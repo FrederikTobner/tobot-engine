@@ -10,7 +10,7 @@ lua scripts/build.lua <BuildType> <Target> <Generator>
 
 The default values are `Release`, `all` and `Ninja` respectively. Under Windows we use MSVC by default. We have not fully tested the build with other compilers, like clang and MSVC under windows yet.
 
-The script does not download the dependencies for you. But there iis an additional script that does that for you. It is located in the scripts directory as well. The script is called `install.lua`.
+The script does not download the dependencies for you. But there is an additional script that does that for you. It is located in the scripts directory as well. The script is called `install.lua`.
 
 Usage:
 
