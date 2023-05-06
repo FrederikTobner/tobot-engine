@@ -1,3 +1,6 @@
+/// @file scene_renderer.h
+/// @brief Contains declarations regarding the scene renderer for the editor
+
 #pragma once
 
 #include "SDL.h"

@@ -40,4 +40,4 @@ The engine has the following external dependencies
 
 ## Building from source
 
-If you want to build tobot from source you need setup the following dependencies. At the moment this is the only way to try tobot, because there is no official release yet. To build it follow these [instructions](BuildFromSource.md).
+If you want to try tobot you need you need to build it from source. At the moment this is the only way to try tobot, because there is no official release yet. To build it follow these [instructions](BuildFromSource.md).

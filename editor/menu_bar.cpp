@@ -1,4 +1,4 @@
-/// @file menu_bar.h
+/// @file menu_bar.cpp
 /// @brief Contains definitions regarding the menu bar for the editor
 
 #include "menu_bar.h"

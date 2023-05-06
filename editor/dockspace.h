@@ -1,3 +1,6 @@
+/// @file dockspace.h
+/// @brief Contains declarations regarding the dockspace of the editor
+
 #pragma once
 
 #include "imgui.h"

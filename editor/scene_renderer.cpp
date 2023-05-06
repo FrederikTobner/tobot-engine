@@ -1,3 +1,6 @@
+/// @file scene_renderer.cpp
+/// @brief Contains definitions regarding the scene renderer for the editor
+
 #include "scene_renderer.h"
 
 auto Tobot::Editor::sceneRendererMain(SDL_Renderer * renderer, ImVec2 scenePosition, ImVec2 sceneWindowSize,

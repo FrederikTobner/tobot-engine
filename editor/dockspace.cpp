@@ -1,3 +1,6 @@
+/// @file dockspace.cpp
+/// @brief Contains definitions regarding the dockspace of the editor
+
 #include "dockspace.h"
 
 auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window,

@@ -1,3 +1,6 @@
+/// @file event_handler.h
+/// @brief Contains declarations regarding the event handler of the editor
+
 #pragma once
 
 #include "SDL.h"

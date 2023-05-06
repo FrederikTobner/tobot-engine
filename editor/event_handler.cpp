@@ -1,3 +1,6 @@
+/// @file event_handler.cpp
+/// @brief Contains definitions regarding the event handler of the editor
+
 #include "event_handler.h"
 
 #include "imgui_impl_sdl2.h"
