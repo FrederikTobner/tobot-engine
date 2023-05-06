@@ -1,15 +1,15 @@
 set(LANG_HEADER_FILES
-"token.h"
-"lexer/tokenization_rule.h"
-"lexer/lexer.h"
-"include/tobot_lang.h"
-"parser/context/parsing_context.h"
-"parser/context/complex_parsing_context.h"
-"parser/context/simple_parsing_context.h"
-"parser/rule/production_rule.h"
-"parser/rule/quantified_production_rule.h"
-"parser/rule/production_rule_sequence.h"
-"parser/rule/terminal_production_rule.h"
+"token.hpp"
+"lexer/tokenization_rule.hpp"
+"lexer/lexer.hpp"
+"include/tobot_lang.hpp"
+"parser/context/parsing_context.hpp"
+"parser/context/complex_parsing_context.hpp"
+"parser/context/simple_parsing_context.hpp"
+"parser/rule/production_rule.hpp"
+"parser/rule/quantified_production_rule.hpp"
+"parser/rule/production_rule_sequence.hpp"
+"parser/rule/terminal_production_rule.hpp"
 )
 
 add_library(tobot-lang INTERFACE)
@@ -25,7 +25,7 @@ target_include_directories(tobot-lang INTERFACE "${SOURCE_PATH_DATA_STRUCTURES}/
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)
     # VisualStudio only accepts header files that also have a source file    
-    target_precompile_headers(tobot-lang INTERFACE pre_compiled_header.h pre_compiled_header.cpp) 
+    target_precompile_headers(tobot-lang INTERFACE pre_compiled_header.hpp pre_compiled_header.cpp) 
 else()
-    target_precompile_headers(tobot-lang INTERFACE pre_compiled_header.h)
+    target_precompile_headers(tobot-lang INTERFACE pre_compiled_header.hpp)
 endif()

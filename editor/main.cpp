@@ -9,17 +9,16 @@
 #include <stdio.h>
 
 // Tobot core dependencies
-#include "exitcode.h"
-#include "sub_system_manager.h"
+#include "exitcode.hpp"
+#include "sub_system_manager.hpp"
 
 // Internal dependencies
-#include "dockspace.h"
-#include "event_handler.h"
-#include "icons_material_design.h"
-
-#include "menu_bar.h"
-#include "scene_renderer.h"
-#include "toolbar.h"
+#include "dockspace.hpp"
+#include "event_handler.hpp"
+#include "icons_material_design.hpp"
+#include "menu_bar.hpp"
+#include "scene_renderer.hpp"
+#include "toolbar.hpp"
 
 #if !SDL_VERSION_ATLEAST(2, 0, 17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function

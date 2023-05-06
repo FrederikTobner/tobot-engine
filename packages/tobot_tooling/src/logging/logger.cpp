@@ -3,7 +3,7 @@
  * @brief Definitions regarding the logger
  */
 
-#include "logger.h"
+#include "logger.hpp"
 
 using namespace Tobot::Tooling;
 

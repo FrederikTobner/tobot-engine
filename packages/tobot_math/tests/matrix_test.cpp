@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "matrix.h"
+#include "matrix.hpp"
 
 using namespace Tobot::Math;
 

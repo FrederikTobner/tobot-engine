@@ -1,11 +1,12 @@
-#include "tobot_application.h"
+#include "tobot_application.hpp"
 
 // Tobot dependencies
-#include "exitcode.h"
-#include "project_config.h"
-#include "scene_manager.h"
-#include "sub_system_manager.h"
-#include "tobot_tooling.h"
+#include "exitcode.hpp"
+#include "project_config.hpp"
+#include "scene_manager.hpp"
+#include "sub_system_manager.hpp"
+
+#include "tobot_tooling.hpp"
 
 // SDL dependencies
 #include "SDL.h"

@@ -1,5 +1,8 @@
-#include "asset_manager.h"
-#include "tobot_tooling.h"
+/// @file asset_manager.cpp
+/// @brief Contains definitions regarding the asset manager of the engine
+
+#include "asset_manager.hpp"
+#include "tobot_tooling.hpp"
 
 #include "SDL_image.h"
 

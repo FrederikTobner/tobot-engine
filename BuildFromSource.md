@@ -8,7 +8,7 @@ Usage:
 lua scripts/build.lua <BuildType> <Target> <Generator>
 ```
 
-The default values are `Release`, `all` and `Ninja` respectively. Under Windows we use MSVC by default. We have not fully tested the build with other compilers, like clang and MSVC under windows yet.
+The default values are `Release`, `all` and `Ninja` respectively. Under Windows we use MSVC by default. We have not fully tested the build with other compilers, like clang and GCC under windows yet.
 
 The script does not download the dependencies for you. But there is an additional script that does that for you. It is located in the scripts directory as well. The script is called `install_dependencies.lua`.
 
@@ -34,14 +34,6 @@ pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-uc
 ```
 
 If you are using MSVC there is no need to install any dependencies. They are included in the repository as submodules and will be detected properly.
-
-If you are using mysys2 you can install the dependencies with pacman.
-
-```mysis2-ucrt
-
-pacman -S mingw-w64-ucrt-x86_64-opusfile mingw-w64-ucrt-x86_64-flac mingw-w64-ucrt-x86_64-libxmp mingw-w64-ucrt-x86_64-fluidsynth mingw-w64-ucrt-x86_64-wavpac mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
-
-```
 
 ### Under linux
 

@@ -3,11 +3,12 @@
  * @brief File containing definitions regarding a TestRunner.
  */
 
-#include "simple_test_runner.h"
+#include "simple_test_runner.hpp"
 
-#include "../test_report.h"
+#include "../test_report.hpp"
 
 #include <iostream>
+
 #include <stdio.h>
 
 using namespace Tobot::Tooling::Test;

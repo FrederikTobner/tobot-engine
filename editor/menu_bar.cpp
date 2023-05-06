@@ -1,7 +1,7 @@
 /// @file menu_bar.cpp
 /// @brief Contains definitions regarding the menu bar for the editor
 
-#include "menu_bar.h"
+#include "menu_bar.hpp"
 
 #include "imgui.h"
 

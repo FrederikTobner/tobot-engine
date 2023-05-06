@@ -1,0 +1,15 @@
+#pragma once
+
+#include "../dimension.hpp"
+#include "../gradient2D.hpp"
+#include "../matrix.hpp"
+#include "../plane.hpp"
+#include "../point2d.hpp"
+#include "../shape/circle.hpp"
+#include "../shape/polygon.hpp"
+#include "../shape/rectangle.hpp"
+#include "../shape/triangle.hpp"
+#include "../vector/vector.hpp"
+#include "../vector/vector2d.hpp"
+#include "../vector/vector3d.hpp"
+#include "../vector/vector4d.hpp"

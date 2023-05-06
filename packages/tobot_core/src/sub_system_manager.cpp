@@ -3,13 +3,14 @@
  * @brief Contains the definitions of the functionality that initialize and quit the sub systems of the engine.
  */
 
-#include "sub_system_manager.h"
+#include "sub_system_manager.hpp"
 
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include "SDL_ttf.h"
-#include "tobot_tooling.h"
+
+#include "tobot_tooling.hpp"
 
 using namespace Tobot::Core;
 using namespace Tobot::Tooling;

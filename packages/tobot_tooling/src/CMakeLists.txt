@@ -3,9 +3,9 @@ set(TOBOT_TOOLING_SOURCE_FILES
 )
 
 set(TOBOT_TOOLING_HEADER_FILES
-"logging/logger.h"
-"debug/tobot_asserts.h"
-"include/tobot_tooling.h"
+"logging/logger.hpp"
+"debug/tobot_asserts.hpp"
+"include/tobot_tooling.hpp"
 )
 
 add_library(tobot-tooling STATIC ${TOBOT_TOOLING_SOURCE_FILES} ${TOBOT_TOOLING_HEADER_FILES})
@@ -16,7 +16,7 @@ target_include_directories(tobot-tooling PUBLIC "${SOURCE_PATH_TOOLING}" "${SOUR
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)
     # VisualStudio only accepts header files that also have a source file    
-    target_precompile_headers(tobot-tooling PUBLIC pre_compiled_header.h pre_compiled_header.cpp) 
+    target_precompile_headers(tobot-tooling PUBLIC pre_compiled_header.hpp pre_compiled_header.cpp) 
 else()
-    target_precompile_headers(tobot-tooling PUBLIC pre_compiled_header.h)
+    target_precompile_headers(tobot-tooling PUBLIC pre_compiled_header.hpp)
 endif()

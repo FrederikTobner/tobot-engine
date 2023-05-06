@@ -1,9 +1,9 @@
 /// @file toolbar.cpp
 /// @brief Contains definitions regarding the toolbar for the editor
 
-#include "toolbar.h"
+#include "toolbar.hpp"
 
-#include "icons_material_design.h"
+#include "icons_material_design.hpp"
 
 #include "imgui.h"
 

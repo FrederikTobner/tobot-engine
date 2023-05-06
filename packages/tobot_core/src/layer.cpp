@@ -1,6 +1,6 @@
-#include "layer.h"
+#include "layer.hpp"
 
 using namespace Tobot::Core;
 
-[[nodiscard]] Layer::Layer(std::string id, std::size_t order) : id(id), order(order) {
+Layer::Layer(std::string id, std::size_t order) : id(id), order(order) {
 }

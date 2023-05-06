@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "vector/vector4d.h"
+#include "vector/vector4d.hpp"
 
 using namespace Tobot::Math;
 

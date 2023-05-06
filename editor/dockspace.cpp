@@ -1,7 +1,7 @@
 /// @file dockspace.cpp
 /// @brief Contains definitions regarding the dockspace of the editor
 
-#include "dockspace.h"
+#include "dockspace.hpp"
 
 auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window,
                                   ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize) -> void {
@@ -9,7 +9,7 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
     ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 30));
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - 30));
     ImGui::SetNextWindowViewport(viewport->ID);
-    ImGuiWindowFlags window_flags = 0 | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking |
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking |
                                     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
                                     ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
                                     ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
@@ -29,42 +29,38 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
         ImGui::ShowDemoWindow(&show_demo_window);
     }
 
-    // Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-    {
-        static float f = 0.0f;
-        static int counter = 0;
-        // Create a window called "Hello, world!" and append into it.
-        ImGui::Begin("Hello, world!");
+    // The hello world window - example code from imgui (just for testing the layout)
+    static float f = 0.0f;
+    static int counter = 0;
+    // Create a window called "Hello, world!" and append into it.
+    ImGui::Begin("Hello, world!");
 
-        ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
-        ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-        ImGui::Checkbox("Another Window", &show_another_window);
+    ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
+    ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
+    ImGui::Checkbox("Another Window", &show_another_window);
 
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
+    ImGui::SliderFloat("float", &f, 0.0f, 1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
 
-        ImGui::SliderFloat("float", &f, 0.0f,
-                           1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
+    ImGui::SliderFloat("float", &f, 0.0f,
+                       1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
 
-        if (ImGui::Button("Button")) { // Buttons return true when clicked (most widgets return true when
-                                       // edited/activated)
-            counter++;
-        }
-        ImGui::SameLine();
-        ImGui::Text("counter = %d", counter);
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
+    if (ImGui::Button("Button")) { // Buttons return true when clicked (most widgets return true when
+                                   // edited/activated)
+        counter++;
     }
+    ImGui::SameLine();
+    ImGui::Text("counter = %d", counter);
+
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+    ImGui::End();
 
     // Our Scene Window
-    {
-        // Our scene window
-        ImGui::Begin("Scene Window");
-        // Get the position and size of the window so we can render our scene without the toolbar
-        scenePosition = ImVec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
-        sceneWindowSize = ImVec2(ImGui::GetWindowSize().x, ImGui::GetWindowSize().y - 20);
-        ImGui::End();
-    }
+    ImGui::Begin("Scene Window");
+    // Get the position and size of the window so we can render our scene without the toolbar
+    scenePosition = ImVec2(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y + 20);
+    sceneWindowSize = ImVec2(ImGui::GetWindowSize().x, ImGui::GetWindowSize().y - 20);
+    ImGui::End();
+
     // Show another simple window.
     if (show_another_window) {
         ImGui::Begin("Another Window",
@@ -80,7 +76,8 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
     if (show_tobot_about) {
         // Creating the about window for tobot
         ImGui::Begin("TobotAbout", &show_tobot_about);
-        ImGui::Text("Rendering implemented using SDL2 and ImGui\n\nAuthors:\nJulian Otto, Frederik Tobner");
+        ImGui::Text(
+            "Rendering implemented using SDL2 and ImGui\n\nAuthors:\nJonas Habel, Julian Otto, Frederik Tobner");
         ImGui::End();
     }
 }

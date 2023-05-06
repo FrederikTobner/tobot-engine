@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "plane.h"
-#include "vector/vector3d.h"
+#include "plane.hpp"
+#include "vector/vector3d.hpp"
 
 using namespace Tobot::Math;
 

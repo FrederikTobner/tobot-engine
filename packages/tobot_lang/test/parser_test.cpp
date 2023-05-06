@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "tobot_data_structures.h"
-#include "tobot_lang.h"
+#include "tobot_data_structures.hpp"
+#include "tobot_lang.hpp"
 #include <vector>
 
 using namespace Tobot::Language;

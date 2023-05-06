@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "point2d.h"
+#include "point2d.hpp"
 
 using namespace Tobot::Math;
 

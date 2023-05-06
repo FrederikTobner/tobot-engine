@@ -1,14 +1,14 @@
 set(DATA_STRUCTURES_HEADER_FILES
-"enum.h"
-"concepts.h"
-"graph/undirected_graph.h"
-"include/tobot_data_structures.h"
-"tree/avl_tree.h"
-"tree/binary_search_tree.h"
-"tree/binary_tree_algorithms.h"
-"tree/red_black_tree.h"
-"tree/tree.h"
-"tree/tree_node.h"
+"enum.hpp"
+"concepts.hpp"
+"graph/undirected_graph.hpp"
+"include/tobot_data_structures.hpp"
+"tree/avl_tree.hpp"
+"tree/binary_search_tree.hpp"
+"tree/binary_tree_algorithms.hpp"
+"tree/red_black_tree.hpp"
+"tree/tree.hpp"
+"tree/tree_node.hpp"
 )
 
 add_library(tobot-data-structures INTERFACE)
@@ -20,7 +20,7 @@ set_target_properties(tobot-data-structures PROPERTIES LINKER_LANGUAGE CXX)
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)
     # VisualStudio only accepts header files that also have a source file    
-    target_precompile_headers(tobot-data-structures INTERFACE pre_compiled_header.h pre_compiled_header.cpp) 
+    target_precompile_headers(tobot-data-structures INTERFACE pre_compiled_header.hpp pre_compiled_header.cpp) 
 else()
-    target_precompile_headers(tobot-data-structures INTERFACE pre_compiled_header.h)
+    target_precompile_headers(tobot-data-structures INTERFACE pre_compiled_header.hpp)
 endif()
