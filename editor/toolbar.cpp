@@ -6,7 +6,7 @@
 
 auto Tobot::Editor::toolBarMain() -> void {
     ImGuiViewport * viewport = ImGui::GetMainViewport();
-    ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 30));
+    ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 20));
 
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, 30));
 

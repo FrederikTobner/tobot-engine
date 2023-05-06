@@ -77,7 +77,7 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
     if (show_tobot_about) {
         // Creating the about window for tobot
         ImGui::Begin("TobotAbout", &show_tobot_about);
-        ImGui::Text("Authors:\nJulian Otto, Frederik Tobner\nRendering implemented using SDL2 and ImGui");
+        ImGui::Text("Rendering implemented using SDL2 and ImGui\n\nAuthors:\nJulian Otto, Frederik Tobner");
         ImGui::End();
     }
 }
