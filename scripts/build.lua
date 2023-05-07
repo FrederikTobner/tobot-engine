@@ -47,7 +47,7 @@ local buildTarget = arg[2] or "all"
 local generator = arg[3] or (ninjaAvailable() and "Ninja" or "")
 
 -- We should make the compiler that is used for building the project configurable as well, for now we just use the default
-local cmake_command = string.format("cmake -B ../build -DCMAKE_BUILD_TYPE=%s%s ..", buildType, generator and (" -G " .. generator) or "")
+local cmake_command = string.format("cmake -B ../build -DCMAKE_BUILD_TYPE=%s %s ..", buildType, generator and ("-G " .. generator) or "")
 -- This command is only needed on Windows
 local vcvars_command = is_windows and string.format('"%s" && ', vcvars64_path) or ""
 os.execute(vcvars_command .. cmake_command .. (string.format(" && cmake --build ../build --config %s --target %s", buildType, buildTarget)))

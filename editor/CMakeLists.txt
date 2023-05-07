@@ -1,4 +1,5 @@
 set(TOBOT_EDITOR_SOURCE_FILES
+color_picker.cpp
 dockspace.cpp
 event_handler.cpp
 main.cpp
@@ -8,9 +9,10 @@ toolbar.cpp
 )
 
 set(TOBOT_EDITOR_HEADER_FILES
-icons_material_design.hpp
+color_picker.hpp
 dockspace.hpp
 event_handler.hpp
+icons_material_design.hpp
 menu_bar.hpp
 scene_renderer.hpp
 toolbar.hpp

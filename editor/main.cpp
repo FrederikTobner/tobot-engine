@@ -13,6 +13,7 @@
 #include "sub_system_manager.hpp"
 
 // Internal dependencies
+#include "color_picker.hpp"
 #include "dockspace.hpp"
 #include "event_handler.hpp"
 #include "icons_material_design.hpp"
@@ -91,6 +92,7 @@ auto main(int argc, char ** argv) -> int {
 
     // Our state
     bool show_tobot_about = false;
+    bool show_color_picker = false;
     bool done = false;
 
     ImVec2 scenePosition, sceneWindowSize;
@@ -99,11 +101,13 @@ auto main(int argc, char ** argv) -> int {
     // Creating the toolbar
     Tobot::Editor::Toolbar toolbar;
     // Creating the menu bar
-    Tobot::Editor::MenuBar menuBar(done, show_tobot_about);
+    Tobot::Editor::MenuBar menuBar(done, show_tobot_about, show_color_picker);
     // Creating the event handler
     Tobot::Editor::EventHandler eventHandler(done, window);
 
     Tobot::Editor::Dockspace dockspace(show_tobot_about, io, scenePosition, sceneWindowSize);
+
+    Tobot::Editor::ColorPicker colorPicker(show_color_picker);
 
     // Main loop
     while (!done) {
@@ -125,6 +129,7 @@ auto main(int argc, char ** argv) -> int {
         menuBar.render();
         toolbar.render();
         dockspace.render();
+        colorPicker.render();
 
         // Rendering
         ImGui::Render();

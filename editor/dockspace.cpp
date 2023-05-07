@@ -7,7 +7,7 @@ using namespace Tobot::Editor;
 
 Dockspace::Dockspace(bool & show_tobot_about, ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize)
     : show_tobot_about(show_tobot_about), io(io), scenePosition(scenePosition), sceneWindowSize(sceneWindowSize) {
-    this->viewport = ImGui::GetMainViewport();
+    viewport = ImGui::GetMainViewport();
 }
 
 auto Tobot::Editor::Dockspace::render() -> void {
