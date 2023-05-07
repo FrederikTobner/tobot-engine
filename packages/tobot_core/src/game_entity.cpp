@@ -1,4 +1,4 @@
-#include "game_entity.h"
+#include "game_entity.hpp"
 
 using namespace Tobot::Core;
 

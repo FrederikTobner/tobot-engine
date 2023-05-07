@@ -3,7 +3,7 @@
  * @brief File containing definitions regarding a TestState.
  */
 
-#include "test_state.h"
+#include "test_state.hpp"
 
 using namespace Tobot::Tooling::Test;
 

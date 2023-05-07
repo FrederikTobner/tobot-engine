@@ -3,9 +3,9 @@
  * @brief File containing definitions regarding a TestFixture.
  */
 
-#include "test_fixture.h"
+#include "test_fixture.hpp"
 
-#include "pre_compiled_header.h"
+#include "pre_compiled_header.hpp"
 
 using namespace Tobot::Tooling::Test;
 

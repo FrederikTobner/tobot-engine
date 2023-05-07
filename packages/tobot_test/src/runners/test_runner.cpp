@@ -1,4 +1,4 @@
-#include "test_runner.h"
+#include "test_runner.hpp"
 
 using namespace Tobot::Tooling::Test;
 

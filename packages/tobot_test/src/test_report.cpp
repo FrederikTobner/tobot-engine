@@ -3,7 +3,7 @@
  * @brief File containing definitions regarding a TestReport.
  */
 
-#include "test_report.h"
+#include "test_report.hpp"
 
 using namespace Tobot::Tooling::Test;
 

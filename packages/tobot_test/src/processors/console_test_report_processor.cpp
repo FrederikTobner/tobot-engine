@@ -3,7 +3,7 @@
  * @brief File containing definitions regarding a ConsoleTestReportProcessor.
  */
 
-#include "console_test_report_processor.h"
+#include "console_test_report_processor.hpp"
 
 using namespace Tobot::Tooling::Test;
 

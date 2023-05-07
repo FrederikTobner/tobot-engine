@@ -8,12 +8,12 @@ toolbar.cpp
 )
 
 set(TOBOT_EDITOR_HEADER_FILES
-icons_material_design.h
-dockspace.h
-event_handler.h
-menu_bar.h
-scene_renderer.h
-toolbar.h
+icons_material_design.hpp
+dockspace.hpp
+event_handler.hpp
+menu_bar.hpp
+scene_renderer.hpp
+toolbar.hpp
 )
 
 add_executable("${PROJECT_NAME}-editor" ${TOBOT_EDITOR_SOURCE_FILES} ${TOBOT_EDITOR_HEADER_FILES})

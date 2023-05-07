@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "tobot_data_structures.h"
+#include "tobot_data_structures.hpp"
 
 #include <queue>
 

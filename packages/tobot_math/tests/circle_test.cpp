@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "point2d.h"
-#include "shape/circle.h"
+#include "point2d.hpp"
+#include "shape/circle.hpp"
 
 using namespace Tobot::Math;
 

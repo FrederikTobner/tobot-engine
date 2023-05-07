@@ -1,19 +1,19 @@
 set(TOBOT_MATH_HEADER_FILES
-"concepts.h"
-"dimension.h"
-"gradient2D.h"
-"matrix.h"
-"plane.h"
-"point2d.h"
-"include/tobot_math.h"
-"shape/circle.h"
-"shape/polygon.h"
-"shape/rectangle.h"
-"shape/triangle.h"
-"vector/vector.h"
-"vector/vector2d.h"
-"vector/vector3d.h"
-"vector/vector4d.h"
+"concepts.hpp"
+"dimension.hpp"
+"gradient2D.hpp"
+"matrix.hpp"
+"plane.hpp"
+"point2d.hpp"
+"include/tobot_math.hpp"
+"shape/circle.hpp"
+"shape/polygon.hpp"
+"shape/rectangle.hpp"
+"shape/triangle.hpp"
+"vector/vector.hpp"
+"vector/vector2d.hpp"
+"vector/vector3d.hpp"
+"vector/vector4d.hpp"
 )
 
 add_library(tobot-math INTERFACE)
@@ -28,7 +28,7 @@ endif()
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)
     # VisualStudio only accepts header files that also have a source file    
-    target_precompile_headers(tobot-math INTERFACE pre_compiled_header.h pre_compiled_header.cpp) 
+    target_precompile_headers(tobot-math INTERFACE pre_compiled_header.hpp pre_compiled_header.cpp) 
 else()
-    target_precompile_headers(tobot-math INTERFACE pre_compiled_header.h)
+    target_precompile_headers(tobot-math INTERFACE pre_compiled_header.hpp)
 endif()

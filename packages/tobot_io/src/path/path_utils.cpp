@@ -1,6 +1,6 @@
-#include "path_utils.h"
+#include "path_utils.hpp"
 
-#include "../pre_compiled_header.h"
+#include "../pre_compiled_header.hpp"
 
 // OS-specific definitions
 #if defined(OS_WINDOWS)

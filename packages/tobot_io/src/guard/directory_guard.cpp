@@ -1,6 +1,6 @@
-#include "directory_guard.h"
+#include "directory_guard.hpp"
 
-#include "../pre_compiled_header.h"
+#include "../pre_compiled_header.hpp"
 
 [[nodiscard]] auto Tobot::IO::Directory::ensure_directory_exists(char const * folderPath) -> int {
 #ifdef OS_WINDOWS

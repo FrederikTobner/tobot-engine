@@ -21,10 +21,8 @@ set(TOBOT_DATA_STRUCTURES_TEST_SOURCES
 "tree_node_test.cpp"
 )
 
-# Set all test files
-set(TEST_SOURCES ${TOBOT_DATA_STRUCTURES_TEST_SOURCES})
 
-add_executable(${TOBOT_DATA_STRUCTURES_TESTS} ${TEST_SOURCES})
+add_executable(${TOBOT_DATA_STRUCTURES_TESTS} ${TOBOT_DATA_STRUCTURES_TEST_SOURCES})
 
 # Includes source path of the math library
 target_include_directories(${TOBOT_DATA_STRUCTURES_TESTS} PUBLIC "${SOURCE_PATH_DATA_STRUCTURES}/include")

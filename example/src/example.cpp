@@ -1,5 +1,5 @@
-#include "tobot_engine.h"
-#include "tobot_tooling.h"
+#include "tobot_engine.hpp"
+#include "tobot_tooling.hpp"
 
 class Soldier : public Tobot::Core::GameEntity {
     public:

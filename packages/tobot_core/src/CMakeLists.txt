@@ -1,4 +1,4 @@
-configure_file(project_config.h.in project_config.h)
+configure_file(project_config.hpp.in project_config.hpp)
 
 set(TOBOT_CORE_SOURCES
 "asset_manager.cpp"
@@ -14,18 +14,18 @@ set(TOBOT_CORE_SOURCES
 )
 
 set(TOBOT_CORE_HEADERS
-"asset_manager.h"
-"concepts.h"
-"entry_point.h"
-"exitcode.h"
-"layer.h"
-"game_entity.h"
-"render_object.h"
-"scene.h"
-"scene_manager.h"
-"sub_system_manager.h"
-"tobot_application.h"
-"transform2D.h"
+"asset_manager.hpp"
+"concepts.hpp"
+"entry_point.hpp"
+"exitcode.hpp"
+"layer.hpp"
+"game_entity.hpp"
+"render_object.hpp"
+"scene.hpp"
+"scene_manager.hpp"
+"sub_system_manager.hpp"
+"tobot_application.hpp"
+"transform2D.hpp"
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")
@@ -50,9 +50,9 @@ target_include_directories(tobot-core PUBLIC ${PROJECT_BINARY_DIR}/packages/tobo
 # Precompiles dependencies to speed up compilation of the target
 if(MSVC)
     # VisualStudio only accepts header files that also have a source file    
-    target_precompile_headers(tobot-core PUBLIC pre_compiled_header.h pre_compiled_header.cpp) 
+    target_precompile_headers(tobot-core PUBLIC pre_compiled_header.hpp pre_compiled_header.cpp) 
 else()
-    target_precompile_headers(tobot-core PUBLIC pre_compiled_header.h)
+    target_precompile_headers(tobot-core PUBLIC pre_compiled_header.hpp)
 endif()
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd][Ee][Bb][Uu][Gg]")

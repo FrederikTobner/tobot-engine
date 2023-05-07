@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "tobot_test.h"
+#include "tobot_test.hpp"
 
 using namespace Tobot::Tooling::Test;
 

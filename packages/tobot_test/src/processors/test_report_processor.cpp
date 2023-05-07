@@ -3,7 +3,7 @@
  * @brief File containing definitions regarding a TestReportProcessor.
  */
 
-#include "test_report_processor.h"
+#include "test_report_processor.hpp"
 
 using namespace Tobot::Tooling::Test;
 
