@@ -59,6 +59,7 @@ local extensions = {"c", "cpp", "cc", "h", "hpp", "hh"}
 local files = find_files_with_extensions("../packages", extensions)
 -- Format the files in the packages directory
 os.execute("clang-format -i --style=file " .. table.concat(files, " "))
+
 -- Find all the files with the extensions
 files = find_files_with_extensions("../editor", extensions)
 -- Format the files in the editor directory

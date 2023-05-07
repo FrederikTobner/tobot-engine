@@ -5,21 +5,15 @@
 
 using namespace Tobot::Editor;
 
-/// @brief Constructs a new dockspace
-/// @param show_demo_window Boolean that determines if the demo window should be shown
-/// @param show_tobot_about Boolean that determines if the about window should be shown
-/// @param show_another_window Boolean that determines if the another window should be shown
-/// @param io The ImGuiIO object
-/// @param scenePosition The position of the scene
-/// @param sceneWindowSize The size of the scene window
 Dockspace::Dockspace(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window, ImGuiIO & io,
                      ImVec2 & scenePosition, ImVec2 & sceneWindowSize)
     : show_demo_window(show_demo_window), show_tobot_about(show_tobot_about), show_another_window(show_another_window),
       io(io), scenePosition(scenePosition), sceneWindowSize(sceneWindowSize) {
+    this->viewport = ImGui::GetMainViewport();
 }
 
 auto Tobot::Editor::Dockspace::render() -> void {
-    ImGuiViewport * viewport = ImGui::GetMainViewport();
+
     ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 30));
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - 30));
     ImGui::SetNextWindowViewport(viewport->ID);
