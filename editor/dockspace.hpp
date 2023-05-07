@@ -7,6 +7,22 @@
 
 namespace Tobot::Editor {
 
+    class Dockspace {
+
+        public:
+            Dockspace(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window, ImGuiIO & io,
+                      ImVec2 & scenePosition, ImVec2 & sceneWindowSize);
+            auto render() -> void;
+
+        private:
+            bool & show_demo_window;
+            bool & show_tobot_about;
+            bool & show_another_window;
+            ImGuiIO & io;
+            ImVec2 & scenePosition;
+            ImVec2 & sceneWindowSize;
+    };
+
     /// @brief The functionalty of the dockspace
     /// @param show_demo_window Boolean that determines if the demo window should be shown
     /// @param show_tobot_help Boolean that determines if the help window should be shown

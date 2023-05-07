@@ -3,8 +3,22 @@
 
 #include "dockspace.hpp"
 
-auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window,
-                                  ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize) -> void {
+using namespace Tobot::Editor;
+
+/// @brief Constructs a new dockspace
+/// @param show_demo_window Boolean that determines if the demo window should be shown
+/// @param show_tobot_about Boolean that determines if the about window should be shown
+/// @param show_another_window Boolean that determines if the another window should be shown
+/// @param io The ImGuiIO object
+/// @param scenePosition The position of the scene
+/// @param sceneWindowSize The size of the scene window
+Dockspace::Dockspace(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window, ImGuiIO & io,
+                     ImVec2 & scenePosition, ImVec2 & sceneWindowSize)
+    : show_demo_window(show_demo_window), show_tobot_about(show_tobot_about), show_another_window(show_another_window),
+      io(io), scenePosition(scenePosition), sceneWindowSize(sceneWindowSize) {
+}
+
+auto Tobot::Editor::Dockspace::render() -> void {
     ImGuiViewport * viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 30));
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - 30));
@@ -72,12 +86,13 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
         }
         ImGui::End();
     }
-    // Show the about tobot window
+    // Creating the about window for tobot
     if (show_tobot_about) {
-        // Creating the about window for tobot
         ImGui::Begin("TobotAbout", &show_tobot_about);
-        ImGui::Text(
-            "Rendering implemented using SDL2 and ImGui\n\nAuthors:\nJonas Habel, Julian Otto, Frederik Tobner");
+        ImGui::Text("Rendering implemented using SDL2 and ImGui\n\nAuthors:\n");
+        ImGui::BulletText("Jonas Habel");
+        ImGui::BulletText("Julian Otto");
+        ImGui::BulletText("Frederik Tobner");
         ImGui::End();
     }
 }

@@ -5,8 +5,16 @@
 
 namespace Tobot::Editor {
 
-    /// @brief Create the menu bar for the editor
-    /// @param done Determines if the user wants to quit
-    /// @param show_tobot_help Determines if the user wants to see the help for Tobot
-    auto menuBarMain(bool & done, bool & show_tobot_help) -> void;
+    class MenuBar {
+        public:
+            MenuBar(bool & done, bool & show_tobot_about);
+
+            auto render() -> void;
+
+        private:
+            // Determines if the user wants to quit
+            bool & done;
+            // Determines if the user wants to see the help for Tobot
+            bool & show_tobot_about;
+    };
 } // namespace Tobot::Editor

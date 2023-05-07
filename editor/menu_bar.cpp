@@ -5,7 +5,12 @@
 
 #include "imgui.h"
 
-auto Tobot::Editor::menuBarMain(bool & done, bool & show_tobot_help) -> void {
+using namespace Tobot::Editor;
+
+MenuBar::MenuBar(bool & done, bool & show_tobot_about) : done(done), show_tobot_about(show_tobot_about) {
+}
+
+auto MenuBar::render() -> void {
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New Project")) {
@@ -31,7 +36,7 @@ auto Tobot::Editor::menuBarMain(bool & done, bool & show_tobot_help) -> void {
         }
         if (ImGui::BeginMenu("Help")) {
             if (ImGui::MenuItem("About Tobot")) {
-                show_tobot_help = true;
+                show_tobot_about = true;
             }
             ImGui::EndMenu();
         }
