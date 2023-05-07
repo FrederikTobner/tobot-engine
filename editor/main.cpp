@@ -24,17 +24,16 @@
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
-using namespace Tobot::Core;
-
 /// @brief Main entry point
 /// @param argc The number of arguments
 /// @param argv The arguments
 /// @return 0 on success, -1 on failure
 auto main(int argc, char ** argv) -> int {
     // Seting up SDL using the Tobot core
-    if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_CORE_INIT_TIMER | SDL_CORE_INIT_GAMECONTROLLER) != 0) {
+    if (Tobot::Core::subSystemsInitialize(Tobot::Core::SDL_CORE_INIT_VIDEO | Tobot::Core::SDL_CORE_INIT_TIMER |
+                                          Tobot::Core::SDL_CORE_INIT_GAMECONTROLLER) != 0) {
         std::cout << "Error: " << SDL_GetError() << "\n";
-        return ExitCode::SOFTWARE.getCode();
+        return Tobot::Core::ExitCode::SOFTWARE.getCode();
     }
 
     // From 2.0.18: Enable native IME.
@@ -91,8 +90,6 @@ auto main(int argc, char ** argv) -> int {
     io.Fonts->AddFontFromFileTTF(MATERIAL_ICONS_FONT_LOCATION, 20.0f, &config, icon_ranges);
 
     // Our state
-    bool show_demo_window = true;
-    bool show_another_window = false;
     bool show_tobot_about = false;
     bool done = false;
 
@@ -100,14 +97,13 @@ auto main(int argc, char ** argv) -> int {
     // Creating the scene renderer
     Tobot::Editor::SceneRenderer sceneRenderer(renderer, scenePosition, sceneWindowSize);
     // Creating the toolbar
-    Tobot::Editor::Toolbar toolbar(ImGui::GetMainViewport());
+    Tobot::Editor::Toolbar toolbar;
     // Creating the menu bar
     Tobot::Editor::MenuBar menuBar(done, show_tobot_about);
     // Creating the event handler
     Tobot::Editor::EventHandler eventHandler(done, window);
 
-    Tobot::Editor::Dockspace dockspace(show_demo_window, show_tobot_about, show_another_window, io, scenePosition,
-                                       sceneWindowSize);
+    Tobot::Editor::Dockspace dockspace(show_tobot_about, io, scenePosition, sceneWindowSize);
 
     // Main loop
     while (!done) {
@@ -152,5 +148,5 @@ auto main(int argc, char ** argv) -> int {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return ExitCode::OK.getCode();
+    return Tobot::Core::ExitCode::OK.getCode();
 }

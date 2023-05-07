@@ -9,8 +9,8 @@
 
 using namespace Tobot::Editor;
 
-Toolbar::Toolbar(ImGuiViewport * viewport) {
-    this->viewport = viewport;
+Toolbar::Toolbar() {
+    viewport = ImGui::GetMainViewport();
 }
 
 auto Toolbar::render() -> void {

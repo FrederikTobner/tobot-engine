@@ -17,15 +17,12 @@ namespace Tobot::Editor {
             /// @param io The ImGuiIO object
             /// @param scenePosition The position of the scene
             /// @param sceneWindowSize The size of the scene window
-            Dockspace(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window, ImGuiIO & io,
-                      ImVec2 & scenePosition, ImVec2 & sceneWindowSize);
+            Dockspace(bool & show_tobot_about, ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize);
             /// @brief Renders the dockspace
             auto render() -> void;
 
         private:
-            bool & show_demo_window;
             bool & show_tobot_about;
-            bool & show_another_window;
             ImGuiIO & io;
             ImVec2 & scenePosition;
             ImVec2 & sceneWindowSize;

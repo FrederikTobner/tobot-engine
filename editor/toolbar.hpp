@@ -8,7 +8,7 @@
 namespace Tobot::Editor {
     class Toolbar {
         public:
-            Toolbar(ImGuiViewport * viewport);
+            Toolbar();
 
             auto render() -> void;
 
