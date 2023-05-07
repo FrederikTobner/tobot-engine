@@ -19,7 +19,7 @@ set(TOBOT_DATA_STRUCTURES_TEST_SOURCES
 "red_black_tree_test.cpp"
 "tree_test.cpp"
 "tree_node_test.cpp"
-)
+"directed_graph_test.cpp")
 
 
 add_executable(${TOBOT_DATA_STRUCTURES_TESTS} ${TOBOT_DATA_STRUCTURES_TEST_SOURCES})

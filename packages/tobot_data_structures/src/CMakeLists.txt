@@ -2,6 +2,7 @@ set(DATA_STRUCTURES_HEADER_FILES
 "enum.hpp"
 "concepts.hpp"
 "graph/undirected_graph.hpp"
+"graph/directed_graph.hpp"
 "include/tobot_data_structures.hpp"
 "tree/avl_tree.hpp"
 "tree/binary_search_tree.hpp"
