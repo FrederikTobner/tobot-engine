@@ -23,7 +23,7 @@ namespace Tobot::Language {
 
     template <typename T>
         requires std::is_enum_v<T>
-    [[nodiscard]] Token<T>::Token(T type, std::string lexeme, std::size_t line, std::size_t column) {
+    Token<T>::Token(T type, std::string lexeme, std::size_t line, std::size_t column) {
         this->type = type;
         this->lexeme = lexeme;
         this->line = line;

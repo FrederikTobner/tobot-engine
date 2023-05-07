@@ -21,7 +21,7 @@ namespace Tobot::Language {
     };
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    [[nodiscard]] TerminalProductionRule<T1, T2>::TerminalProductionRule(T2 type, T1 tokenType) {
+    TerminalProductionRule<T1, T2>::TerminalProductionRule(T2 type, T1 tokenType) {
         this->type = type;
         this->tokenType = tokenType;
     }

@@ -19,7 +19,7 @@ namespace Tobot::Language {
 
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    [[nodiscard]] ParsingContext<T1, T2>::ParsingContext(T2 type) {
+    ParsingContext<T1, T2>::ParsingContext(T2 type) {
         this->type = type;
     }
 } // namespace Tobot::Language

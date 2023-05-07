@@ -29,7 +29,7 @@ namespace Tobot::Language {
     /// @param rules Rules for tokenizing
     template <typename T>
         requires std::is_enum_v<T>
-    [[nodiscard]] Lexer<T>::Lexer(std::vector<TokenizationRule<T>> rules) {
+    Lexer<T>::Lexer(std::vector<TokenizationRule<T>> rules) {
         this->rules = rules;
     }
 

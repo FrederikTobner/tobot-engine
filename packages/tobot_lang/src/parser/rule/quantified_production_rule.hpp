@@ -49,8 +49,8 @@ namespace Tobot::Language {
     /// @param type The type of the expression
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    [[nodiscard]] QuantifiedProductionRule<T1, T2>::QuantifiedProductionRule(
-        std::pair<ProductionRule<T1, T2>, RegexQuantifier> rule, T2 type) {
+    QuantifiedProductionRule<T1, T2>::QuantifiedProductionRule(std::pair<ProductionRule<T1, T2>, RegexQuantifier> rule,
+                                                               T2 type) {
         this->rule = rule;
     }
 

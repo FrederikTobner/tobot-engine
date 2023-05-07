@@ -30,7 +30,7 @@ namespace Tobot::Language {
 
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    [[nodiscard]] Parser<T1, T2>::Parser(Tree<ProductionRule<T1, T2> *> * grammer) {
+    Parser<T1, T2>::Parser(Tree<ProductionRule<T1, T2> *> * grammer) {
         this->grammer = grammer;
     }
 

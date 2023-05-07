@@ -21,7 +21,7 @@ namespace Tobot::Language {
 
     template <typename T>
         requires std::is_enum_v<T>
-    [[nodiscard]] TokenizationRule<T>::TokenizationRule(T type, std::string regex) {
+    TokenizationRule<T>::TokenizationRule(T type, std::string regex) {
         this->type = type;
         this->pattern = std::regex("^" + regex);
     }

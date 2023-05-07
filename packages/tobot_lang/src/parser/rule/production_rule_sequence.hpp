@@ -29,8 +29,7 @@ namespace Tobot::Language {
     /// @tparam T2 The type of the expression type enum
     template <typename T1, typename T2>
         requires std::is_enum_v<T1> && std::is_enum_v<T2>
-    [[nodiscard]] ProductionRuleSequence<T1, T2>::ProductionRuleSequence(T2 type,
-                                                                         std::vector<ProductionRule<T1, T2> *> rules) {
+    ProductionRuleSequence<T1, T2>::ProductionRuleSequence(T2 type, std::vector<ProductionRule<T1, T2> *> rules) {
         this->type = type;
         this->rules = rules;
     }
