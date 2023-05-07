@@ -3,6 +3,13 @@
 
 local lfs = require "lfs"
 
+-- Function for concatenating two arrays
+local function mergeArray(a, b)
+    local result = {table.unpack(a)}
+    table.move(b, 1, #b, #result + 1, result)
+    return result
+end  
+
 -- Function for checking that a file exists
 function directory_exists(path)
     local attributes = lfs.attributes(path)
@@ -55,12 +62,7 @@ end
 
 -- The file extensions to format
 local extensions = {"c", "cpp", "cc", "h", "hpp", "hh"}
--- Find all the files with the extensions
-local files = find_files_with_extensions("../packages", extensions)
--- Format the files in the packages directory
+-- Find all the files with the extensions in the packages directory and the editor directory
+local files = mergeArray(find_files_with_extensions("../packages", extensions), find_files_with_extensions("../editor", extensions))
+-- Formatting the files in both directories
 os.execute("clang-format -i --style=file " .. table.concat(files, " "))
--- Find all the files with the extensions
-files = find_files_with_extensions("../editor", extensions)
--- Format the files in the editor directory
-os.execute("clang-format -i --style=file " .. table.concat(files, " "))
-os.exit(0)

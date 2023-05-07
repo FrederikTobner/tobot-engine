@@ -7,6 +7,19 @@
 #include "imgui.h"
 
 namespace Tobot::Editor {
-    auto sceneRendererMain(SDL_Renderer * renderer, ImVec2 scenePosition, ImVec2 sceneWindowSize,
-                           SDL_Texture * sceneTexture) -> void;
-}
+
+    class SceneRenderer {
+        public:
+            SceneRenderer(SDL_Renderer * renderer, ImVec2 & scenePosition, ImVec2 & sceneWindowSize);
+
+            auto render(SDL_Texture * sceneTexture) -> void;
+
+        private:
+            // The renderer for the scene
+            SDL_Renderer * renderer;
+            // The position of the scene window
+            ImVec2 & scenePosition;
+            // The size of the scene window
+            ImVec2 & sceneWindowSize;
+    };
+} // namespace Tobot::Editor

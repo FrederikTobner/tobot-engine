@@ -3,9 +3,15 @@
 
 #include "dockspace.hpp"
 
-auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_about, bool & show_another_window,
-                                  ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize) -> void {
-    ImGuiViewport * viewport = ImGui::GetMainViewport();
+using namespace Tobot::Editor;
+
+Dockspace::Dockspace(bool & show_tobot_about, ImGuiIO & io, ImVec2 & scenePosition, ImVec2 & sceneWindowSize)
+    : show_tobot_about(show_tobot_about), io(io), scenePosition(scenePosition), sceneWindowSize(sceneWindowSize) {
+    viewport = ImGui::GetMainViewport();
+}
+
+auto Tobot::Editor::Dockspace::render() -> void {
+
     ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 30));
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, viewport->Size.y - 30));
     ImGui::SetNextWindowViewport(viewport->ID);
@@ -23,35 +29,36 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
     ImGui::DockSpace(dockMain);
     ImGui::End();
     ImGui::PopStyleVar(3);
-    // Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its
-    // code to learn more about Dear ImGui!).
-    if (show_demo_window) {
-        ImGui::ShowDemoWindow(&show_demo_window);
+
+    // The Inspector Window
+    static float position[] = {1.0f, 2.0f};
+    static float rotation = 0.0f;
+    static float scale[] = {3.0f, 4.0f};
+    ImGui::Begin("Inspector");
+    ImGui::Text("Transform");
+    ImGui::InputFloat2("Position", position);
+    ImGui::InputFloat("Rotation", &rotation);
+    ImGui::InputFloat2("Scale", scale);
+    ImGui::End();
+
+    // The scene hierarchy
+    ImGui::Begin("Hierarchy");
+    if (ImGui::TreeNode("Root")) {
+        if (ImGui::TreeNode("Child 1")) {
+            ImGui::Text("Hello from Child 1");
+            ImGui::TreePop();
+        }
+        ImGui::TreePop();
     }
+    ImGui::End();
 
-    // The hello world window - example code from imgui (just for testing the layout)
-    static float f = 0.0f;
-    static int counter = 0;
-    // Create a window called "Hello, world!" and append into it.
-    ImGui::Begin("Hello, world!");
-
-    ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
-    ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-    ImGui::Checkbox("Another Window", &show_another_window);
-
-    ImGui::SliderFloat("float", &f, 0.0f, 1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
-
-    ImGui::SliderFloat("float", &f, 0.0f,
-                       1.0f); // Edit 1 float using a slider from 0.0f to 1.0f
-
-    if (ImGui::Button("Button")) { // Buttons return true when clicked (most widgets return true when
-                                   // edited/activated)
-        counter++;
-    }
-    ImGui::SameLine();
-    ImGui::Text("counter = %d", counter);
-
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+    // The resources window
+    ImGui::Begin("Resources");
+    ImGui::Text("Here we will display resources");
+    ImGui::BulletText("Folders");
+    ImGui::BulletText("Assets");
+    ImGui::BulletText("Scripts");
+    ImGui::BulletText("Etc");
     ImGui::End();
 
     // Our Scene Window
@@ -61,23 +68,14 @@ auto Tobot::Editor::dockSpaceMain(bool & show_demo_window, bool & show_tobot_abo
     sceneWindowSize = ImVec2(ImGui::GetWindowSize().x, ImGui::GetWindowSize().y - 20);
     ImGui::End();
 
-    // Show another simple window.
-    if (show_another_window) {
-        ImGui::Begin("Another Window",
-                     &show_another_window); // Pass a pointer to our bool variable (the window will have a
-                                            // closing button that will clear the bool when clicked)
-        ImGui::Text("Hello from another window!");
-        if (ImGui::Button("Close Me")) {
-            show_another_window = false;
-        }
-        ImGui::End();
-    }
-    // Show the about tobot window
+    // Creating the about window for tobot
     if (show_tobot_about) {
-        // Creating the about window for tobot
-        ImGui::Begin("TobotAbout", &show_tobot_about);
-        ImGui::Text(
-            "Rendering implemented using SDL2 and ImGui\n\nAuthors:\nJonas Habel, Julian Otto, Frederik Tobner");
+        ImGui::Begin("TobotAbout", &show_tobot_about,
+                     ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking);
+        ImGui::Text("Rendering implemented using SDL2 and ImGui\n\nAuthors:\n");
+        ImGui::BulletText("Jonas Habel");
+        ImGui::BulletText("Julian Otto");
+        ImGui::BulletText("Frederik Tobner");
         ImGui::End();
     }
 }
