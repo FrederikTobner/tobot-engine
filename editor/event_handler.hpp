@@ -7,6 +7,16 @@
 
 namespace Tobot::Editor {
 
-    auto handleEvents(SDL_Event & event, bool & done, SDL_Window * window) -> void;
+    class EventHandler {
+        public:
+            EventHandler(bool & done, SDL_Window * window);
+
+            auto handleEvents() -> void;
+
+        private:
+            // Determines if the user wants to quit
+            bool & done;
+            SDL_Window * window;
+    };
 
 } // namespace Tobot::Editor

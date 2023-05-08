@@ -11,23 +11,20 @@ end
 local function check_dependency(package_name)
     local handle = io.popen("which " .. package_name)
     local result = handle:read("*a")
-    handle:close()
-    
+    handle:close()    
     return result ~= ""
 end
 
--- Installs the given package using the available package manager
-local function install_dependency(package_name)
-    local command
+-- Determines the available package manager and returns the command to install a package
+local function determinePackageManagerCommand()
     if os.execute("which pacman >/dev/null 2>&1") then
-        command = "sudo pacman -S --noconfirm " .. package_name
+        return "sudo pacman -S "
     elseif os.execute("which apt-get >/dev/null 2>&1") then
-        command = "sudo apt-get install -y " .. package_name
+        return "sudo apt-get install "
     else
-        print("Could not find a supported package manager.")
-        return
+        print("Could not determine package manager.")
+        os.exit(1)
     end
-    os.execute(command)
 end
   
 local dependencies = {
@@ -47,11 +44,13 @@ local dependencies = {
     "ninja-build",
     "pkg-config"
 }
+
+local command = determinePackageManager()
   
 for _, dependency in ipairs(dependencies) do
     if not check_dependency(dependency) then
         print("Installing dependency:", dependency)
-        install_dependency(dependency)
+        os.execute(command .. package_name)
     end
 end
   

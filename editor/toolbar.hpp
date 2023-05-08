@@ -3,6 +3,17 @@
 
 #pragma once
 
+#include "imgui.h"
+
 namespace Tobot::Editor {
-    auto toolBarMain() -> void;
-}
+    class Toolbar {
+        public:
+            Toolbar();
+
+            auto render() -> void;
+
+        private:
+            // The viewport of the toolbar
+            ImGuiViewport * viewport;
+    };
+} // namespace Tobot::Editor

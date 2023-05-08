@@ -13,6 +13,7 @@
 #include "sub_system_manager.hpp"
 
 // Internal dependencies
+#include "color_picker.hpp"
 #include "dockspace.hpp"
 #include "event_handler.hpp"
 #include "icons_material_design.hpp"
@@ -24,17 +25,16 @@
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
-using namespace Tobot::Core;
-
 /// @brief Main entry point
 /// @param argc The number of arguments
 /// @param argv The arguments
 /// @return 0 on success, -1 on failure
 auto main(int argc, char ** argv) -> int {
     // Seting up SDL using the Tobot core
-    if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_CORE_INIT_TIMER | SDL_CORE_INIT_GAMECONTROLLER) != 0) {
+    if (Tobot::Core::subSystemsInitialize(Tobot::Core::SDL_CORE_INIT_VIDEO | Tobot::Core::SDL_CORE_INIT_TIMER |
+                                          Tobot::Core::SDL_CORE_INIT_GAMECONTROLLER) != 0) {
         std::cout << "Error: " << SDL_GetError() << "\n";
-        return ExitCode::SOFTWARE.getCode();
+        return Tobot::Core::ExitCode::SOFTWARE.getCode();
     }
 
     // From 2.0.18: Enable native IME.
@@ -46,7 +46,7 @@ auto main(int argc, char ** argv) -> int {
     SDL_WindowFlags window_flags =
         (SDL_WindowFlags)(SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_VULKAN | SDL_WINDOW_MAXIMIZED | SDL_WINDOW_RESIZABLE);
     SDL_Window * window =
-        SDL_CreateWindow("Tobot-Editor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1800, 1000, window_flags);
+        SDL_CreateWindow("Tobot-Editor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0, window_flags);
     SDL_Surface * window_icon_scurface = SDL_LoadBMP(IMAGE_LOCATION);
     if (!window_icon_scurface) {
         std::cout << "Failed to load window icon " << SDL_GetError() << " from " << IMAGE_LOCATION << "\n";
@@ -87,21 +87,29 @@ auto main(int argc, char ** argv) -> int {
     // Adding the material icons font and merging it with the current font (Roboto)
     ImFontConfig config;
     config.MergeMode = true;
-    config.GlyphMinAdvanceX = 13.0f; // Use if you want to make the icon monospaced
     const ImWchar icon_ranges[] = {(ImWchar)ICON_MIN_MD, (ImWchar)ICON_MAX_MD, (ImWchar)0};
     io.Fonts->AddFontFromFileTTF(MATERIAL_ICONS_FONT_LOCATION, 20.0f, &config, icon_ranges);
-    io.Fonts->AddFontFromFileTTF(FONT_LOCATION, 16.0f);
 
     // Our state
-    bool show_demo_window = true;
-    bool show_another_window = false;
-    bool show_tobot_help = false;
+    bool show_tobot_about = false;
+    bool show_color_picker = false;
+    bool done = false;
 
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     ImVec2 scenePosition, sceneWindowSize;
+    // Creating the scene renderer
+    Tobot::Editor::SceneRenderer sceneRenderer(renderer, scenePosition, sceneWindowSize);
+    // Creating the toolbar
+    Tobot::Editor::Toolbar toolbar;
+    // Creating the menu bar
+    Tobot::Editor::MenuBar menuBar(done, show_tobot_about, show_color_picker);
+    // Creating the event handler
+    Tobot::Editor::EventHandler eventHandler(done, window);
+
+    Tobot::Editor::Dockspace dockspace(show_tobot_about, io, scenePosition, sceneWindowSize);
+
+    Tobot::Editor::ColorPicker colorPicker(show_color_picker);
 
     // Main loop
-    bool done = false;
     while (!done) {
         // Poll and handle events (inputs, window resize, etc.)
         // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use
@@ -111,32 +119,24 @@ auto main(int argc, char ** argv) -> int {
         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or
         // clear/overwrite your copy of the keyboard data. Generally you may always pass all inputs to dear imgui,
         // and hide them from your application based on those two flags.
-        SDL_Event event;
-        Tobot::Editor::handleEvents(event, done, window);
+        eventHandler.handleEvents();
 
         // Start the Dear ImGui frame
         ImGui_ImplSDLRenderer_NewFrame();
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
-        Tobot::Editor::menuBarMain(done, show_tobot_help);
 
-        // 1. Toolbar
-        Tobot::Editor::toolBarMain();
-
-        // 2. DockSpace
-        Tobot::Editor::dockSpaceMain(show_demo_window, show_tobot_help, show_another_window, io, scenePosition,
-                                     sceneWindowSize);
+        menuBar.render();
+        toolbar.render();
+        dockspace.render();
+        colorPicker.render();
 
         // Rendering
         ImGui::Render();
         SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-        SDL_SetRenderDrawColor(renderer, (uint8_t)(clear_color.x * 255), (uint8_t)(clear_color.y * 255),
-                               (uint8_t)(clear_color.z * 255), (uint8_t)(clear_color.w * 255));
-
-        SDL_RenderClear(renderer);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 
-        Tobot::Editor::sceneRendererMain(renderer, scenePosition, sceneWindowSize, sceneTexture);
+        sceneRenderer.render(sceneTexture);
 
         SDL_RenderPresent(renderer);
     }
@@ -153,5 +153,5 @@ auto main(int argc, char ** argv) -> int {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return ExitCode::OK.getCode();
+    return Tobot::Core::ExitCode::OK.getCode();
 }

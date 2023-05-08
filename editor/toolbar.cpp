@@ -7,15 +7,21 @@
 
 #include "imgui.h"
 
-auto Tobot::Editor::toolBarMain() -> void {
-    ImGuiViewport * viewport = ImGui::GetMainViewport();
+using namespace Tobot::Editor;
+
+Toolbar::Toolbar() {
+    viewport = ImGui::GetMainViewport();
+}
+
+auto Toolbar::render() -> void {
+
     ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + 20));
 
     ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, 30));
 
     ImGui::SetNextWindowViewport(viewport->ID);
 
-    ImGuiWindowFlags window_flags = 0 | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
                                     ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar |
                                     ImGuiWindowFlags_NoSavedSettings;
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
