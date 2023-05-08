@@ -19,7 +19,8 @@ IndentAccessModifiers: true
 NamespaceIndentation: All
 IndentCaseBlocks: true
 InsertBraces: true
-PointerAlignment: Middle
+PointerAlignment: Left
 SpaceBeforeAssignmentOperators: true
 AlwaysBreakTemplateDeclarations: Yes
 UseTab: Never
+QualifierAlignment: Left
