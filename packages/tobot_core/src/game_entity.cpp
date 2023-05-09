@@ -1,6 +1,10 @@
 #include "game_entity.hpp"
 
+#include "asset_manager.hpp"
 #include "tobot_texture.hpp"
+
+#include <stdlib.h>
+#include <string.h>
 
 using namespace Tobot::Core;
 
@@ -9,8 +13,10 @@ GameEntity::GameEntity(char const * id, float x, float y, TobotTexture * texture
     this->p_Texture = texture;
 }
 
-GameEntity::GameEntity(char const * id, float x, float y, float scaleX, float scaleY)
-    : m_Id(id), m_transform(Tobot::Math::Vector2D<float>(x, y), 0.0, Tobot::Math::Vector2D<float>(scaleX, scaleY)) {
+GameEntity::GameEntity(char const * id, float x, float y, char const * texturePath, float scaleX, float scaleY)
+    : m_Id(id), m_transform(Tobot::Math::Vector2D<float>(x, y), 0.0, Tobot::Math::Vector2D<float>(scaleX, scaleY)),
+      m_TexturePath(texturePath) {
+    this->p_Texture = nullptr;
 }
 
 GameEntity::~GameEntity() {
@@ -18,10 +24,6 @@ GameEntity::~GameEntity() {
 
 auto Tobot::Core::GameEntity::setVisible(bool visible) -> void {
     this->m_Visible = visible;
-}
-
-auto Tobot::Core::GameEntity::incrementPosition() -> void {
-    this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
 }
 
 [[nodiscard]] auto GameEntity::getId() -> const char * {
@@ -40,20 +42,12 @@ auto Tobot::Core::GameEntity::incrementPosition() -> void {
     return this->m_Visible;
 }
 
-auto GameEntity::setTexture(SDL_Surface * texture) -> void {
-    this->p_TextureSurface = texture;
-}
-
 auto GameEntity::initializeTexture(SDL_Renderer * renderer) -> void {
     // We should not create a new texture every time we initialize the texture. We should create the texture once and
     // reuse it for every game entity that uses the same texture. We would need a texture manager for that.
-    if (this->p_TextureSurface) {
-        this->p_Texture = new TobotTexture(this->p_TextureSurface, renderer);
+    if (!this->p_Texture && this->m_TexturePath) {
+        this->p_Texture = new TobotTexture(AssetManager::loadTextureScurface(this->m_TexturePath), renderer);
     }
-    SDL_FreeSurface(this->p_TextureSurface);
-}
-
-auto GameEntity::prepareRects() -> void {
 }
 
 auto GameEntity::render(SDL_Renderer * renderer) -> void {

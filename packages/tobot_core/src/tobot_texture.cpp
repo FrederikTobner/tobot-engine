@@ -26,19 +26,26 @@ TobotTexture::TobotTexture(char const * textureText, SDL_Color textColor, TTF_Fo
     }
 }
 
+TobotTexture::TobotTexture(SDL_Texture * texture) {
+    this->p_Texture = texture;
+    // Getting the width and height of the texture -> This is needed because the SDL_Texture is a opaque type (We can't
+    // access the width and height of the texture)
+    SDL_QueryTexture(this->p_Texture, NULL, NULL, &this->m_Width, &this->m_Height);
+}
+
 TobotTexture::~TobotTexture() {
     SDL_DestroyTexture(this->p_Texture);
 }
 
-[[nodiscard]] auto TobotTexture::getTexture() -> SDL_Texture * {
+[[nodiscard]] auto TobotTexture::getTexture() const -> SDL_Texture * {
     return this->p_Texture;
 }
 
-[[nodiscard]] auto TobotTexture::getWidth() -> int {
+[[nodiscard]] auto TobotTexture::getWidth() const -> int {
     return this->m_Width;
 }
 
-[[nodiscard]] auto TobotTexture::getHeight() -> int {
+[[nodiscard]] auto TobotTexture::getHeight() const -> int {
     return this->m_Height;
 }
 
