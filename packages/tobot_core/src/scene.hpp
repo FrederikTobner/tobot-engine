@@ -6,11 +6,10 @@
 
 #include "game_entity.hpp"
 #include "layer.hpp"
-#include "render_object.hpp"
 
 namespace Tobot::Core {
 
-    /// @brief A hash function for strings and char pointers that can be used in unordered_map.
+    /// @brief Hashing for strings and char pointers that can be used in unordered_map.
     struct string_hash {
             using hash_type = std::hash<std::string_view>;
             using is_transparent = void;

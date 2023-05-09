@@ -9,6 +9,9 @@ class Soldier : public Tobot::Core::GameEntity {
 
         void update() override {
             this->incrementPosition();
+            if (this->getPosition().getX() == 500) {
+                this->setVisible(false);
+            }
         }
 };
 
@@ -20,6 +23,9 @@ class Weapon : public Tobot::Core::GameEntity {
 
         void update() override {
             this->incrementPosition();
+            if (this->getPosition().getX() == 500) {
+                this->setVisible(false);
+            }
         }
 };
 
@@ -35,7 +41,7 @@ class Player : public Tobot::Core::GameEntity {
 
 class Background : public Tobot::Core::GameEntity {
     public:
-        Background() : GameEntity("background", 0, 0) {
+        Background() : GameEntity("background", 0, 0, 1.6f, 1.6f) {
             this->setTexture(Tobot::Core::AssetManager::loadTextureScurface("assets/main_menu_background.png"));
         }
 

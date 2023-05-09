@@ -34,15 +34,16 @@ auto TobotApplication::initialize() -> void {
                                              __/ |             \n\
                                             |___/");
     // Initialize SDL subsystems - we need to adapt this so we initialize all the subsystems that are needed without any
-    // unnecassary subsystems
+    // unnecassary subsystems. For now we could just initialize all of them. But this would increase the startup time of
+    // the application.
     if (subSystemsInitialize(SDL_CORE_INIT_VIDEO | SDL_IMAGE_INIT_PNG | SDL_TTF_INIT | SDL_MIXER_INIT_MP3)) {
         exit(ExitCode::SOFTWARE.getCode());
     }
-    // We use vulkan right now - we should make this configurable
-    this->p_Window =
-        SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                         this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN | SDL_WINDOW_VULKAN);
+    this->p_Window = SDL_CreateWindow(this->m_ApplicationName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                                      this->m_DisplaySize.width, this->m_DisplaySize.height, SDL_WINDOW_SHOWN);
     // The framerate should be configurable - vsync should be an option not the default
+    // Additionally we let SDL guess which driver to use for the renderer (e.g. direct3d, direct3d11, direct3d12,
+    // opengl or software)
     this->p_Renderer = SDL_CreateRenderer(this->p_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->m_Running = true;
 
@@ -109,7 +110,6 @@ auto TobotApplication::render() -> void {
     SDL_RenderClear(this->p_Renderer);
 
     this->p_CurrentScene->render(this->p_Renderer);
-
     SDL_RenderPresent(this->p_Renderer);
 }
 

@@ -55,6 +55,8 @@ auto Scene::update() -> void {
 }
 
 auto Scene::render(SDL_Renderer * renderer) -> void {
+    // Clearing the screen
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     // We should sort the layers by their order using a binary search tree instead of the unordered_map
     // Another option is to use a std::vector and use the order as the index.
     // Looking up layers by the name could be slow by iterating through the vector, because that is not a priority.
@@ -77,6 +79,8 @@ auto Scene::render(SDL_Renderer * renderer) -> void {
             }
         }
     }
+    // Update screen
+    SDL_RenderPresent(renderer);
 }
 
 auto Scene::destroy(char const * id) -> void {
