@@ -10,19 +10,19 @@ namespace Tobot::DataStructures {
     class UndirectedGraph {
         public:
             UndirectedGraph();
-            UndirectedGraph(UndirectedGraph<T> const & graph);
-            UndirectedGraph(UndirectedGraph<T> && graph);
+            UndirectedGraph(const UndirectedGraph<T>& graph);
+            UndirectedGraph(UndirectedGraph<T>&& graph);
             UndirectedGraph(std::vector<T> vertices);
             UndirectedGraph(std::vector<T> vertices, std::vector<std::pair<T, T>> edges);
             UndirectedGraph(std::initializer_list<T> vertices);
             UndirectedGraph(std::initializer_list<T> vertices, std::initializer_list<std::pair<T, T>> edges);
             ~UndirectedGraph();
 
-            auto operator=(UndirectedGraph<T> const & graph) -> UndirectedGraph<T> &;
-            auto operator=(UndirectedGraph<T> && graph) -> UndirectedGraph<T> &;
-            auto operator==(UndirectedGraph<T> const & graph) const -> bool;
-            auto operator!=(UndirectedGraph<T> const & graph) const -> bool;
-            friend auto operator<<(std::ostream & os, UndirectedGraph<T> const & graph) -> std::ostream {
+            auto operator=(const UndirectedGraph<T>& graph) -> UndirectedGraph<T>&;
+            auto operator=(UndirectedGraph<T>&& graph) -> UndirectedGraph<T>&;
+            auto operator==(const UndirectedGraph<T>& graph) const -> bool;
+            auto operator!=(const UndirectedGraph<T>& graph) const -> bool;
+            friend auto operator<<(std::ostream& os, const UndirectedGraph<T>& graph) -> std::ostream {
                 os << "Vertices: " << graph.vertices << std::endl;
                 os << "Edges: " << graph.edges << std::endl;
                 os << "Connected Components: " << graph.connected_components << std::endl;
@@ -87,11 +87,11 @@ namespace Tobot::DataStructures {
             auto addEdgeToConnectedComponents(T vertex1, T vertex2) -> void;
             auto findConnectedComponents() -> void;
             auto findCycles() -> void;
-            auto findConnectedComponent(T vertex, std::vector<T> & visited_vertices,
-                                        std::vector<T> & connected_component) const -> void;
-            auto findConnectedComponent(T vertex, std::vector<T> & visited_vertices,
-                                        std::vector<T> & connected_component) -> void;
-            auto findCycle(T vertex, std::vector<T> & visited_vertices, std::vector<T> & cycle) -> void;
+            auto findConnectedComponent(T vertex, std::vector<T>& visited_vertices,
+                                        std::vector<T>& connected_component) const -> void;
+            auto findConnectedComponent(T vertex, std::vector<T>& visited_vertices, std::vector<T>& connected_component)
+                -> void;
+            auto findCycle(T vertex, std::vector<T>& visited_vertices, std::vector<T>& cycle) -> void;
 
     }; // class Graph
 
@@ -109,7 +109,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param graph The graph to copy.
     template <typename T>
-    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T> const & graph) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(const UndirectedGraph<T>& graph) {
         vertices = std::vector<T>(graph.vertices);         // deep copy of the vertices
         edges = std::vector<std::pair<T, T>>(graph.edges); // deep copy of the edges
         connected_components = graph.connected_components; // shallow copy of the connected_components
@@ -120,7 +120,7 @@ namespace Tobot::DataStructures {
     /// @tparam T The type of the vertices in the graph.
     /// @param graph The graph to move.
     template <typename T>
-    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T> && graph) {
+    [[nodiscard]] UndirectedGraph<T>::UndirectedGraph(UndirectedGraph<T>&& graph) {
         vertices = std::move(graph.vertices);
         edges = std::move(graph.edges);
         connected_components = std::move(graph.connected_components);
@@ -189,7 +189,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to copy.
     /// @return A reference to the graph.
     template <typename T>
-    [[nodiscard]] auto UndirectedGraph<T>::operator=(UndirectedGraph<T> const & graph) -> UndirectedGraph<T> & {
+    [[nodiscard]] auto UndirectedGraph<T>::operator=(const UndirectedGraph<T>& graph) -> UndirectedGraph<T>& {
         vertices = graph.vertices;
         edges = graph.edges;
         connected_components = graph.connected_components;
@@ -202,7 +202,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to move.
     /// @return A reference to the graph.
     template <typename T>
-    [[nodiscard]] auto UndirectedGraph<T>::operator=(UndirectedGraph<T> && graph) -> UndirectedGraph<T> & {
+    [[nodiscard]] auto UndirectedGraph<T>::operator=(UndirectedGraph<T>&& graph) -> UndirectedGraph<T>& {
         vertices = std::move(graph.vertices);
         edges = std::move(graph.edges);
         connected_components = std::move(graph.connected_components);
@@ -215,7 +215,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to compare to.
     /// @return True if the graphs are equal, false otherwise.
     template <typename T>
-    [[nodiscard]] auto UndirectedGraph<T>::operator==(UndirectedGraph<T> const & graph) const -> bool {
+    [[nodiscard]] auto UndirectedGraph<T>::operator==(const UndirectedGraph<T>& graph) const -> bool {
         return vertices == graph.vertices && edges == graph.edges;
     }
 
@@ -224,7 +224,7 @@ namespace Tobot::DataStructures {
     /// @param graph The graph to compare to.
     /// @return True if the graphs are not equal, false otherwise.
     template <typename T>
-    [[nodiscard]] auto UndirectedGraph<T>::operator!=(UndirectedGraph<T> const & graph) const -> bool {
+    [[nodiscard]] auto UndirectedGraph<T>::operator!=(const UndirectedGraph<T>& graph) const -> bool {
         return !(*this == graph);
     }
 
@@ -288,7 +288,7 @@ namespace Tobot::DataStructures {
         // connected components.
         bool vertex1_found = false;
         bool vertex2_found = false;
-        for (std::vector<T> & connected_component : connected_components) {
+        for (std::vector<T>& connected_component : connected_components) {
             if (std::find(connected_component.begin(), connected_component.end(), vertex1) !=
                 connected_component.end()) {
                 if (std::find(connected_component.begin(), connected_component.end(), vertex2) ==
@@ -583,8 +583,8 @@ namespace Tobot::DataStructures {
     /// @param visited_vertices The vertices that have been visited.
     /// @param connected_component The connected component that has been found.
     template <typename T>
-    auto UndirectedGraph<T>::findConnectedComponent(T vertex, std::vector<T> & visited_vertices,
-                                                    std::vector<T> & connected_component) -> void {
+    auto UndirectedGraph<T>::findConnectedComponent(T vertex, std::vector<T>& visited_vertices,
+                                                    std::vector<T>& connected_component) -> void {
         visited_vertices.push_back(vertex);
         connected_component.push_back(vertex);
         for (T neighbor : getNeighbors(vertex)) {
@@ -614,7 +614,7 @@ namespace Tobot::DataStructures {
     /// @param visited_vertices The vertices that have been visited.
     /// @param cycle The cycle that has been found.
     template <typename T>
-    auto UndirectedGraph<T>::findCycle(T vertex, std::vector<T> & visited_vertices, std::vector<T> & cycle) -> void {
+    auto UndirectedGraph<T>::findCycle(T vertex, std::vector<T>& visited_vertices, std::vector<T>& cycle) -> void {
         visited_vertices.push_back(vertex);
         cycle.push_back(vertex);
         for (T neighbor : getNeighbors(vertex)) {
@@ -812,8 +812,8 @@ namespace Tobot::DataStructures {
      * component (passed as reference)
      */
     template <typename T>
-    auto UndirectedGraph<T>::findConnectedComponent(T vertex, std::vector<T> & visited_vertices,
-                                                    std::vector<T> & connected_component) const -> void {
+    auto UndirectedGraph<T>::findConnectedComponent(T vertex, std::vector<T>& visited_vertices,
+                                                    std::vector<T>& connected_component) const -> void {
         // Adds the initial vertex as visited and part of the connected component
         visited_vertices.push_back(vertex);
         connected_component.push_back(vertex);
