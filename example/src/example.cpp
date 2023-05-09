@@ -8,6 +8,7 @@ class Soldier : public Tobot::Core::GameEntity {
 
         void update() override {
             this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
+            this->m_transform.rotate(1.0);
             if (this->getPosition().getX() == 500) {
                 this->setVisible(false);
             }
@@ -21,6 +22,7 @@ class Weapon : public Tobot::Core::GameEntity {
 
         void update() override {
             this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
+            this->m_transform.rotate(1.0);
             if (this->getPosition().getX() == 500) {
                 this->setVisible(false);
             }

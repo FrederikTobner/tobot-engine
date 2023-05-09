@@ -27,3 +27,7 @@ auto Transform2D::getRotation() const -> float {
 auto Transform2D::getScale() const -> Math::Vector2D<float> {
     return m_Scale;
 }
+
+auto Transform2D::rotate(float rotation) -> void {
+    m_Rotation += rotation;
+}

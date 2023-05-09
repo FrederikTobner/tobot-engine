@@ -55,7 +55,12 @@ auto GameEntity::render(SDL_Renderer * renderer) -> void {
     SDL_Rect rect = {(int)this->getPosition().getX(), (int)this->getPosition().getY(),
                      (int)(this->p_Texture->getWidth() * this->getScale().getX()),
                      (int)(this->p_Texture->getHeight() * this->getScale().getY())};
-    SDL_RenderCopy(renderer, this->p_Texture->getTexture(), NULL, &rect);
+    if (this->m_transform.getRotation() != 0.0) {
+        SDL_RenderCopyEx(renderer, this->p_Texture->getTexture(), NULL, &rect, this->m_transform.getRotation(), NULL,
+                         SDL_FLIP_NONE);
+    } else {
+        SDL_RenderCopy(renderer, this->p_Texture->getTexture(), NULL, &rect);
+    }
 }
 
 auto GameEntity::dispose() -> void {

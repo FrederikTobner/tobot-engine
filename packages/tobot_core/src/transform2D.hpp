@@ -35,6 +35,8 @@ namespace Tobot::Core {
             /// @param translation The translation vector
             auto translate(const Math::Vector2D<float> & translation) -> void;
 
+            auto rotate(float rotation) -> void;
+
         private:
             // The position of the object
             Math::Vector2D<float> m_Position;
