@@ -5,11 +5,12 @@ set(TOBOT_CORE_SOURCES
 "exitcode.cpp"
 "game_entity.cpp"
 "layer.cpp"
-"render_object.cpp"
 "scene.cpp"
 "scene_manager.cpp"
+"string_hash.cpp"
 "sub_system_manager.cpp"
 "tobot_application.cpp"
+"tobot_texture.cpp"
 "transform2D.cpp"
 )
 
@@ -20,11 +21,12 @@ set(TOBOT_CORE_HEADERS
 "exitcode.hpp"
 "layer.hpp"
 "game_entity.hpp"
-"render_object.hpp"
 "scene.hpp"
 "scene_manager.hpp"
+"string_hash.hpp"
 "sub_system_manager.hpp"
 "tobot_application.hpp"
+"tobot_texture.hpp"
 "transform2D.hpp"
 )
 

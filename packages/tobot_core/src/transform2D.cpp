@@ -1,9 +1,8 @@
 #include "transform2D.hpp"
 
-using namespace Tobot::Core;
+#include <cmath>
 
-Transform2D::Transform2D() : m_Position(0.0, 0.0), m_Rotation(0.0), m_Scale(1.0, 1.0) {
-}
+using namespace Tobot::Core;
 
 Transform2D::Transform2D(const Math::Vector2D<float> & position, float rotation, const Math::Vector2D<float> & scale)
     : m_Position(position), m_Rotation(rotation), m_Scale(scale) {
@@ -16,14 +15,23 @@ auto Transform2D::translate(const Math::Vector2D<float> & translate) -> void {
     m_Position += translate;
 }
 
-auto Transform2D::getPosition() const -> Math::Vector2D<float> {
+[[nodiscard]] auto Transform2D::getPosition() const -> Math::Vector2D<float> {
     return m_Position;
 }
 
-auto Transform2D::getRotation() const -> float {
+[[nodiscard]] auto Transform2D::getRotation() const -> float {
     return m_Rotation;
 }
 
-auto Transform2D::getScale() const -> Math::Vector2D<float> {
+[[nodiscard]] auto Transform2D::getScale() const -> Math::Vector2D<float> {
     return m_Scale;
+}
+
+auto Transform2D::rotate(float rotation) -> void {
+    m_Rotation += rotation;
+    // Maybe we should only do that in the editor because SDL wont care about that
+    if (m_Rotation > 360.0f) {
+        // Modulo using floats
+        m_Rotation = fmodf(m_Rotation, 360.0f);
+    }
 }
