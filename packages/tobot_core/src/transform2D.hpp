@@ -7,14 +7,12 @@ namespace Tobot::Core {
     class Transform2D {
 
         public:
-            /// @brief Creates a new Transform2D object with default values
-            Transform2D();
-
             /// @brief Creates a new Transform2D object with the given values
             /// @param position The position of the object
             /// @param rotation The rotation of the object
             /// @param scale The scale of the object
-            Transform2D(const Math::Vector2D<float> & position, float rotation, const Math::Vector2D<float> & scale);
+            Transform2D(Math::Vector2D<float> const & position = Math::Vector2D<float>(1.0f, 1.0f),
+                        float rotation = 0.0f, Math::Vector2D<float> const & scale = Math::Vector2D<float>(1.0f, 1.0f));
 
             /// @brief Deconstructor of the Transform2D object
             ~Transform2D();

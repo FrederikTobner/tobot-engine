@@ -3,13 +3,13 @@
 
 class Soldier : public Tobot::Core::GameEntity {
     public:
-        Soldier() : GameEntity("soldier", 10, 10, "assets/Player_gold.png") {
+        Soldier() : GameEntity("soldier", 10.0f, 10.0f, "assets/Player_gold.png") {
         }
 
         void update() override {
-            this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
+            this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0f, 1.0f));
             this->m_transform.rotate(1.0);
-            if (this->getPosition().getX() == 500) {
+            if (this->getPosition().getX() == 500.0f) {
                 this->setVisible(false);
             }
         }
@@ -21,9 +21,9 @@ class Weapon : public Tobot::Core::GameEntity {
         }
 
         void update() override {
-            this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0, 1.0));
+            this->m_transform.translate(Tobot::Math::Vector2D<float>(1.0f, 1.0f));
             this->m_transform.rotate(1.0);
-            if (this->getPosition().getX() == 500) {
+            if (this->getPosition().getX() == 500.0f) {
                 this->setVisible(false);
             }
         }
@@ -71,14 +71,16 @@ class IntroductionScene : public Tobot::Core::Scene {
             // Layers, Widgets, RenderObjects
             LOG_INFO("MainMenu::onCreate");
             Tobot::Core::Layer * layer = new Tobot::Core::Layer("foreground", 1);
-            Tobot::Core::Layer * playerLayer = new Tobot::Core::Layer("playerLayer", 2);
+            Tobot::Core::Layer * weaponLayer = new Tobot::Core::Layer("weaponLayer", 2);
+            Tobot::Core::Layer * playerLayer = new Tobot::Core::Layer("playerLayer", 3);
             this->addLayer(layer);
             this->addLayer(playerLayer);
+            this->addLayer(weaponLayer);
 
             this->add(new Background());
             this->add("foreground", new Player());
             this->add("playerLayer", new Soldier());
-            this->add("playerLayer", new Weapon());
+            this->add("weaponLayer", new Weapon());
         }
 
         void onDestroy() override {

@@ -9,7 +9,7 @@
 using namespace Tobot::Core;
 
 GameEntity::GameEntity(char const * id, float x, float y, TobotTexture * texture, float scaleX, float scaleY)
-    : m_Id(id), m_transform(Tobot::Math::Vector2D<float>(x, y), 0.0, Tobot::Math::Vector2D<float>(scaleX, scaleY)) {
+    : m_Id(id), m_transform(Tobot::Math::Vector2D<float>(x, y), 0.0f, Tobot::Math::Vector2D<float>(scaleX, scaleY)) {
     this->p_Texture = texture;
 }
 
@@ -51,6 +51,7 @@ auto GameEntity::initializeTexture(SDL_Renderer * renderer) -> void {
 }
 
 auto GameEntity::render(SDL_Renderer * renderer) -> void {
+
     // Creating the destination rectangle every time when the texture is rendered is not very efficient.
     SDL_Rect rect = {(int)this->getPosition().getX(), (int)this->getPosition().getY(),
                      (int)(this->p_Texture->getWidth() * this->getScale().getX()),

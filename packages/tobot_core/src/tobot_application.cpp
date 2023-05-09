@@ -14,8 +14,7 @@
 using namespace Tobot::Core;
 using namespace Tobot::Tooling;
 
-// virtual constructor
-[[nodiscard]] TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
+TobotApplication::TobotApplication(char const * name) : m_ApplicationName(name) {
 }
 
 // virtual destructor
