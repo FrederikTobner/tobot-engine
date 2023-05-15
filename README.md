@@ -12,7 +12,7 @@ A simple game engine built on top of SDL2.
 
 ## Overview
 
-Tobot is a simple game engine that is built on top of SDL. It is designed to be simple and easy to use. The engine is written in C++ and provides an editor that was implemented using imgui.
+Tobot is a simple game engine, that is built on top of SDL. It is designed to be simple and easy to use. The engine is written in C++ and provides an editor that was implemented using imgui.
 
 ## Architecture
 

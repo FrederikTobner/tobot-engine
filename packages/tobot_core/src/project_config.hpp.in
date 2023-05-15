@@ -1,9 +1,0 @@
-#ifndef PROJECT_CONFIGURATION_H_
-#define PROJECT_CONFIGURATION_H_
-
-#define PROJECT_VERSION_MAJOR ("@tobot-core_VERSION_MAJOR@")
-#define PROJECT_VERSION_MINOR ("@tobot-core_VERSION_MINOR@")
-#define PROJECT_VERSION_PATCH ("@tobot-core_VERSION_PATCH@")
-#define PROJECT_NAME          ("@PROJECT_NAME@")
-
-#endif

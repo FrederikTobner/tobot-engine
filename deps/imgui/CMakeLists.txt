@@ -17,6 +17,6 @@ imgui_dir/backends/imgui_impl_sdlrenderer.h
 imgui_dir/backends/imgui_impl_sdlrenderer.cpp
 )
 
-add_library(imgui ${IMGUI_SOURCES})
+add_library(imgui STATIC ${IMGUI_SOURCES})
 
 target_include_directories(imgui PUBLIC imgui_dir ../SDL/include)

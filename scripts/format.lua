@@ -48,11 +48,18 @@ function find_files_with_extensions(directory, extensions)
     return files
 end
 
--- Guarantee the package directory exists
-if not (directory_exists("../packages")) then
+-- Guarantee the tobot directory exists
+if not (directory_exists("../tobot")) then
     print("Source directory not found!")
     os.exit(74)
 end
+
+-- Guarantee the editor directory exists
+if not (directory_exists("../editor")) then
+    print("Source directory not found!")
+    os.exit(74)
+end
+
 
 -- Guarantee the clang-format file exists
 if not (file_exists("../.clang-format")) then
@@ -63,6 +70,6 @@ end
 -- The file extensions to format
 local extensions = {"c", "cpp", "cc", "h", "hpp", "hh"}
 -- Find all the files with the extensions in the packages directory and the editor directory
-local files = mergeArray(find_files_with_extensions("../packages", extensions), find_files_with_extensions("../editor", extensions))
+local files = mergeArray(find_files_with_extensions("../tobot", extensions), find_files_with_extensions("../editor", extensions))
 -- Formatting the files in both directories
 os.execute("clang-format -i --style=file " .. table.concat(files, " "))
