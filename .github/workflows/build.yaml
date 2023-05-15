@@ -23,7 +23,6 @@ jobs:
       uses: ashutoshvarma/setup-ninja@master
       with:
         version: 1.10.2
-    # Windoof dependencies
     - name: Setup MSVC under Windows
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
@@ -66,14 +65,7 @@ jobs:
       with:
         submodules: recursive
 
-    # Under Windows we are using Visual Studio as the Generator for now
     - name: Configure CMake under Windows
-      if: runner.os == 'Windows'
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja -DBUILD_TESTS=OFF
-
-    # Under Unix based systems we are using Ninja
-    - name: Configure CMake under unixbased systems
-      if: runner.os != 'Windows'
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G Ninja -DBUILD_TESTS=OFF
 
     # We are not building our tests in the build workflow because that is already done in the test workflow

@@ -1,9 +1,19 @@
 -- Install dependencies for building the project under Linux
+-- If someone has time to make this work under MacOS, feel free to do so. 
+-- Have look at the build script (in the .github/workflows folder) to see what dependencies are needed.
+-- Im too lazy too setup MacOS for this purpose.
 
 local is_windows = package.config:sub(1,1) == '\\'
+local is_macos = package.config:sub(1,1) == "/" and package.config:find(";")
+local is_linxu = package.config:sub(1,1) == "/" and not package.config:find(";")
 
 if(is_windows) then
     print("This script is not supported on Windows.")
+    exit(1)
+end
+
+if(is_macos) then
+    print("This script is not supported on MacOS.")
     exit(1)
 end
 

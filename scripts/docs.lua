@@ -2,7 +2,7 @@
 
 local lfs = require("lfs")
 
--- Determine if we are running on Windows or Linux
+-- Determine if we are running on Windows or on a unix-based system
 local is_windows = package.config:sub(1,1) == "\\"
 if is_windows then
   os.execute("rmdir /s /q ..\\docs")

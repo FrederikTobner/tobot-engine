@@ -3,8 +3,8 @@
 -- Find vcvars64.bat
 local function find_vcvars64_bat()
     local search_paths = { os.getenv("ProgramFiles(x86)"), os.getenv("ProgramFiles") }
-    local versions = {"2015", "2017", "2019", "2022" }
-    local editions = { "Community", "Enterprise", "Professional" }
+    local versions = {"2022", "2019", "2017", "2015"}
+    local editions = {"Community", "Enterprise", "Professional"}
     for _, path in ipairs(search_paths) do
         for _, version in ipairs(versions) do
             for _, edition in ipairs(editions) do

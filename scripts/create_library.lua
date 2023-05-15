@@ -85,18 +85,18 @@ end
 -- Create a CMakeLists.txt file for a library test directory
 function createTestCMakeLists(libraryTestDirectory, libraryName, librarySourcePathVariable)
     createFile("CMakeLists.txt", libraryTestDirectory, "# include google test\n\
-    include(FetchContent)\n\
-    FetchContent_Declare(\n\
-      googletest\n\
-      URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip\n\
-    )\n\
-    \n\
-    # For Windows: Prevent overriding the parent project's compiler/linker settings\n\
-    set(gtest_force_shared_crt ON CACHE BOOL \"\" FORCE)\n\
-    FetchContent_MakeAvailable(googletest)\n\
-    add_executable(" .. libraryName .. "-test <PLACEHOLDER>)\n\
-    target_link_libraries(" .. libraryName .. "-tests " .. libraryName .. ")\n\
-    target_include_directories(" .. libraryName .. "-test PUBLIC \"${" .. librarySourcePathVariable .. "}/include\")\n")
+include(FetchContent)\n\
+FetchContent_Declare(\n\
+  googletest\n\
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip\n\
+)\n\
+\n\
+# For Windows: Prevent overriding the parent project's compiler/linker settings\n\
+set(gtest_force_shared_crt ON CACHE BOOL \"\" FORCE)\n\
+FetchContent_MakeAvailable(googletest)\n\
+add_executable(" .. libraryName .. "-test <PLACEHOLDER>)\n\
+target_link_libraries(" .. libraryName .. "-tests " .. libraryName .. ")\n\
+target_include_directories(" .. libraryName .. "-test PUBLIC \"${" .. librarySourcePathVariable .. "}/include\")\n")
 end
 
 -- Creating the CMakelists.txt file for the library in the source directory

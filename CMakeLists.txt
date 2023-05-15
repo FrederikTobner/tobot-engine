@@ -34,7 +34,7 @@ endif()
 
 add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 
-# enabling tests - should probably be done for every library so we can test them seperately
+# enabling tests - should probably be done for every library as well so we can test them seperately
 if(BUILD_TESTS)
     enable_testing()
 endif()
