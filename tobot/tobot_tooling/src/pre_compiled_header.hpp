@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 // C++ standard library dependecies
 #include <atomic>
 #include <iostream>
@@ -35,5 +34,4 @@
 #ifdef OS_LINUX
 #include <sys/stat.h>
 #include <sys/types.h>
-
 #endif

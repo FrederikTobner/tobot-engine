@@ -8,6 +8,15 @@
 # By checking if all os-specifc dependencies the precompiled header file needs are available.
 # E.g. checking for psapi.h and windows.h and so on
 # We can further study the CMake setup of SDL, because they are not just a bunch of unexperienced idiots :)
+cmake_minimum_required(VERSION 3.18.0)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+if(NOT DEFINED BUILD_TESTS)
+option(BUILD_TESTS "Build the unit tests" ON)
+endif()
+
 add_subdirectory(src)
 if(BUILD_TESTS)
     enable_testing()    

@@ -1,8 +1,3 @@
-# Adding compile definitions (used OS, compiler, build type and the logs folder path) - we should do this for each library separately
-include(../cmake/tobot_detect.cmake)
-Tobot_Detect_Platform()
-Tobot_Detect_Compiler()
-
 add_subdirectory(tobot_data_structures)
 
 add_subdirectory(tobot_lang)
