@@ -1,6 +1,5 @@
 # Macro for adding os-specific compiler definitions
-macro(Tobot_Detect_Platform)
-    
+macro(Tobot_Detect_Platform)    
     if(UNIX)
     add_compile_definitions(OS_UNIX_LIKE)    
     if(NOT APPLE) 
@@ -55,7 +54,8 @@ macro(Tobot_Detect_Platform)
     endif()
 endmacro(Tobot_Detect_Platform)
 
-# Macro for adding compiler definitions based on the compiler that is used
+# Macro for adding compiler definitions based on the compiler that is used 
+# Could be extended - https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER_ID.html
 macro(Tobot_Detect_Compiler)
     if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
         add_compile_definitions(COMPILER_GCC)

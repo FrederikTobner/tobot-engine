@@ -6,9 +6,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_C_STANDARD 99)
 set(C_STANDARD_REQUIRED TRUE)
+
 option(BUILD_CORE_SHARED "Building the core library as DLL" OFF)
 option(INCLUDE_DEPS "Include external dependencies" ON)
 option(BUILD_TESTS "Build the unit tests" ON)
+
 include(CheckIncludeFile)
 
 # Checking the dependencies of the project - we should do this for every library instead to make them a seperate entity
@@ -32,19 +34,14 @@ endif()
 
 add_compile_definitions(LOGS_FOLDER_PATH="${PROJECT_SOURCE_DIR}/logs/")
 
-get_filename_component(SOURCE_PATH_CORE ${PROJECT_SOURCE_DIR}/packages/tobot_core/src ABSOLUTE)
-get_filename_component(SOURCE_PATH_DATA_STRUCTURES ${PROJECT_SOURCE_DIR}/packages/tobot_data_structures/src ABSOLUTE)
-get_filename_component(SOURCE_PATH_IO ${PROJECT_SOURCE_DIR}/packages/tobot_io/src ABSOLUTE)
-get_filename_component(SOURCE_PATH_LANG ${PROJECT_SOURCE_DIR}/packages/tobot_lang/src ABSOLUTE)
-get_filename_component(SOURCE_PATH_MATH ${PROJECT_SOURCE_DIR}/packages/tobot_math/src ABSOLUTE)
-get_filename_component(SOURCE_PATH_TEST ${PROJECT_SOURCE_DIR}/packages/tobot_test/src ABSOLUTE)
-get_filename_component(SOURCE_PATH_TOOLING ${PROJECT_SOURCE_DIR}/packages/tobot_tooling/src ABSOLUTE)
+# enabling tests - should probably be done for every library so we can test them seperately
+if(BUILD_TESTS)
+    enable_testing()
+endif()
+# building tobot libraries
+add_subdirectory(tobot)
 
-# enabling tests
-enable_testing()
-# building packages
-add_subdirectory(packages)
-
+# For testing the project we currently don't need the editor and the dependencies - at least not for now
 if(INCLUDE_DEPS)
     # SDL2 deps and imgui
    add_subdirectory(deps)
@@ -54,7 +51,7 @@ endif()
 
 
 
-# Doesn't work if we build the lib as a dll for some reason
+# Doesn't work if we build the library as a dll for some reason - probably because we forced to use static linking before
 if(NOT BUILD_CORE_SHARED)
     # Tobot Engine Example
     add_subdirectory(example)
